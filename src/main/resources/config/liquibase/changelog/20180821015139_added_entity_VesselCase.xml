@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity VesselCase.
+    -->
+    <changeSet id="20180821015139-1" author="jhipster">
+        <createTable tableName="vessel_case">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="number_id" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="case_year" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="insured_vessel" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="company_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vessel_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="company_chinese_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vessel_chinese_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="deduct" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="assigned_handler" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="assigned_time" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="registered_handler" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="registered_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="case_code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="case_location" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="case_description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="loading_port" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pol_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="discharging_port" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="limit_time" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cp_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cp_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="arrest_vessel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="jurisdiction" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="applicable_law" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="close_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="close_handler" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="remark" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="settlement_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="settlement_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cpi_insurance_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="case_status_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="settlement_mode_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="vessel_case" columnName="assigned_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="registered_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="pol_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="limit_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="cp_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="close_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="settlement_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

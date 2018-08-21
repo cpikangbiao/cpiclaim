@@ -1,0 +1,75 @@
+entity CpiInsuranceType {
+	sortNum Integer  ,
+	cpiInsuranceTypeName String required ,
+}
+
+entity CaseSettlementMode {
+	sortNum Integer  ,
+	settlementModeName String required ,
+}
+
+entity CaseSatusType {
+	sortNum Integer  ,
+	caseStatusName String required ,
+}
+
+entity VesselCase {
+	numberId Integer required ,
+	caseYear String  ,
+	insuredVessel Long required ,
+	companyName String  ,
+	vesselName String  ,
+	companyChineseName String  ,
+	vesselChineseName String  ,
+	deduct BigDecimal  ,
+	assignedHandler Long  ,
+	assignedTime Instant  ,
+	registeredHandler Long  ,
+	registeredDate Instant  ,
+	caseCode String required ,
+	caseLocation Long  ,
+	caseDescription String  ,
+	loadingPort Long  ,
+	polDate Instant  ,
+	dischargingPort Long  ,
+	limitTime Instant  ,
+	cpDate Instant  ,
+	cpType String  ,
+	arrestVessel String  ,
+	jurisdiction Long  ,
+	applicableLaw Long  ,
+	closeDate Instant  ,
+	closeHandler Long  ,
+	remark TextBlob  ,
+	settlementAmount BigDecimal  ,
+	settlementDate Instant  ,
+}
+
+relationship ManyToOne {
+	VesselCase{cpiInsuranceType(cpiInsuranceTypeName)} to CpiInsuranceType
+}
+
+relationship ManyToOne {
+	VesselCase{caseStatus(caseStatusName)} to CaseSatusType
+}
+
+relationship ManyToOne {
+	VesselCase{settlementMode(settlementModeName)} to CaseSettlementMode
+}
+
+
+
+
+// Set pagination options
+//paginate PartnerType with infinite-scroll
+paginate * with pagination
+
+dto * with mapstruct
+
+//Set service options to all except few
+service * with serviceImpl //except PartnerType
+
+filter * //except PartnerType
+
+
+microservice * with cpiclaim

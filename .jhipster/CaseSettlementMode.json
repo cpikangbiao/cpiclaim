@@ -1,0 +1,27 @@
+{
+    "name": "CaseSettlementMode",
+    "fields": [
+        {
+            "fieldName": "sortNum",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "settlementModeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180821015137",
+    "entityTableName": "case_settlement_mode",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}
