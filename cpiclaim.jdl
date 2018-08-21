@@ -62,6 +62,50 @@ relationship ManyToOne {
 }
 
 
+entity RiskGroup {
+	sortNum Integer  ,
+	RiskGroupName String required ,
+}
+
+
+entity Risk {
+	sortNum Integer  ,
+	tclType Boolean  ,
+	piType Boolean  ,
+	riskName String  ,
+	riskNameChinese String  ,
+	riskNameEnglish String  ,
+	riskNameEnglishAbbr String  ,
+}
+
+
+relationship ManyToOne {
+	Risk{riskGroup(riskGroupName)} to RiskGroup
+}
+
+
+entity VesselSubCase {
+	numberId Integer  ,
+	assignedUserId Long  ,
+	insertTime Instant  ,
+	subcaseCode String  ,
+	blNo String  ,
+	claimant String  ,
+	claimAmount String  ,
+	currency Long  ,
+	deductible BigDecimal  ,
+	currencyRate Double  ,
+	deductDollar BigDecimal  ,
+	remark TextBlob  ,
+}
+
+relationship ManyToOne {
+	VesselSubCase{vesselCase(caseCode)} to VesselCase
+}
+
+relationship ManyToOne {
+	VesselSubCase{risk(riskName)} to Risk
+}
 
 
 // Set pagination options

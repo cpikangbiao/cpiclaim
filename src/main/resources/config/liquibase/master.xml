@@ -11,9 +11,14 @@
     <!--<include file="config/liquibase/changelog/20180821051755_added_entity_CaseStatusType.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180821055341_added_entity_VesselCase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180821062146_added_entity_VesselCase.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180821083306_added_entity_RiskGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180821083307_added_entity_Risk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180821083308_added_entity_VesselSubCase.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!--<include file="config/liquibase/changelog/20180821015139_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180821055341_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180821062146_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180821083307_added_entity_constraints_Risk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180821083308_added_entity_constraints_VesselSubCase.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
