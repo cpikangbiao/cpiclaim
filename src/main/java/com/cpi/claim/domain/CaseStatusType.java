@@ -10,12 +10,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A CaseSatusType.
+ * A CaseStatusType.
  */
 @Entity
-@Table(name = "case_satus_type")
+@Table(name = "case_status_type")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class CaseSatusType implements Serializable {
+public class CaseStatusType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class CaseSatusType implements Serializable {
         return sortNum;
     }
 
-    public CaseSatusType sortNum(Integer sortNum) {
+    public CaseStatusType sortNum(Integer sortNum) {
         this.sortNum = sortNum;
         return this;
     }
@@ -56,7 +56,7 @@ public class CaseSatusType implements Serializable {
         return caseStatusName;
     }
 
-    public CaseSatusType caseStatusName(String caseStatusName) {
+    public CaseStatusType caseStatusName(String caseStatusName) {
         this.caseStatusName = caseStatusName;
         return this;
     }
@@ -74,11 +74,11 @@ public class CaseSatusType implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CaseSatusType caseSatusType = (CaseSatusType) o;
-        if (caseSatusType.getId() == null || getId() == null) {
+        CaseStatusType caseStatusType = (CaseStatusType) o;
+        if (caseStatusType.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), caseSatusType.getId());
+        return Objects.equals(getId(), caseStatusType.getId());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class CaseSatusType implements Serializable {
 
     @Override
     public String toString() {
-        return "CaseSatusType{" +
+        return "CaseStatusType{" +
             "id=" + getId() +
             ", sortNum=" + getSortNum() +
             ", caseStatusName='" + getCaseStatusName() + "'" +

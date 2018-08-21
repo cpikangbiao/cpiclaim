@@ -1,5 +1,5 @@
 {
-    "name": "CaseSatusType",
+    "name": "CaseStatusType",
     "fields": [
         {
             "fieldName": "sortNum",
@@ -14,8 +14,8 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20180821015138",
-    "entityTableName": "case_satus_type",
+    "changelogDate": "20180821051755",
+    "entityTableName": "case_status_type",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",

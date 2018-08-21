@@ -34,8 +34,8 @@ public class VesselCase implements Serializable {
     private String caseYear;
 
     @NotNull
-    @Column(name = "insured_vessel", nullable = false)
-    private Long insuredVessel;
+    @Column(name = "insured_vessel_id", nullable = false)
+    private Long insuredVesselId;
 
     @Column(name = "company_name")
     private String companyName;
@@ -48,6 +48,9 @@ public class VesselCase implements Serializable {
 
     @Column(name = "vessel_chinese_name")
     private String vesselChineseName;
+
+    @Column(name = "reinsure_id")
+    private Long reinsureId;
 
     @Column(name = "deduct", precision = 10, scale = 2)
     private BigDecimal deduct;
@@ -68,20 +71,29 @@ public class VesselCase implements Serializable {
     @Column(name = "case_code", nullable = false)
     private String caseCode;
 
+    @Column(name = "case_date")
+    private Instant caseDate;
+
     @Column(name = "case_location")
     private Long caseLocation;
 
     @Column(name = "case_description")
     private String caseDescription;
 
+    @Column(name = "voyage_no")
+    private String voyageNo;
+
     @Column(name = "loading_port")
     private Long loadingPort;
 
-    @Column(name = "pol_date")
-    private Instant polDate;
+    @Column(name = "loading_date")
+    private Instant loadingDate;
 
     @Column(name = "discharging_port")
     private Long dischargingPort;
+
+    @Column(name = "discharging_date")
+    private Instant dischargingDate;
 
     @Column(name = "limit_time")
     private Instant limitTime;
@@ -123,7 +135,7 @@ public class VesselCase implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private CaseSatusType caseStatus;
+    private CaseStatusType caseStatus;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -164,17 +176,17 @@ public class VesselCase implements Serializable {
         this.caseYear = caseYear;
     }
 
-    public Long getInsuredVessel() {
-        return insuredVessel;
+    public Long getInsuredVesselId() {
+        return insuredVesselId;
     }
 
-    public VesselCase insuredVessel(Long insuredVessel) {
-        this.insuredVessel = insuredVessel;
+    public VesselCase insuredVesselId(Long insuredVesselId) {
+        this.insuredVesselId = insuredVesselId;
         return this;
     }
 
-    public void setInsuredVessel(Long insuredVessel) {
-        this.insuredVessel = insuredVessel;
+    public void setInsuredVesselId(Long insuredVesselId) {
+        this.insuredVesselId = insuredVesselId;
     }
 
     public String getCompanyName() {
@@ -227,6 +239,19 @@ public class VesselCase implements Serializable {
 
     public void setVesselChineseName(String vesselChineseName) {
         this.vesselChineseName = vesselChineseName;
+    }
+
+    public Long getReinsureId() {
+        return reinsureId;
+    }
+
+    public VesselCase reinsureId(Long reinsureId) {
+        this.reinsureId = reinsureId;
+        return this;
+    }
+
+    public void setReinsureId(Long reinsureId) {
+        this.reinsureId = reinsureId;
     }
 
     public BigDecimal getDeduct() {
@@ -307,6 +332,19 @@ public class VesselCase implements Serializable {
         this.caseCode = caseCode;
     }
 
+    public Instant getCaseDate() {
+        return caseDate;
+    }
+
+    public VesselCase caseDate(Instant caseDate) {
+        this.caseDate = caseDate;
+        return this;
+    }
+
+    public void setCaseDate(Instant caseDate) {
+        this.caseDate = caseDate;
+    }
+
     public Long getCaseLocation() {
         return caseLocation;
     }
@@ -333,6 +371,19 @@ public class VesselCase implements Serializable {
         this.caseDescription = caseDescription;
     }
 
+    public String getVoyageNo() {
+        return voyageNo;
+    }
+
+    public VesselCase voyageNo(String voyageNo) {
+        this.voyageNo = voyageNo;
+        return this;
+    }
+
+    public void setVoyageNo(String voyageNo) {
+        this.voyageNo = voyageNo;
+    }
+
     public Long getLoadingPort() {
         return loadingPort;
     }
@@ -346,17 +397,17 @@ public class VesselCase implements Serializable {
         this.loadingPort = loadingPort;
     }
 
-    public Instant getPolDate() {
-        return polDate;
+    public Instant getLoadingDate() {
+        return loadingDate;
     }
 
-    public VesselCase polDate(Instant polDate) {
-        this.polDate = polDate;
+    public VesselCase loadingDate(Instant loadingDate) {
+        this.loadingDate = loadingDate;
         return this;
     }
 
-    public void setPolDate(Instant polDate) {
-        this.polDate = polDate;
+    public void setLoadingDate(Instant loadingDate) {
+        this.loadingDate = loadingDate;
     }
 
     public Long getDischargingPort() {
@@ -370,6 +421,19 @@ public class VesselCase implements Serializable {
 
     public void setDischargingPort(Long dischargingPort) {
         this.dischargingPort = dischargingPort;
+    }
+
+    public Instant getDischargingDate() {
+        return dischargingDate;
+    }
+
+    public VesselCase dischargingDate(Instant dischargingDate) {
+        this.dischargingDate = dischargingDate;
+        return this;
+    }
+
+    public void setDischargingDate(Instant dischargingDate) {
+        this.dischargingDate = dischargingDate;
     }
 
     public Instant getLimitTime() {
@@ -528,17 +592,17 @@ public class VesselCase implements Serializable {
         this.cpiInsuranceType = cpiInsuranceType;
     }
 
-    public CaseSatusType getCaseStatus() {
+    public CaseStatusType getCaseStatus() {
         return caseStatus;
     }
 
-    public VesselCase caseStatus(CaseSatusType caseSatusType) {
-        this.caseStatus = caseSatusType;
+    public VesselCase caseStatus(CaseStatusType caseStatusType) {
+        this.caseStatus = caseStatusType;
         return this;
     }
 
-    public void setCaseStatus(CaseSatusType caseSatusType) {
-        this.caseStatus = caseSatusType;
+    public void setCaseStatus(CaseStatusType caseStatusType) {
+        this.caseStatus = caseStatusType;
     }
 
     public CaseSettlementMode getSettlementMode() {
@@ -581,22 +645,26 @@ public class VesselCase implements Serializable {
             "id=" + getId() +
             ", numberId=" + getNumberId() +
             ", caseYear='" + getCaseYear() + "'" +
-            ", insuredVessel=" + getInsuredVessel() +
+            ", insuredVesselId=" + getInsuredVesselId() +
             ", companyName='" + getCompanyName() + "'" +
             ", vesselName='" + getVesselName() + "'" +
             ", companyChineseName='" + getCompanyChineseName() + "'" +
             ", vesselChineseName='" + getVesselChineseName() + "'" +
+            ", reinsureId=" + getReinsureId() +
             ", deduct=" + getDeduct() +
             ", assignedHandler=" + getAssignedHandler() +
             ", assignedTime='" + getAssignedTime() + "'" +
             ", registeredHandler=" + getRegisteredHandler() +
             ", registeredDate='" + getRegisteredDate() + "'" +
             ", caseCode='" + getCaseCode() + "'" +
+            ", caseDate='" + getCaseDate() + "'" +
             ", caseLocation=" + getCaseLocation() +
             ", caseDescription='" + getCaseDescription() + "'" +
+            ", voyageNo='" + getVoyageNo() + "'" +
             ", loadingPort=" + getLoadingPort() +
-            ", polDate='" + getPolDate() + "'" +
+            ", loadingDate='" + getLoadingDate() + "'" +
             ", dischargingPort=" + getDischargingPort() +
+            ", dischargingDate='" + getDischargingDate() + "'" +
             ", limitTime='" + getLimitTime() + "'" +
             ", cpDate='" + getCpDate() + "'" +
             ", cpType='" + getCpType() + "'" +

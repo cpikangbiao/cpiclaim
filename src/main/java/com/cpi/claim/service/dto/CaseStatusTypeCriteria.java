@@ -15,14 +15,14 @@ import io.github.jhipster.service.filter.StringFilter;
 
 
 /**
- * Criteria class for the CaseSatusType entity. This class is used in CaseSatusTypeResource to
+ * Criteria class for the CaseStatusType entity. This class is used in CaseStatusTypeResource to
  * receive all the possible filtering options from the Http GET request parameters.
  * For example the following could be a valid requests:
- * <code> /case-satus-types?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * <code> /case-status-types?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CaseSatusTypeCriteria implements Serializable {
+public class CaseStatusTypeCriteria implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
@@ -32,7 +32,7 @@ public class CaseSatusTypeCriteria implements Serializable {
 
     private StringFilter caseStatusName;
 
-    public CaseSatusTypeCriteria() {
+    public CaseStatusTypeCriteria() {
     }
 
     public LongFilter getId() {
@@ -61,7 +61,7 @@ public class CaseSatusTypeCriteria implements Serializable {
 
     @Override
     public String toString() {
-        return "CaseSatusTypeCriteria{" +
+        return "CaseStatusTypeCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (sortNum != null ? "sortNum=" + sortNum + ", " : "") +
                 (caseStatusName != null ? "caseStatusName=" + caseStatusName + ", " : "") +

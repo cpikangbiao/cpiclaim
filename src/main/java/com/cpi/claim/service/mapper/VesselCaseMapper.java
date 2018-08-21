@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity VesselCase and its DTO VesselCaseDTO.
  */
-@Mapper(componentModel = "spring", uses = {CpiInsuranceTypeMapper.class, CaseSatusTypeMapper.class, CaseSettlementModeMapper.class})
+@Mapper(componentModel = "spring", uses = {CpiInsuranceTypeMapper.class, CaseStatusTypeMapper.class, CaseSettlementModeMapper.class})
 public interface VesselCaseMapper extends EntityMapper<VesselCaseDTO, VesselCase> {
 
     @Mapping(source = "cpiInsuranceType.id", target = "cpiInsuranceTypeId")

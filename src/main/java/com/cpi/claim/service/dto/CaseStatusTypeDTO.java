@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CaseSatusType entity.
+ * A DTO for the CaseStatusType entity.
  */
-public class CaseSatusTypeDTO implements Serializable {
+public class CaseStatusTypeDTO implements Serializable {
 
     private Long id;
 
@@ -49,11 +49,11 @@ public class CaseSatusTypeDTO implements Serializable {
             return false;
         }
 
-        CaseSatusTypeDTO caseSatusTypeDTO = (CaseSatusTypeDTO) o;
-        if (caseSatusTypeDTO.getId() == null || getId() == null) {
+        CaseStatusTypeDTO caseStatusTypeDTO = (CaseStatusTypeDTO) o;
+        if (caseStatusTypeDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), caseSatusTypeDTO.getId());
+        return Objects.equals(getId(), caseStatusTypeDTO.getId());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CaseSatusTypeDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CaseSatusTypeDTO{" +
+        return "CaseStatusTypeDTO{" +
             "id=" + getId() +
             ", sortNum=" + getSortNum() +
             ", caseStatusName='" + getCaseStatusName() + "'" +

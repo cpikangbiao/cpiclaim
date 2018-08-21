@@ -6,7 +6,7 @@ import com.cpi.claim.config.SecurityBeanOverrideConfiguration;
 
 import com.cpi.claim.domain.VesselCase;
 import com.cpi.claim.domain.CpiInsuranceType;
-import com.cpi.claim.domain.CaseSatusType;
+import com.cpi.claim.domain.CaseStatusType;
 import com.cpi.claim.domain.CaseSettlementMode;
 import com.cpi.claim.repository.VesselCaseRepository;
 import com.cpi.claim.service.VesselCaseService;
@@ -59,8 +59,8 @@ public class VesselCaseResourceIntTest {
     private static final String DEFAULT_CASE_YEAR = "AAAAAAAAAA";
     private static final String UPDATED_CASE_YEAR = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_INSURED_VESSEL = 1L;
-    private static final Long UPDATED_INSURED_VESSEL = 2L;
+    private static final Long DEFAULT_INSURED_VESSEL_ID = 1L;
+    private static final Long UPDATED_INSURED_VESSEL_ID = 2L;
 
     private static final String DEFAULT_COMPANY_NAME = "AAAAAAAAAA";
     private static final String UPDATED_COMPANY_NAME = "BBBBBBBBBB";
@@ -73,6 +73,9 @@ public class VesselCaseResourceIntTest {
 
     private static final String DEFAULT_VESSEL_CHINESE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_VESSEL_CHINESE_NAME = "BBBBBBBBBB";
+
+    private static final Long DEFAULT_REINSURE_ID = 1L;
+    private static final Long UPDATED_REINSURE_ID = 2L;
 
     private static final BigDecimal DEFAULT_DEDUCT = new BigDecimal(1);
     private static final BigDecimal UPDATED_DEDUCT = new BigDecimal(2);
@@ -92,20 +95,29 @@ public class VesselCaseResourceIntTest {
     private static final String DEFAULT_CASE_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CASE_CODE = "BBBBBBBBBB";
 
+    private static final Instant DEFAULT_CASE_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CASE_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
     private static final Long DEFAULT_CASE_LOCATION = 1L;
     private static final Long UPDATED_CASE_LOCATION = 2L;
 
     private static final String DEFAULT_CASE_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_CASE_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_VOYAGE_NO = "AAAAAAAAAA";
+    private static final String UPDATED_VOYAGE_NO = "BBBBBBBBBB";
+
     private static final Long DEFAULT_LOADING_PORT = 1L;
     private static final Long UPDATED_LOADING_PORT = 2L;
 
-    private static final Instant DEFAULT_POL_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_POL_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LOADING_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LOADING_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Long DEFAULT_DISCHARGING_PORT = 1L;
     private static final Long UPDATED_DISCHARGING_PORT = 2L;
+
+    private static final Instant DEFAULT_DISCHARGING_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DISCHARGING_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Instant DEFAULT_LIMIT_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LIMIT_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -191,22 +203,26 @@ public class VesselCaseResourceIntTest {
         VesselCase vesselCase = new VesselCase()
             .numberId(DEFAULT_NUMBER_ID)
             .caseYear(DEFAULT_CASE_YEAR)
-            .insuredVessel(DEFAULT_INSURED_VESSEL)
+            .insuredVesselId(DEFAULT_INSURED_VESSEL_ID)
             .companyName(DEFAULT_COMPANY_NAME)
             .vesselName(DEFAULT_VESSEL_NAME)
             .companyChineseName(DEFAULT_COMPANY_CHINESE_NAME)
             .vesselChineseName(DEFAULT_VESSEL_CHINESE_NAME)
+            .reinsureId(DEFAULT_REINSURE_ID)
             .deduct(DEFAULT_DEDUCT)
             .assignedHandler(DEFAULT_ASSIGNED_HANDLER)
             .assignedTime(DEFAULT_ASSIGNED_TIME)
             .registeredHandler(DEFAULT_REGISTERED_HANDLER)
             .registeredDate(DEFAULT_REGISTERED_DATE)
             .caseCode(DEFAULT_CASE_CODE)
+            .caseDate(DEFAULT_CASE_DATE)
             .caseLocation(DEFAULT_CASE_LOCATION)
             .caseDescription(DEFAULT_CASE_DESCRIPTION)
+            .voyageNo(DEFAULT_VOYAGE_NO)
             .loadingPort(DEFAULT_LOADING_PORT)
-            .polDate(DEFAULT_POL_DATE)
+            .loadingDate(DEFAULT_LOADING_DATE)
             .dischargingPort(DEFAULT_DISCHARGING_PORT)
+            .dischargingDate(DEFAULT_DISCHARGING_DATE)
             .limitTime(DEFAULT_LIMIT_TIME)
             .cpDate(DEFAULT_CP_DATE)
             .cpType(DEFAULT_CP_TYPE)
@@ -244,22 +260,26 @@ public class VesselCaseResourceIntTest {
         VesselCase testVesselCase = vesselCaseList.get(vesselCaseList.size() - 1);
         assertThat(testVesselCase.getNumberId()).isEqualTo(DEFAULT_NUMBER_ID);
         assertThat(testVesselCase.getCaseYear()).isEqualTo(DEFAULT_CASE_YEAR);
-        assertThat(testVesselCase.getInsuredVessel()).isEqualTo(DEFAULT_INSURED_VESSEL);
+        assertThat(testVesselCase.getInsuredVesselId()).isEqualTo(DEFAULT_INSURED_VESSEL_ID);
         assertThat(testVesselCase.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
         assertThat(testVesselCase.getVesselName()).isEqualTo(DEFAULT_VESSEL_NAME);
         assertThat(testVesselCase.getCompanyChineseName()).isEqualTo(DEFAULT_COMPANY_CHINESE_NAME);
         assertThat(testVesselCase.getVesselChineseName()).isEqualTo(DEFAULT_VESSEL_CHINESE_NAME);
+        assertThat(testVesselCase.getReinsureId()).isEqualTo(DEFAULT_REINSURE_ID);
         assertThat(testVesselCase.getDeduct()).isEqualTo(DEFAULT_DEDUCT);
         assertThat(testVesselCase.getAssignedHandler()).isEqualTo(DEFAULT_ASSIGNED_HANDLER);
         assertThat(testVesselCase.getAssignedTime()).isEqualTo(DEFAULT_ASSIGNED_TIME);
         assertThat(testVesselCase.getRegisteredHandler()).isEqualTo(DEFAULT_REGISTERED_HANDLER);
         assertThat(testVesselCase.getRegisteredDate()).isEqualTo(DEFAULT_REGISTERED_DATE);
         assertThat(testVesselCase.getCaseCode()).isEqualTo(DEFAULT_CASE_CODE);
+        assertThat(testVesselCase.getCaseDate()).isEqualTo(DEFAULT_CASE_DATE);
         assertThat(testVesselCase.getCaseLocation()).isEqualTo(DEFAULT_CASE_LOCATION);
         assertThat(testVesselCase.getCaseDescription()).isEqualTo(DEFAULT_CASE_DESCRIPTION);
+        assertThat(testVesselCase.getVoyageNo()).isEqualTo(DEFAULT_VOYAGE_NO);
         assertThat(testVesselCase.getLoadingPort()).isEqualTo(DEFAULT_LOADING_PORT);
-        assertThat(testVesselCase.getPolDate()).isEqualTo(DEFAULT_POL_DATE);
+        assertThat(testVesselCase.getLoadingDate()).isEqualTo(DEFAULT_LOADING_DATE);
         assertThat(testVesselCase.getDischargingPort()).isEqualTo(DEFAULT_DISCHARGING_PORT);
+        assertThat(testVesselCase.getDischargingDate()).isEqualTo(DEFAULT_DISCHARGING_DATE);
         assertThat(testVesselCase.getLimitTime()).isEqualTo(DEFAULT_LIMIT_TIME);
         assertThat(testVesselCase.getCpDate()).isEqualTo(DEFAULT_CP_DATE);
         assertThat(testVesselCase.getCpType()).isEqualTo(DEFAULT_CP_TYPE);
@@ -314,10 +334,10 @@ public class VesselCaseResourceIntTest {
 
     @Test
     @Transactional
-    public void checkInsuredVesselIsRequired() throws Exception {
+    public void checkInsuredVesselIdIsRequired() throws Exception {
         int databaseSizeBeforeTest = vesselCaseRepository.findAll().size();
         // set the field null
-        vesselCase.setInsuredVessel(null);
+        vesselCase.setInsuredVesselId(null);
 
         // Create the VesselCase, which fails.
         VesselCaseDTO vesselCaseDTO = vesselCaseMapper.toDto(vesselCase);
@@ -363,22 +383,26 @@ public class VesselCaseResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(vesselCase.getId().intValue())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].caseYear").value(hasItem(DEFAULT_CASE_YEAR.toString())))
-            .andExpect(jsonPath("$.[*].insuredVessel").value(hasItem(DEFAULT_INSURED_VESSEL.intValue())))
+            .andExpect(jsonPath("$.[*].insuredVesselId").value(hasItem(DEFAULT_INSURED_VESSEL_ID.intValue())))
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].vesselName").value(hasItem(DEFAULT_VESSEL_NAME.toString())))
             .andExpect(jsonPath("$.[*].companyChineseName").value(hasItem(DEFAULT_COMPANY_CHINESE_NAME.toString())))
             .andExpect(jsonPath("$.[*].vesselChineseName").value(hasItem(DEFAULT_VESSEL_CHINESE_NAME.toString())))
+            .andExpect(jsonPath("$.[*].reinsureId").value(hasItem(DEFAULT_REINSURE_ID.intValue())))
             .andExpect(jsonPath("$.[*].deduct").value(hasItem(DEFAULT_DEDUCT.intValue())))
             .andExpect(jsonPath("$.[*].assignedHandler").value(hasItem(DEFAULT_ASSIGNED_HANDLER.intValue())))
             .andExpect(jsonPath("$.[*].assignedTime").value(hasItem(DEFAULT_ASSIGNED_TIME.toString())))
             .andExpect(jsonPath("$.[*].registeredHandler").value(hasItem(DEFAULT_REGISTERED_HANDLER.intValue())))
             .andExpect(jsonPath("$.[*].registeredDate").value(hasItem(DEFAULT_REGISTERED_DATE.toString())))
             .andExpect(jsonPath("$.[*].caseCode").value(hasItem(DEFAULT_CASE_CODE.toString())))
+            .andExpect(jsonPath("$.[*].caseDate").value(hasItem(DEFAULT_CASE_DATE.toString())))
             .andExpect(jsonPath("$.[*].caseLocation").value(hasItem(DEFAULT_CASE_LOCATION.intValue())))
             .andExpect(jsonPath("$.[*].caseDescription").value(hasItem(DEFAULT_CASE_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].voyageNo").value(hasItem(DEFAULT_VOYAGE_NO.toString())))
             .andExpect(jsonPath("$.[*].loadingPort").value(hasItem(DEFAULT_LOADING_PORT.intValue())))
-            .andExpect(jsonPath("$.[*].polDate").value(hasItem(DEFAULT_POL_DATE.toString())))
+            .andExpect(jsonPath("$.[*].loadingDate").value(hasItem(DEFAULT_LOADING_DATE.toString())))
             .andExpect(jsonPath("$.[*].dischargingPort").value(hasItem(DEFAULT_DISCHARGING_PORT.intValue())))
+            .andExpect(jsonPath("$.[*].dischargingDate").value(hasItem(DEFAULT_DISCHARGING_DATE.toString())))
             .andExpect(jsonPath("$.[*].limitTime").value(hasItem(DEFAULT_LIMIT_TIME.toString())))
             .andExpect(jsonPath("$.[*].cpDate").value(hasItem(DEFAULT_CP_DATE.toString())))
             .andExpect(jsonPath("$.[*].cpType").value(hasItem(DEFAULT_CP_TYPE.toString())))
@@ -406,22 +430,26 @@ public class VesselCaseResourceIntTest {
             .andExpect(jsonPath("$.id").value(vesselCase.getId().intValue()))
             .andExpect(jsonPath("$.numberId").value(DEFAULT_NUMBER_ID))
             .andExpect(jsonPath("$.caseYear").value(DEFAULT_CASE_YEAR.toString()))
-            .andExpect(jsonPath("$.insuredVessel").value(DEFAULT_INSURED_VESSEL.intValue()))
+            .andExpect(jsonPath("$.insuredVesselId").value(DEFAULT_INSURED_VESSEL_ID.intValue()))
             .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
             .andExpect(jsonPath("$.vesselName").value(DEFAULT_VESSEL_NAME.toString()))
             .andExpect(jsonPath("$.companyChineseName").value(DEFAULT_COMPANY_CHINESE_NAME.toString()))
             .andExpect(jsonPath("$.vesselChineseName").value(DEFAULT_VESSEL_CHINESE_NAME.toString()))
+            .andExpect(jsonPath("$.reinsureId").value(DEFAULT_REINSURE_ID.intValue()))
             .andExpect(jsonPath("$.deduct").value(DEFAULT_DEDUCT.intValue()))
             .andExpect(jsonPath("$.assignedHandler").value(DEFAULT_ASSIGNED_HANDLER.intValue()))
             .andExpect(jsonPath("$.assignedTime").value(DEFAULT_ASSIGNED_TIME.toString()))
             .andExpect(jsonPath("$.registeredHandler").value(DEFAULT_REGISTERED_HANDLER.intValue()))
             .andExpect(jsonPath("$.registeredDate").value(DEFAULT_REGISTERED_DATE.toString()))
             .andExpect(jsonPath("$.caseCode").value(DEFAULT_CASE_CODE.toString()))
+            .andExpect(jsonPath("$.caseDate").value(DEFAULT_CASE_DATE.toString()))
             .andExpect(jsonPath("$.caseLocation").value(DEFAULT_CASE_LOCATION.intValue()))
             .andExpect(jsonPath("$.caseDescription").value(DEFAULT_CASE_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.voyageNo").value(DEFAULT_VOYAGE_NO.toString()))
             .andExpect(jsonPath("$.loadingPort").value(DEFAULT_LOADING_PORT.intValue()))
-            .andExpect(jsonPath("$.polDate").value(DEFAULT_POL_DATE.toString()))
+            .andExpect(jsonPath("$.loadingDate").value(DEFAULT_LOADING_DATE.toString()))
             .andExpect(jsonPath("$.dischargingPort").value(DEFAULT_DISCHARGING_PORT.intValue()))
+            .andExpect(jsonPath("$.dischargingDate").value(DEFAULT_DISCHARGING_DATE.toString()))
             .andExpect(jsonPath("$.limitTime").value(DEFAULT_LIMIT_TIME.toString()))
             .andExpect(jsonPath("$.cpDate").value(DEFAULT_CP_DATE.toString()))
             .andExpect(jsonPath("$.cpType").value(DEFAULT_CP_TYPE.toString()))
@@ -542,67 +570,67 @@ public class VesselCaseResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllVesselCasesByInsuredVesselIsEqualToSomething() throws Exception {
+    public void getAllVesselCasesByInsuredVesselIdIsEqualToSomething() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where insuredVessel equals to DEFAULT_INSURED_VESSEL
-        defaultVesselCaseShouldBeFound("insuredVessel.equals=" + DEFAULT_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId equals to DEFAULT_INSURED_VESSEL_ID
+        defaultVesselCaseShouldBeFound("insuredVesselId.equals=" + DEFAULT_INSURED_VESSEL_ID);
 
-        // Get all the vesselCaseList where insuredVessel equals to UPDATED_INSURED_VESSEL
-        defaultVesselCaseShouldNotBeFound("insuredVessel.equals=" + UPDATED_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId equals to UPDATED_INSURED_VESSEL_ID
+        defaultVesselCaseShouldNotBeFound("insuredVesselId.equals=" + UPDATED_INSURED_VESSEL_ID);
     }
 
     @Test
     @Transactional
-    public void getAllVesselCasesByInsuredVesselIsInShouldWork() throws Exception {
+    public void getAllVesselCasesByInsuredVesselIdIsInShouldWork() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where insuredVessel in DEFAULT_INSURED_VESSEL or UPDATED_INSURED_VESSEL
-        defaultVesselCaseShouldBeFound("insuredVessel.in=" + DEFAULT_INSURED_VESSEL + "," + UPDATED_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId in DEFAULT_INSURED_VESSEL_ID or UPDATED_INSURED_VESSEL_ID
+        defaultVesselCaseShouldBeFound("insuredVesselId.in=" + DEFAULT_INSURED_VESSEL_ID + "," + UPDATED_INSURED_VESSEL_ID);
 
-        // Get all the vesselCaseList where insuredVessel equals to UPDATED_INSURED_VESSEL
-        defaultVesselCaseShouldNotBeFound("insuredVessel.in=" + UPDATED_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId equals to UPDATED_INSURED_VESSEL_ID
+        defaultVesselCaseShouldNotBeFound("insuredVesselId.in=" + UPDATED_INSURED_VESSEL_ID);
     }
 
     @Test
     @Transactional
-    public void getAllVesselCasesByInsuredVesselIsNullOrNotNull() throws Exception {
+    public void getAllVesselCasesByInsuredVesselIdIsNullOrNotNull() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where insuredVessel is not null
-        defaultVesselCaseShouldBeFound("insuredVessel.specified=true");
+        // Get all the vesselCaseList where insuredVesselId is not null
+        defaultVesselCaseShouldBeFound("insuredVesselId.specified=true");
 
-        // Get all the vesselCaseList where insuredVessel is null
-        defaultVesselCaseShouldNotBeFound("insuredVessel.specified=false");
+        // Get all the vesselCaseList where insuredVesselId is null
+        defaultVesselCaseShouldNotBeFound("insuredVesselId.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllVesselCasesByInsuredVesselIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllVesselCasesByInsuredVesselIdIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where insuredVessel greater than or equals to DEFAULT_INSURED_VESSEL
-        defaultVesselCaseShouldBeFound("insuredVessel.greaterOrEqualThan=" + DEFAULT_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId greater than or equals to DEFAULT_INSURED_VESSEL_ID
+        defaultVesselCaseShouldBeFound("insuredVesselId.greaterOrEqualThan=" + DEFAULT_INSURED_VESSEL_ID);
 
-        // Get all the vesselCaseList where insuredVessel greater than or equals to UPDATED_INSURED_VESSEL
-        defaultVesselCaseShouldNotBeFound("insuredVessel.greaterOrEqualThan=" + UPDATED_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId greater than or equals to UPDATED_INSURED_VESSEL_ID
+        defaultVesselCaseShouldNotBeFound("insuredVesselId.greaterOrEqualThan=" + UPDATED_INSURED_VESSEL_ID);
     }
 
     @Test
     @Transactional
-    public void getAllVesselCasesByInsuredVesselIsLessThanSomething() throws Exception {
+    public void getAllVesselCasesByInsuredVesselIdIsLessThanSomething() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where insuredVessel less than or equals to DEFAULT_INSURED_VESSEL
-        defaultVesselCaseShouldNotBeFound("insuredVessel.lessThan=" + DEFAULT_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId less than or equals to DEFAULT_INSURED_VESSEL_ID
+        defaultVesselCaseShouldNotBeFound("insuredVesselId.lessThan=" + DEFAULT_INSURED_VESSEL_ID);
 
-        // Get all the vesselCaseList where insuredVessel less than or equals to UPDATED_INSURED_VESSEL
-        defaultVesselCaseShouldBeFound("insuredVessel.lessThan=" + UPDATED_INSURED_VESSEL);
+        // Get all the vesselCaseList where insuredVesselId less than or equals to UPDATED_INSURED_VESSEL_ID
+        defaultVesselCaseShouldBeFound("insuredVesselId.lessThan=" + UPDATED_INSURED_VESSEL_ID);
     }
 
 
@@ -761,6 +789,72 @@ public class VesselCaseResourceIntTest {
         // Get all the vesselCaseList where vesselChineseName is null
         defaultVesselCaseShouldNotBeFound("vesselChineseName.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByReinsureIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where reinsureId equals to DEFAULT_REINSURE_ID
+        defaultVesselCaseShouldBeFound("reinsureId.equals=" + DEFAULT_REINSURE_ID);
+
+        // Get all the vesselCaseList where reinsureId equals to UPDATED_REINSURE_ID
+        defaultVesselCaseShouldNotBeFound("reinsureId.equals=" + UPDATED_REINSURE_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByReinsureIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where reinsureId in DEFAULT_REINSURE_ID or UPDATED_REINSURE_ID
+        defaultVesselCaseShouldBeFound("reinsureId.in=" + DEFAULT_REINSURE_ID + "," + UPDATED_REINSURE_ID);
+
+        // Get all the vesselCaseList where reinsureId equals to UPDATED_REINSURE_ID
+        defaultVesselCaseShouldNotBeFound("reinsureId.in=" + UPDATED_REINSURE_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByReinsureIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where reinsureId is not null
+        defaultVesselCaseShouldBeFound("reinsureId.specified=true");
+
+        // Get all the vesselCaseList where reinsureId is null
+        defaultVesselCaseShouldNotBeFound("reinsureId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByReinsureIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where reinsureId greater than or equals to DEFAULT_REINSURE_ID
+        defaultVesselCaseShouldBeFound("reinsureId.greaterOrEqualThan=" + DEFAULT_REINSURE_ID);
+
+        // Get all the vesselCaseList where reinsureId greater than or equals to UPDATED_REINSURE_ID
+        defaultVesselCaseShouldNotBeFound("reinsureId.greaterOrEqualThan=" + UPDATED_REINSURE_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByReinsureIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where reinsureId less than or equals to DEFAULT_REINSURE_ID
+        defaultVesselCaseShouldNotBeFound("reinsureId.lessThan=" + DEFAULT_REINSURE_ID);
+
+        // Get all the vesselCaseList where reinsureId less than or equals to UPDATED_REINSURE_ID
+        defaultVesselCaseShouldBeFound("reinsureId.lessThan=" + UPDATED_REINSURE_ID);
+    }
+
 
     @Test
     @Transactional
@@ -1052,6 +1146,45 @@ public class VesselCaseResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllVesselCasesByCaseDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where caseDate equals to DEFAULT_CASE_DATE
+        defaultVesselCaseShouldBeFound("caseDate.equals=" + DEFAULT_CASE_DATE);
+
+        // Get all the vesselCaseList where caseDate equals to UPDATED_CASE_DATE
+        defaultVesselCaseShouldNotBeFound("caseDate.equals=" + UPDATED_CASE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByCaseDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where caseDate in DEFAULT_CASE_DATE or UPDATED_CASE_DATE
+        defaultVesselCaseShouldBeFound("caseDate.in=" + DEFAULT_CASE_DATE + "," + UPDATED_CASE_DATE);
+
+        // Get all the vesselCaseList where caseDate equals to UPDATED_CASE_DATE
+        defaultVesselCaseShouldNotBeFound("caseDate.in=" + UPDATED_CASE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByCaseDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where caseDate is not null
+        defaultVesselCaseShouldBeFound("caseDate.specified=true");
+
+        // Get all the vesselCaseList where caseDate is null
+        defaultVesselCaseShouldNotBeFound("caseDate.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllVesselCasesByCaseLocationIsEqualToSomething() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
@@ -1157,6 +1290,45 @@ public class VesselCaseResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllVesselCasesByVoyageNoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where voyageNo equals to DEFAULT_VOYAGE_NO
+        defaultVesselCaseShouldBeFound("voyageNo.equals=" + DEFAULT_VOYAGE_NO);
+
+        // Get all the vesselCaseList where voyageNo equals to UPDATED_VOYAGE_NO
+        defaultVesselCaseShouldNotBeFound("voyageNo.equals=" + UPDATED_VOYAGE_NO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByVoyageNoIsInShouldWork() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where voyageNo in DEFAULT_VOYAGE_NO or UPDATED_VOYAGE_NO
+        defaultVesselCaseShouldBeFound("voyageNo.in=" + DEFAULT_VOYAGE_NO + "," + UPDATED_VOYAGE_NO);
+
+        // Get all the vesselCaseList where voyageNo equals to UPDATED_VOYAGE_NO
+        defaultVesselCaseShouldNotBeFound("voyageNo.in=" + UPDATED_VOYAGE_NO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByVoyageNoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where voyageNo is not null
+        defaultVesselCaseShouldBeFound("voyageNo.specified=true");
+
+        // Get all the vesselCaseList where voyageNo is null
+        defaultVesselCaseShouldNotBeFound("voyageNo.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllVesselCasesByLoadingPortIsEqualToSomething() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
@@ -1223,41 +1395,41 @@ public class VesselCaseResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllVesselCasesByPolDateIsEqualToSomething() throws Exception {
+    public void getAllVesselCasesByLoadingDateIsEqualToSomething() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where polDate equals to DEFAULT_POL_DATE
-        defaultVesselCaseShouldBeFound("polDate.equals=" + DEFAULT_POL_DATE);
+        // Get all the vesselCaseList where loadingDate equals to DEFAULT_LOADING_DATE
+        defaultVesselCaseShouldBeFound("loadingDate.equals=" + DEFAULT_LOADING_DATE);
 
-        // Get all the vesselCaseList where polDate equals to UPDATED_POL_DATE
-        defaultVesselCaseShouldNotBeFound("polDate.equals=" + UPDATED_POL_DATE);
+        // Get all the vesselCaseList where loadingDate equals to UPDATED_LOADING_DATE
+        defaultVesselCaseShouldNotBeFound("loadingDate.equals=" + UPDATED_LOADING_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllVesselCasesByPolDateIsInShouldWork() throws Exception {
+    public void getAllVesselCasesByLoadingDateIsInShouldWork() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where polDate in DEFAULT_POL_DATE or UPDATED_POL_DATE
-        defaultVesselCaseShouldBeFound("polDate.in=" + DEFAULT_POL_DATE + "," + UPDATED_POL_DATE);
+        // Get all the vesselCaseList where loadingDate in DEFAULT_LOADING_DATE or UPDATED_LOADING_DATE
+        defaultVesselCaseShouldBeFound("loadingDate.in=" + DEFAULT_LOADING_DATE + "," + UPDATED_LOADING_DATE);
 
-        // Get all the vesselCaseList where polDate equals to UPDATED_POL_DATE
-        defaultVesselCaseShouldNotBeFound("polDate.in=" + UPDATED_POL_DATE);
+        // Get all the vesselCaseList where loadingDate equals to UPDATED_LOADING_DATE
+        defaultVesselCaseShouldNotBeFound("loadingDate.in=" + UPDATED_LOADING_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllVesselCasesByPolDateIsNullOrNotNull() throws Exception {
+    public void getAllVesselCasesByLoadingDateIsNullOrNotNull() throws Exception {
         // Initialize the database
         vesselCaseRepository.saveAndFlush(vesselCase);
 
-        // Get all the vesselCaseList where polDate is not null
-        defaultVesselCaseShouldBeFound("polDate.specified=true");
+        // Get all the vesselCaseList where loadingDate is not null
+        defaultVesselCaseShouldBeFound("loadingDate.specified=true");
 
-        // Get all the vesselCaseList where polDate is null
-        defaultVesselCaseShouldNotBeFound("polDate.specified=false");
+        // Get all the vesselCaseList where loadingDate is null
+        defaultVesselCaseShouldNotBeFound("loadingDate.specified=false");
     }
 
     @Test
@@ -1325,6 +1497,45 @@ public class VesselCaseResourceIntTest {
         defaultVesselCaseShouldBeFound("dischargingPort.lessThan=" + UPDATED_DISCHARGING_PORT);
     }
 
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByDischargingDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where dischargingDate equals to DEFAULT_DISCHARGING_DATE
+        defaultVesselCaseShouldBeFound("dischargingDate.equals=" + DEFAULT_DISCHARGING_DATE);
+
+        // Get all the vesselCaseList where dischargingDate equals to UPDATED_DISCHARGING_DATE
+        defaultVesselCaseShouldNotBeFound("dischargingDate.equals=" + UPDATED_DISCHARGING_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByDischargingDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where dischargingDate in DEFAULT_DISCHARGING_DATE or UPDATED_DISCHARGING_DATE
+        defaultVesselCaseShouldBeFound("dischargingDate.in=" + DEFAULT_DISCHARGING_DATE + "," + UPDATED_DISCHARGING_DATE);
+
+        // Get all the vesselCaseList where dischargingDate equals to UPDATED_DISCHARGING_DATE
+        defaultVesselCaseShouldNotBeFound("dischargingDate.in=" + UPDATED_DISCHARGING_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllVesselCasesByDischargingDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        vesselCaseRepository.saveAndFlush(vesselCase);
+
+        // Get all the vesselCaseList where dischargingDate is not null
+        defaultVesselCaseShouldBeFound("dischargingDate.specified=true");
+
+        // Get all the vesselCaseList where dischargingDate is null
+        defaultVesselCaseShouldNotBeFound("dischargingDate.specified=false");
+    }
 
     @Test
     @Transactional
@@ -1820,7 +2031,7 @@ public class VesselCaseResourceIntTest {
     @Transactional
     public void getAllVesselCasesByCaseStatusIsEqualToSomething() throws Exception {
         // Initialize the database
-        CaseSatusType caseStatus = CaseSatusTypeResourceIntTest.createEntity(em);
+        CaseStatusType caseStatus = CaseStatusTypeResourceIntTest.createEntity(em);
         em.persist(caseStatus);
         em.flush();
         vesselCase.setCaseStatus(caseStatus);
@@ -1863,22 +2074,26 @@ public class VesselCaseResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(vesselCase.getId().intValue())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].caseYear").value(hasItem(DEFAULT_CASE_YEAR.toString())))
-            .andExpect(jsonPath("$.[*].insuredVessel").value(hasItem(DEFAULT_INSURED_VESSEL.intValue())))
+            .andExpect(jsonPath("$.[*].insuredVesselId").value(hasItem(DEFAULT_INSURED_VESSEL_ID.intValue())))
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].vesselName").value(hasItem(DEFAULT_VESSEL_NAME.toString())))
             .andExpect(jsonPath("$.[*].companyChineseName").value(hasItem(DEFAULT_COMPANY_CHINESE_NAME.toString())))
             .andExpect(jsonPath("$.[*].vesselChineseName").value(hasItem(DEFAULT_VESSEL_CHINESE_NAME.toString())))
+            .andExpect(jsonPath("$.[*].reinsureId").value(hasItem(DEFAULT_REINSURE_ID.intValue())))
             .andExpect(jsonPath("$.[*].deduct").value(hasItem(DEFAULT_DEDUCT.intValue())))
             .andExpect(jsonPath("$.[*].assignedHandler").value(hasItem(DEFAULT_ASSIGNED_HANDLER.intValue())))
             .andExpect(jsonPath("$.[*].assignedTime").value(hasItem(DEFAULT_ASSIGNED_TIME.toString())))
             .andExpect(jsonPath("$.[*].registeredHandler").value(hasItem(DEFAULT_REGISTERED_HANDLER.intValue())))
             .andExpect(jsonPath("$.[*].registeredDate").value(hasItem(DEFAULT_REGISTERED_DATE.toString())))
             .andExpect(jsonPath("$.[*].caseCode").value(hasItem(DEFAULT_CASE_CODE.toString())))
+            .andExpect(jsonPath("$.[*].caseDate").value(hasItem(DEFAULT_CASE_DATE.toString())))
             .andExpect(jsonPath("$.[*].caseLocation").value(hasItem(DEFAULT_CASE_LOCATION.intValue())))
             .andExpect(jsonPath("$.[*].caseDescription").value(hasItem(DEFAULT_CASE_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].voyageNo").value(hasItem(DEFAULT_VOYAGE_NO.toString())))
             .andExpect(jsonPath("$.[*].loadingPort").value(hasItem(DEFAULT_LOADING_PORT.intValue())))
-            .andExpect(jsonPath("$.[*].polDate").value(hasItem(DEFAULT_POL_DATE.toString())))
+            .andExpect(jsonPath("$.[*].loadingDate").value(hasItem(DEFAULT_LOADING_DATE.toString())))
             .andExpect(jsonPath("$.[*].dischargingPort").value(hasItem(DEFAULT_DISCHARGING_PORT.intValue())))
+            .andExpect(jsonPath("$.[*].dischargingDate").value(hasItem(DEFAULT_DISCHARGING_DATE.toString())))
             .andExpect(jsonPath("$.[*].limitTime").value(hasItem(DEFAULT_LIMIT_TIME.toString())))
             .andExpect(jsonPath("$.[*].cpDate").value(hasItem(DEFAULT_CP_DATE.toString())))
             .andExpect(jsonPath("$.[*].cpType").value(hasItem(DEFAULT_CP_TYPE.toString())))
@@ -1926,22 +2141,26 @@ public class VesselCaseResourceIntTest {
         updatedVesselCase
             .numberId(UPDATED_NUMBER_ID)
             .caseYear(UPDATED_CASE_YEAR)
-            .insuredVessel(UPDATED_INSURED_VESSEL)
+            .insuredVesselId(UPDATED_INSURED_VESSEL_ID)
             .companyName(UPDATED_COMPANY_NAME)
             .vesselName(UPDATED_VESSEL_NAME)
             .companyChineseName(UPDATED_COMPANY_CHINESE_NAME)
             .vesselChineseName(UPDATED_VESSEL_CHINESE_NAME)
+            .reinsureId(UPDATED_REINSURE_ID)
             .deduct(UPDATED_DEDUCT)
             .assignedHandler(UPDATED_ASSIGNED_HANDLER)
             .assignedTime(UPDATED_ASSIGNED_TIME)
             .registeredHandler(UPDATED_REGISTERED_HANDLER)
             .registeredDate(UPDATED_REGISTERED_DATE)
             .caseCode(UPDATED_CASE_CODE)
+            .caseDate(UPDATED_CASE_DATE)
             .caseLocation(UPDATED_CASE_LOCATION)
             .caseDescription(UPDATED_CASE_DESCRIPTION)
+            .voyageNo(UPDATED_VOYAGE_NO)
             .loadingPort(UPDATED_LOADING_PORT)
-            .polDate(UPDATED_POL_DATE)
+            .loadingDate(UPDATED_LOADING_DATE)
             .dischargingPort(UPDATED_DISCHARGING_PORT)
+            .dischargingDate(UPDATED_DISCHARGING_DATE)
             .limitTime(UPDATED_LIMIT_TIME)
             .cpDate(UPDATED_CP_DATE)
             .cpType(UPDATED_CP_TYPE)
@@ -1966,22 +2185,26 @@ public class VesselCaseResourceIntTest {
         VesselCase testVesselCase = vesselCaseList.get(vesselCaseList.size() - 1);
         assertThat(testVesselCase.getNumberId()).isEqualTo(UPDATED_NUMBER_ID);
         assertThat(testVesselCase.getCaseYear()).isEqualTo(UPDATED_CASE_YEAR);
-        assertThat(testVesselCase.getInsuredVessel()).isEqualTo(UPDATED_INSURED_VESSEL);
+        assertThat(testVesselCase.getInsuredVesselId()).isEqualTo(UPDATED_INSURED_VESSEL_ID);
         assertThat(testVesselCase.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testVesselCase.getVesselName()).isEqualTo(UPDATED_VESSEL_NAME);
         assertThat(testVesselCase.getCompanyChineseName()).isEqualTo(UPDATED_COMPANY_CHINESE_NAME);
         assertThat(testVesselCase.getVesselChineseName()).isEqualTo(UPDATED_VESSEL_CHINESE_NAME);
+        assertThat(testVesselCase.getReinsureId()).isEqualTo(UPDATED_REINSURE_ID);
         assertThat(testVesselCase.getDeduct()).isEqualTo(UPDATED_DEDUCT);
         assertThat(testVesselCase.getAssignedHandler()).isEqualTo(UPDATED_ASSIGNED_HANDLER);
         assertThat(testVesselCase.getAssignedTime()).isEqualTo(UPDATED_ASSIGNED_TIME);
         assertThat(testVesselCase.getRegisteredHandler()).isEqualTo(UPDATED_REGISTERED_HANDLER);
         assertThat(testVesselCase.getRegisteredDate()).isEqualTo(UPDATED_REGISTERED_DATE);
         assertThat(testVesselCase.getCaseCode()).isEqualTo(UPDATED_CASE_CODE);
+        assertThat(testVesselCase.getCaseDate()).isEqualTo(UPDATED_CASE_DATE);
         assertThat(testVesselCase.getCaseLocation()).isEqualTo(UPDATED_CASE_LOCATION);
         assertThat(testVesselCase.getCaseDescription()).isEqualTo(UPDATED_CASE_DESCRIPTION);
+        assertThat(testVesselCase.getVoyageNo()).isEqualTo(UPDATED_VOYAGE_NO);
         assertThat(testVesselCase.getLoadingPort()).isEqualTo(UPDATED_LOADING_PORT);
-        assertThat(testVesselCase.getPolDate()).isEqualTo(UPDATED_POL_DATE);
+        assertThat(testVesselCase.getLoadingDate()).isEqualTo(UPDATED_LOADING_DATE);
         assertThat(testVesselCase.getDischargingPort()).isEqualTo(UPDATED_DISCHARGING_PORT);
+        assertThat(testVesselCase.getDischargingDate()).isEqualTo(UPDATED_DISCHARGING_DATE);
         assertThat(testVesselCase.getLimitTime()).isEqualTo(UPDATED_LIMIT_TIME);
         assertThat(testVesselCase.getCpDate()).isEqualTo(UPDATED_CP_DATE);
         assertThat(testVesselCase.getCpType()).isEqualTo(UPDATED_CP_TYPE);

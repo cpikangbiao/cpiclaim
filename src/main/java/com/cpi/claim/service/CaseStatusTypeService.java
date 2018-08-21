@@ -1,6 +1,6 @@
 package com.cpi.claim.service;
 
-import com.cpi.claim.service.dto.CaseSatusTypeDTO;
+import com.cpi.claim.service.dto.CaseStatusTypeDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,37 +8,37 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing CaseSatusType.
+ * Service Interface for managing CaseStatusType.
  */
-public interface CaseSatusTypeService {
+public interface CaseStatusTypeService {
 
     /**
-     * Save a caseSatusType.
+     * Save a caseStatusType.
      *
-     * @param caseSatusTypeDTO the entity to save
+     * @param caseStatusTypeDTO the entity to save
      * @return the persisted entity
      */
-    CaseSatusTypeDTO save(CaseSatusTypeDTO caseSatusTypeDTO);
+    CaseStatusTypeDTO save(CaseStatusTypeDTO caseStatusTypeDTO);
 
     /**
-     * Get all the caseSatusTypes.
+     * Get all the caseStatusTypes.
      *
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<CaseSatusTypeDTO> findAll(Pageable pageable);
+    Page<CaseStatusTypeDTO> findAll(Pageable pageable);
 
 
     /**
-     * Get the "id" caseSatusType.
+     * Get the "id" caseStatusType.
      *
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<CaseSatusTypeDTO> findOne(Long id);
+    Optional<CaseStatusTypeDTO> findOne(Long id);
 
     /**
-     * Delete the "id" caseSatusType.
+     * Delete the "id" caseStatusType.
      *
      * @param id the id of the entity
      */

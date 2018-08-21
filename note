@@ -1,0 +1,4 @@
+alter table `cpiclaim`.`vessel_case` add column  `created_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`vessel_case` add column  `created_by` varchar(50) NOT NULL;
+alter table `cpiclaim`.`vessel_case` add column  `last_modified_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`vessel_case` add column  `last_modified_by` varchar(50) NOT NULL;

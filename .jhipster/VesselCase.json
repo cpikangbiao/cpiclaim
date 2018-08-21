@@ -13,7 +13,7 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "insuredVessel",
+            "fieldName": "insuredVesselId",
             "fieldType": "Long",
             "fieldValidateRules": [
                 "required"
@@ -34,6 +34,10 @@
         {
             "fieldName": "vesselChineseName",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "reinsureId",
+            "fieldType": "Long"
         },
         {
             "fieldName": "deduct",
@@ -63,6 +67,10 @@
             ]
         },
         {
+            "fieldName": "caseDate",
+            "fieldType": "Instant"
+        },
+        {
             "fieldName": "caseLocation",
             "fieldType": "Long"
         },
@@ -71,16 +79,24 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "voyageNo",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "loadingPort",
             "fieldType": "Long"
         },
         {
-            "fieldName": "polDate",
+            "fieldName": "loadingDate",
             "fieldType": "Instant"
         },
         {
             "fieldName": "dischargingPort",
             "fieldType": "Long"
+        },
+        {
+            "fieldName": "dischargingDate",
+            "fieldType": "Instant"
         },
         {
             "fieldName": "limitTime",
@@ -138,7 +154,7 @@
         {
             "relationshipType": "many-to-one",
             "relationshipName": "caseStatus",
-            "otherEntityName": "caseSatusType",
+            "otherEntityName": "caseStatusType",
             "otherEntityField": "caseStatusName"
         },
         {
@@ -148,7 +164,7 @@
             "otherEntityField": "settlementModeName"
         }
     ],
-    "changelogDate": "20180821015139",
+    "changelogDate": "20180821062146",
     "entityTableName": "vessel_case",
     "dto": "mapstruct",
     "pagination": "pagination",

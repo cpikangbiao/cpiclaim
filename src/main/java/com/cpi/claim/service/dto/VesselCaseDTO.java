@@ -20,7 +20,7 @@ public class VesselCaseDTO implements Serializable {
     private String caseYear;
 
     @NotNull
-    private Long insuredVessel;
+    private Long insuredVesselId;
 
     private String companyName;
 
@@ -29,6 +29,8 @@ public class VesselCaseDTO implements Serializable {
     private String companyChineseName;
 
     private String vesselChineseName;
+
+    private Long reinsureId;
 
     private BigDecimal deduct;
 
@@ -43,15 +45,21 @@ public class VesselCaseDTO implements Serializable {
     @NotNull
     private String caseCode;
 
+    private Instant caseDate;
+
     private Long caseLocation;
 
     private String caseDescription;
 
+    private String voyageNo;
+
     private Long loadingPort;
 
-    private Instant polDate;
+    private Instant loadingDate;
 
     private Long dischargingPort;
+
+    private Instant dischargingDate;
 
     private Instant limitTime;
 
@@ -112,12 +120,12 @@ public class VesselCaseDTO implements Serializable {
         this.caseYear = caseYear;
     }
 
-    public Long getInsuredVessel() {
-        return insuredVessel;
+    public Long getInsuredVesselId() {
+        return insuredVesselId;
     }
 
-    public void setInsuredVessel(Long insuredVessel) {
-        this.insuredVessel = insuredVessel;
+    public void setInsuredVesselId(Long insuredVesselId) {
+        this.insuredVesselId = insuredVesselId;
     }
 
     public String getCompanyName() {
@@ -150,6 +158,14 @@ public class VesselCaseDTO implements Serializable {
 
     public void setVesselChineseName(String vesselChineseName) {
         this.vesselChineseName = vesselChineseName;
+    }
+
+    public Long getReinsureId() {
+        return reinsureId;
+    }
+
+    public void setReinsureId(Long reinsureId) {
+        this.reinsureId = reinsureId;
     }
 
     public BigDecimal getDeduct() {
@@ -200,6 +216,14 @@ public class VesselCaseDTO implements Serializable {
         this.caseCode = caseCode;
     }
 
+    public Instant getCaseDate() {
+        return caseDate;
+    }
+
+    public void setCaseDate(Instant caseDate) {
+        this.caseDate = caseDate;
+    }
+
     public Long getCaseLocation() {
         return caseLocation;
     }
@@ -216,6 +240,14 @@ public class VesselCaseDTO implements Serializable {
         this.caseDescription = caseDescription;
     }
 
+    public String getVoyageNo() {
+        return voyageNo;
+    }
+
+    public void setVoyageNo(String voyageNo) {
+        this.voyageNo = voyageNo;
+    }
+
     public Long getLoadingPort() {
         return loadingPort;
     }
@@ -224,12 +256,12 @@ public class VesselCaseDTO implements Serializable {
         this.loadingPort = loadingPort;
     }
 
-    public Instant getPolDate() {
-        return polDate;
+    public Instant getLoadingDate() {
+        return loadingDate;
     }
 
-    public void setPolDate(Instant polDate) {
-        this.polDate = polDate;
+    public void setLoadingDate(Instant loadingDate) {
+        this.loadingDate = loadingDate;
     }
 
     public Long getDischargingPort() {
@@ -238,6 +270,14 @@ public class VesselCaseDTO implements Serializable {
 
     public void setDischargingPort(Long dischargingPort) {
         this.dischargingPort = dischargingPort;
+    }
+
+    public Instant getDischargingDate() {
+        return dischargingDate;
+    }
+
+    public void setDischargingDate(Instant dischargingDate) {
+        this.dischargingDate = dischargingDate;
     }
 
     public Instant getLimitTime() {
@@ -348,16 +388,16 @@ public class VesselCaseDTO implements Serializable {
         return caseStatusId;
     }
 
-    public void setCaseStatusId(Long caseSatusTypeId) {
-        this.caseStatusId = caseSatusTypeId;
+    public void setCaseStatusId(Long caseStatusTypeId) {
+        this.caseStatusId = caseStatusTypeId;
     }
 
     public String getCaseStatusCaseStatusName() {
         return caseStatusCaseStatusName;
     }
 
-    public void setCaseStatusCaseStatusName(String caseSatusTypeCaseStatusName) {
-        this.caseStatusCaseStatusName = caseSatusTypeCaseStatusName;
+    public void setCaseStatusCaseStatusName(String caseStatusTypeCaseStatusName) {
+        this.caseStatusCaseStatusName = caseStatusTypeCaseStatusName;
     }
 
     public Long getSettlementModeId() {
@@ -403,22 +443,26 @@ public class VesselCaseDTO implements Serializable {
             "id=" + getId() +
             ", numberId=" + getNumberId() +
             ", caseYear='" + getCaseYear() + "'" +
-            ", insuredVessel=" + getInsuredVessel() +
+            ", insuredVesselId=" + getInsuredVesselId() +
             ", companyName='" + getCompanyName() + "'" +
             ", vesselName='" + getVesselName() + "'" +
             ", companyChineseName='" + getCompanyChineseName() + "'" +
             ", vesselChineseName='" + getVesselChineseName() + "'" +
+            ", reinsureId=" + getReinsureId() +
             ", deduct=" + getDeduct() +
             ", assignedHandler=" + getAssignedHandler() +
             ", assignedTime='" + getAssignedTime() + "'" +
             ", registeredHandler=" + getRegisteredHandler() +
             ", registeredDate='" + getRegisteredDate() + "'" +
             ", caseCode='" + getCaseCode() + "'" +
+            ", caseDate='" + getCaseDate() + "'" +
             ", caseLocation=" + getCaseLocation() +
             ", caseDescription='" + getCaseDescription() + "'" +
+            ", voyageNo='" + getVoyageNo() + "'" +
             ", loadingPort=" + getLoadingPort() +
-            ", polDate='" + getPolDate() + "'" +
+            ", loadingDate='" + getLoadingDate() + "'" +
             ", dischargingPort=" + getDischargingPort() +
+            ", dischargingDate='" + getDischargingDate() + "'" +
             ", limitTime='" + getLimitTime() + "'" +
             ", cpDate='" + getCpDate() + "'" +
             ", cpType='" + getCpType() + "'" +

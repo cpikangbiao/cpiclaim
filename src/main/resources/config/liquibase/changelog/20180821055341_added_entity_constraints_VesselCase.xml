@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity VesselCase.
     -->
-    <changeSet id="20180821015139-2" author="jhipster">
+    <changeSet id="20180821055341-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="cpi_insurance_type_id"
                                  baseTableName="vessel_case"

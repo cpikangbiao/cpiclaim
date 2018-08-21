@@ -17,7 +17,7 @@
     <!--
         Added the entity VesselCase.
     -->
-    <changeSet id="20180821015139-1" author="jhipster">
+    <changeSet id="20180821062146-1" author="jhipster">
         <createTable tableName="vessel_case">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -78,6 +78,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="case_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
             <column name="case_location" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -86,15 +90,23 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="voyage_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="loading_port" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="pol_date" type="datetime">
+            <column name="loading_date" type="datetime">
                 <constraints nullable="true" />
             </column>
 
             <column name="discharging_port" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="discharging_date" type="datetime">
                 <constraints nullable="true" />
             </column>
 
@@ -158,7 +170,9 @@
         </createTable>
         <dropDefaultValue tableName="vessel_case" columnName="assigned_time" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="registered_date" columnDataType="datetime"/>
-        <dropDefaultValue tableName="vessel_case" columnName="pol_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="case_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="loading_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="vessel_case" columnName="discharging_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="limit_time" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="cp_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="close_date" columnDataType="datetime"/>

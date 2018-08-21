@@ -32,7 +32,7 @@ public class VesselCaseCriteria implements Serializable {
 
     private StringFilter caseYear;
 
-    private LongFilter insuredVessel;
+    private LongFilter insuredVesselId;
 
     private StringFilter companyName;
 
@@ -41,6 +41,8 @@ public class VesselCaseCriteria implements Serializable {
     private StringFilter companyChineseName;
 
     private StringFilter vesselChineseName;
+
+    private LongFilter reinsureId;
 
     private BigDecimalFilter deduct;
 
@@ -54,15 +56,21 @@ public class VesselCaseCriteria implements Serializable {
 
     private StringFilter caseCode;
 
+    private InstantFilter caseDate;
+
     private LongFilter caseLocation;
 
     private StringFilter caseDescription;
 
+    private StringFilter voyageNo;
+
     private LongFilter loadingPort;
 
-    private InstantFilter polDate;
+    private InstantFilter loadingDate;
 
     private LongFilter dischargingPort;
+
+    private InstantFilter dischargingDate;
 
     private InstantFilter limitTime;
 
@@ -117,12 +125,12 @@ public class VesselCaseCriteria implements Serializable {
         this.caseYear = caseYear;
     }
 
-    public LongFilter getInsuredVessel() {
-        return insuredVessel;
+    public LongFilter getInsuredVesselId() {
+        return insuredVesselId;
     }
 
-    public void setInsuredVessel(LongFilter insuredVessel) {
-        this.insuredVessel = insuredVessel;
+    public void setInsuredVesselId(LongFilter insuredVesselId) {
+        this.insuredVesselId = insuredVesselId;
     }
 
     public StringFilter getCompanyName() {
@@ -155,6 +163,14 @@ public class VesselCaseCriteria implements Serializable {
 
     public void setVesselChineseName(StringFilter vesselChineseName) {
         this.vesselChineseName = vesselChineseName;
+    }
+
+    public LongFilter getReinsureId() {
+        return reinsureId;
+    }
+
+    public void setReinsureId(LongFilter reinsureId) {
+        this.reinsureId = reinsureId;
     }
 
     public BigDecimalFilter getDeduct() {
@@ -205,6 +221,14 @@ public class VesselCaseCriteria implements Serializable {
         this.caseCode = caseCode;
     }
 
+    public InstantFilter getCaseDate() {
+        return caseDate;
+    }
+
+    public void setCaseDate(InstantFilter caseDate) {
+        this.caseDate = caseDate;
+    }
+
     public LongFilter getCaseLocation() {
         return caseLocation;
     }
@@ -221,6 +245,14 @@ public class VesselCaseCriteria implements Serializable {
         this.caseDescription = caseDescription;
     }
 
+    public StringFilter getVoyageNo() {
+        return voyageNo;
+    }
+
+    public void setVoyageNo(StringFilter voyageNo) {
+        this.voyageNo = voyageNo;
+    }
+
     public LongFilter getLoadingPort() {
         return loadingPort;
     }
@@ -229,12 +261,12 @@ public class VesselCaseCriteria implements Serializable {
         this.loadingPort = loadingPort;
     }
 
-    public InstantFilter getPolDate() {
-        return polDate;
+    public InstantFilter getLoadingDate() {
+        return loadingDate;
     }
 
-    public void setPolDate(InstantFilter polDate) {
-        this.polDate = polDate;
+    public void setLoadingDate(InstantFilter loadingDate) {
+        this.loadingDate = loadingDate;
     }
 
     public LongFilter getDischargingPort() {
@@ -243,6 +275,14 @@ public class VesselCaseCriteria implements Serializable {
 
     public void setDischargingPort(LongFilter dischargingPort) {
         this.dischargingPort = dischargingPort;
+    }
+
+    public InstantFilter getDischargingDate() {
+        return dischargingDate;
+    }
+
+    public void setDischargingDate(InstantFilter dischargingDate) {
+        this.dischargingDate = dischargingDate;
     }
 
     public InstantFilter getLimitTime() {
@@ -355,22 +395,26 @@ public class VesselCaseCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (numberId != null ? "numberId=" + numberId + ", " : "") +
                 (caseYear != null ? "caseYear=" + caseYear + ", " : "") +
-                (insuredVessel != null ? "insuredVessel=" + insuredVessel + ", " : "") +
+                (insuredVesselId != null ? "insuredVesselId=" + insuredVesselId + ", " : "") +
                 (companyName != null ? "companyName=" + companyName + ", " : "") +
                 (vesselName != null ? "vesselName=" + vesselName + ", " : "") +
                 (companyChineseName != null ? "companyChineseName=" + companyChineseName + ", " : "") +
                 (vesselChineseName != null ? "vesselChineseName=" + vesselChineseName + ", " : "") +
+                (reinsureId != null ? "reinsureId=" + reinsureId + ", " : "") +
                 (deduct != null ? "deduct=" + deduct + ", " : "") +
                 (assignedHandler != null ? "assignedHandler=" + assignedHandler + ", " : "") +
                 (assignedTime != null ? "assignedTime=" + assignedTime + ", " : "") +
                 (registeredHandler != null ? "registeredHandler=" + registeredHandler + ", " : "") +
                 (registeredDate != null ? "registeredDate=" + registeredDate + ", " : "") +
                 (caseCode != null ? "caseCode=" + caseCode + ", " : "") +
+                (caseDate != null ? "caseDate=" + caseDate + ", " : "") +
                 (caseLocation != null ? "caseLocation=" + caseLocation + ", " : "") +
                 (caseDescription != null ? "caseDescription=" + caseDescription + ", " : "") +
+                (voyageNo != null ? "voyageNo=" + voyageNo + ", " : "") +
                 (loadingPort != null ? "loadingPort=" + loadingPort + ", " : "") +
-                (polDate != null ? "polDate=" + polDate + ", " : "") +
+                (loadingDate != null ? "loadingDate=" + loadingDate + ", " : "") +
                 (dischargingPort != null ? "dischargingPort=" + dischargingPort + ", " : "") +
+                (dischargingDate != null ? "dischargingDate=" + dischargingDate + ", " : "") +
                 (limitTime != null ? "limitTime=" + limitTime + ", " : "") +
                 (cpDate != null ? "cpDate=" + cpDate + ", " : "") +
                 (cpType != null ? "cpType=" + cpType + ", " : "") +

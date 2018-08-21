@@ -82,8 +82,8 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
             if (criteria.getCaseYear() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCaseYear(), VesselCase_.caseYear));
             }
-            if (criteria.getInsuredVessel() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getInsuredVessel(), VesselCase_.insuredVessel));
+            if (criteria.getInsuredVesselId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getInsuredVesselId(), VesselCase_.insuredVesselId));
             }
             if (criteria.getCompanyName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCompanyName(), VesselCase_.companyName));
@@ -96,6 +96,9 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
             }
             if (criteria.getVesselChineseName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getVesselChineseName(), VesselCase_.vesselChineseName));
+            }
+            if (criteria.getReinsureId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getReinsureId(), VesselCase_.reinsureId));
             }
             if (criteria.getDeduct() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDeduct(), VesselCase_.deduct));
@@ -115,20 +118,29 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
             if (criteria.getCaseCode() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCaseCode(), VesselCase_.caseCode));
             }
+            if (criteria.getCaseDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCaseDate(), VesselCase_.caseDate));
+            }
             if (criteria.getCaseLocation() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCaseLocation(), VesselCase_.caseLocation));
             }
             if (criteria.getCaseDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCaseDescription(), VesselCase_.caseDescription));
             }
+            if (criteria.getVoyageNo() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getVoyageNo(), VesselCase_.voyageNo));
+            }
             if (criteria.getLoadingPort() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLoadingPort(), VesselCase_.loadingPort));
             }
-            if (criteria.getPolDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPolDate(), VesselCase_.polDate));
+            if (criteria.getLoadingDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLoadingDate(), VesselCase_.loadingDate));
             }
             if (criteria.getDischargingPort() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDischargingPort(), VesselCase_.dischargingPort));
+            }
+            if (criteria.getDischargingDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDischargingDate(), VesselCase_.dischargingDate));
             }
             if (criteria.getLimitTime() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLimitTime(), VesselCase_.limitTime));
@@ -164,7 +176,7 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCpiInsuranceTypeId(), VesselCase_.cpiInsuranceType, CpiInsuranceType_.id));
             }
             if (criteria.getCaseStatusId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseStatusId(), VesselCase_.caseStatus, CaseSatusType_.id));
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseStatusId(), VesselCase_.caseStatus, CaseStatusType_.id));
             }
             if (criteria.getSettlementModeId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSettlementModeId(), VesselCase_.settlementMode, CaseSettlementMode_.id));
