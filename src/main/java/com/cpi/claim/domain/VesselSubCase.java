@@ -17,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "vessel_sub_case")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class VesselSubCase implements Serializable {
+public class VesselSubCase extends  AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

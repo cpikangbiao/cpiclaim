@@ -1,0 +1,112 @@
+{
+    "name": "CaseFee",
+    "fields": [
+        {
+            "fieldName": "clientNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "currencyRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "feeCostDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "feeCost",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "feeCostDollar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "deduct",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "deductCurrency",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "deductCurrencyRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "deductAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "amountDollar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "feeCreateUser",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "feeCreateDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "isSigned",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "signUser",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "signDate",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "processId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "feeType",
+            "otherEntityName": "feeType",
+            "otherEntityField": "feeTypeName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "subcase",
+            "otherEntityName": "vesselSubCase",
+            "otherEntityField": "subcaseCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "creditor",
+            "otherEntityName": "creditor",
+            "otherEntityField": "creditorCode"
+        }
+    ],
+    "changelogDate": "20180827071400",
+    "entityTableName": "case_fee",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

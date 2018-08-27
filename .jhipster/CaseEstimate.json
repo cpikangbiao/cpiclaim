@@ -1,0 +1,48 @@
+{
+    "name": "CaseEstimate",
+    "fields": [
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "registerUserId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "estimateDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "estimateEntityFee",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "estimateCostFee",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "subcase",
+            "otherEntityName": "vesselSubCase",
+            "otherEntityField": "subcaseCode"
+        }
+    ],
+    "changelogDate": "20180827053445",
+    "entityTableName": "case_estimate",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

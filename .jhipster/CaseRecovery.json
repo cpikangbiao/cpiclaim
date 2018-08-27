@@ -1,0 +1,84 @@
+{
+    "name": "CaseRecovery",
+    "fields": [
+        {
+            "fieldName": "clientNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "currencyRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "issueDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "issueAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "receivedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "receivedAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "amountDollar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "registerDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "registerUser",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "subcase",
+            "otherEntityName": "vesselSubCase",
+            "otherEntityField": "subcaseCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "recoveryType",
+            "otherEntityName": "recoveryType",
+            "otherEntityField": "recoveryTypeName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "creditor",
+            "otherEntityName": "creditor",
+            "otherEntityField": "creditorCode"
+        }
+    ],
+    "changelogDate": "20180827064441",
+    "entityTableName": "case_recovery",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

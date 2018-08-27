@@ -108,6 +108,148 @@ relationship ManyToOne {
 }
 
 
+
+entity CaseEstimate {
+	numberId Integer  ,
+	registerUserId Long  ,
+	estimateDate Instant  ,
+	estimateEntityFee BigDecimal  ,
+	estimateCostFee BigDecimal  ,
+	remark TextBlob  ,
+}
+
+relationship ManyToOne {
+	CaseEstimate{subcase(subcaseCode)} to VesselSubCase
+}
+
+entity CaseClaim {
+ 	numberId Integer  ,
+ 	claimer String  ,
+ 	claimDate Instant  ,
+ 	billOfLading String  ,
+ 	currencyId Long  ,
+ 	currencyRate Double  ,
+ 	claimCost BigDecimal  ,
+ 	claimCostDollar BigDecimal  ,
+ 	remark TextBlob  ,
+ }
+
+relationship ManyToOne {
+ 	CaseClaim{subcase(subcaseCode)} to VesselSubCase
+}
+
+entity Creditor {
+	creditorCode String  ,
+	creditorName String  ,
+	creditorAddress String  ,
+	portName String  ,
+	swiftCode String  ,
+	ibanCode String  ,
+	bankName String  ,
+	bankAddress String  ,
+	accountNo String  ,
+	corrBankName String  ,
+	corrBankAddress String  ,
+	corrBankName2 String  ,
+	corrBankAddress2 String  ,
+}
+
+entity CasePayment {
+	clientNo String  ,
+	numberId Integer  ,
+	payCostDate Instant  ,
+	currency Long  ,
+	currencyRate Double  ,
+	payCost BigDecimal  ,
+	payCostDollar BigDecimal  ,
+	deduct BigDecimal  ,
+	amount BigDecimal  ,
+	feeCreateUser Long  ,
+	feeCreateDate Instant  ,
+	remark TextBlob  ,
+}
+
+relationship ManyToOne {
+	CasePayment{subcase(subcaseCode)} to VesselSubCase
+}
+
+relationship ManyToOne {
+	CasePayment{creditor(creditorCode)} to Creditor
+}
+
+entity RecoveryType {
+	sortNum Integer  ,
+	recoveryTypeName String required ,
+}
+
+
+entity CaseRecovery {
+	clientNo String  ,
+	numberId Integer  ,
+	currency Long  ,
+	currencyRate Double  ,
+	issueDate Instant  ,
+	issueAmount BigDecimal  ,
+	receivedDate Instant  ,
+	receivedAmount BigDecimal  ,
+	amountDollar BigDecimal  ,
+	registerDate Instant  ,
+	registerUser Long  ,
+	remark TextBlob  ,
+ }
+
+relationship ManyToOne {
+	CaseRecovery{subcase(subcaseCode)} to VesselSubCase
+}
+
+relationship ManyToOne {
+	CaseRecovery{recoveryType(recoveryTypeName)} to RecoveryType
+}
+
+relationship ManyToOne {
+	CaseRecovery{creditor(creditorCode)} to Creditor
+}
+
+
+entity FeeType {
+	sortNum Integer  ,
+	feeTypeName String required ,
+}
+
+entity CaseFee {
+	clientNo String  ,
+	numberId Integer  ,
+	currency Long  ,
+	currencyRate Double  ,
+	feeCostDate Instant  ,
+	feeCost BigDecimal  ,
+	feeCostDollar BigDecimal  ,
+	deduct BigDecimal  ,
+	deductCurrency Long  ,
+	deductCurrencyRate Double  ,
+	deductAmount BigDecimal  ,
+	amountDollar BigDecimal  ,
+	feeCreateUser Long  ,
+	feeCreateDate Instant  ,
+	remark TextBlob  ,
+	isSigned Boolean  ,
+	signUser Long  ,
+	signDate Long  ,
+	processId Long  ,
+}
+
+relationship ManyToOne {
+	CaseFee{feeType(feeTypeName)} to FeeType
+}
+
+relationship ManyToOne {
+	CaseFee{subcase(subcaseCode)} to VesselSubCase
+}
+
+relationship ManyToOne {
+	CaseFee{creditor(creditorCode)} to Creditor
+}
+
 // Set pagination options
 //paginate PartnerType with infinite-scroll
 paginate * with pagination

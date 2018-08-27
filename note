@@ -10,4 +10,29 @@ alter table `cpiclaim`.`vessel_sub_case` add column  `last_modified_date` varcha
 alter table `cpiclaim`.`vessel_sub_case` add column  `last_modified_by` varchar(50) NOT NULL;
 
 
+alter table `cpiclaim`.`case_claim` add column  `created_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_claim` add column  `created_by` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_claim` add column  `last_modified_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_claim` add column  `last_modified_by` varchar(50) NOT NULL;
 
+alter table `cpiclaim`.`case_estimate` add column  `created_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_estimate` add column  `created_by` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_estimate` add column  `last_modified_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_estimate` add column  `last_modified_by` varchar(50) NOT NULL;
+
+
+alter table `cpiclaim`.`creditor` add column  `created_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`creditor` add column  `created_by` varchar(50) NOT NULL;
+alter table `cpiclaim`.`creditor` add column  `last_modified_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`creditor` add column  `last_modified_by` varchar(50) NOT NULL;
+
+
+alter table `cpiclaim`.`case_payment` add column  `created_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_payment` add column  `created_by` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_payment` add column  `last_modified_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_payment` add column  `last_modified_by` varchar(50) NOT NULL;
+
+alter table `cpiclaim`.`case_fee` add column  `created_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_fee` add column  `created_by` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_fee` add column  `last_modified_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_fee` add column  `last_modified_by` varchar(50) NOT NULL;
