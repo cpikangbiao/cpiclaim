@@ -250,6 +250,61 @@ relationship ManyToOne {
 	CaseFee{creditor(creditorCode)} to Creditor
 }
 
+
+entity GuaranteeType {
+	sortNum Integer  ,
+	GuaranteeTypeName String required ,
+}
+
+entity CaseGuarantee {
+	vesselId Long  ,
+	numberId Integer  ,
+	arrestDate Instant  ,
+	arrestPort Long  ,
+	arrestVesselId Long  ,
+	arrestVesselName String  ,
+	billOfLading String  ,
+	billLadingDate Instant  ,
+	natureOfClaim String  ,
+	guarantee String  ,
+	guaranteeDate Instant  ,
+	guaranteeCurrency Long  ,
+	guaranteeRate Double  ,
+	guaranteeAmount BigDecimal  ,
+	guaranteeAmountDollar BigDecimal  ,
+	guaranteeTo String  ,
+	guaranteeToAddress String  ,
+	guaranteeNo String  ,
+	guaranteeFee BigDecimal  ,
+	guaranteeOther String  ,
+	cancelDate Instant  ,
+	conGuarantee String  ,
+	conGuaranteeDate Instant  ,
+	conGuaranteeCurrency Long  ,
+	conGuaranteeRate Double  ,
+	conGuaranteeAmount BigDecimal  ,
+	conGuaranteeAmountDollar BigDecimal  ,
+	conGuaranteeNo String  ,
+	conGuaranteeTo String  ,
+	conGuaranteeCancelDate Instant  ,
+	remark TextBlob  ,
+	releaseDate Instant  ,
+	registerUserId Long  ,
+ }
+
+relationship ManyToOne {
+	CaseGuarantee{subcase(subcaseCode)} to VesselSubCase
+}
+
+relationship ManyToOne {
+	CaseGuarantee{guaranteeType(GuaranteeTypeName)} to GuaranteeType
+}
+
+relationship ManyToOne {
+	CaseGuarantee{conGuaranteeType(GuaranteeTypeName)} to GuaranteeType
+}
+
+
 // Set pagination options
 //paginate PartnerType with infinite-scroll
 paginate * with pagination

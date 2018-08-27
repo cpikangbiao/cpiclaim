@@ -1,0 +1,168 @@
+{
+    "name": "CaseGuarantee",
+    "fields": [
+        {
+            "fieldName": "vesselId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "arrestDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "arrestPort",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "arrestVesselId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "arrestVesselName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "billOfLading",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "billLadingDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "natureOfClaim",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guarantee",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guaranteeDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "guaranteeCurrency",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "guaranteeRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "guaranteeAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "guaranteeAmountDollar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "guaranteeTo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guaranteeToAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guaranteeNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guaranteeFee",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "guaranteeOther",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cancelDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "conGuarantee",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "conGuaranteeDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "conGuaranteeCurrency",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "conGuaranteeRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "conGuaranteeAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "conGuaranteeAmountDollar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "conGuaranteeNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "conGuaranteeTo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "conGuaranteeCancelDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "releaseDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "registerUserId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "subcase",
+            "otherEntityName": "vesselSubCase",
+            "otherEntityField": "subcaseCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "guaranteeType",
+            "otherEntityName": "guaranteeType",
+            "otherEntityField": "guaranteeTypeName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "conGuaranteeType",
+            "otherEntityName": "guaranteeType",
+            "otherEntityField": "guaranteeTypeName"
+        }
+    ],
+    "changelogDate": "20180827080745",
+    "entityTableName": "case_guarantee",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CaseGuarantee.
+    -->
+    <changeSet id="20180827075427-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="subcase_id"
+                                 baseTableName="case_guarantee"
+                                 constraintName="fk_case_guarantee_subcase_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vessel_sub_case"/>
+
+        <addForeignKeyConstraint baseColumnNames="guarantee_type_id"
+                                 baseTableName="case_guarantee"
+                                 constraintName="fk_case_guarantee_guarantee_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="guarantee_type"/>
+
+    </changeSet>
+</databaseChangeLog>
