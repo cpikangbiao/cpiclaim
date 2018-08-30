@@ -24,10 +24,20 @@
     <!--<include file="config/liquibase/changelog/20180827064441_added_entity_CaseRecovery.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180827065909_added_entity_FeeType.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180827071400_added_entity_CaseFee.xml" relativeToChangelogFile="false"/>-->
-    <include file="config/liquibase/changelog/20180827075426_added_entity_GuaranteeType.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180827075427_added_entity_CaseGuarantee.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180827080304_added_entity_CaseGuarantee.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180827080745_added_entity_CaseGuarantee.xml" relativeToChangelogFile="false"/>
+    <!--<include file="config/liquibase/changelog/20180827075426_added_entity_GuaranteeType.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180827075427_added_entity_CaseGuarantee.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180827080304_added_entity_CaseGuarantee.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180827080745_added_entity_CaseGuarantee.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052101_added_entity_CaseAssignLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052102_added_entity_CaseRegisterLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052103_added_entity_CaseCloseLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052104_added_entity_ClaimBillType.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052105_added_entity_ClaimBillStatus.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052106_added_entity_ClaimBillFinanceType.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052529_added_entity_CaseClaimBill.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830063121_added_entity_CaseClaimBillPrintLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830063122_added_entity_CaseClaimBillDeleteLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830063123_added_entity_CaseClaimBillApprovalLog.xml" relativeToChangelogFile="false"/>-->
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!--<include file="config/liquibase/changelog/20180821015139_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180821055341_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>-->
@@ -41,8 +51,15 @@
     <!--<include file="config/liquibase/changelog/20180827061806_added_entity_constraints_CasePayment.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180827064441_added_entity_constraints_CaseRecovery.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180827071400_added_entity_constraints_CaseFee.xml" relativeToChangelogFile="false"/>-->
-    <include file="config/liquibase/changelog/20180827075427_added_entity_constraints_CaseGuarantee.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180827080304_added_entity_constraints_CaseGuarantee.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180827080745_added_entity_constraints_CaseGuarantee.xml" relativeToChangelogFile="false"/>
+    <!--<include file="config/liquibase/changelog/20180827075427_added_entity_constraints_CaseGuarantee.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180827080304_added_entity_constraints_CaseGuarantee.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180827080745_added_entity_constraints_CaseGuarantee.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052101_added_entity_constraints_CaseAssignLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052102_added_entity_constraints_CaseRegisterLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052103_added_entity_constraints_CaseCloseLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830052529_added_entity_constraints_CaseClaimBill.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830063121_added_entity_constraints_CaseClaimBillPrintLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830063122_added_entity_constraints_CaseClaimBillDeleteLog.xml" relativeToChangelogFile="false"/>-->
+    <!--<include file="config/liquibase/changelog/20180830063123_added_entity_constraints_CaseClaimBillApprovalLog.xml" relativeToChangelogFile="false"/>-->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -64,10 +64,10 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
     @Column(name = "guarantee_rate")
     private Double guaranteeRate;
 
-    @Column(name = "guarantee_amount", precision = 10, scale = 2)
+    @Column(name = "guarantee_amount", precision = 20, scale = 2)
     private BigDecimal guaranteeAmount;
 
-    @Column(name = "guarantee_amount_dollar", precision = 10, scale = 2)
+    @Column(name = "guarantee_amount_dollar", precision = 20, scale = 2)
     private BigDecimal guaranteeAmountDollar;
 
     @Column(name = "guarantee_to")
@@ -79,7 +79,7 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
     @Column(name = "guarantee_no")
     private String guaranteeNo;
 
-    @Column(name = "guarantee_fee", precision = 10, scale = 2)
+    @Column(name = "guarantee_fee", precision = 20, scale = 2)
     private BigDecimal guaranteeFee;
 
     @Column(name = "guarantee_other")
@@ -100,10 +100,10 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
     @Column(name = "con_guarantee_rate")
     private Double conGuaranteeRate;
 
-    @Column(name = "con_guarantee_amount", precision = 10, scale = 2)
+    @Column(name = "con_guarantee_amount", precision = 20, scale = 2)
     private BigDecimal conGuaranteeAmount;
 
-    @Column(name = "con_guarantee_amount_dollar", precision = 10, scale = 2)
+    @Column(name = "con_guarantee_amount_dollar", precision = 20, scale = 2)
     private BigDecimal conGuaranteeAmountDollar;
 
     @Column(name = "con_guarantee_no")

@@ -42,3 +42,9 @@ alter table `cpiclaim`.`case_guarantee` add column  `created_date` varchar(50) N
 alter table `cpiclaim`.`case_guarantee` add column  `created_by` varchar(50) NOT NULL;
 alter table `cpiclaim`.`case_guarantee` add column  `last_modified_date` varchar(50) NOT NULL;
 alter table `cpiclaim`.`case_guarantee` add column  `last_modified_by` varchar(50) NOT NULL;
+
+
+alter table `cpiclaim`.`case_claim_bill` add column  `created_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_claim_bill` add column  `created_by` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_claim_bill` add column  `last_modified_date` varchar(50) NOT NULL;
+alter table `cpiclaim`.`case_claim_bill` add column  `last_modified_by` varchar(50) NOT NULL;

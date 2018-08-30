@@ -305,6 +305,132 @@ relationship ManyToOne {
 }
 
 
+
+entity CaseAssignLog {
+	numberId String ,
+	assignUser String ,
+	assignTime String ,
+	assignedUser String ,
+}
+
+relationship ManyToOne {
+	CaseAssignLog{vesselCase(caseCode)} to VesselCase
+}
+
+entity CaseRegisterLog {
+	numberId String ,
+	assignUser String ,
+	assignTime String ,
+	assignedUser String ,
+}
+
+relationship ManyToOne {
+	CaseRegisterLog{vesselCase(caseCode)} to VesselCase
+}
+
+entity CaseCloseLog {
+	operateUserId String ,
+	operateDate String ,
+	operateType String ,
+}
+
+relationship ManyToOne {
+	CaseCloseLog{vesselCase(caseCode)} to VesselCase
+}
+
+entity ClaimBillType {
+	sortNum Integer  ,
+	claimBillTypeName String required ,
+}
+
+entity ClaimBillStatus {
+	sortNum Integer  ,
+	claimBillStatusName String required ,
+}
+
+entity ClaimBillFinanceType {
+	sortNum Integer  ,
+	claimBillFinanceTypeName String required ,
+}
+
+
+entity CaseClaimBill {
+	claimBillCode String  ,
+	claimBillDate Instant  ,
+	registerUserId Long  ,
+	clientBillNo String  ,
+	billDescription String  ,
+	dueDate Instant  ,
+	memberYear String  ,
+	numberId Integer  ,
+	claimAmountCurrency Long  ,
+	claimAmount BigDecimal  ,
+	deductible BigDecimal  ,
+	deductibleCurrency Long  ,
+	deductibleCurrencyRate Double  ,
+	deductibleDollar BigDecimal  ,
+	billCurrency Long  ,
+	billAmount BigDecimal  ,
+	billCurrencyRate Double  ,
+	billAmountDollar BigDecimal  ,
+	remark TextBlob  ,
+	isSigned Boolean  ,
+	signUser Long  ,
+	signDate Instant  ,
+	processId Long  ,
+	printNumber Integer  ,
+}
+
+relationship ManyToOne {
+	CaseClaimBill{subcase(subcaseCode)} to VesselSubCase
+}
+relationship ManyToOne {
+	CaseClaimBill{claimBillStatus(claimBillStatusName)} to ClaimBillStatus
+}
+relationship ManyToOne {
+	CaseClaimBill{claimBillType(claimBillTypeName)} to ClaimBillType
+}
+relationship ManyToOne {
+	CaseClaimBill{claimBillFinanceType(claimBillFinanceTypeName)} to ClaimBillFinanceType
+}
+
+relationship ManyToOne {
+	CaseClaimBill{creditor(creditorName)} to Creditor
+}
+
+entity CaseClaimBillPrintLog {
+	operateType String ,
+	operateUser String ,
+	operateDate String ,
+}
+
+relationship ManyToOne {
+	CaseClaimBillPrintLog{caseClaimBill(claimBillCode)} to CaseClaimBill
+}
+
+entity CaseClaimBillDeleteLog {
+    claimBillCode String ,
+	operateType String ,
+	operateUser String ,
+	operateDate Instant ,
+}
+
+
+
+entity CaseClaimBillApprovalLog {
+	processId Long ,
+	insertTime Instant ,
+	approvalUse String ,
+	approvalOpinion String ,
+	approvalTransition String ,
+	remark String ,
+}
+
+relationship ManyToOne {
+	CaseClaimBillApprovalLog{caseClaimBill(claimBillCode)} to CaseClaimBill
+}
+
+
 // Set pagination options
 //paginate PartnerType with infinite-scroll
 paginate * with pagination

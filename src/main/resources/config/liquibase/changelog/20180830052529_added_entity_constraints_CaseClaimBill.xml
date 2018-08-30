@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CaseClaimBill.
+    -->
+    <changeSet id="20180830052529-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="subcase_id"
+                                 baseTableName="case_claim_bill"
+                                 constraintName="fk_case_claim_bill_subcase_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vessel_sub_case"/>
+
+        <addForeignKeyConstraint baseColumnNames="claim_bill_status_id"
+                                 baseTableName="case_claim_bill"
+                                 constraintName="fk_case_claim_bill_claim_bill_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="claim_bill_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="claim_bill_type_id"
+                                 baseTableName="case_claim_bill"
+                                 constraintName="fk_case_claim_bill_claim_bill_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="claim_bill_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="claim_bill_finance_type_id"
+                                 baseTableName="case_claim_bill"
+                                 constraintName="fk_case_claim_bill_claim_bill_finance_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="claim_bill_finance_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="creditor_id"
+                                 baseTableName="case_claim_bill"
+                                 constraintName="fk_case_claim_bill_creditor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="creditor"/>
+
+    </changeSet>
+</databaseChangeLog>
