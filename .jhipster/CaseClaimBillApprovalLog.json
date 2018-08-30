@@ -10,7 +10,7 @@
             "fieldType": "Instant"
         },
         {
-            "fieldName": "approvalUse",
+            "fieldName": "approvalUser",
             "fieldType": "String"
         },
         {

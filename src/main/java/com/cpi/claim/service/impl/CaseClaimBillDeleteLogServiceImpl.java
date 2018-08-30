@@ -1,6 +1,7 @@
 package com.cpi.claim.service.impl;
 
 import com.cpi.claim.service.CaseClaimBillDeleteLogService;
+import com.cpi.claim.domain.CaseClaimBillDeleteLog;
 import com.cpi.claim.repository.CaseClaimBillDeleteLogRepository;
 import com.cpi.claim.service.dto.CaseClaimBillDeleteLogDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillDeleteLogMapper;

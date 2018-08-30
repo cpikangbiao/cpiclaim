@@ -82,8 +82,8 @@ public class CaseClaimBillApprovalLogQueryService extends QueryService<CaseClaim
             if (criteria.getInsertTime() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getInsertTime(), CaseClaimBillApprovalLog_.insertTime));
             }
-            if (criteria.getApprovalUse() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getApprovalUse(), CaseClaimBillApprovalLog_.approvalUse));
+            if (criteria.getApprovalUser() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getApprovalUser(), CaseClaimBillApprovalLog_.approvalUser));
             }
             if (criteria.getApprovalOpinion() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getApprovalOpinion(), CaseClaimBillApprovalLog_.approvalOpinion));

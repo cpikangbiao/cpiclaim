@@ -420,7 +420,7 @@ entity CaseClaimBillDeleteLog {
 entity CaseClaimBillApprovalLog {
 	processId Long ,
 	insertTime Instant ,
-	approvalUse String ,
+	approvalUser String ,
 	approvalOpinion String ,
 	approvalTransition String ,
 	remark String ,

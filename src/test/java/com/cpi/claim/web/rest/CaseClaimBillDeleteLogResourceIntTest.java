@@ -4,12 +4,13 @@ import com.cpi.claim.CpiclaimApp;
 
 import com.cpi.claim.config.SecurityBeanOverrideConfiguration;
 
-import com.cpi.claim.domain.CaseClaimBill;
+import com.cpi.claim.domain.CaseClaimBillDeleteLog;
 import com.cpi.claim.repository.CaseClaimBillDeleteLogRepository;
 import com.cpi.claim.service.CaseClaimBillDeleteLogService;
 import com.cpi.claim.service.dto.CaseClaimBillDeleteLogDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillDeleteLogMapper;
 import com.cpi.claim.web.rest.errors.ExceptionTranslator;
+import com.cpi.claim.service.dto.CaseClaimBillDeleteLogCriteria;
 import com.cpi.claim.service.CaseClaimBillDeleteLogQueryService;
 
 import org.junit.Before;
@@ -27,6 +28,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -45,14 +48,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = {SecurityBeanOverrideConfiguration.class, CpiclaimApp.class})
 public class CaseClaimBillDeleteLogResourceIntTest {
 
+    private static final String DEFAULT_CLAIM_BILL_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CLAIM_BILL_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_OPERATE_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_OPERATE_TYPE = "BBBBBBBBBB";
 
     private static final String DEFAULT_OPERATE_USER = "AAAAAAAAAA";
     private static final String UPDATED_OPERATE_USER = "BBBBBBBBBB";
 
-    private static final String DEFAULT_OPERATE_DATE = "AAAAAAAAAA";
-    private static final String UPDATED_OPERATE_DATE = "BBBBBBBBBB";
+    private static final Instant DEFAULT_OPERATE_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_OPERATE_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private CaseClaimBillDeleteLogRepository caseClaimBillDeleteLogRepository;
@@ -60,7 +66,7 @@ public class CaseClaimBillDeleteLogResourceIntTest {
 
     @Autowired
     private CaseClaimBillDeleteLogMapper caseClaimBillDeleteLogMapper;
-
+    
 
     @Autowired
     private CaseClaimBillDeleteLogService caseClaimBillDeleteLogService;
@@ -103,6 +109,7 @@ public class CaseClaimBillDeleteLogResourceIntTest {
      */
     public static CaseClaimBillDeleteLog createEntity(EntityManager em) {
         CaseClaimBillDeleteLog caseClaimBillDeleteLog = new CaseClaimBillDeleteLog()
+            .claimBillCode(DEFAULT_CLAIM_BILL_CODE)
             .operateType(DEFAULT_OPERATE_TYPE)
             .operateUser(DEFAULT_OPERATE_USER)
             .operateDate(DEFAULT_OPERATE_DATE);
@@ -130,6 +137,7 @@ public class CaseClaimBillDeleteLogResourceIntTest {
         List<CaseClaimBillDeleteLog> caseClaimBillDeleteLogList = caseClaimBillDeleteLogRepository.findAll();
         assertThat(caseClaimBillDeleteLogList).hasSize(databaseSizeBeforeCreate + 1);
         CaseClaimBillDeleteLog testCaseClaimBillDeleteLog = caseClaimBillDeleteLogList.get(caseClaimBillDeleteLogList.size() - 1);
+        assertThat(testCaseClaimBillDeleteLog.getClaimBillCode()).isEqualTo(DEFAULT_CLAIM_BILL_CODE);
         assertThat(testCaseClaimBillDeleteLog.getOperateType()).isEqualTo(DEFAULT_OPERATE_TYPE);
         assertThat(testCaseClaimBillDeleteLog.getOperateUser()).isEqualTo(DEFAULT_OPERATE_USER);
         assertThat(testCaseClaimBillDeleteLog.getOperateDate()).isEqualTo(DEFAULT_OPERATE_DATE);
@@ -166,11 +174,12 @@ public class CaseClaimBillDeleteLogResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(caseClaimBillDeleteLog.getId().intValue())))
+            .andExpect(jsonPath("$.[*].claimBillCode").value(hasItem(DEFAULT_CLAIM_BILL_CODE.toString())))
             .andExpect(jsonPath("$.[*].operateType").value(hasItem(DEFAULT_OPERATE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].operateUser").value(hasItem(DEFAULT_OPERATE_USER.toString())))
             .andExpect(jsonPath("$.[*].operateDate").value(hasItem(DEFAULT_OPERATE_DATE.toString())));
     }
-
+    
 
     @Test
     @Transactional
@@ -183,9 +192,49 @@ public class CaseClaimBillDeleteLogResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(caseClaimBillDeleteLog.getId().intValue()))
+            .andExpect(jsonPath("$.claimBillCode").value(DEFAULT_CLAIM_BILL_CODE.toString()))
             .andExpect(jsonPath("$.operateType").value(DEFAULT_OPERATE_TYPE.toString()))
             .andExpect(jsonPath("$.operateUser").value(DEFAULT_OPERATE_USER.toString()))
             .andExpect(jsonPath("$.operateDate").value(DEFAULT_OPERATE_DATE.toString()));
+    }
+
+    @Test
+    @Transactional
+    public void getAllCaseClaimBillDeleteLogsByClaimBillCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        caseClaimBillDeleteLogRepository.saveAndFlush(caseClaimBillDeleteLog);
+
+        // Get all the caseClaimBillDeleteLogList where claimBillCode equals to DEFAULT_CLAIM_BILL_CODE
+        defaultCaseClaimBillDeleteLogShouldBeFound("claimBillCode.equals=" + DEFAULT_CLAIM_BILL_CODE);
+
+        // Get all the caseClaimBillDeleteLogList where claimBillCode equals to UPDATED_CLAIM_BILL_CODE
+        defaultCaseClaimBillDeleteLogShouldNotBeFound("claimBillCode.equals=" + UPDATED_CLAIM_BILL_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCaseClaimBillDeleteLogsByClaimBillCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        caseClaimBillDeleteLogRepository.saveAndFlush(caseClaimBillDeleteLog);
+
+        // Get all the caseClaimBillDeleteLogList where claimBillCode in DEFAULT_CLAIM_BILL_CODE or UPDATED_CLAIM_BILL_CODE
+        defaultCaseClaimBillDeleteLogShouldBeFound("claimBillCode.in=" + DEFAULT_CLAIM_BILL_CODE + "," + UPDATED_CLAIM_BILL_CODE);
+
+        // Get all the caseClaimBillDeleteLogList where claimBillCode equals to UPDATED_CLAIM_BILL_CODE
+        defaultCaseClaimBillDeleteLogShouldNotBeFound("claimBillCode.in=" + UPDATED_CLAIM_BILL_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCaseClaimBillDeleteLogsByClaimBillCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        caseClaimBillDeleteLogRepository.saveAndFlush(caseClaimBillDeleteLog);
+
+        // Get all the caseClaimBillDeleteLogList where claimBillCode is not null
+        defaultCaseClaimBillDeleteLogShouldBeFound("claimBillCode.specified=true");
+
+        // Get all the caseClaimBillDeleteLogList where claimBillCode is null
+        defaultCaseClaimBillDeleteLogShouldNotBeFound("claimBillCode.specified=false");
     }
 
     @Test
@@ -304,25 +353,6 @@ public class CaseClaimBillDeleteLogResourceIntTest {
         // Get all the caseClaimBillDeleteLogList where operateDate is null
         defaultCaseClaimBillDeleteLogShouldNotBeFound("operateDate.specified=false");
     }
-
-    @Test
-    @Transactional
-    public void getAllCaseClaimBillDeleteLogsByCaseClaimBillIsEqualToSomething() throws Exception {
-        // Initialize the database
-        CaseClaimBill caseClaimBill = CaseClaimBillResourceIntTest.createEntity(em);
-        em.persist(caseClaimBill);
-        em.flush();
-        caseClaimBillDeleteLog.setCaseClaimBill(caseClaimBill);
-        caseClaimBillDeleteLogRepository.saveAndFlush(caseClaimBillDeleteLog);
-        Long caseClaimBillId = caseClaimBill.getId();
-
-        // Get all the caseClaimBillDeleteLogList where caseClaimBill equals to caseClaimBillId
-        defaultCaseClaimBillDeleteLogShouldBeFound("caseClaimBillId.equals=" + caseClaimBillId);
-
-        // Get all the caseClaimBillDeleteLogList where caseClaimBill equals to caseClaimBillId + 1
-        defaultCaseClaimBillDeleteLogShouldNotBeFound("caseClaimBillId.equals=" + (caseClaimBillId + 1));
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -331,6 +361,7 @@ public class CaseClaimBillDeleteLogResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(caseClaimBillDeleteLog.getId().intValue())))
+            .andExpect(jsonPath("$.[*].claimBillCode").value(hasItem(DEFAULT_CLAIM_BILL_CODE.toString())))
             .andExpect(jsonPath("$.[*].operateType").value(hasItem(DEFAULT_OPERATE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].operateUser").value(hasItem(DEFAULT_OPERATE_USER.toString())))
             .andExpect(jsonPath("$.[*].operateDate").value(hasItem(DEFAULT_OPERATE_DATE.toString())));
@@ -368,6 +399,7 @@ public class CaseClaimBillDeleteLogResourceIntTest {
         // Disconnect from session so that the updates on updatedCaseClaimBillDeleteLog are not directly saved in db
         em.detach(updatedCaseClaimBillDeleteLog);
         updatedCaseClaimBillDeleteLog
+            .claimBillCode(UPDATED_CLAIM_BILL_CODE)
             .operateType(UPDATED_OPERATE_TYPE)
             .operateUser(UPDATED_OPERATE_USER)
             .operateDate(UPDATED_OPERATE_DATE);
@@ -382,6 +414,7 @@ public class CaseClaimBillDeleteLogResourceIntTest {
         List<CaseClaimBillDeleteLog> caseClaimBillDeleteLogList = caseClaimBillDeleteLogRepository.findAll();
         assertThat(caseClaimBillDeleteLogList).hasSize(databaseSizeBeforeUpdate);
         CaseClaimBillDeleteLog testCaseClaimBillDeleteLog = caseClaimBillDeleteLogList.get(caseClaimBillDeleteLogList.size() - 1);
+        assertThat(testCaseClaimBillDeleteLog.getClaimBillCode()).isEqualTo(UPDATED_CLAIM_BILL_CODE);
         assertThat(testCaseClaimBillDeleteLog.getOperateType()).isEqualTo(UPDATED_OPERATE_TYPE);
         assertThat(testCaseClaimBillDeleteLog.getOperateUser()).isEqualTo(UPDATED_OPERATE_USER);
         assertThat(testCaseClaimBillDeleteLog.getOperateDate()).isEqualTo(UPDATED_OPERATE_DATE);
@@ -395,7 +428,7 @@ public class CaseClaimBillDeleteLogResourceIntTest {
         // Create the CaseClaimBillDeleteLog
         CaseClaimBillDeleteLogDTO caseClaimBillDeleteLogDTO = caseClaimBillDeleteLogMapper.toDto(caseClaimBillDeleteLog);
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException
+        // If the entity doesn't have an ID, it will throw BadRequestAlertException 
         restCaseClaimBillDeleteLogMockMvc.perform(put("/api/case-claim-bill-delete-logs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(caseClaimBillDeleteLogDTO)))

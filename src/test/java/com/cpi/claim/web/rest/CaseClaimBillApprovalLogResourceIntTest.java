@@ -55,8 +55,8 @@ public class CaseClaimBillApprovalLogResourceIntTest {
     private static final Instant DEFAULT_INSERT_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_INSERT_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_APPROVAL_USE = "AAAAAAAAAA";
-    private static final String UPDATED_APPROVAL_USE = "BBBBBBBBBB";
+    private static final String DEFAULT_APPROVAL_USER = "AAAAAAAAAA";
+    private static final String UPDATED_APPROVAL_USER = "BBBBBBBBBB";
 
     private static final String DEFAULT_APPROVAL_OPINION = "AAAAAAAAAA";
     private static final String UPDATED_APPROVAL_OPINION = "BBBBBBBBBB";
@@ -118,7 +118,7 @@ public class CaseClaimBillApprovalLogResourceIntTest {
         CaseClaimBillApprovalLog caseClaimBillApprovalLog = new CaseClaimBillApprovalLog()
             .processId(DEFAULT_PROCESS_ID)
             .insertTime(DEFAULT_INSERT_TIME)
-            .approvalUse(DEFAULT_APPROVAL_USE)
+            .approvalUser(DEFAULT_APPROVAL_USER)
             .approvalOpinion(DEFAULT_APPROVAL_OPINION)
             .approvalTransition(DEFAULT_APPROVAL_TRANSITION)
             .remark(DEFAULT_REMARK);
@@ -148,7 +148,7 @@ public class CaseClaimBillApprovalLogResourceIntTest {
         CaseClaimBillApprovalLog testCaseClaimBillApprovalLog = caseClaimBillApprovalLogList.get(caseClaimBillApprovalLogList.size() - 1);
         assertThat(testCaseClaimBillApprovalLog.getProcessId()).isEqualTo(DEFAULT_PROCESS_ID);
         assertThat(testCaseClaimBillApprovalLog.getInsertTime()).isEqualTo(DEFAULT_INSERT_TIME);
-        assertThat(testCaseClaimBillApprovalLog.getApprovalUse()).isEqualTo(DEFAULT_APPROVAL_USE);
+        assertThat(testCaseClaimBillApprovalLog.getApprovalUser()).isEqualTo(DEFAULT_APPROVAL_USER);
         assertThat(testCaseClaimBillApprovalLog.getApprovalOpinion()).isEqualTo(DEFAULT_APPROVAL_OPINION);
         assertThat(testCaseClaimBillApprovalLog.getApprovalTransition()).isEqualTo(DEFAULT_APPROVAL_TRANSITION);
         assertThat(testCaseClaimBillApprovalLog.getRemark()).isEqualTo(DEFAULT_REMARK);
@@ -187,7 +187,7 @@ public class CaseClaimBillApprovalLogResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(caseClaimBillApprovalLog.getId().intValue())))
             .andExpect(jsonPath("$.[*].processId").value(hasItem(DEFAULT_PROCESS_ID.intValue())))
             .andExpect(jsonPath("$.[*].insertTime").value(hasItem(DEFAULT_INSERT_TIME.toString())))
-            .andExpect(jsonPath("$.[*].approvalUse").value(hasItem(DEFAULT_APPROVAL_USE.toString())))
+            .andExpect(jsonPath("$.[*].approvalUser").value(hasItem(DEFAULT_APPROVAL_USER.toString())))
             .andExpect(jsonPath("$.[*].approvalOpinion").value(hasItem(DEFAULT_APPROVAL_OPINION.toString())))
             .andExpect(jsonPath("$.[*].approvalTransition").value(hasItem(DEFAULT_APPROVAL_TRANSITION.toString())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
@@ -207,7 +207,7 @@ public class CaseClaimBillApprovalLogResourceIntTest {
             .andExpect(jsonPath("$.id").value(caseClaimBillApprovalLog.getId().intValue()))
             .andExpect(jsonPath("$.processId").value(DEFAULT_PROCESS_ID.intValue()))
             .andExpect(jsonPath("$.insertTime").value(DEFAULT_INSERT_TIME.toString()))
-            .andExpect(jsonPath("$.approvalUse").value(DEFAULT_APPROVAL_USE.toString()))
+            .andExpect(jsonPath("$.approvalUser").value(DEFAULT_APPROVAL_USER.toString()))
             .andExpect(jsonPath("$.approvalOpinion").value(DEFAULT_APPROVAL_OPINION.toString()))
             .andExpect(jsonPath("$.approvalTransition").value(DEFAULT_APPROVAL_TRANSITION.toString()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK.toString()));
@@ -320,41 +320,41 @@ public class CaseClaimBillApprovalLogResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllCaseClaimBillApprovalLogsByApprovalUseIsEqualToSomething() throws Exception {
+    public void getAllCaseClaimBillApprovalLogsByApprovalUserIsEqualToSomething() throws Exception {
         // Initialize the database
         caseClaimBillApprovalLogRepository.saveAndFlush(caseClaimBillApprovalLog);
 
-        // Get all the caseClaimBillApprovalLogList where approvalUse equals to DEFAULT_APPROVAL_USE
-        defaultCaseClaimBillApprovalLogShouldBeFound("approvalUse.equals=" + DEFAULT_APPROVAL_USE);
+        // Get all the caseClaimBillApprovalLogList where approvalUser equals to DEFAULT_APPROVAL_USER
+        defaultCaseClaimBillApprovalLogShouldBeFound("approvalUser.equals=" + DEFAULT_APPROVAL_USER);
 
-        // Get all the caseClaimBillApprovalLogList where approvalUse equals to UPDATED_APPROVAL_USE
-        defaultCaseClaimBillApprovalLogShouldNotBeFound("approvalUse.equals=" + UPDATED_APPROVAL_USE);
+        // Get all the caseClaimBillApprovalLogList where approvalUser equals to UPDATED_APPROVAL_USER
+        defaultCaseClaimBillApprovalLogShouldNotBeFound("approvalUser.equals=" + UPDATED_APPROVAL_USER);
     }
 
     @Test
     @Transactional
-    public void getAllCaseClaimBillApprovalLogsByApprovalUseIsInShouldWork() throws Exception {
+    public void getAllCaseClaimBillApprovalLogsByApprovalUserIsInShouldWork() throws Exception {
         // Initialize the database
         caseClaimBillApprovalLogRepository.saveAndFlush(caseClaimBillApprovalLog);
 
-        // Get all the caseClaimBillApprovalLogList where approvalUse in DEFAULT_APPROVAL_USE or UPDATED_APPROVAL_USE
-        defaultCaseClaimBillApprovalLogShouldBeFound("approvalUse.in=" + DEFAULT_APPROVAL_USE + "," + UPDATED_APPROVAL_USE);
+        // Get all the caseClaimBillApprovalLogList where approvalUser in DEFAULT_APPROVAL_USER or UPDATED_APPROVAL_USER
+        defaultCaseClaimBillApprovalLogShouldBeFound("approvalUser.in=" + DEFAULT_APPROVAL_USER + "," + UPDATED_APPROVAL_USER);
 
-        // Get all the caseClaimBillApprovalLogList where approvalUse equals to UPDATED_APPROVAL_USE
-        defaultCaseClaimBillApprovalLogShouldNotBeFound("approvalUse.in=" + UPDATED_APPROVAL_USE);
+        // Get all the caseClaimBillApprovalLogList where approvalUser equals to UPDATED_APPROVAL_USER
+        defaultCaseClaimBillApprovalLogShouldNotBeFound("approvalUser.in=" + UPDATED_APPROVAL_USER);
     }
 
     @Test
     @Transactional
-    public void getAllCaseClaimBillApprovalLogsByApprovalUseIsNullOrNotNull() throws Exception {
+    public void getAllCaseClaimBillApprovalLogsByApprovalUserIsNullOrNotNull() throws Exception {
         // Initialize the database
         caseClaimBillApprovalLogRepository.saveAndFlush(caseClaimBillApprovalLog);
 
-        // Get all the caseClaimBillApprovalLogList where approvalUse is not null
-        defaultCaseClaimBillApprovalLogShouldBeFound("approvalUse.specified=true");
+        // Get all the caseClaimBillApprovalLogList where approvalUser is not null
+        defaultCaseClaimBillApprovalLogShouldBeFound("approvalUser.specified=true");
 
-        // Get all the caseClaimBillApprovalLogList where approvalUse is null
-        defaultCaseClaimBillApprovalLogShouldNotBeFound("approvalUse.specified=false");
+        // Get all the caseClaimBillApprovalLogList where approvalUser is null
+        defaultCaseClaimBillApprovalLogShouldNotBeFound("approvalUser.specified=false");
     }
 
     @Test
@@ -502,7 +502,7 @@ public class CaseClaimBillApprovalLogResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(caseClaimBillApprovalLog.getId().intValue())))
             .andExpect(jsonPath("$.[*].processId").value(hasItem(DEFAULT_PROCESS_ID.intValue())))
             .andExpect(jsonPath("$.[*].insertTime").value(hasItem(DEFAULT_INSERT_TIME.toString())))
-            .andExpect(jsonPath("$.[*].approvalUse").value(hasItem(DEFAULT_APPROVAL_USE.toString())))
+            .andExpect(jsonPath("$.[*].approvalUser").value(hasItem(DEFAULT_APPROVAL_USER.toString())))
             .andExpect(jsonPath("$.[*].approvalOpinion").value(hasItem(DEFAULT_APPROVAL_OPINION.toString())))
             .andExpect(jsonPath("$.[*].approvalTransition").value(hasItem(DEFAULT_APPROVAL_TRANSITION.toString())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
@@ -542,7 +542,7 @@ public class CaseClaimBillApprovalLogResourceIntTest {
         updatedCaseClaimBillApprovalLog
             .processId(UPDATED_PROCESS_ID)
             .insertTime(UPDATED_INSERT_TIME)
-            .approvalUse(UPDATED_APPROVAL_USE)
+            .approvalUser(UPDATED_APPROVAL_USER)
             .approvalOpinion(UPDATED_APPROVAL_OPINION)
             .approvalTransition(UPDATED_APPROVAL_TRANSITION)
             .remark(UPDATED_REMARK);
@@ -559,7 +559,7 @@ public class CaseClaimBillApprovalLogResourceIntTest {
         CaseClaimBillApprovalLog testCaseClaimBillApprovalLog = caseClaimBillApprovalLogList.get(caseClaimBillApprovalLogList.size() - 1);
         assertThat(testCaseClaimBillApprovalLog.getProcessId()).isEqualTo(UPDATED_PROCESS_ID);
         assertThat(testCaseClaimBillApprovalLog.getInsertTime()).isEqualTo(UPDATED_INSERT_TIME);
-        assertThat(testCaseClaimBillApprovalLog.getApprovalUse()).isEqualTo(UPDATED_APPROVAL_USE);
+        assertThat(testCaseClaimBillApprovalLog.getApprovalUser()).isEqualTo(UPDATED_APPROVAL_USER);
         assertThat(testCaseClaimBillApprovalLog.getApprovalOpinion()).isEqualTo(UPDATED_APPROVAL_OPINION);
         assertThat(testCaseClaimBillApprovalLog.getApprovalTransition()).isEqualTo(UPDATED_APPROVAL_TRANSITION);
         assertThat(testCaseClaimBillApprovalLog.getRemark()).isEqualTo(UPDATED_REMARK);

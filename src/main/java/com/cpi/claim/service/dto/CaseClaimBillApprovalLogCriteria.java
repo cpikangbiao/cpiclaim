@@ -32,7 +32,7 @@ public class CaseClaimBillApprovalLogCriteria implements Serializable {
 
     private InstantFilter insertTime;
 
-    private StringFilter approvalUse;
+    private StringFilter approvalUser;
 
     private StringFilter approvalOpinion;
 
@@ -69,12 +69,12 @@ public class CaseClaimBillApprovalLogCriteria implements Serializable {
         this.insertTime = insertTime;
     }
 
-    public StringFilter getApprovalUse() {
-        return approvalUse;
+    public StringFilter getApprovalUser() {
+        return approvalUser;
     }
 
-    public void setApprovalUse(StringFilter approvalUse) {
-        this.approvalUse = approvalUse;
+    public void setApprovalUser(StringFilter approvalUser) {
+        this.approvalUser = approvalUser;
     }
 
     public StringFilter getApprovalOpinion() {
@@ -115,7 +115,7 @@ public class CaseClaimBillApprovalLogCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (processId != null ? "processId=" + processId + ", " : "") +
                 (insertTime != null ? "insertTime=" + insertTime + ", " : "") +
-                (approvalUse != null ? "approvalUse=" + approvalUse + ", " : "") +
+                (approvalUser != null ? "approvalUser=" + approvalUser + ", " : "") +
                 (approvalOpinion != null ? "approvalOpinion=" + approvalOpinion + ", " : "") +
                 (approvalTransition != null ? "approvalTransition=" + approvalTransition + ", " : "") +
                 (remark != null ? "remark=" + remark + ", " : "") +

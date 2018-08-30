@@ -9,7 +9,7 @@ import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-
+import io.github.jhipster.service.filter.InstantFilter;
 
 
 
@@ -28,13 +28,13 @@ public class CaseClaimBillDeleteLogCriteria implements Serializable {
 
     private LongFilter id;
 
+    private StringFilter claimBillCode;
+
     private StringFilter operateType;
 
     private StringFilter operateUser;
 
-    private StringFilter operateDate;
-
-    private LongFilter caseClaimBillId;
+    private InstantFilter operateDate;
 
     public CaseClaimBillDeleteLogCriteria() {
     }
@@ -45,6 +45,14 @@ public class CaseClaimBillDeleteLogCriteria implements Serializable {
 
     public void setId(LongFilter id) {
         this.id = id;
+    }
+
+    public StringFilter getClaimBillCode() {
+        return claimBillCode;
+    }
+
+    public void setClaimBillCode(StringFilter claimBillCode) {
+        this.claimBillCode = claimBillCode;
     }
 
     public StringFilter getOperateType() {
@@ -63,30 +71,22 @@ public class CaseClaimBillDeleteLogCriteria implements Serializable {
         this.operateUser = operateUser;
     }
 
-    public StringFilter getOperateDate() {
+    public InstantFilter getOperateDate() {
         return operateDate;
     }
 
-    public void setOperateDate(StringFilter operateDate) {
+    public void setOperateDate(InstantFilter operateDate) {
         this.operateDate = operateDate;
-    }
-
-    public LongFilter getCaseClaimBillId() {
-        return caseClaimBillId;
-    }
-
-    public void setCaseClaimBillId(LongFilter caseClaimBillId) {
-        this.caseClaimBillId = caseClaimBillId;
     }
 
     @Override
     public String toString() {
         return "CaseClaimBillDeleteLogCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
+                (claimBillCode != null ? "claimBillCode=" + claimBillCode + ", " : "") +
                 (operateType != null ? "operateType=" + operateType + ", " : "") +
                 (operateUser != null ? "operateUser=" + operateUser + ", " : "") +
                 (operateDate != null ? "operateDate=" + operateDate + ", " : "") +
-                (caseClaimBillId != null ? "caseClaimBillId=" + caseClaimBillId + ", " : "") +
             "}";
     }
 

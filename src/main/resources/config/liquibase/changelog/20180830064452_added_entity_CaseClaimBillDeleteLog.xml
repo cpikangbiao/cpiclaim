@@ -15,44 +15,32 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity CaseClaimBillApprovalLog.
+        Added the entity CaseClaimBillDeleteLog.
     -->
-    <changeSet id="20180830063123-1" author="jhipster">
-        <createTable tableName="case_claim_bill_approval_log">
+    <changeSet id="20180830064452-1" author="jhipster">
+        <createTable tableName="case_claim_bill_delete_log">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="process_id" type="bigint">
+            <column name="claim_bill_code" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="insert_time" type="datetime">
+            <column name="operate_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="approval_user" type="varchar(255)">
+            <column name="operate_user" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="approval_opinion" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="approval_transition" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="remark" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="case_claim_bill_id" type="bigint">
+            <column name="operate_date" type="datetime">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="case_claim_bill_approval_log" columnName="insert_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="case_claim_bill_delete_log" columnName="operate_date" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

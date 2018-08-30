@@ -15,7 +15,7 @@ public class CaseClaimBillApprovalLogDTO implements Serializable {
 
     private Instant insertTime;
 
-    private String approvalUse;
+    private String approvalUser;
 
     private String approvalOpinion;
 
@@ -51,12 +51,12 @@ public class CaseClaimBillApprovalLogDTO implements Serializable {
         this.insertTime = insertTime;
     }
 
-    public String getApprovalUse() {
-        return approvalUse;
+    public String getApprovalUser() {
+        return approvalUser;
     }
 
-    public void setApprovalUse(String approvalUse) {
-        this.approvalUse = approvalUse;
+    public void setApprovalUser(String approvalUser) {
+        this.approvalUser = approvalUser;
     }
 
     public String getApprovalOpinion() {
@@ -126,7 +126,7 @@ public class CaseClaimBillApprovalLogDTO implements Serializable {
             "id=" + getId() +
             ", processId=" + getProcessId() +
             ", insertTime='" + getInsertTime() + "'" +
-            ", approvalUse='" + getApprovalUse() + "'" +
+            ", approvalUser='" + getApprovalUser() + "'" +
             ", approvalOpinion='" + getApprovalOpinion() + "'" +
             ", approvalTransition='" + getApprovalTransition() + "'" +
             ", remark='" + getRemark() + "'" +

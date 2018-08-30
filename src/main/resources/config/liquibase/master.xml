@@ -38,6 +38,7 @@
     <!--<include file="config/liquibase/changelog/20180830063121_added_entity_CaseClaimBillPrintLog.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180830063122_added_entity_CaseClaimBillDeleteLog.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180830063123_added_entity_CaseClaimBillApprovalLog.xml" relativeToChangelogFile="false"/>-->
+    <include file="config/liquibase/changelog/20180830064452_added_entity_CaseClaimBillDeleteLog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!--<include file="config/liquibase/changelog/20180821015139_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180821055341_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>-->

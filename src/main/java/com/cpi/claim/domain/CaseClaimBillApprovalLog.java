@@ -30,8 +30,8 @@ public class CaseClaimBillApprovalLog implements Serializable {
     @Column(name = "insert_time")
     private Instant insertTime;
 
-    @Column(name = "approval_use")
-    private String approvalUse;
+    @Column(name = "approval_user")
+    private String approvalUser;
 
     @Column(name = "approval_opinion")
     private String approvalOpinion;
@@ -81,17 +81,17 @@ public class CaseClaimBillApprovalLog implements Serializable {
         this.insertTime = insertTime;
     }
 
-    public String getApprovalUse() {
-        return approvalUse;
+    public String getApprovalUser() {
+        return approvalUser;
     }
 
-    public CaseClaimBillApprovalLog approvalUse(String approvalUse) {
-        this.approvalUse = approvalUse;
+    public CaseClaimBillApprovalLog approvalUser(String approvalUser) {
+        this.approvalUser = approvalUser;
         return this;
     }
 
-    public void setApprovalUse(String approvalUse) {
-        this.approvalUse = approvalUse;
+    public void setApprovalUser(String approvalUser) {
+        this.approvalUser = approvalUser;
     }
 
     public String getApprovalOpinion() {
@@ -173,7 +173,7 @@ public class CaseClaimBillApprovalLog implements Serializable {
             "id=" + getId() +
             ", processId=" + getProcessId() +
             ", insertTime='" + getInsertTime() + "'" +
-            ", approvalUse='" + getApprovalUse() + "'" +
+            ", approvalUser='" + getApprovalUser() + "'" +
             ", approvalOpinion='" + getApprovalOpinion() + "'" +
             ", approvalTransition='" + getApprovalTransition() + "'" +
             ", remark='" + getRemark() + "'" +

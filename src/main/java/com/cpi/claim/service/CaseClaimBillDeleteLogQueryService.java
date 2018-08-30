@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.jhipster.service.QueryService;
 
+import com.cpi.claim.domain.CaseClaimBillDeleteLog;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseClaimBillDeleteLogRepository;
 import com.cpi.claim.service.dto.CaseClaimBillDeleteLogCriteria;
@@ -75,6 +76,9 @@ public class CaseClaimBillDeleteLogQueryService extends QueryService<CaseClaimBi
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CaseClaimBillDeleteLog_.id));
             }
+            if (criteria.getClaimBillCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getClaimBillCode(), CaseClaimBillDeleteLog_.claimBillCode));
+            }
             if (criteria.getOperateType() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getOperateType(), CaseClaimBillDeleteLog_.operateType));
             }
@@ -82,10 +86,7 @@ public class CaseClaimBillDeleteLogQueryService extends QueryService<CaseClaimBi
                 specification = specification.and(buildStringSpecification(criteria.getOperateUser(), CaseClaimBillDeleteLog_.operateUser));
             }
             if (criteria.getOperateDate() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getOperateDate(), CaseClaimBillDeleteLog_.operateDate));
-            }
-            if (criteria.getCaseClaimBillId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseClaimBillId(), CaseClaimBillDeleteLog_.caseClaimBill, CaseClaimBill_.id));
+                specification = specification.and(buildRangeSpecification(criteria.getOperateDate(), CaseClaimBillDeleteLog_.operateDate));
             }
         }
         return specification;
