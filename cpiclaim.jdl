@@ -431,16 +431,32 @@ relationship ManyToOne {
 }
 
 
-// Set pagination options
-//paginate PartnerType with infinite-scroll
-paginate * with pagination
+entity StatisticsCaseYearCount {
+    caseYear String,
+    insuranceType String,
+    caseCount Integer,
+    updateTime Instant,
+}
 
-dto * with mapstruct
+entity StatisticsCaseMonthCount {
+    caseYear  Integer,
+    caseMonth Integer,
+    insuranceType String,
+    caseCount Integer,
+    updateTime Instant,
+}
+
+
+// Set pagination options
+// paginate PartnerType with infinite-scroll
+paginate * with pagination except StatisticsCaseYearCount, StatisticsCaseMonthCount
+
+dto * with mapstruct except StatisticsCaseYearCount, StatisticsCaseMonthCount
 
 //Set service options to all except few
-service * with serviceImpl //except PartnerType
+service * with serviceImpl except StatisticsCaseYearCount, StatisticsCaseMonthCount
 
-filter * //except PartnerType
+filter * except StatisticsCaseYearCount, StatisticsCaseMonthCount
 
 
 microservice * with cpiclaim
