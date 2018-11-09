@@ -30,8 +30,8 @@ public class CasePaymentBill implements Serializable {
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "amout", precision = 10, scale = 2)
-    private BigDecimal amout;
+    @Column(name = "amount", precision = 10, scale = 2)
+    private BigDecimal amount;
 
     @Column(name = "is_write_off")
     private Boolean isWriteOff;
@@ -83,17 +83,17 @@ public class CasePaymentBill implements Serializable {
         this.currency = currency;
     }
 
-    public BigDecimal getAmout() {
-        return amout;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public CasePaymentBill amout(BigDecimal amout) {
-        this.amout = amout;
+    public CasePaymentBill amount(BigDecimal amount) {
+        this.amount = amount;
         return this;
     }
 
-    public void setAmout(BigDecimal amout) {
-        this.amout = amout;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Boolean isIsWriteOff() {
@@ -175,7 +175,7 @@ public class CasePaymentBill implements Serializable {
             "id=" + getId() +
             ", numberId=" + getNumberId() +
             ", currency=" + getCurrency() +
-            ", amout=" + getAmout() +
+            ", amount=" + getAmount() +
             ", isWriteOff='" + isIsWriteOff() + "'" +
             "}";
     }

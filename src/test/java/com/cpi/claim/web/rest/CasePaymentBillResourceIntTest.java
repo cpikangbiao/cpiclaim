@@ -56,8 +56,8 @@ public class CasePaymentBillResourceIntTest {
     private static final Long DEFAULT_CURRENCY = 1L;
     private static final Long UPDATED_CURRENCY = 2L;
 
-    private static final BigDecimal DEFAULT_AMOUT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_AMOUT = new BigDecimal(2);
+    private static final BigDecimal DEFAULT_AMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_AMOUNT = new BigDecimal(2);
 
     private static final Boolean DEFAULT_IS_WRITE_OFF = false;
     private static final Boolean UPDATED_IS_WRITE_OFF = true;
@@ -113,7 +113,7 @@ public class CasePaymentBillResourceIntTest {
         CasePaymentBill casePaymentBill = new CasePaymentBill()
             .numberId(DEFAULT_NUMBER_ID)
             .currency(DEFAULT_CURRENCY)
-            .amout(DEFAULT_AMOUT)
+            .amount(DEFAULT_AMOUNT)
             .isWriteOff(DEFAULT_IS_WRITE_OFF);
         return casePaymentBill;
     }
@@ -141,7 +141,7 @@ public class CasePaymentBillResourceIntTest {
         CasePaymentBill testCasePaymentBill = casePaymentBillList.get(casePaymentBillList.size() - 1);
         assertThat(testCasePaymentBill.getNumberId()).isEqualTo(DEFAULT_NUMBER_ID);
         assertThat(testCasePaymentBill.getCurrency()).isEqualTo(DEFAULT_CURRENCY);
-        assertThat(testCasePaymentBill.getAmout()).isEqualTo(DEFAULT_AMOUT);
+        assertThat(testCasePaymentBill.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testCasePaymentBill.isIsWriteOff()).isEqualTo(DEFAULT_IS_WRITE_OFF);
     }
 
@@ -178,7 +178,7 @@ public class CasePaymentBillResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(casePaymentBill.getId().intValue())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].amout").value(hasItem(DEFAULT_AMOUT.intValue())))
+            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].isWriteOff").value(hasItem(DEFAULT_IS_WRITE_OFF.booleanValue())));
     }
     
@@ -196,7 +196,7 @@ public class CasePaymentBillResourceIntTest {
             .andExpect(jsonPath("$.id").value(casePaymentBill.getId().intValue()))
             .andExpect(jsonPath("$.numberId").value(DEFAULT_NUMBER_ID))
             .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.amout").value(DEFAULT_AMOUT.intValue()))
+            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
             .andExpect(jsonPath("$.isWriteOff").value(DEFAULT_IS_WRITE_OFF.booleanValue()));
     }
 
@@ -334,41 +334,41 @@ public class CasePaymentBillResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllCasePaymentBillsByAmoutIsEqualToSomething() throws Exception {
+    public void getAllCasePaymentBillsByAmountIsEqualToSomething() throws Exception {
         // Initialize the database
         casePaymentBillRepository.saveAndFlush(casePaymentBill);
 
-        // Get all the casePaymentBillList where amout equals to DEFAULT_AMOUT
-        defaultCasePaymentBillShouldBeFound("amout.equals=" + DEFAULT_AMOUT);
+        // Get all the casePaymentBillList where amount equals to DEFAULT_AMOUNT
+        defaultCasePaymentBillShouldBeFound("amount.equals=" + DEFAULT_AMOUNT);
 
-        // Get all the casePaymentBillList where amout equals to UPDATED_AMOUT
-        defaultCasePaymentBillShouldNotBeFound("amout.equals=" + UPDATED_AMOUT);
+        // Get all the casePaymentBillList where amount equals to UPDATED_AMOUNT
+        defaultCasePaymentBillShouldNotBeFound("amount.equals=" + UPDATED_AMOUNT);
     }
 
     @Test
     @Transactional
-    public void getAllCasePaymentBillsByAmoutIsInShouldWork() throws Exception {
+    public void getAllCasePaymentBillsByAmountIsInShouldWork() throws Exception {
         // Initialize the database
         casePaymentBillRepository.saveAndFlush(casePaymentBill);
 
-        // Get all the casePaymentBillList where amout in DEFAULT_AMOUT or UPDATED_AMOUT
-        defaultCasePaymentBillShouldBeFound("amout.in=" + DEFAULT_AMOUT + "," + UPDATED_AMOUT);
+        // Get all the casePaymentBillList where amount in DEFAULT_AMOUNT or UPDATED_AMOUNT
+        defaultCasePaymentBillShouldBeFound("amount.in=" + DEFAULT_AMOUNT + "," + UPDATED_AMOUNT);
 
-        // Get all the casePaymentBillList where amout equals to UPDATED_AMOUT
-        defaultCasePaymentBillShouldNotBeFound("amout.in=" + UPDATED_AMOUT);
+        // Get all the casePaymentBillList where amount equals to UPDATED_AMOUNT
+        defaultCasePaymentBillShouldNotBeFound("amount.in=" + UPDATED_AMOUNT);
     }
 
     @Test
     @Transactional
-    public void getAllCasePaymentBillsByAmoutIsNullOrNotNull() throws Exception {
+    public void getAllCasePaymentBillsByAmountIsNullOrNotNull() throws Exception {
         // Initialize the database
         casePaymentBillRepository.saveAndFlush(casePaymentBill);
 
-        // Get all the casePaymentBillList where amout is not null
-        defaultCasePaymentBillShouldBeFound("amout.specified=true");
+        // Get all the casePaymentBillList where amount is not null
+        defaultCasePaymentBillShouldBeFound("amount.specified=true");
 
-        // Get all the casePaymentBillList where amout is null
-        defaultCasePaymentBillShouldNotBeFound("amout.specified=false");
+        // Get all the casePaymentBillList where amount is null
+        defaultCasePaymentBillShouldNotBeFound("amount.specified=false");
     }
 
     @Test
@@ -476,7 +476,7 @@ public class CasePaymentBillResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(casePaymentBill.getId().intValue())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].amout").value(hasItem(DEFAULT_AMOUT.intValue())))
+            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].isWriteOff").value(hasItem(DEFAULT_IS_WRITE_OFF.booleanValue())));
     }
 
@@ -514,7 +514,7 @@ public class CasePaymentBillResourceIntTest {
         updatedCasePaymentBill
             .numberId(UPDATED_NUMBER_ID)
             .currency(UPDATED_CURRENCY)
-            .amout(UPDATED_AMOUT)
+            .amount(UPDATED_AMOUNT)
             .isWriteOff(UPDATED_IS_WRITE_OFF);
         CasePaymentBillDTO casePaymentBillDTO = casePaymentBillMapper.toDto(updatedCasePaymentBill);
 
@@ -529,7 +529,7 @@ public class CasePaymentBillResourceIntTest {
         CasePaymentBill testCasePaymentBill = casePaymentBillList.get(casePaymentBillList.size() - 1);
         assertThat(testCasePaymentBill.getNumberId()).isEqualTo(UPDATED_NUMBER_ID);
         assertThat(testCasePaymentBill.getCurrency()).isEqualTo(UPDATED_CURRENCY);
-        assertThat(testCasePaymentBill.getAmout()).isEqualTo(UPDATED_AMOUT);
+        assertThat(testCasePaymentBill.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testCasePaymentBill.isIsWriteOff()).isEqualTo(UPDATED_IS_WRITE_OFF);
     }
 

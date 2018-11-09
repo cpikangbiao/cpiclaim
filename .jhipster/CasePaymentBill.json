@@ -10,7 +10,7 @@
             "fieldType": "Long"
         },
         {
-            "fieldName": "amout",
+            "fieldName": "amount",
             "fieldType": "BigDecimal"
         },
         {
@@ -38,7 +38,7 @@
             "otherEntityField": "claimBillCode"
         }
     ],
-    "changelogDate": "20181109030744",
+    "changelogDate": "20181109031545",
     "entityTableName": "case_payment_bill",
     "dto": "mapstruct",
     "pagination": "pagination",

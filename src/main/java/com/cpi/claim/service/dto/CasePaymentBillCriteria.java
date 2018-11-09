@@ -32,7 +32,7 @@ public class CasePaymentBillCriteria implements Serializable {
 
     private LongFilter currency;
 
-    private BigDecimalFilter amout;
+    private BigDecimalFilter amount;
 
     private BooleanFilter isWriteOff;
 
@@ -69,12 +69,12 @@ public class CasePaymentBillCriteria implements Serializable {
         this.currency = currency;
     }
 
-    public BigDecimalFilter getAmout() {
-        return amout;
+    public BigDecimalFilter getAmount() {
+        return amount;
     }
 
-    public void setAmout(BigDecimalFilter amout) {
-        this.amout = amout;
+    public void setAmount(BigDecimalFilter amount) {
+        this.amount = amount;
     }
 
     public BooleanFilter getIsWriteOff() {
@@ -115,7 +115,7 @@ public class CasePaymentBillCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (numberId != null ? "numberId=" + numberId + ", " : "") +
                 (currency != null ? "currency=" + currency + ", " : "") +
-                (amout != null ? "amout=" + amout + ", " : "") +
+                (amount != null ? "amount=" + amount + ", " : "") +
                 (isWriteOff != null ? "isWriteOff=" + isWriteOff + ", " : "") +
                 (subcaseId != null ? "subcaseId=" + subcaseId + ", " : "") +
                 (caseClaimBillId != null ? "caseClaimBillId=" + caseClaimBillId + ", " : "") +

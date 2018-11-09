@@ -15,7 +15,7 @@ public class CasePaymentBillDTO implements Serializable {
 
     private Long currency;
 
-    private BigDecimal amout;
+    private BigDecimal amount;
 
     private Boolean isWriteOff;
 
@@ -53,12 +53,12 @@ public class CasePaymentBillDTO implements Serializable {
         this.currency = currency;
     }
 
-    public BigDecimal getAmout() {
-        return amout;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setAmout(BigDecimal amout) {
-        this.amout = amout;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Boolean isIsWriteOff() {
@@ -136,7 +136,7 @@ public class CasePaymentBillDTO implements Serializable {
             "id=" + getId() +
             ", numberId=" + getNumberId() +
             ", currency=" + getCurrency() +
-            ", amout=" + getAmout() +
+            ", amount=" + getAmount() +
             ", isWriteOff='" + isIsWriteOff() + "'" +
             ", subcase=" + getSubcaseId() +
             ", caseClaimBill=" + getCaseClaimBillId() +

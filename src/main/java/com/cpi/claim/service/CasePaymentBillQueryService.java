@@ -82,8 +82,8 @@ public class CasePaymentBillQueryService extends QueryService<CasePaymentBill> {
             if (criteria.getCurrency() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCurrency(), CasePaymentBill_.currency));
             }
-            if (criteria.getAmout() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getAmout(), CasePaymentBill_.amout));
+            if (criteria.getAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getAmount(), CasePaymentBill_.amount));
             }
             if (criteria.getIsWriteOff() != null) {
                 specification = specification.and(buildSpecification(criteria.getIsWriteOff(), CasePaymentBill_.isWriteOff));
