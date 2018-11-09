@@ -1,9 +1,11 @@
 package com.cpi.claim.service;
 
+import com.cpi.claim.domain.CaseClaim;
 import com.cpi.claim.domain.CaseEstimate;
 import com.cpi.claim.domain.CaseEstimate_;
 import com.cpi.claim.domain.VesselSubCase_;
 import com.cpi.claim.repository.CaseEstimateRepository;
+import com.cpi.claim.service.dto.CaseClaimDTO;
 import com.cpi.claim.service.dto.CaseEstimateCriteria;
 import com.cpi.claim.service.dto.CaseEstimateDTO;
 import com.cpi.claim.service.mapper.CaseEstimateMapper;
@@ -37,6 +39,21 @@ public class CaseEstimateExtService extends QueryService<CaseEstimate> {
     public CaseEstimateExtService(CaseEstimateRepository caseEstimateRepository, CaseEstimateMapper caseEstimateMapper) {
         this.caseEstimateRepository = caseEstimateRepository;
         this.caseEstimateMapper = caseEstimateMapper;
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<CaseEstimateDTO> findAllByVesselCaseId(Long vesselCaseId) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final List<CaseEstimate> caseEstimates = caseEstimateRepository.findAllBySubcaseVesselCaseId(vesselCaseId);
+        return caseEstimateMapper.toDto(caseEstimates);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CaseEstimateDTO> findAllByVesselCaseId(Long vesselCaseId, Pageable page) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final Page<CaseEstimate> caseEstimates = caseEstimateRepository.findAllBySubcaseVesselCaseId(vesselCaseId, page);
+        return caseEstimates.map(caseEstimateMapper::toDto);
     }
 
     @Transactional(readOnly = true)

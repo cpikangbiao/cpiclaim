@@ -1,10 +1,8 @@
 package com.cpi.claim.service;
 
-import com.cpi.claim.domain.CaseGuarantee;
-import com.cpi.claim.domain.CaseGuarantee_;
-import com.cpi.claim.domain.GuaranteeType_;
-import com.cpi.claim.domain.VesselSubCase_;
+import com.cpi.claim.domain.*;
 import com.cpi.claim.repository.CaseGuaranteeRepository;
+import com.cpi.claim.service.dto.CaseGuaranteeDTO;
 import com.cpi.claim.service.dto.CaseGuaranteeCriteria;
 import com.cpi.claim.service.dto.CaseGuaranteeDTO;
 import com.cpi.claim.service.mapper.CaseGuaranteeMapper;
@@ -38,6 +36,20 @@ public class CaseGuaranteeExtService extends QueryService<CaseGuarantee> {
     public CaseGuaranteeExtService(CaseGuaranteeRepository caseGuaranteeRepository, CaseGuaranteeMapper caseGuaranteeMapper) {
         this.caseGuaranteeRepository = caseGuaranteeRepository;
         this.caseGuaranteeMapper = caseGuaranteeMapper;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CaseGuaranteeDTO> findAllByVesselCaseId(Long vesselCaseId) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final List<CaseGuarantee> caseGuarantees = caseGuaranteeRepository.findAllBySubcaseVesselCaseId(vesselCaseId);
+        return caseGuaranteeMapper.toDto(caseGuarantees);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CaseGuaranteeDTO> findAllByVesselCaseId(Long vesselCaseId, Pageable page) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final Page<CaseGuarantee> caseGuarantees = caseGuaranteeRepository.findAllBySubcaseVesselCaseId(vesselCaseId, page);
+        return caseGuarantees.map(caseGuaranteeMapper::toDto);
     }
 
     @Transactional(readOnly = true)

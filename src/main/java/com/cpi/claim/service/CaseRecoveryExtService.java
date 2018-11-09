@@ -2,6 +2,7 @@ package com.cpi.claim.service;
 
 import com.cpi.claim.domain.*;
 import com.cpi.claim.repository.CaseRecoveryRepository;
+import com.cpi.claim.service.dto.CaseRecoveryDTO;
 import com.cpi.claim.service.dto.CaseRecoveryCriteria;
 import com.cpi.claim.service.dto.CaseRecoveryDTO;
 import com.cpi.claim.service.mapper.CaseRecoveryMapper;
@@ -31,6 +32,22 @@ public class CaseRecoveryExtService extends QueryService<CaseRecovery> {
         this.caseRecoveryRepository = caseRecoveryRepository;
         this.caseRecoveryMapper = caseRecoveryMapper;
     }
+
+
+    @Transactional(readOnly = true)
+    public List<CaseRecoveryDTO> findAllByVesselCaseId(Long vesselCaseId) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final List<CaseRecovery> caseRecoveries = caseRecoveryRepository.findAllBySubcaseVesselCaseId(vesselCaseId);
+        return caseRecoveryMapper.toDto(caseRecoveries);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CaseRecoveryDTO> findAllByVesselCaseId(Long vesselCaseId, Pageable page) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final Page<CaseRecovery> caseRecoveries = caseRecoveryRepository.findAllBySubcaseVesselCaseId(vesselCaseId, page);
+        return caseRecoveries.map(caseRecoveryMapper::toDto);
+    }
+
 
     @Transactional(readOnly = true)
     public Integer findMaxNumberIdBySubCaseId(Long vesselCaseId) {

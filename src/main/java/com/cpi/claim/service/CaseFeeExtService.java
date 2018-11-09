@@ -2,6 +2,7 @@ package com.cpi.claim.service;
 
 import com.cpi.claim.domain.*;
 import com.cpi.claim.repository.CaseFeeRepository;
+import com.cpi.claim.service.dto.CaseEstimateDTO;
 import com.cpi.claim.service.dto.CaseFeeCriteria;
 import com.cpi.claim.service.dto.CaseFeeDTO;
 import com.cpi.claim.service.mapper.CaseFeeMapper;
@@ -35,6 +36,21 @@ public class CaseFeeExtService extends QueryService<CaseFee> {
     public CaseFeeExtService(CaseFeeRepository caseFeeRepository, CaseFeeMapper caseFeeMapper) {
         this.caseFeeRepository = caseFeeRepository;
         this.caseFeeMapper = caseFeeMapper;
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<CaseFeeDTO> findAllByVesselCaseId(Long vesselCaseId) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final List<CaseFee> caseFees = caseFeeRepository.findAllBySubcaseVesselCaseId(vesselCaseId);
+        return caseFeeMapper.toDto(caseFees);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CaseFeeDTO> findAllByVesselCaseId(Long vesselCaseId, Pageable page) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final Page<CaseFee> caseFees = caseFeeRepository.findAllBySubcaseVesselCaseId(vesselCaseId, page);
+        return caseFees.map(caseFeeMapper::toDto);
     }
 
     @Transactional(readOnly = true)

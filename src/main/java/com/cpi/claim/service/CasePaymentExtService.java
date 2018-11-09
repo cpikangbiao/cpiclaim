@@ -1,10 +1,8 @@
 package com.cpi.claim.service;
 
-import com.cpi.claim.domain.CasePayment;
-import com.cpi.claim.domain.CasePayment_;
-import com.cpi.claim.domain.Creditor_;
-import com.cpi.claim.domain.VesselSubCase_;
+import com.cpi.claim.domain.*;
 import com.cpi.claim.repository.CasePaymentRepository;
+import com.cpi.claim.service.dto.CasePaymentDTO;
 import com.cpi.claim.service.dto.CasePaymentCriteria;
 import com.cpi.claim.service.dto.CasePaymentDTO;
 import com.cpi.claim.service.mapper.CasePaymentMapper;
@@ -33,6 +31,20 @@ public class CasePaymentExtService extends QueryService<CasePayment> {
     public CasePaymentExtService(CasePaymentRepository casePaymentRepository, CasePaymentMapper casePaymentMapper) {
         this.casePaymentRepository = casePaymentRepository;
         this.casePaymentMapper = casePaymentMapper;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CasePaymentDTO> findAllByVesselCaseId(Long vesselCaseId) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final List<CasePayment> casePayments = casePaymentRepository.findAllBySubcaseVesselCaseId(vesselCaseId);
+        return casePaymentMapper.toDto(casePayments);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CasePaymentDTO> findAllByVesselCaseId(Long vesselCaseId, Pageable page) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final Page<CasePayment> casePayments = casePaymentRepository.findAllBySubcaseVesselCaseId(vesselCaseId, page);
+        return casePayments.map(casePaymentMapper::toDto);
     }
 
     @Transactional(readOnly = true)
