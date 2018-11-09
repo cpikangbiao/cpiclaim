@@ -11,6 +11,7 @@
 package com.cpi.claim.web.schedule;
 
 import com.cpi.claim.service.VesselCaseExtService;
+import com.cpi.claim.service.VesselCaseStatisticsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class ScheduledForStatistics {
     private final Logger log = LoggerFactory.getLogger(ScheduledForStatistics.class);
 
     @Autowired
-    private VesselCaseExtService vesselCaseExtService;
+    private VesselCaseStatisticsService vesselCaseStatisticsService;
 
 
     @Scheduled(cron = "0 59 23 * * ?")
@@ -43,11 +44,11 @@ public class ScheduledForStatistics {
 
         // gather Static For Member Year Count
         log.info("gather Static For case Year Count at {}", Instant.now());
-        vesselCaseExtService.gatherStaticForCaseYearCount();
+        vesselCaseStatisticsService.gatherStaticForCaseYearCount();
 
         // gather Static For Member Year Count
         log.info("gather Static For case month Count at {}", Instant.now());
-        vesselCaseExtService.gatherStaticForCaseMonthCount();
+        vesselCaseStatisticsService.gatherStaticForCaseMonthCount();
 
         log.info("end gather Statistic  data scheduled!");
     }

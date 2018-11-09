@@ -1,7 +1,9 @@
 package com.cpi.claim.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.cpi.claim.service.CaseClaimBillExtService;
 import com.cpi.claim.service.CaseClaimBillService;
+import com.cpi.claim.service.utility.generate.ClaimBillCodeGenerateUtility;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
 import com.cpi.claim.web.rest.util.PaginationUtil;
@@ -11,6 +13,7 @@ import com.cpi.claim.service.CaseClaimBillQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +42,10 @@ public class CaseClaimBillResource {
 
     private final CaseClaimBillQueryService caseClaimBillQueryService;
 
+    @Autowired
+    private CaseClaimBillExtService caseClaimBillExtService;
+
+
     public CaseClaimBillResource(CaseClaimBillService caseClaimBillService, CaseClaimBillQueryService caseClaimBillQueryService) {
         this.caseClaimBillService = caseClaimBillService;
         this.caseClaimBillQueryService = caseClaimBillQueryService;
@@ -58,6 +65,26 @@ public class CaseClaimBillResource {
         if (caseClaimBillDTO.getId() != null) {
             throw new BadRequestAlertException("A new caseClaimBill cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (caseClaimBillDTO.getMemberYear() == null) {
+            throw new BadRequestAlertException("A new caseClaimBill not have Year", ENTITY_NAME, "idexists");
+        }
+
+        if (caseClaimBillDTO.getMemberYear() == null) {
+            throw new BadRequestAlertException("A new caseClaimBill not have Year", ENTITY_NAME, "idexists");
+        }
+
+        if (caseClaimBillDTO.getMemberYear() == null) {
+            throw new BadRequestAlertException("A new caseClaimBill not have Year", ENTITY_NAME, "idexists");
+        }
+
+        caseClaimBillDTO.setNumberId(caseClaimBillExtService.findMaxNumberIdByYear(caseClaimBillDTO.getMemberYear()));
+//        caseClaimBillDTO.setClaimBillCode(ClaimBillCodeGenerateUtility.createClaimBillCode(
+//            caseClaimBillDTO.getMemberYear(),
+//            caseClaimBillDTO.getClaimBillTypeId(),
+//            caseClaimBillDTO.getNumberId()
+//        ));
+
         CaseClaimBillDTO result = caseClaimBillService.save(caseClaimBillDTO);
         return ResponseEntity.created(new URI("/api/case-claim-bills/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
