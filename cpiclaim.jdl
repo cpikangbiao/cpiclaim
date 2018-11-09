@@ -480,6 +480,24 @@ relationship ManyToOne {
 	CasePaymentBill{writeOffBill(claimBillCode)} to CaseClaimBill
 }
 
+
+entity CaseRecoveryBill {
+	numberId Integer  ,
+	isWriteOff Boolean  ,
+}
+
+relationship ManyToOne {
+	CaseRecoveryBill{caseRecovery} to CaseRecovery
+}
+relationship ManyToOne {
+	CaseRecoveryBill{caseClaimBill(claimBillCode)} to CaseClaimBill
+}
+relationship ManyToOne {
+	CaseRecoveryBill{writeOffBill(claimBillCode)} to CaseClaimBill
+}
+
+
+
 // Set pagination options
 // paginate PartnerType with infinite-scroll
 paginate * with pagination except StatisticsCaseYearCount, StatisticsCaseMonthCount

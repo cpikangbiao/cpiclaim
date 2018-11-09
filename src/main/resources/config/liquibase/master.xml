@@ -45,6 +45,7 @@
     <!--<include file="config/liquibase/changelog/20181109030743_added_entity_CaseFeeBill.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20181109030744_added_entity_CasePaymentBill.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20181109031545_added_entity_CasePaymentBill.xml" relativeToChangelogFile="false"/>-->
+    <include file="config/liquibase/changelog/20181109035142_added_entity_CaseRecoveryBill.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!--<include file="config/liquibase/changelog/20180821015139_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20180821055341_added_entity_constraints_VesselCase.xml" relativeToChangelogFile="false"/>-->
@@ -71,5 +72,6 @@
     <!--<include file="config/liquibase/changelog/20181109030743_added_entity_constraints_CaseFeeBill.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20181109030744_added_entity_constraints_CasePaymentBill.xml" relativeToChangelogFile="false"/>-->
     <!--<include file="config/liquibase/changelog/20181109031545_added_entity_constraints_CasePaymentBill.xml" relativeToChangelogFile="false"/>-->
+    <include file="config/liquibase/changelog/20181109035142_added_entity_constraints_CaseRecoveryBill.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
