@@ -1,6 +1,7 @@
 package com.cpi.claim.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.cpi.claim.service.CaseEstimateExtService;
 import com.cpi.claim.service.CaseEstimateService;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
@@ -11,6 +12,7 @@ import com.cpi.claim.service.CaseEstimateQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,9 @@ public class CaseEstimateResource {
 
     private final CaseEstimateQueryService caseEstimateQueryService;
 
+    @Autowired
+    private CaseEstimateExtService caseEstimateExtService;
+
     public CaseEstimateResource(CaseEstimateService caseEstimateService, CaseEstimateQueryService caseEstimateQueryService) {
         this.caseEstimateService = caseEstimateService;
         this.caseEstimateQueryService = caseEstimateQueryService;
@@ -58,6 +63,12 @@ public class CaseEstimateResource {
         if (caseEstimateDTO.getId() != null) {
             throw new BadRequestAlertException("A new caseEstimate cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (caseEstimateDTO.getSubcaseId() == null) {
+            throw new BadRequestAlertException("A new caseEstimate not have Sub Case ID", ENTITY_NAME, "idexists");
+        }
+
+        caseEstimateDTO.setNumberId(caseEstimateExtService.findMaxNumberIdBySubCaseId(caseEstimateDTO.getSubcaseId()));
+
         CaseEstimateDTO result = caseEstimateService.save(caseEstimateDTO);
         return ResponseEntity.created(new URI("/api/case-estimates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

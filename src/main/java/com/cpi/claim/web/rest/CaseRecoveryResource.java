@@ -1,6 +1,7 @@
 package com.cpi.claim.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.cpi.claim.service.CaseRecoveryExtService;
 import com.cpi.claim.service.CaseRecoveryService;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
@@ -11,6 +12,7 @@ import com.cpi.claim.service.CaseRecoveryQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,9 @@ public class CaseRecoveryResource {
 
     private final CaseRecoveryQueryService caseRecoveryQueryService;
 
+    @Autowired
+    private CaseRecoveryExtService caseRecoveryExtService;
+
     public CaseRecoveryResource(CaseRecoveryService caseRecoveryService, CaseRecoveryQueryService caseRecoveryQueryService) {
         this.caseRecoveryService = caseRecoveryService;
         this.caseRecoveryQueryService = caseRecoveryQueryService;
@@ -58,6 +63,13 @@ public class CaseRecoveryResource {
         if (caseRecoveryDTO.getId() != null) {
             throw new BadRequestAlertException("A new caseRecovery cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (caseRecoveryDTO.getSubcaseId() == null) {
+            throw new BadRequestAlertException("A new caseFee not have Sub Case ID", ENTITY_NAME, "idexists");
+        }
+
+        caseRecoveryDTO.setNumberId(caseRecoveryExtService.findMaxNumberIdBySubCaseId(caseRecoveryDTO.getSubcaseId()));
+
         CaseRecoveryDTO result = caseRecoveryService.save(caseRecoveryDTO);
         return ResponseEntity.created(new URI("/api/case-recoveries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

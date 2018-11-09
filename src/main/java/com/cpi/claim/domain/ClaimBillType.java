@@ -19,6 +19,16 @@ public class ClaimBillType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public final static int CLAIM_BILL_TYPE_PAYMENT   = 1;
+
+    public final static int CLAIM_BILL_TYPE_CLAIMFEE  = 2;
+
+    public final static int CLAIM_BILL_TYPE_RECOVERY  = 3;
+
+    public final static int CLAIM_BILL_TYPE_RECANDPAY = 4;
+
+    public final static int CLAIM_BILL_TYPE_OTHERS    = 5;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

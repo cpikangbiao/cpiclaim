@@ -1,6 +1,7 @@
 package com.cpi.claim.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.cpi.claim.service.VesselSubCaseExtService;
 import com.cpi.claim.service.VesselSubCaseService;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
@@ -11,6 +12,7 @@ import com.cpi.claim.service.VesselSubCaseQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,9 @@ public class VesselSubCaseResource {
 
     private final VesselSubCaseQueryService vesselSubCaseQueryService;
 
+    @Autowired
+    private VesselSubCaseExtService vesselSubCaseExtService;
+
     public VesselSubCaseResource(VesselSubCaseService vesselSubCaseService, VesselSubCaseQueryService vesselSubCaseQueryService) {
         this.vesselSubCaseService = vesselSubCaseService;
         this.vesselSubCaseQueryService = vesselSubCaseQueryService;
@@ -58,6 +63,13 @@ public class VesselSubCaseResource {
         if (vesselSubCaseDTO.getId() != null) {
             throw new BadRequestAlertException("A new vesselSubCase cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (vesselSubCaseDTO.getVesselCaseId() == null) {
+            throw new BadRequestAlertException("A new vesselSubCase cannot saved because VesselCaseId is NULL", ENTITY_NAME, "idexists");
+        }
+
+        vesselSubCaseDTO.setNumberId(vesselSubCaseExtService.findNextNumberIdByVesselCaseId(vesselSubCaseDTO.getVesselCaseId()));
+
         VesselSubCaseDTO result = vesselSubCaseService.save(vesselSubCaseDTO);
         return ResponseEntity.created(new URI("/api/vessel-sub-cases/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

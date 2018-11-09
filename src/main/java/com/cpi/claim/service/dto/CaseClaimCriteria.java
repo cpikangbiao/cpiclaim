@@ -46,6 +46,16 @@ public class CaseClaimCriteria implements Serializable {
 
     private LongFilter subcaseId;
 
+//    private LongFilter vesselCaseId;
+//
+//    public LongFilter getVesselCaseId() {
+//        return vesselCaseId;
+//    }
+//
+//    public void setVesselCaseId(LongFilter vesselCaseId) {
+//        this.vesselCaseId = vesselCaseId;
+//    }
+
     public CaseClaimCriteria() {
     }
 

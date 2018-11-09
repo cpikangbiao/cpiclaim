@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface StatisticsCaseYearCountRepository extends JpaRepository<StatisticsCaseYearCount, Long> {
 
-    List<StatisticsCaseYearCount> findAllByCaseYearOrderByCaseYear(List<String> years);
+    List<StatisticsCaseYearCount> findAllByCaseYearInOrderByCaseYear(List<String> years);
 }

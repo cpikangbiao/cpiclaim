@@ -2,6 +2,7 @@ package com.cpi.claim.repository;
 
 import com.cpi.claim.domain.VesselSubCase;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -12,4 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VesselSubCaseRepository extends JpaRepository<VesselSubCase, Long>, JpaSpecificationExecutor<VesselSubCase> {
 
+    @Query("SELECT COALESCE(MAX(c.numberId), 0) "
+        + " FROM VesselSubCase c "
+        + " WHERE c.vesselCase.id = :vesselCaseId ")
+    Integer findMaxNumberIdByVesselCaseId(@Param("vesselCaseId") Long vesselCaseId);
 }

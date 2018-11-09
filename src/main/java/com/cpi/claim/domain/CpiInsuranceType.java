@@ -19,6 +19,12 @@ public class CpiInsuranceType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final Long CPI_INSURANCE_PI   = new Long(1);
+
+    public static final Long CPI_INSURANCE_TCL  = new Long(2);
+
+    public static final Long CPI_INSURANCE_FDD  = new Long(3);
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

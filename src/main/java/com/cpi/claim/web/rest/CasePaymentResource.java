@@ -1,6 +1,7 @@
 package com.cpi.claim.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.cpi.claim.service.CasePaymentExtService;
 import com.cpi.claim.service.CasePaymentService;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
@@ -11,6 +12,7 @@ import com.cpi.claim.service.CasePaymentQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,9 @@ public class CasePaymentResource {
 
     private final CasePaymentQueryService casePaymentQueryService;
 
+    @Autowired
+    private CasePaymentExtService casePaymentExtService;
+
     public CasePaymentResource(CasePaymentService casePaymentService, CasePaymentQueryService casePaymentQueryService) {
         this.casePaymentService = casePaymentService;
         this.casePaymentQueryService = casePaymentQueryService;
@@ -58,6 +63,13 @@ public class CasePaymentResource {
         if (casePaymentDTO.getId() != null) {
             throw new BadRequestAlertException("A new casePayment cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (casePaymentDTO.getSubcaseId() == null) {
+            throw new BadRequestAlertException("A new casePayment not have Sub Case ID", ENTITY_NAME, "idexists");
+        }
+
+        casePaymentDTO.setNumberId(casePaymentExtService.findMaxNumberIdBySubCaseId(casePaymentDTO.getSubcaseId()));
+
         CasePaymentDTO result = casePaymentService.save(casePaymentDTO);
         return ResponseEntity.created(new URI("/api/case-payments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

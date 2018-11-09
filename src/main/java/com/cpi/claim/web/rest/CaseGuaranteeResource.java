@@ -1,6 +1,7 @@
 package com.cpi.claim.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.cpi.claim.service.CaseGuaranteeExtService;
 import com.cpi.claim.service.CaseGuaranteeService;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
@@ -11,6 +12,7 @@ import com.cpi.claim.service.CaseGuaranteeQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,9 @@ public class CaseGuaranteeResource {
 
     private final CaseGuaranteeQueryService caseGuaranteeQueryService;
 
+    @Autowired
+    private CaseGuaranteeExtService caseGuaranteeExtService;
+
     public CaseGuaranteeResource(CaseGuaranteeService caseGuaranteeService, CaseGuaranteeQueryService caseGuaranteeQueryService) {
         this.caseGuaranteeService = caseGuaranteeService;
         this.caseGuaranteeQueryService = caseGuaranteeQueryService;
@@ -58,6 +63,13 @@ public class CaseGuaranteeResource {
         if (caseGuaranteeDTO.getId() != null) {
             throw new BadRequestAlertException("A new caseGuarantee cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (caseGuaranteeDTO.getSubcaseId() == null) {
+            throw new BadRequestAlertException("A new caseFee not have Sub Case ID", ENTITY_NAME, "idexists");
+        }
+
+        caseGuaranteeDTO.setNumberId(caseGuaranteeExtService.findMaxNumberIdBySubCaseId(caseGuaranteeDTO.getSubcaseId()));
+
         CaseGuaranteeDTO result = caseGuaranteeService.save(caseGuaranteeDTO);
         return ResponseEntity.created(new URI("/api/case-guarantees/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
