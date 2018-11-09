@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CasePaymentBill.
+    -->
+    <changeSet id="20181109030744-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="subcase_id"
+                                 baseTableName="case_payment_bill"
+                                 constraintName="fk_case_payment_bill_subcase_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vessel_sub_case"/>
+
+        <addForeignKeyConstraint baseColumnNames="case_claim_bill_id"
+                                 baseTableName="case_payment_bill"
+                                 constraintName="fk_case_payment_bill_case_claim_bill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="case_claim_bill"/>
+
+        <addForeignKeyConstraint baseColumnNames="write_off_bill_id"
+                                 baseTableName="case_payment_bill"
+                                 constraintName="fk_case_payment_bill_write_off_bill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="case_claim_bill"/>
+
+    </changeSet>
+</databaseChangeLog>

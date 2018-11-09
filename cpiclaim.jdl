@@ -447,6 +447,39 @@ entity StatisticsCaseMonthCount {
 }
 
 
+entity CaseFeeBill {
+	numberId Integer  ,
+	isWriteOff   Boolean,
+ }
+relationship ManyToOne {
+	CaseFeeBill{caseFee} to CaseFee
+}
+relationship ManyToOne {
+	CaseFeeBill{caseClaimBill(claimBillCode)} to CaseClaimBill
+}
+relationship ManyToOne {
+	CaseFeeBill{writeOffBill(claimBillCode)} to CaseClaimBill
+}
+
+entity CasePaymentBill {
+	numberId Integer  ,
+	currency Long  ,
+	amount BigDecimal  ,
+	isWriteOff Boolean  ,
+}
+
+relationship ManyToOne {
+	CasePaymentBill{subcase} to VesselSubCase
+}
+
+relationship ManyToOne {
+	CasePaymentBill{caseClaimBill(claimBillCode)} to CaseClaimBill
+}
+
+relationship ManyToOne {
+	CasePaymentBill{writeOffBill(claimBillCode)} to CaseClaimBill
+}
+
 // Set pagination options
 // paginate PartnerType with infinite-scroll
 paginate * with pagination except StatisticsCaseYearCount, StatisticsCaseMonthCount
