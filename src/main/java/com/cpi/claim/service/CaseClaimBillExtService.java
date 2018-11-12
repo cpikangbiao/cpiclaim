@@ -4,6 +4,7 @@ import com.cpi.claim.domain.*;
 import com.cpi.claim.repository.CaseClaimBillRepository;
 import com.cpi.claim.service.dto.CaseClaimBillCriteria;
 import com.cpi.claim.service.dto.CaseClaimBillDTO;
+import com.cpi.claim.service.dto.CaseClaimDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillMapper;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
@@ -39,4 +40,18 @@ public class CaseClaimBillExtService extends QueryService<CaseClaimBill> {
         return maxNumberId + 1;
     }
 
+
+    @Transactional(readOnly = true)
+    public List<CaseClaimBillDTO> findAllByVesselCaseId(Long vesselCaseId) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final List<CaseClaimBill> caseClaimBills = caseClaimBillRepository.findAllBySubcaseVesselCaseId(vesselCaseId);
+        return caseClaimBillMapper.toDto(caseClaimBills);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CaseClaimBillDTO> findAllByVesselCaseId(Long vesselCaseId, Pageable page) {
+        log.debug("find All By VesselCase Id : {}", vesselCaseId);
+        final Page<CaseClaimBill> caseClaimBills = caseClaimBillRepository.findAllBySubcaseVesselCaseId(vesselCaseId, page);
+        return caseClaimBills.map(caseClaimBillMapper::toDto);
+    }
 }

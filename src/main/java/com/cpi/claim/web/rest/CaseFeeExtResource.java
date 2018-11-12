@@ -50,7 +50,7 @@ public class CaseFeeExtResource {
 
     @GetMapping("/case-fees/by-vessel-case/{id}")
     @Timed
-    public ResponseEntity<List> getcaseFeeForVesselCaseId(@PathVariable Long id) {
+    public ResponseEntity<List> getCaseFeeForVesselCaseId(@PathVariable Long id) {
         log.debug("REST request to get caseFee For VesselCaseId(: {}", id);
         List<CaseFeeDTO> caseFeeDTOS = caseFeeExtService.findAllByVesselCaseId(id);
         return new ResponseEntity<>(caseFeeDTOS, HttpStatus.OK);
