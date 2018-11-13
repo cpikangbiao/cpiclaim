@@ -1,6 +1,9 @@
 package com.cpi.claim.repository;
 
+import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseClaimBillPrintLog;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CaseClaimBillPrintLogRepository extends JpaRepository<CaseClaimBillPrintLog, Long>, JpaSpecificationExecutor<CaseClaimBillPrintLog> {
 
+    Page<CaseClaimBillPrintLog> findAllByCaseClaimBill(CaseClaimBill caseClaimBill, Pageable pageable);
 }

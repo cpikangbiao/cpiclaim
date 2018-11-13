@@ -3,6 +3,7 @@ package com.cpi.claim.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.VesselSubCaseExtService;
 import com.cpi.claim.service.VesselSubCaseService;
+import com.cpi.claim.service.utility.generate.SubCaseCodeGenerateUtility;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
 import com.cpi.claim.web.rest.util.PaginationUtil;
@@ -69,6 +70,10 @@ public class VesselSubCaseResource {
         }
 
         vesselSubCaseDTO.setNumberId(vesselSubCaseExtService.findNextNumberIdByVesselCaseId(vesselSubCaseDTO.getVesselCaseId()));
+        vesselSubCaseDTO.setSubcaseCode(SubCaseCodeGenerateUtility.createSubCaseCode(
+            vesselSubCaseDTO.getVesselCaseCaseCode(),
+            vesselSubCaseDTO.getNumberId()
+        ));
 
         VesselSubCaseDTO result = vesselSubCaseService.save(vesselSubCaseDTO);
         return ResponseEntity.created(new URI("/api/vessel-sub-cases/" + result.getId()))
