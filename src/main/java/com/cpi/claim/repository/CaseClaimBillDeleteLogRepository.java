@@ -16,5 +16,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CaseClaimBillDeleteLogRepository extends JpaRepository<CaseClaimBillDeleteLog, Long>, JpaSpecificationExecutor<CaseClaimBillDeleteLog> {
 
-    Page<CaseClaimBillDeleteLog> findAllByCaseClaimBill(CaseClaimBill caseClaimBill, Pageable pageable);
+//    Page<CaseClaimBillDeleteLog> findAllByCaseClaimBill(CaseClaimBill caseClaimBill, Pageable pageable);
 }

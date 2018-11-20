@@ -35,11 +35,11 @@ public class CaseClaimBillDeleteLogExtService extends QueryService<CaseClaimBill
         this.caseClaimBillDeleteLogMapper = caseClaimBillDeleteLogMapper;
     }
 
-    @Transactional(readOnly = true)
-    public Page<CaseClaimBillDeleteLogDTO> findAllByCaseClaimBill(CaseClaimBill caseClaimBill, Pageable page) {
-        log.debug("find by caseClaimBill : {}", caseClaimBill);
-        return caseClaimBillDeleteLogRepository.findAllByCaseClaimBill(caseClaimBill, page)
-            .map(caseClaimBillDeleteLogMapper::toDto);
-    }
+//    @Transactional(readOnly = true)
+//    public Page<CaseClaimBillDeleteLogDTO> findAllByCaseClaimBill(CaseClaimBill caseClaimBill, Pageable page) {
+//        log.debug("find by caseClaimBill : {}", caseClaimBill);
+//        return caseClaimBillDeleteLogRepository.findAllByCaseClaimBill(caseClaimBill, page)
+//            .map(caseClaimBillDeleteLogMapper::toDto);
+//    }
 
 }

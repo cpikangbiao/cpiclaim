@@ -43,15 +43,15 @@ public class CaseClaimBillDeleteLogExtResource {
         this.caseClaimBillDeleteLogQueryService = caseClaimBillDeleteLogQueryService;
     }
 
-
-    @GetMapping("/case-claim-bill-delete-logs")
-    @Timed
-    public ResponseEntity<List<CaseClaimBillDeleteLogDTO>> getAllCaseClaimBillDeleteLogs(CaseClaimBillDeleteLogCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get CaseClaimBillDeleteLogs by criteria: {}", criteria);
-        Page<CaseClaimBillDeleteLogDTO> page = caseClaimBillDeleteLogQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/case-claim-bill-delete-logs");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+//
+//    @GetMapping("/case-claim-bill-delete-logs")
+//    @Timed
+//    public ResponseEntity<List<CaseClaimBillDeleteLogDTO>> getAllCaseClaimBillDeleteLogs(CaseClaimBillDeleteLogCriteria criteria, Pageable pageable) {
+//        log.debug("REST request to get CaseClaimBillDeleteLogs by criteria: {}", criteria);
+//        Page<CaseClaimBillDeleteLogDTO> page = caseClaimBillDeleteLogQueryService.findByCriteria(criteria, pageable);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/case-claim-bill-delete-logs");
+//        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+//    }
 
 
 }
