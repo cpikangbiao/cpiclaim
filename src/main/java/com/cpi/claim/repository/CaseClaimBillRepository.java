@@ -2,6 +2,7 @@ package com.cpi.claim.repository;
 
 import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseEstimate;
+import com.cpi.claim.domain.VesselSubCase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -27,4 +28,6 @@ public interface CaseClaimBillRepository extends JpaRepository<CaseClaimBill, Lo
         + " WHERE cc.memberYear = :memberYear ")
     Integer findMaxNumberIdByYear(@Param("memberYear") String memberYear);
 
+
+    List<CaseClaimBill> findAllBySubcase(VesselSubCase vesselSubCase);
 }

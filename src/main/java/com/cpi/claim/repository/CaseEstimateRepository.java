@@ -29,4 +29,5 @@ public interface CaseEstimateRepository extends JpaRepository<CaseEstimate, Long
 
     CaseEstimate findFirstBySubcaseOrderByEstimateDateDesc(VesselSubCase subcase);
 
+    List<CaseEstimate> findAllBySubcase(VesselSubCase vesselSubCase);
 }

@@ -13,6 +13,7 @@ package com.cpi.claim.service.utility;
 import com.cpi.claim.domain.CaseClaim;
 import com.cpi.claim.domain.CaseGuarantee;
 import com.cpi.claim.domain.CasePayment;
+import com.cpi.claim.domain.VesselCase;
 import com.cpi.claim.repository.*;
 import com.cpi.claim.repository.common.*;
 import com.cpi.claim.repository.jasperreport.JasperReportUtility;
@@ -96,5 +97,8 @@ public class ClaimToolUtility {
 
     @Autowired
     public VesselSubCaseRepository vesselSubCaseRepository;
+
+    @Autowired
+    public VesselCaseRepository vesselCaseRepository;
 
 }

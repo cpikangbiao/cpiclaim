@@ -180,7 +180,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
         deductible = vesselSubCase.getDeductDollar();
 
         //担保
-        List<CaseGuarantee> caseGuarantees = claimToolUtility.caseGuaranteeRepository.findAllBySubcaseVesselCaseId(vesselSubCase.getId());
+        List<CaseGuarantee> caseGuarantees = claimToolUtility.caseGuaranteeRepository.findAllBySubcase(vesselSubCase);
         if (caseGuarantees.size() > 0) {
             guaranteeNumber       = caseGuarantees.size();
             for (CaseGuarantee guarantee : caseGuarantees) {
@@ -192,7 +192,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
         }
 
         //评估
-        List<CaseEstimate> caseEstimates = claimToolUtility.caseEstimateRepository.findAllBySubcaseVesselCaseId(vesselSubCase.getId());
+        List<CaseEstimate> caseEstimates = claimToolUtility.caseEstimateRepository.findAllBySubcase(vesselSubCase);
         if (caseEstimates.size() > 0) {
             estimateNumber       = caseEstimates.size();
             CaseEstimate lastCaseEstimate = claimToolUtility.caseEstimateRepository.findFirstBySubcaseOrderByEstimateDateDesc(vesselSubCase);
@@ -205,7 +205,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
         }
 
         //索赔
-        List<CaseClaim> caseClaims = claimToolUtility.caseClaimRepository.findAllBySubcaseVesselCaseId(vesselSubCase.getId());
+        List<CaseClaim> caseClaims = claimToolUtility.caseClaimRepository.findAllBySubcase(vesselSubCase);
         if (caseClaims.size() > 0) {
             claimNumber       = caseClaims.size();
             for (CaseClaim caseClaim : caseClaims) {
@@ -223,7 +223,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
             recoveryNumber       = caseRecoveries.size();
             for (CaseRecovery caseRecovery : caseRecoveries) {
                 if (caseRecovery.getAmountDollar() != null)
-                    recoveryAmount.add(caseRecovery.getAmountDollar());
+                    recoveryAmount = recoveryAmount.add(caseRecovery.getAmountDollar());
                 if (caseRecovery.getReceivedDate() != null)
                     recoveryLastDate = caseRecovery.getReceivedDate();
 
@@ -245,7 +245,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
             thirdpartNumber       = caseThirdRecoveries.size();
             for (CaseRecovery caseRecovery : caseThirdRecoveries) {
                 if (caseRecovery.getAmountDollar() != null)
-                    thirdpartAmount.add(caseRecovery.getAmountDollar());
+                    thirdpartAmount = thirdpartAmount.add(caseRecovery.getAmountDollar());
                 if (caseRecovery.getReceivedDate() != null)
                     thirdpartLastDate = caseRecovery.getReceivedDate();
 
@@ -268,7 +268,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
             memberPaymentNumber       = memberPayments.size();
             for (CasePayment memberPayment : memberPayments) {
                 if (memberPayment.getAmount() != null)
-                    memberPaymentAmount.add(memberPayment.getAmount());
+                    memberPaymentAmount = memberPaymentAmount.add(memberPayment.getAmount());
             }
         }
 
@@ -291,7 +291,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
             thirdpartPaymentNumber       = thirdPayments.size();
             for (CasePayment thirdPayment : thirdPayments) {
                 if (thirdPayment.getAmount() != null)
-                    thirdpartPaymentAmount.add(thirdPayment.getAmount());
+                    thirdpartPaymentAmount  = thirdpartPaymentAmount.add(thirdPayment.getAmount());
                 if (thirdPayment.getFeeCreateDate() != null)
                     thirdpartPaymentLastDate = thirdPayment.getFeeCreateDate();
             }
@@ -300,12 +300,12 @@ public class VesselSubCaseOverviewBean implements Serializable {
 
         //费用
         List<CaseFeeBill> caseFeeBills = null;
-        List<CaseFee> caseFees = claimToolUtility.caseFeeRepository.findAllBySubcaseVesselCaseId(vesselSubCase.getId());
+        List<CaseFee> caseFees = claimToolUtility.caseFeeRepository.findAllBySubcase(vesselSubCase);
         for (CaseFee caseFee : caseFees) {
             switch (caseFee.getFeeType().getId().intValue()) {
                 case FeeType.CLAIMTYPE_SURVEYOR :
                     surveytNumber         += 1;
-                    surveyAmount.add(caseFee.getAmountDollar());
+                    surveyAmount = surveyAmount.add(caseFee.getAmountDollar());
 
                     caseFeeBills = claimToolUtility.caseFeeBillRepository.findAllByCaseFee(caseFee);
                     for (CaseFeeBill claimFeeBill : caseFeeBills) {
@@ -322,7 +322,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
 //					break;
                 case FeeType.CLAIMTYPE_CORRESPONDENT :
                     correspondentNumber   += 1;
-                    correspondentAmount.add(caseFee.getAmountDollar());
+                    correspondentAmount = correspondentAmount.add(caseFee.getAmountDollar());
 
                     caseFeeBills =claimToolUtility.caseFeeBillRepository.findAllByCaseFee(caseFee);
                     for (CaseFeeBill claimFeeBill : caseFeeBills) {
@@ -337,7 +337,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
                     break;
                 case FeeType.CLAIMTYPE_LAWYER :
                     lawayerNumber         += 1;
-                    lawayerAmount        .add(caseFee.getAmountDollar());
+                    lawayerAmount = lawayerAmount        .add(caseFee.getAmountDollar());
 
                     caseFeeBills =claimToolUtility.caseFeeBillRepository.findAllByCaseFee(caseFee);
                     for (CaseFeeBill claimFeeBill : caseFeeBills) {
@@ -352,7 +352,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
                     break;
                 case FeeType.CLAIMTYPE_OTHER:
                     otherNumber           += 1;
-                    otherAmount.add(caseFee.getAmountDollar());
+                    otherAmount = otherAmount.add(caseFee.getAmountDollar());
                     otherLastDate         = caseFee.getFeeCostDate();
 
                     caseFeeBills =claimToolUtility.caseFeeBillRepository.findAllByCaseFee(caseFee);
@@ -367,7 +367,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
                     break;
                 default:
                     otherNumber          += 1;
-                    otherAmount.add(caseFee.getAmountDollar());
+                    otherAmount = otherAmount.add(caseFee.getAmountDollar());
 
                     caseFeeBills =claimToolUtility.caseFeeBillRepository.findAllByCaseFee(caseFee);
                     for (CaseFeeBill claimFeeBill : caseFeeBills) {
@@ -380,7 +380,7 @@ public class VesselSubCaseOverviewBean implements Serializable {
                     }
                     break;
             }
-            totalCost.add(caseFee.getAmountDollar());
+            totalCost = totalCost.add(caseFee.getAmountDollar());
         }
 
         //total payment = total cost + member payment + thirdpartPaymentAmount - third party recovery

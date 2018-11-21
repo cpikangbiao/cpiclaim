@@ -1,6 +1,7 @@
 package com.cpi.claim.repository;
 
 import com.cpi.claim.domain.CaseClaim;
+import com.cpi.claim.domain.VesselSubCase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -26,4 +27,6 @@ public interface CaseClaimRepository extends JpaRepository<CaseClaim, Long>, Jpa
         + " FROM CaseClaim cc "
         + " WHERE cc.subcase.id = :subcaseId ")
     Integer findMaxNumberIdBySubcaseId(@Param("subcaseId") Long subcaseId);
+
+    List<CaseClaim> findAllBySubcase(VesselSubCase vesselSubCase);
 }
