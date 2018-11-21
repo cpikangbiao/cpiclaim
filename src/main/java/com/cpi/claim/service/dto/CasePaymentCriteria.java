@@ -50,6 +50,8 @@ public class CasePaymentCriteria implements Serializable {
 
     private InstantFilter feeCreateDate;
 
+    private LongFilter paymentTypeId;
+
     private LongFilter subcaseId;
 
     private LongFilter creditorId;
@@ -153,6 +155,14 @@ public class CasePaymentCriteria implements Serializable {
         this.feeCreateDate = feeCreateDate;
     }
 
+    public LongFilter getPaymentTypeId() {
+        return paymentTypeId;
+    }
+
+    public void setPaymentTypeId(LongFilter paymentTypeId) {
+        this.paymentTypeId = paymentTypeId;
+    }
+
     public LongFilter getSubcaseId() {
         return subcaseId;
     }
@@ -184,6 +194,7 @@ public class CasePaymentCriteria implements Serializable {
                 (amount != null ? "amount=" + amount + ", " : "") +
                 (feeCreateUser != null ? "feeCreateUser=" + feeCreateUser + ", " : "") +
                 (feeCreateDate != null ? "feeCreateDate=" + feeCreateDate + ", " : "") +
+                (paymentTypeId != null ? "paymentTypeId=" + paymentTypeId + ", " : "") +
                 (subcaseId != null ? "subcaseId=" + subcaseId + ", " : "") +
                 (creditorId != null ? "creditorId=" + creditorId + ", " : "") +
             "}";

@@ -10,6 +10,10 @@
  */
 package com.cpi.claim.service.utility;
 
+import com.cpi.claim.domain.CaseClaim;
+import com.cpi.claim.domain.CaseGuarantee;
+import com.cpi.claim.domain.CasePayment;
+import com.cpi.claim.repository.*;
 import com.cpi.claim.repository.common.*;
 import com.cpi.claim.repository.jasperreport.JasperReportUtility;
 import com.cpi.claim.repository.uaa.UserRepository;
@@ -52,5 +56,45 @@ public class ClaimToolUtility {
 
     @Autowired
     public AddressRepository addressRepository;
+
+
+    @Autowired
+    public CaseGuaranteeRepository caseGuaranteeRepository;
+
+    @Autowired
+    public CaseEstimateRepository caseEstimateRepository;
+
+    @Autowired
+    public CaseClaimRepository caseClaimRepository;
+
+    @Autowired
+    public RecoveryTypeRepository recoveryTypeRepository;
+
+    @Autowired
+    public CaseRecoveryRepository caseRecoveryRepository;
+
+    @Autowired
+    public CaseRecoveryBillRepository caseRecoveryBillRepository;
+
+    @Autowired
+    public CaseClaimBillRepository caseClaimBillRepository;
+
+    @Autowired
+    public PaymentTypeRepository paymentTypeRepository;
+
+    @Autowired
+    public  CasePaymentRepository casePaymentRepository;
+
+    @Autowired
+    public CasePaymentBillRepository casePaymentBillRepository;
+
+    @Autowired
+    public CaseFeeRepository caseFeeRepository;
+
+    @Autowired
+    public CaseFeeBillRepository caseFeeBillRepository;
+
+    @Autowired
+    public VesselSubCaseRepository vesselSubCaseRepository;
 
 }

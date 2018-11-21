@@ -54,6 +54,12 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
+            "relationshipName": "paymentType",
+            "otherEntityName": "paymentType",
+            "otherEntityField": "paymentTypeName"
+        },
+        {
+            "relationshipType": "many-to-one",
             "relationshipName": "subcase",
             "otherEntityName": "vesselSubCase",
             "otherEntityField": "subcaseCode"

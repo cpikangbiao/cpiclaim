@@ -17,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "case_payment")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class CasePayment extends AbstractAuditingEntity implements Serializable {
+public class CasePayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -61,6 +61,10 @@ public class CasePayment extends AbstractAuditingEntity implements Serializable 
     @Lob
     @Column(name = "remark")
     private String remark;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private PaymentType paymentType;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -233,6 +237,19 @@ public class CasePayment extends AbstractAuditingEntity implements Serializable 
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType;
+    }
+
+    public CasePayment paymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
+        return this;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
     }
 
     public VesselSubCase getSubcase() {

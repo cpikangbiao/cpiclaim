@@ -1,9 +1,12 @@
 package com.cpi.claim.repository;
 
+import com.cpi.claim.domain.VesselCase;
 import com.cpi.claim.domain.VesselSubCase;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -17,4 +20,6 @@ public interface VesselSubCaseRepository extends JpaRepository<VesselSubCase, Lo
         + " FROM VesselSubCase c "
         + " WHERE c.vesselCase.id = :vesselCaseId ")
     Integer findMaxNumberIdByVesselCaseId(@Param("vesselCaseId") Long vesselCaseId);
+
+    List<VesselSubCase> findAllByVesselCase(VesselCase vesselCase);
 }

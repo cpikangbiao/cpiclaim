@@ -10,18 +10,18 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A RecoveryType.
+ * A PaymentType.
  */
 @Entity
-@Table(name = "recovery_type")
+@Table(name = "payment_type")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class RecoveryType implements Serializable {
+public class PaymentType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public final static Long RECOVERY_TYPE_REINSURANCE   = new Long(1);
+    public final static Long PAYMENTTYPE_MEMBER    = new Long(1);
 
-    public final static Long RECOVERY_TYPE_THIRDPART     =  new Long(2);
+    public final static Long PAYMENTTYPE_THIRDPART = new Long(2);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,8 @@ public class RecoveryType implements Serializable {
     private Integer sortNum;
 
     @NotNull
-    @Column(name = "recovery_type_name", nullable = false)
-    private String recoveryTypeName;
+    @Column(name = "payment_type_name", nullable = false)
+    private String paymentTypeName;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -47,7 +47,7 @@ public class RecoveryType implements Serializable {
         return sortNum;
     }
 
-    public RecoveryType sortNum(Integer sortNum) {
+    public PaymentType sortNum(Integer sortNum) {
         this.sortNum = sortNum;
         return this;
     }
@@ -56,17 +56,17 @@ public class RecoveryType implements Serializable {
         this.sortNum = sortNum;
     }
 
-    public String getRecoveryTypeName() {
-        return recoveryTypeName;
+    public String getPaymentTypeName() {
+        return paymentTypeName;
     }
 
-    public RecoveryType recoveryTypeName(String recoveryTypeName) {
-        this.recoveryTypeName = recoveryTypeName;
+    public PaymentType paymentTypeName(String paymentTypeName) {
+        this.paymentTypeName = paymentTypeName;
         return this;
     }
 
-    public void setRecoveryTypeName(String recoveryTypeName) {
-        this.recoveryTypeName = recoveryTypeName;
+    public void setPaymentTypeName(String paymentTypeName) {
+        this.paymentTypeName = paymentTypeName;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -78,11 +78,11 @@ public class RecoveryType implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RecoveryType recoveryType = (RecoveryType) o;
-        if (recoveryType.getId() == null || getId() == null) {
+        PaymentType paymentType = (PaymentType) o;
+        if (paymentType.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), recoveryType.getId());
+        return Objects.equals(getId(), paymentType.getId());
     }
 
     @Override
@@ -92,10 +92,10 @@ public class RecoveryType implements Serializable {
 
     @Override
     public String toString() {
-        return "RecoveryType{" +
+        return "PaymentType{" +
             "id=" + getId() +
             ", sortNum=" + getSortNum() +
-            ", recoveryTypeName='" + getRecoveryTypeName() + "'" +
+            ", paymentTypeName='" + getPaymentTypeName() + "'" +
             "}";
     }
 }

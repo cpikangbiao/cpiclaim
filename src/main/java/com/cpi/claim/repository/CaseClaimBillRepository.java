@@ -26,4 +26,5 @@ public interface CaseClaimBillRepository extends JpaRepository<CaseClaimBill, Lo
         + " FROM CaseClaimBill cc "
         + " WHERE cc.memberYear = :memberYear ")
     Integer findMaxNumberIdByYear(@Param("memberYear") String memberYear);
+
 }

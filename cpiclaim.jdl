@@ -154,6 +154,11 @@ entity Creditor {
 	corrBankAddress2 String  ,
 }
 
+entity PaymentType {
+	sortNum Integer  ,
+	paymentTypeName String required ,
+}
+
 entity CasePayment {
 	clientNo String  ,
 	numberId Integer  ,
@@ -167,6 +172,10 @@ entity CasePayment {
 	feeCreateUser Long  ,
 	feeCreateDate Instant  ,
 	remark TextBlob  ,
+}
+
+relationship ManyToOne {
+	CasePayment{paymentType(paymentTypeName)} to PaymentType
 }
 
 relationship ManyToOne {

@@ -5,6 +5,7 @@ import com.cpi.claim.CpiclaimApp;
 import com.cpi.claim.config.SecurityBeanOverrideConfiguration;
 
 import com.cpi.claim.domain.CasePayment;
+import com.cpi.claim.domain.PaymentType;
 import com.cpi.claim.domain.VesselSubCase;
 import com.cpi.claim.domain.Creditor;
 import com.cpi.claim.repository.CasePaymentRepository;
@@ -767,6 +768,25 @@ public class CasePaymentResourceIntTest {
         // Get all the casePaymentList where feeCreateDate is null
         defaultCasePaymentShouldNotBeFound("feeCreateDate.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllCasePaymentsByPaymentTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        PaymentType paymentType = PaymentTypeResourceIntTest.createEntity(em);
+        em.persist(paymentType);
+        em.flush();
+        casePayment.setPaymentType(paymentType);
+        casePaymentRepository.saveAndFlush(casePayment);
+        Long paymentTypeId = paymentType.getId();
+
+        // Get all the casePaymentList where paymentType equals to paymentTypeId
+        defaultCasePaymentShouldBeFound("paymentTypeId.equals=" + paymentTypeId);
+
+        // Get all the casePaymentList where paymentType equals to paymentTypeId + 1
+        defaultCasePaymentShouldNotBeFound("paymentTypeId.equals=" + (paymentTypeId + 1));
+    }
+
 
     @Test
     @Transactional

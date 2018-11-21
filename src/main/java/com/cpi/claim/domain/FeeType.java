@@ -19,6 +19,16 @@ public class FeeType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public final static int CLAIMTYPE_GUARANTEE     = 1;
+
+    public final static int CLAIMTYPE_SURVEYOR      = 2;
+
+    public final static int CLAIMTYPE_CORRESPONDENT = 3;
+
+    public final static int CLAIMTYPE_LAWYER        = 4;
+
+    public final static int CLAIMTYPE_OTHER         = 5;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

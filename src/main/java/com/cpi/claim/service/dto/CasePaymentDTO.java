@@ -38,6 +38,10 @@ public class CasePaymentDTO implements Serializable {
     @Lob
     private String remark;
 
+    private Long paymentTypeId;
+
+    private String paymentTypePaymentTypeName;
+
     private Long subcaseId;
 
     private String subcaseSubcaseCode;
@@ -150,6 +154,22 @@ public class CasePaymentDTO implements Serializable {
         this.remark = remark;
     }
 
+    public Long getPaymentTypeId() {
+        return paymentTypeId;
+    }
+
+    public void setPaymentTypeId(Long paymentTypeId) {
+        this.paymentTypeId = paymentTypeId;
+    }
+
+    public String getPaymentTypePaymentTypeName() {
+        return paymentTypePaymentTypeName;
+    }
+
+    public void setPaymentTypePaymentTypeName(String paymentTypePaymentTypeName) {
+        this.paymentTypePaymentTypeName = paymentTypePaymentTypeName;
+    }
+
     public Long getSubcaseId() {
         return subcaseId;
     }
@@ -219,6 +239,8 @@ public class CasePaymentDTO implements Serializable {
             ", feeCreateUser=" + getFeeCreateUser() +
             ", feeCreateDate='" + getFeeCreateDate() + "'" +
             ", remark='" + getRemark() + "'" +
+            ", paymentType=" + getPaymentTypeId() +
+            ", paymentType='" + getPaymentTypePaymentTypeName() + "'" +
             ", subcase=" + getSubcaseId() +
             ", subcase='" + getSubcaseSubcaseCode() + "'" +
             ", creditor=" + getCreditorId() +

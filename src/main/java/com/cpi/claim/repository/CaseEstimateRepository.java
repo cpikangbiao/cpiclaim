@@ -2,6 +2,7 @@ package com.cpi.claim.repository;
 
 import com.cpi.claim.domain.CaseClaim;
 import com.cpi.claim.domain.CaseEstimate;
+import com.cpi.claim.domain.VesselSubCase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -25,4 +26,7 @@ public interface CaseEstimateRepository extends JpaRepository<CaseEstimate, Long
         + " FROM CaseEstimate cc "
         + " WHERE cc.subcase.id = :subcaseId ")
     Integer findMaxNumberIdBySubcaseId(@Param("subcaseId") Long subcaseId);
+
+    CaseEstimate findFirstBySubcaseOrderByEstimateDateDesc(VesselSubCase subcase);
+
 }

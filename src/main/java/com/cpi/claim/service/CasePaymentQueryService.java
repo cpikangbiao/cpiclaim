@@ -109,6 +109,9 @@ public class CasePaymentQueryService extends QueryService<CasePayment> {
             if (criteria.getFeeCreateDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getFeeCreateDate(), CasePayment_.feeCreateDate));
             }
+            if (criteria.getPaymentTypeId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getPaymentTypeId(), CasePayment_.paymentType, PaymentType_.id));
+            }
             if (criteria.getSubcaseId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CasePayment_.subcase, VesselSubCase_.id));
             }
