@@ -31,4 +31,7 @@ public interface CasePaymentRepository extends JpaRepository<CasePayment, Long>,
     Integer findMaxNumberIdBySubcaseId(@Param("subcaseId") Long subcaseId);
 
     List<CasePayment> findAllBySubcaseAndPaymentType(VesselSubCase vesselSubCase, PaymentType paymentType);
+
+    List<CasePayment> findAllBySubcase(VesselSubCase vesselSubCase);
+
 }

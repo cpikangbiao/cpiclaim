@@ -19,6 +19,10 @@ public class CaseStatusType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final Long CASE_STATUS_OPEN   = new Long(1);
+
+    public static final Long CASE_STATUS_CLOSE  = new Long(2);
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

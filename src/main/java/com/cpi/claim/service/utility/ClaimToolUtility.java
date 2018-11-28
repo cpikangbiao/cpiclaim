@@ -18,6 +18,8 @@ import com.cpi.claim.repository.*;
 import com.cpi.claim.repository.common.*;
 import com.cpi.claim.repository.jasperreport.JasperReportUtility;
 import com.cpi.claim.repository.uaa.UserRepository;
+import com.cpi.claim.repository.uw.InsuredVesselRepository;
+import com.cpi.claim.repository.uw.MemberRepository;
 import com.cpi.claim.repository.workflow.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -57,6 +59,12 @@ public class ClaimToolUtility {
 
     @Autowired
     public AddressRepository addressRepository;
+
+    @Autowired
+    public InsuredVesselRepository insuredVesselRepository;
+
+    @Autowired
+    public MemberRepository memberRepository;
 
 
     @Autowired
@@ -100,5 +108,6 @@ public class ClaimToolUtility {
 
     @Autowired
     public VesselCaseRepository vesselCaseRepository;
+
 
 }
