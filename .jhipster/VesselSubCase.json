@@ -39,7 +39,7 @@
         },
         {
             "fieldName": "currencyRate",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "deductDollar",

@@ -23,6 +23,7 @@ import com.cpi.claim.service.utility.ClaimToolUtility;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,10 +108,49 @@ public class CaseStatsPerCaseBean implements Serializable {
     //成本率
     private BigDecimal  costRatio;
 
-    public void init (VesselCase vesselCase, Integer language,  ClaimToolUtility claimToolUtility) {
+    public CaseStatsPerCaseBean() {
+        this.caseStatsPerSubCaseBeans = new ArrayList<>();
+        this.numberId = 0;
+        this.vesselCase = null;
+        this.language = null;
+        this.year = null;
+        this.caseCode = null;
+        this.companyName = null;
+        this.vesselName = null;
+        this.registUser = null;
+        this.registDate = null;
+        this.assignedUser = null;
+        this.caseDate = null;
+        this.caseLocation = null;
+        this.caseStatus = null;
+        this.closeDate = null;
+        this.subCaseNum = 0;
+        this.risk = null;
+        this.riskNumber = null;
+        this.guaranteeAmount = new BigDecimal(0);
+        this.estimateAmount = new BigDecimal(0);
+        this.claimAmount = new BigDecimal(0);
+        this.riAmount = new BigDecimal(0);
+        this.thirdpartAmount = new BigDecimal(0);
+        this.memberPaymentAmount = new BigDecimal(0);
+        this.surveyorFee = new BigDecimal(0);
+        this.correspondentFee = new BigDecimal(0);
+        this.lawyerFee = new BigDecimal(0);
+        this.otherFee = new BigDecimal(0);
+        this.totalCost = new BigDecimal(0);
+        this.thirdpartRecoveryAmount = new BigDecimal(0);
+        this.paymentAmount = new BigDecimal(0);
+        this.grossPayment = new BigDecimal(0);
+        this.netPayment = new BigDecimal(0);
+        this.benifitRatio = new BigDecimal(0);
+        this.costRatio = new BigDecimal(0);
+    }
+
+    public void init (VesselCase vesselCase, Integer language, ClaimToolUtility claimToolUtility) {
         this.vesselCase = vesselCase;
         this.language = language;
         this.caseStatsPerSubCaseBeans = new ArrayList<>();
+        this.subCaseNum = 0;
 
         InsuredVesselDTO insuredVessel = claimToolUtility.insuredVesselRepository.findInsuredVesselByID(vesselCase.getInsuredVesselId());
         MemberDTO member = claimToolUtility.memberRepository.findMemberByID(insuredVessel.getMemberId());
@@ -218,21 +258,18 @@ public class CaseStatsPerCaseBean implements Serializable {
         netPayment   = netPayment.add(caseMemberPayment).add(caseSurveyFee).add(caseCorrespondentFee).add(caseLawerFee).add(caseOtherFee)
             .add(caseEstimate).subtract(caseThirdPart).subtract(caseRI);
 
-        if (claimAmount.equals(new BigDecimal(0))) {
+        if (claimAmount.compareTo(BigDecimal.ZERO) == 0) {
             benifitRatio = new BigDecimal(0);
         } else {
-            benifitRatio = new BigDecimal(1).subtract(paymentAmount.divide(claimAmount));
+            benifitRatio = new BigDecimal(1).subtract(paymentAmount.divide(claimAmount, 4, RoundingMode.HALF_UP));
         }
 
 
-        if (paymentAmount.equals(new BigDecimal(0))) {
+        if (paymentAmount.compareTo(BigDecimal.ZERO) == 0) {
             costRatio = new BigDecimal(0);
         } else  {
-            costRatio = new BigDecimal(1).subtract(totalCost.divide(paymentAmount));
+            costRatio = new BigDecimal(1).subtract(totalCost.divide(paymentAmount, 4, RoundingMode.HALF_UP));
         }
-    }
-
-    public CaseStatsPerCaseBean() {
     }
 
     public List<CaseStatsPerSubCaseBean> getCaseStatsPerSubCaseBeans() {

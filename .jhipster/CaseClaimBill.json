@@ -51,7 +51,7 @@
         },
         {
             "fieldName": "deductibleCurrencyRate",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "deductibleDollar",
@@ -67,7 +67,7 @@
         },
         {
             "fieldName": "billCurrencyRate",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "billAmountDollar",

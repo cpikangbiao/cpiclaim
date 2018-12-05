@@ -8,6 +8,7 @@ import com.cpi.claim.service.dto.VesselSubCaseCriteria;
 import com.cpi.claim.service.dto.VesselSubCaseDTO;
 import com.cpi.claim.service.utility.generate.SubCaseCodeGenerateUtility;
 import com.cpi.claim.service.utility.statistics.StatisticsForCaseService;
+import com.cpi.claim.web.rest.bean.StatisticsForCaseBean;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
 import com.cpi.claim.web.rest.util.HeaderUtil;
 import com.cpi.claim.web.rest.util.PaginationUtil;
@@ -42,38 +43,25 @@ public class StatisticsForCaseResource {
     private StatisticsForCaseService statisticsForCaseService;
 
 
-    @GetMapping("/statistics/case-by-member/{fromYear}/{endYear}/{companyId}/{cpiInsuranceTypeId}/{caseStatusId}/{caseDateFrom}/{caseDateTo}/{registeredDateFrom}/{registeredDateTo}/{closeDateFrom}/{closeDateTo}/{language}/{operateType}/pdf")
+//    @GetMapping("/statistics/case-by-member/{fromYear}/{endYear}/{companyId}/{cpiInsuranceTypeId}/{caseStatusId}/{caseDateFrom}/{caseDateTo}/{registeredDateFrom}/{registeredDateTo}/{closeDateFrom}/{closeDateTo}/{language}/{operateType}/pdf")
+    @GetMapping("/statistics/case-by-member/pdf")
     @Timed
-    public ResponseEntity<byte[]> getStatisticsPDFFileForCaseByMember(
-                                                                      @PathVariable("fromYear")  String fromYear,
-                                                                      @PathVariable("endYear")String endYear,
-                                                                      @PathVariable("companyId")  Long companyId,
-                                                                      @PathVariable("cpiInsuranceTypeId")  Long cpiInsuranceTypeId,
-                                                                      @PathVariable("caseStatusId")  Long caseStatusId,
-                                                                      @PathVariable("caseDateFrom")  Instant caseDateFrom,
-                                                                      @PathVariable("caseDateTo")  Instant caseDateTo,
-                                                                      @PathVariable("registeredDateFrom")  Instant registeredDateFrom,
-                                                                      @PathVariable("registeredDateTo")  Instant registeredDateTo,
-                                                                      @PathVariable("closeDateFrom")  Instant closeDateFrom,
-                                                                      @PathVariable("closeDateTo")  Instant closeDateTo,
-                                                                      @PathVariable("language")  Integer language,
-                                                                      @PathVariable("operateType")  Integer operateType
-    ) {
+    public ResponseEntity<byte[]> getStatisticsPDFFileForCaseByMember(StatisticsForCaseBean statisticsForCaseBean) {
         log.debug("REST request to get getStatisticsPDFFileForCaseByMember pdf ");
         byte[] bytes = statisticsForCaseService.createCaseStatsPDFFile(
-             fromYear,
-             endYear,
-             companyId,
-             cpiInsuranceTypeId,
-             caseStatusId,
-             caseDateFrom,
-             caseDateTo,
-             registeredDateFrom,
-             registeredDateTo,
-             closeDateFrom,
-             closeDateTo,
-             language,
-             operateType
+            statisticsForCaseBean.getFromYear(),
+            statisticsForCaseBean.getEndYear(),
+            statisticsForCaseBean.getCompanyId(),
+            statisticsForCaseBean.getCpiInsuranceTypeId(),
+            statisticsForCaseBean.getCaseStatusId(),
+            statisticsForCaseBean.getCaseDateFrom(),
+            statisticsForCaseBean.getCaseDateTo(),
+            statisticsForCaseBean.getRegisteredDateFrom(),
+            statisticsForCaseBean.getRegisteredDateTo(),
+            statisticsForCaseBean.getCloseDateFrom(),
+            statisticsForCaseBean.getCloseDateTo(),
+            statisticsForCaseBean.getLanguage(),
+            statisticsForCaseBean.getOperateType()
         );
 
         HttpHeaders header = new HttpHeaders();
@@ -81,9 +69,9 @@ public class StatisticsForCaseResource {
         StringBuilder fileName = new StringBuilder();
         fileName.append("attachment; filename=").append("\"").append(
             statisticsForCaseService.createCaseStatsPDFFileName(
-                fromYear,
-                endYear,
-                companyId)).append("\"");
+                statisticsForCaseBean.getFromYear(),
+                statisticsForCaseBean.getEndYear(),
+                statisticsForCaseBean.getCompanyId())).append("\"");
         header.set(HttpHeaders.CONTENT_DISPOSITION, fileName.toString());
 
         if (bytes != null) {

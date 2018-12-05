@@ -21,6 +21,7 @@ import com.cpi.claim.service.utility.ClaimToolUtility;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.List;
 
@@ -100,6 +101,40 @@ public class CaseStatsPerSubCaseBean implements Serializable {
     //成本率
     private BigDecimal  costRatio;
 
+    public CaseStatsPerSubCaseBean() {
+        this.numberId = 0;
+        this.vesselSubCase = null;
+        this.language = null;
+        this.year = null;
+        this.caseCode = null;
+        this.subCaseCode = null;
+        this.companyName = null;
+        this.vesselName = null;
+        this.registUser = null;
+        this.registDate = Instant.now();
+        this.assignedUser = null;
+        this.caseDate = Instant.now();
+        this.caseLocation = null;
+        this.caseStatus = null;
+        this.closeDate = Instant.now();
+        this.risk = null;
+        this.guaranteeAmount = new BigDecimal(0);
+        this.claimAmount = new BigDecimal(0);
+        this.estimateAmount = new BigDecimal(0);
+        this.riAmount = new BigDecimal(0);
+        this.thirdpartAmount = new BigDecimal(0);
+        this.memberPaymentAmount = new BigDecimal(0);
+        this.surveyorFee = new BigDecimal(0);
+        this.correspondentFee = new BigDecimal(0);
+        this.lawyerFee = new BigDecimal(0);
+        this.otherFee = new BigDecimal(0);
+        this.totalCost = new BigDecimal(0);
+        this.paymentAmount = new BigDecimal(0);
+        this.grossPayment = new BigDecimal(0);
+        this.netPayment = new BigDecimal(0);
+        this.benifitRatio = new BigDecimal(0);
+        this.costRatio = new BigDecimal(0);
+    }
 
     public void init(VesselSubCase vesselSubCase, Integer language, ClaimToolUtility claimToolUtility) {
         this.vesselSubCase = vesselSubCase;
@@ -272,21 +307,18 @@ public class CaseStatsPerSubCaseBean implements Serializable {
             .subtract(thirdpartAmount)
             .subtract(riAmount);
 
-        if (claimAmount.equals(new BigDecimal(0))) {
+        if (claimAmount.compareTo(BigDecimal.ZERO) == 0) {
             benifitRatio = new BigDecimal(0);
         } else {
-            benifitRatio = new BigDecimal(1).subtract(paymentAmount.divide(claimAmount));
+            benifitRatio = new BigDecimal(1).subtract(paymentAmount.divide(claimAmount, 4, RoundingMode.HALF_UP));
         }
 
 
-        if (paymentAmount.equals(new BigDecimal(0))) {
+        if (paymentAmount.compareTo(BigDecimal.ZERO) == 0) {
             costRatio = new BigDecimal(0);
         } else  {
-            costRatio = new BigDecimal(1).subtract(totalCost.divide(paymentAmount));
+            costRatio = new BigDecimal(1).subtract(totalCost.divide(paymentAmount, 4, RoundingMode.HALF_UP));
         }
-    }
-
-    public CaseStatsPerSubCaseBean() {
     }
 
     public Instant getRegistDate() {

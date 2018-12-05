@@ -33,28 +33,4 @@ public interface VesselCaseRepository extends JpaRepository<VesselCase, Long>, J
         + " GROUP BY DATE_FORMAT(c.caseDate, '%Y'), DATE_FORMAT(c.caseDate, '%m'), t.cpiInsuranceTypeName")
     List<CaseMonthCountStatisticsBean> findCaseMonthStaticsCount();
 
-    @Query(value = "SELECT c "
-        + " FROM VesselCase c"
-        + " WHERE c.insuredVesselId IN :insuredVesselIds "
-        + "  AND c.cpiInsuranceType = :cpiInsuranceType "
-        + "  AND c.caseStatus = :caseStatus "
-        + "  AND c.caseDate >= :caseDateFrom "
-        + "  AND c.caseDate <= :caseDateTo "
-        + "  AND c.registeredDate >= :registeredDateFrom "
-        + "  AND c.registeredDate <= :registeredDateTo "
-        + "  AND c.closeDate >= :closeDateFrom "
-        + "  AND c.closeDate <= :closeDateTo "
-        )
-    List<VesselCase> findAllCaseForStatics(
-        @Param("insuredVesselIds") List<Long> insuredVesselIds,
-        @Param("cpiInsuranceType") CpiInsuranceType cpiInsuranceType,
-        @Param("caseStatus") CaseStatusType caseStatus,
-        @Param("caseDateFrom") Instant caseDateFrom,
-        @Param("caseDateTo") Instant caseDateTo,
-        @Param("registeredDateFrom") Instant registeredDateFrom,
-        @Param("registeredDateTo") Instant registeredDateTo,
-        @Param("closeDateFrom") Instant closeDateFrom,
-        @Param("closeDateTo") Instant closeDateTo
-    );
-
 }

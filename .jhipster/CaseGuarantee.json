@@ -51,7 +51,7 @@
         },
         {
             "fieldName": "guaranteeRate",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "guaranteeAmount",
@@ -99,7 +99,7 @@
         },
         {
             "fieldName": "conGuaranteeRate",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "conGuaranteeAmount",

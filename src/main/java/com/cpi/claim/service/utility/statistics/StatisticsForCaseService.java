@@ -2,6 +2,7 @@ package com.cpi.claim.service.utility.statistics;
 
 import com.cpi.claim.domain.*;
 import com.cpi.claim.repository.*;
+import com.cpi.claim.service.VesselCaseQueryExtService;
 import com.cpi.claim.service.bean.statistics.CaseStatsBean;
 import com.cpi.claim.service.common.Contants;
 import com.cpi.claim.service.dto.VesselCaseCriteria;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +51,9 @@ public class StatisticsForCaseService {
 
     @Autowired
     private CaseStatusTypeRepository caseStatusTypeRepository;
+
+    @Autowired
+    private VesselCaseQueryExtService vesselCaseQueryExtService;
 
     public StatisticsForCaseService(VesselCaseRepository vesselCaseRepository, VesselCaseMapper vesselCaseMapper) {
         this.vesselCaseRepository = vesselCaseRepository;
@@ -140,6 +145,8 @@ public class StatisticsForCaseService {
         parameter.put("thirdpartAmount", caseStatsBean.getThirdpartAmount());
         parameter.put("totalCost", caseStatsBean.getTotalCost());
 
+        parameter.put("datasource", caseStatsBean.getCaseStatsPerCaseBeans());
+
         return parameter;
     }
 
@@ -204,12 +211,16 @@ public class StatisticsForCaseService {
         ) {
         CaseStatsBean caseStatsBean = new CaseStatsBean();
 
-        List<Long> insuredVesselIds = claimToolUtility.insuredVesselRepository.getIdsForYearAndCompany(
-            fromYear,
-            endYear,
-            companyId,
-            cpiInsuranceTypeId
-        );
+        List<Long> insuredVesselIds = new ArrayList<>();
+        if (fromYear != null && endYear != null) {
+            insuredVesselIds = claimToolUtility.insuredVesselRepository.getIdsForYearAndCompany(
+                fromYear,
+                endYear,
+                companyId,
+                cpiInsuranceTypeId
+            );
+        }
+
 
         CpiInsuranceType cpiInsuranceType = null;
         if (cpiInsuranceTypeId != null) {
@@ -221,7 +232,7 @@ public class StatisticsForCaseService {
             caseStatus = caseStatusTypeRepository.getOne(caseStatusId);
         }
 
-        List<VesselCase> vesselCases = vesselCaseRepository.findAllCaseForStatics(
+        List<VesselCase> vesselCases = vesselCaseQueryExtService.getListForStats(
                                                          insuredVesselIds,
                                                         cpiInsuranceType,
                                                         caseStatus,
