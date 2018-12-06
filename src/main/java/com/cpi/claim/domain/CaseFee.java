@@ -34,16 +34,16 @@ public class CaseFee extends AbstractAuditingEntity implements Serializable {
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "currency_rate")
-    private Double currencyRate;
+    @Column(name = "currency_rate", precision = 10, scale = 5)
+    private BigDecimal currencyRate;
 
     @Column(name = "fee_cost_date")
     private Instant feeCostDate;
 
-    @Column(name = "fee_cost", precision = 10, scale = 2)
+    @Column(name = "fee_cost", precision = 20, scale = 2)
     private BigDecimal feeCost;
 
-    @Column(name = "fee_cost_dollar", precision = 10, scale = 2)
+    @Column(name = "fee_cost_dollar", precision = 20, scale = 2)
     private BigDecimal feeCostDollar;
 
     @Column(name = "deduct", precision = 10, scale = 2)
@@ -52,8 +52,8 @@ public class CaseFee extends AbstractAuditingEntity implements Serializable {
     @Column(name = "deduct_currency")
     private Long deductCurrency;
 
-    @Column(name = "deduct_currency_rate")
-    private Double deductCurrencyRate;
+    @Column(name = "deduct_currency_rate", precision = 10, scale = 2)
+    private BigDecimal deductCurrencyRate;
 
     @Column(name = "deduct_amount", precision = 10, scale = 2)
     private BigDecimal deductAmount;
@@ -143,16 +143,16 @@ public class CaseFee extends AbstractAuditingEntity implements Serializable {
         this.currency = currency;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public CaseFee currencyRate(Double currencyRate) {
+    public CaseFee currencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
         return this;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 
@@ -221,16 +221,16 @@ public class CaseFee extends AbstractAuditingEntity implements Serializable {
         this.deductCurrency = deductCurrency;
     }
 
-    public Double getDeductCurrencyRate() {
+    public BigDecimal getDeductCurrencyRate() {
         return deductCurrencyRate;
     }
 
-    public CaseFee deductCurrencyRate(Double deductCurrencyRate) {
+    public CaseFee deductCurrencyRate(BigDecimal deductCurrencyRate) {
         this.deductCurrencyRate = deductCurrencyRate;
         return this;
     }
 
-    public void setDeductCurrencyRate(Double deductCurrencyRate) {
+    public void setDeductCurrencyRate(BigDecimal deductCurrencyRate) {
         this.deductCurrencyRate = deductCurrencyRate;
     }
 

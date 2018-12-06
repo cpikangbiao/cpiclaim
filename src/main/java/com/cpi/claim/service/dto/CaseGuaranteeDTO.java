@@ -37,7 +37,7 @@ public class CaseGuaranteeDTO implements Serializable {
 
     private Long guaranteeCurrency;
 
-    private Double guaranteeRate;
+    private BigDecimal guaranteeRate;
 
     private BigDecimal guaranteeAmount;
 
@@ -61,7 +61,7 @@ public class CaseGuaranteeDTO implements Serializable {
 
     private Long conGuaranteeCurrency;
 
-    private Double conGuaranteeRate;
+    private BigDecimal conGuaranteeRate;
 
     private BigDecimal conGuaranteeAmount;
 
@@ -196,11 +196,11 @@ public class CaseGuaranteeDTO implements Serializable {
         this.guaranteeCurrency = guaranteeCurrency;
     }
 
-    public Double getGuaranteeRate() {
+    public BigDecimal getGuaranteeRate() {
         return guaranteeRate;
     }
 
-    public void setGuaranteeRate(Double guaranteeRate) {
+    public void setGuaranteeRate(BigDecimal guaranteeRate) {
         this.guaranteeRate = guaranteeRate;
     }
 
@@ -292,11 +292,11 @@ public class CaseGuaranteeDTO implements Serializable {
         this.conGuaranteeCurrency = conGuaranteeCurrency;
     }
 
-    public Double getConGuaranteeRate() {
+    public BigDecimal getConGuaranteeRate() {
         return conGuaranteeRate;
     }
 
-    public void setConGuaranteeRate(Double conGuaranteeRate) {
+    public void setConGuaranteeRate(BigDecimal conGuaranteeRate) {
         this.conGuaranteeRate = conGuaranteeRate;
     }
 

@@ -52,17 +52,17 @@ public class CaseClaimBill extends AbstractAuditingEntity implements Serializabl
     @Column(name = "claim_amount_currency")
     private Long claimAmountCurrency;
 
-    @Column(name = "claim_amount", precision = 10, scale = 2)
+    @Column(name = "claim_amount", precision = 20, scale = 2)
     private BigDecimal claimAmount;
 
-    @Column(name = "deductible", precision = 10, scale = 2)
+    @Column(name = "deductible", precision = 20, scale = 2)
     private BigDecimal deductible;
 
     @Column(name = "deductible_currency")
     private Long deductibleCurrency;
 
-    @Column(name = "deductible_currency_rate")
-    private Double deductibleCurrencyRate;
+    @Column(name = "deductible_currency_rate", precision = 10, scale = 5)
+    private BigDecimal deductibleCurrencyRate;
 
     @Column(name = "deductible_dollar", precision = 10, scale = 2)
     private BigDecimal deductibleDollar;
@@ -73,8 +73,8 @@ public class CaseClaimBill extends AbstractAuditingEntity implements Serializabl
     @Column(name = "bill_amount", precision = 10, scale = 2)
     private BigDecimal billAmount;
 
-    @Column(name = "bill_currency_rate")
-    private Double billCurrencyRate;
+    @Column(name = "bill_currency_rate", precision = 10, scale = 5)
+    private BigDecimal billCurrencyRate;
 
     @Column(name = "bill_amount_dollar", precision = 10, scale = 2)
     private BigDecimal billAmountDollar;
@@ -283,16 +283,16 @@ public class CaseClaimBill extends AbstractAuditingEntity implements Serializabl
         this.deductibleCurrency = deductibleCurrency;
     }
 
-    public Double getDeductibleCurrencyRate() {
+    public BigDecimal getDeductibleCurrencyRate() {
         return deductibleCurrencyRate;
     }
 
-    public CaseClaimBill deductibleCurrencyRate(Double deductibleCurrencyRate) {
+    public CaseClaimBill deductibleCurrencyRate(BigDecimal deductibleCurrencyRate) {
         this.deductibleCurrencyRate = deductibleCurrencyRate;
         return this;
     }
 
-    public void setDeductibleCurrencyRate(Double deductibleCurrencyRate) {
+    public void setDeductibleCurrencyRate(BigDecimal deductibleCurrencyRate) {
         this.deductibleCurrencyRate = deductibleCurrencyRate;
     }
 
@@ -335,16 +335,16 @@ public class CaseClaimBill extends AbstractAuditingEntity implements Serializabl
         this.billAmount = billAmount;
     }
 
-    public Double getBillCurrencyRate() {
+    public BigDecimal getBillCurrencyRate() {
         return billCurrencyRate;
     }
 
-    public CaseClaimBill billCurrencyRate(Double billCurrencyRate) {
+    public CaseClaimBill billCurrencyRate(BigDecimal billCurrencyRate) {
         this.billCurrencyRate = billCurrencyRate;
         return this;
     }
 
-    public void setBillCurrencyRate(Double billCurrencyRate) {
+    public void setBillCurrencyRate(BigDecimal billCurrencyRate) {
         this.billCurrencyRate = billCurrencyRate;
     }
 

@@ -34,7 +34,7 @@ public class CaseFeeCriteria implements Serializable {
 
     private LongFilter currency;
 
-    private DoubleFilter currencyRate;
+    private BigDecimalFilter currencyRate;
 
     private InstantFilter feeCostDate;
 
@@ -46,7 +46,7 @@ public class CaseFeeCriteria implements Serializable {
 
     private LongFilter deductCurrency;
 
-    private DoubleFilter deductCurrencyRate;
+    private BigDecimalFilter deductCurrencyRate;
 
     private BigDecimalFilter deductAmount;
 
@@ -105,11 +105,11 @@ public class CaseFeeCriteria implements Serializable {
         this.currency = currency;
     }
 
-    public DoubleFilter getCurrencyRate() {
+    public BigDecimalFilter getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(DoubleFilter currencyRate) {
+    public void setCurrencyRate(BigDecimalFilter currencyRate) {
         this.currencyRate = currencyRate;
     }
 
@@ -153,11 +153,11 @@ public class CaseFeeCriteria implements Serializable {
         this.deductCurrency = deductCurrency;
     }
 
-    public DoubleFilter getDeductCurrencyRate() {
+    public BigDecimalFilter getDeductCurrencyRate() {
         return deductCurrencyRate;
     }
 
-    public void setDeductCurrencyRate(DoubleFilter deductCurrencyRate) {
+    public void setDeductCurrencyRate(BigDecimalFilter deductCurrencyRate) {
         this.deductCurrencyRate = deductCurrencyRate;
     }
 

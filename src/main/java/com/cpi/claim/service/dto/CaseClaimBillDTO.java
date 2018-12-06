@@ -37,7 +37,7 @@ public class CaseClaimBillDTO implements Serializable {
 
     private Long deductibleCurrency;
 
-    private Double deductibleCurrencyRate;
+    private BigDecimal deductibleCurrencyRate;
 
     private BigDecimal deductibleDollar;
 
@@ -45,7 +45,7 @@ public class CaseClaimBillDTO implements Serializable {
 
     private BigDecimal billAmount;
 
-    private Double billCurrencyRate;
+    private BigDecimal billCurrencyRate;
 
     private BigDecimal billAmountDollar;
 
@@ -186,11 +186,11 @@ public class CaseClaimBillDTO implements Serializable {
         this.deductibleCurrency = deductibleCurrency;
     }
 
-    public Double getDeductibleCurrencyRate() {
+    public BigDecimal getDeductibleCurrencyRate() {
         return deductibleCurrencyRate;
     }
 
-    public void setDeductibleCurrencyRate(Double deductibleCurrencyRate) {
+    public void setDeductibleCurrencyRate(BigDecimal deductibleCurrencyRate) {
         this.deductibleCurrencyRate = deductibleCurrencyRate;
     }
 
@@ -218,11 +218,11 @@ public class CaseClaimBillDTO implements Serializable {
         this.billAmount = billAmount;
     }
 
-    public Double getBillCurrencyRate() {
+    public BigDecimal getBillCurrencyRate() {
         return billCurrencyRate;
     }
 
-    public void setBillCurrencyRate(Double billCurrencyRate) {
+    public void setBillCurrencyRate(BigDecimal billCurrencyRate) {
         this.billCurrencyRate = billCurrencyRate;
     }
 

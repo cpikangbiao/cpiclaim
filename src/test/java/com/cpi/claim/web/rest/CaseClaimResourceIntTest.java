@@ -66,8 +66,8 @@ public class CaseClaimResourceIntTest {
     private static final Long DEFAULT_CURRENCY_ID = 1L;
     private static final Long UPDATED_CURRENCY_ID = 2L;
 
-    private static final Double DEFAULT_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CURRENCY_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_CLAIM_COST = new BigDecimal(1);
     private static final BigDecimal UPDATED_CLAIM_COST = new BigDecimal(2);
@@ -207,7 +207,7 @@ public class CaseClaimResourceIntTest {
             .andExpect(jsonPath("$.[*].claimDate").value(hasItem(DEFAULT_CLAIM_DATE.toString())))
             .andExpect(jsonPath("$.[*].billOfLading").value(hasItem(DEFAULT_BILL_OF_LADING.toString())))
             .andExpect(jsonPath("$.[*].currencyId").value(hasItem(DEFAULT_CURRENCY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].claimCost").value(hasItem(DEFAULT_CLAIM_COST.intValue())))
             .andExpect(jsonPath("$.[*].claimCostDollar").value(hasItem(DEFAULT_CLAIM_COST_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
@@ -230,7 +230,7 @@ public class CaseClaimResourceIntTest {
             .andExpect(jsonPath("$.claimDate").value(DEFAULT_CLAIM_DATE.toString()))
             .andExpect(jsonPath("$.billOfLading").value(DEFAULT_BILL_OF_LADING.toString()))
             .andExpect(jsonPath("$.currencyId").value(DEFAULT_CURRENCY_ID.intValue()))
-            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.claimCost").value(DEFAULT_CLAIM_COST.intValue()))
             .andExpect(jsonPath("$.claimCostDollar").value(DEFAULT_CLAIM_COST_DOLLAR.intValue()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK.toString()));
@@ -633,7 +633,7 @@ public class CaseClaimResourceIntTest {
             .andExpect(jsonPath("$.[*].claimDate").value(hasItem(DEFAULT_CLAIM_DATE.toString())))
             .andExpect(jsonPath("$.[*].billOfLading").value(hasItem(DEFAULT_BILL_OF_LADING.toString())))
             .andExpect(jsonPath("$.[*].currencyId").value(hasItem(DEFAULT_CURRENCY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].claimCost").value(hasItem(DEFAULT_CLAIM_COST.intValue())))
             .andExpect(jsonPath("$.[*].claimCostDollar").value(hasItem(DEFAULT_CLAIM_COST_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));

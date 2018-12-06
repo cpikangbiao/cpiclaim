@@ -36,7 +36,7 @@ public class CasePaymentCriteria implements Serializable {
 
     private LongFilter currency;
 
-    private DoubleFilter currencyRate;
+    private BigDecimalFilter currencyRate;
 
     private BigDecimalFilter payCost;
 
@@ -99,11 +99,11 @@ public class CasePaymentCriteria implements Serializable {
         this.currency = currency;
     }
 
-    public DoubleFilter getCurrencyRate() {
+    public BigDecimalFilter getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(DoubleFilter currencyRate) {
+    public void setCurrencyRate(BigDecimalFilter currencyRate) {
         this.currencyRate = currencyRate;
     }
 

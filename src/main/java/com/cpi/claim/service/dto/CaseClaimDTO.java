@@ -23,7 +23,7 @@ public class CaseClaimDTO implements Serializable {
 
     private Long currencyId;
 
-    private Double currencyRate;
+    private BigDecimal currencyRate;
 
     private BigDecimal claimCost;
 
@@ -84,11 +84,11 @@ public class CaseClaimDTO implements Serializable {
         this.currencyId = currencyId;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 

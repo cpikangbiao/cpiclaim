@@ -34,7 +34,7 @@ public class CaseRecoveryCriteria implements Serializable {
 
     private LongFilter currency;
 
-    private DoubleFilter currencyRate;
+    private BigDecimalFilter currencyRate;
 
     private InstantFilter issueDate;
 
@@ -91,11 +91,11 @@ public class CaseRecoveryCriteria implements Serializable {
         this.currency = currency;
     }
 
-    public DoubleFilter getCurrencyRate() {
+    public BigDecimalFilter getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(DoubleFilter currencyRate) {
+    public void setCurrencyRate(BigDecimalFilter currencyRate) {
         this.currencyRate = currencyRate;
     }
 

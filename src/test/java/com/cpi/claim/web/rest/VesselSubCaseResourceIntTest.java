@@ -79,8 +79,8 @@ public class VesselSubCaseResourceIntTest {
     private static final BigDecimal DEFAULT_DEDUCTIBLE = new BigDecimal(1);
     private static final BigDecimal UPDATED_DEDUCTIBLE = new BigDecimal(2);
 
-    private static final Double DEFAULT_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CURRENCY_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_DEDUCT_DOLLAR = new BigDecimal(1);
     private static final BigDecimal UPDATED_DEDUCT_DOLLAR = new BigDecimal(2);
@@ -227,7 +227,7 @@ public class VesselSubCaseResourceIntTest {
             .andExpect(jsonPath("$.[*].claimAmount").value(hasItem(DEFAULT_CLAIM_AMOUNT.toString())))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
             .andExpect(jsonPath("$.[*].deductible").value(hasItem(DEFAULT_DEDUCTIBLE.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].deductDollar").value(hasItem(DEFAULT_DEDUCT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
     }
@@ -253,7 +253,7 @@ public class VesselSubCaseResourceIntTest {
             .andExpect(jsonPath("$.claimAmount").value(DEFAULT_CLAIM_AMOUNT.toString()))
             .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.intValue()))
             .andExpect(jsonPath("$.deductible").value(DEFAULT_DEDUCTIBLE.intValue()))
-            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.deductDollar").value(DEFAULT_DEDUCT_DOLLAR.intValue()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK.toString()));
     }
@@ -822,7 +822,7 @@ public class VesselSubCaseResourceIntTest {
             .andExpect(jsonPath("$.[*].claimAmount").value(hasItem(DEFAULT_CLAIM_AMOUNT.toString())))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
             .andExpect(jsonPath("$.[*].deductible").value(hasItem(DEFAULT_DEDUCTIBLE.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].deductDollar").value(hasItem(DEFAULT_DEDUCT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
     }

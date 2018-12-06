@@ -61,13 +61,13 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
     @Column(name = "guarantee_currency")
     private Long guaranteeCurrency;
 
-    @Column(name = "guarantee_rate")
-    private Double guaranteeRate;
+    @Column(name = "guarantee_rate", precision = 10, scale = 5)
+    private BigDecimal guaranteeRate;
 
-    @Column(name = "guarantee_amount", precision = 20, scale = 2)
+    @Column(name = "guarantee_amount", precision = 10, scale = 2)
     private BigDecimal guaranteeAmount;
 
-    @Column(name = "guarantee_amount_dollar", precision = 20, scale = 2)
+    @Column(name = "guarantee_amount_dollar", precision = 10, scale = 2)
     private BigDecimal guaranteeAmountDollar;
 
     @Column(name = "guarantee_to")
@@ -79,7 +79,7 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
     @Column(name = "guarantee_no")
     private String guaranteeNo;
 
-    @Column(name = "guarantee_fee", precision = 20, scale = 2)
+    @Column(name = "guarantee_fee", precision = 10, scale = 2)
     private BigDecimal guaranteeFee;
 
     @Column(name = "guarantee_other")
@@ -97,13 +97,13 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
     @Column(name = "con_guarantee_currency")
     private Long conGuaranteeCurrency;
 
-    @Column(name = "con_guarantee_rate")
-    private Double conGuaranteeRate;
+    @Column(name = "con_guarantee_rate", precision = 10, scale = 5)
+    private BigDecimal conGuaranteeRate;
 
-    @Column(name = "con_guarantee_amount", precision = 20, scale = 2)
+    @Column(name = "con_guarantee_amount", precision = 10, scale = 2)
     private BigDecimal conGuaranteeAmount;
 
-    @Column(name = "con_guarantee_amount_dollar", precision = 20, scale = 2)
+    @Column(name = "con_guarantee_amount_dollar", precision = 10, scale = 2)
     private BigDecimal conGuaranteeAmountDollar;
 
     @Column(name = "con_guarantee_no")
@@ -302,16 +302,16 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
         this.guaranteeCurrency = guaranteeCurrency;
     }
 
-    public Double getGuaranteeRate() {
+    public BigDecimal getGuaranteeRate() {
         return guaranteeRate;
     }
 
-    public CaseGuarantee guaranteeRate(Double guaranteeRate) {
+    public CaseGuarantee guaranteeRate(BigDecimal guaranteeRate) {
         this.guaranteeRate = guaranteeRate;
         return this;
     }
 
-    public void setGuaranteeRate(Double guaranteeRate) {
+    public void setGuaranteeRate(BigDecimal guaranteeRate) {
         this.guaranteeRate = guaranteeRate;
     }
 
@@ -458,16 +458,16 @@ public class CaseGuarantee extends AbstractAuditingEntity implements Serializabl
         this.conGuaranteeCurrency = conGuaranteeCurrency;
     }
 
-    public Double getConGuaranteeRate() {
+    public BigDecimal getConGuaranteeRate() {
         return conGuaranteeRate;
     }
 
-    public CaseGuarantee conGuaranteeRate(Double conGuaranteeRate) {
+    public CaseGuarantee conGuaranteeRate(BigDecimal conGuaranteeRate) {
         this.conGuaranteeRate = conGuaranteeRate;
         return this;
     }
 
-    public void setConGuaranteeRate(Double conGuaranteeRate) {
+    public void setConGuaranteeRate(BigDecimal conGuaranteeRate) {
         this.conGuaranteeRate = conGuaranteeRate;
     }
 

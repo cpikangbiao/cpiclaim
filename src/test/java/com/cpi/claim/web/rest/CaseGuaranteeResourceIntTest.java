@@ -89,8 +89,8 @@ public class CaseGuaranteeResourceIntTest {
     private static final Long DEFAULT_GUARANTEE_CURRENCY = 1L;
     private static final Long UPDATED_GUARANTEE_CURRENCY = 2L;
 
-    private static final Double DEFAULT_GUARANTEE_RATE = 1D;
-    private static final Double UPDATED_GUARANTEE_RATE = 2D;
+    private static final BigDecimal DEFAULT_GUARANTEE_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_GUARANTEE_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_GUARANTEE_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_GUARANTEE_AMOUNT = new BigDecimal(2);
@@ -125,8 +125,8 @@ public class CaseGuaranteeResourceIntTest {
     private static final Long DEFAULT_CON_GUARANTEE_CURRENCY = 1L;
     private static final Long UPDATED_CON_GUARANTEE_CURRENCY = 2L;
 
-    private static final Double DEFAULT_CON_GUARANTEE_RATE = 1D;
-    private static final Double UPDATED_CON_GUARANTEE_RATE = 2D;
+    private static final BigDecimal DEFAULT_CON_GUARANTEE_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CON_GUARANTEE_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_CON_GUARANTEE_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_CON_GUARANTEE_AMOUNT = new BigDecimal(2);
@@ -336,7 +336,7 @@ public class CaseGuaranteeResourceIntTest {
             .andExpect(jsonPath("$.[*].guarantee").value(hasItem(DEFAULT_GUARANTEE.toString())))
             .andExpect(jsonPath("$.[*].guaranteeDate").value(hasItem(DEFAULT_GUARANTEE_DATE.toString())))
             .andExpect(jsonPath("$.[*].guaranteeCurrency").value(hasItem(DEFAULT_GUARANTEE_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].guaranteeRate").value(hasItem(DEFAULT_GUARANTEE_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].guaranteeRate").value(hasItem(DEFAULT_GUARANTEE_RATE.intValue())))
             .andExpect(jsonPath("$.[*].guaranteeAmount").value(hasItem(DEFAULT_GUARANTEE_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].guaranteeAmountDollar").value(hasItem(DEFAULT_GUARANTEE_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].guaranteeTo").value(hasItem(DEFAULT_GUARANTEE_TO.toString())))
@@ -348,7 +348,7 @@ public class CaseGuaranteeResourceIntTest {
             .andExpect(jsonPath("$.[*].conGuarantee").value(hasItem(DEFAULT_CON_GUARANTEE.toString())))
             .andExpect(jsonPath("$.[*].conGuaranteeDate").value(hasItem(DEFAULT_CON_GUARANTEE_DATE.toString())))
             .andExpect(jsonPath("$.[*].conGuaranteeCurrency").value(hasItem(DEFAULT_CON_GUARANTEE_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].conGuaranteeRate").value(hasItem(DEFAULT_CON_GUARANTEE_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].conGuaranteeRate").value(hasItem(DEFAULT_CON_GUARANTEE_RATE.intValue())))
             .andExpect(jsonPath("$.[*].conGuaranteeAmount").value(hasItem(DEFAULT_CON_GUARANTEE_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].conGuaranteeAmountDollar").value(hasItem(DEFAULT_CON_GUARANTEE_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].conGuaranteeNo").value(hasItem(DEFAULT_CON_GUARANTEE_NO.toString())))
@@ -383,7 +383,7 @@ public class CaseGuaranteeResourceIntTest {
             .andExpect(jsonPath("$.guarantee").value(DEFAULT_GUARANTEE.toString()))
             .andExpect(jsonPath("$.guaranteeDate").value(DEFAULT_GUARANTEE_DATE.toString()))
             .andExpect(jsonPath("$.guaranteeCurrency").value(DEFAULT_GUARANTEE_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.guaranteeRate").value(DEFAULT_GUARANTEE_RATE.doubleValue()))
+            .andExpect(jsonPath("$.guaranteeRate").value(DEFAULT_GUARANTEE_RATE.intValue()))
             .andExpect(jsonPath("$.guaranteeAmount").value(DEFAULT_GUARANTEE_AMOUNT.intValue()))
             .andExpect(jsonPath("$.guaranteeAmountDollar").value(DEFAULT_GUARANTEE_AMOUNT_DOLLAR.intValue()))
             .andExpect(jsonPath("$.guaranteeTo").value(DEFAULT_GUARANTEE_TO.toString()))
@@ -395,7 +395,7 @@ public class CaseGuaranteeResourceIntTest {
             .andExpect(jsonPath("$.conGuarantee").value(DEFAULT_CON_GUARANTEE.toString()))
             .andExpect(jsonPath("$.conGuaranteeDate").value(DEFAULT_CON_GUARANTEE_DATE.toString()))
             .andExpect(jsonPath("$.conGuaranteeCurrency").value(DEFAULT_CON_GUARANTEE_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.conGuaranteeRate").value(DEFAULT_CON_GUARANTEE_RATE.doubleValue()))
+            .andExpect(jsonPath("$.conGuaranteeRate").value(DEFAULT_CON_GUARANTEE_RATE.intValue()))
             .andExpect(jsonPath("$.conGuaranteeAmount").value(DEFAULT_CON_GUARANTEE_AMOUNT.intValue()))
             .andExpect(jsonPath("$.conGuaranteeAmountDollar").value(DEFAULT_CON_GUARANTEE_AMOUNT_DOLLAR.intValue()))
             .andExpect(jsonPath("$.conGuaranteeNo").value(DEFAULT_CON_GUARANTEE_NO.toString()))
@@ -1919,7 +1919,7 @@ public class CaseGuaranteeResourceIntTest {
             .andExpect(jsonPath("$.[*].guarantee").value(hasItem(DEFAULT_GUARANTEE.toString())))
             .andExpect(jsonPath("$.[*].guaranteeDate").value(hasItem(DEFAULT_GUARANTEE_DATE.toString())))
             .andExpect(jsonPath("$.[*].guaranteeCurrency").value(hasItem(DEFAULT_GUARANTEE_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].guaranteeRate").value(hasItem(DEFAULT_GUARANTEE_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].guaranteeRate").value(hasItem(DEFAULT_GUARANTEE_RATE.intValue())))
             .andExpect(jsonPath("$.[*].guaranteeAmount").value(hasItem(DEFAULT_GUARANTEE_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].guaranteeAmountDollar").value(hasItem(DEFAULT_GUARANTEE_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].guaranteeTo").value(hasItem(DEFAULT_GUARANTEE_TO.toString())))
@@ -1931,7 +1931,7 @@ public class CaseGuaranteeResourceIntTest {
             .andExpect(jsonPath("$.[*].conGuarantee").value(hasItem(DEFAULT_CON_GUARANTEE.toString())))
             .andExpect(jsonPath("$.[*].conGuaranteeDate").value(hasItem(DEFAULT_CON_GUARANTEE_DATE.toString())))
             .andExpect(jsonPath("$.[*].conGuaranteeCurrency").value(hasItem(DEFAULT_CON_GUARANTEE_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].conGuaranteeRate").value(hasItem(DEFAULT_CON_GUARANTEE_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].conGuaranteeRate").value(hasItem(DEFAULT_CON_GUARANTEE_RATE.intValue())))
             .andExpect(jsonPath("$.[*].conGuaranteeAmount").value(hasItem(DEFAULT_CON_GUARANTEE_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].conGuaranteeAmountDollar").value(hasItem(DEFAULT_CON_GUARANTEE_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].conGuaranteeNo").value(hasItem(DEFAULT_CON_GUARANTEE_NO.toString())))

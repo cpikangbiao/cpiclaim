@@ -40,13 +40,13 @@ public class CaseClaim extends AbstractAuditingEntity implements Serializable {
     @Column(name = "currency_id")
     private Long currencyId;
 
-    @Column(name = "currency_rate")
-    private Double currencyRate;
+    @Column(name = "currency_rate", precision = 15, scale = 5)
+    private BigDecimal currencyRate;
 
-    @Column(name = "claim_cost", precision = 10, scale = 2)
+    @Column(name = "claim_cost", precision = 20, scale = 2)
     private BigDecimal claimCost;
 
-    @Column(name = "claim_cost_dollar", precision = 10, scale = 2)
+    @Column(name = "claim_cost_dollar", precision = 20, scale = 2)
     private BigDecimal claimCostDollar;
 
     @Lob
@@ -131,16 +131,16 @@ public class CaseClaim extends AbstractAuditingEntity implements Serializable {
         this.currencyId = currencyId;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public CaseClaim currencyRate(Double currencyRate) {
+    public CaseClaim currencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
         return this;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 

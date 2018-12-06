@@ -52,7 +52,7 @@ public class CaseGuaranteeCriteria implements Serializable {
 
     private LongFilter guaranteeCurrency;
 
-    private DoubleFilter guaranteeRate;
+    private BigDecimalFilter guaranteeRate;
 
     private BigDecimalFilter guaranteeAmount;
 
@@ -76,7 +76,7 @@ public class CaseGuaranteeCriteria implements Serializable {
 
     private LongFilter conGuaranteeCurrency;
 
-    private DoubleFilter conGuaranteeRate;
+    private BigDecimalFilter conGuaranteeRate;
 
     private BigDecimalFilter conGuaranteeAmount;
 
@@ -205,11 +205,11 @@ public class CaseGuaranteeCriteria implements Serializable {
         this.guaranteeCurrency = guaranteeCurrency;
     }
 
-    public DoubleFilter getGuaranteeRate() {
+    public BigDecimalFilter getGuaranteeRate() {
         return guaranteeRate;
     }
 
-    public void setGuaranteeRate(DoubleFilter guaranteeRate) {
+    public void setGuaranteeRate(BigDecimalFilter guaranteeRate) {
         this.guaranteeRate = guaranteeRate;
     }
 
@@ -301,11 +301,11 @@ public class CaseGuaranteeCriteria implements Serializable {
         this.conGuaranteeCurrency = conGuaranteeCurrency;
     }
 
-    public DoubleFilter getConGuaranteeRate() {
+    public BigDecimalFilter getConGuaranteeRate() {
         return conGuaranteeRate;
     }
 
-    public void setConGuaranteeRate(DoubleFilter conGuaranteeRate) {
+    public void setConGuaranteeRate(BigDecimalFilter conGuaranteeRate) {
         this.conGuaranteeRate = conGuaranteeRate;
     }
 

@@ -46,7 +46,7 @@ public class VesselSubCaseCriteria implements Serializable {
 
     private BigDecimalFilter deductible;
 
-    private DoubleFilter currencyRate;
+    private BigDecimalFilter currencyRate;
 
     private BigDecimalFilter deductDollar;
 
@@ -137,11 +137,11 @@ public class VesselSubCaseCriteria implements Serializable {
         this.deductible = deductible;
     }
 
-    public DoubleFilter getCurrencyRate() {
+    public BigDecimalFilter getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(DoubleFilter currencyRate) {
+    public void setCurrencyRate(BigDecimalFilter currencyRate) {
         this.currencyRate = currencyRate;
     }
 

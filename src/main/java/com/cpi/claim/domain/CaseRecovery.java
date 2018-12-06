@@ -34,22 +34,22 @@ public class CaseRecovery extends AbstractAuditingEntity implements Serializable
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "currency_rate")
-    private Double currencyRate;
+    @Column(name = "currency_rate", precision = 10, scale = 5)
+    private BigDecimal currencyRate;
 
     @Column(name = "issue_date")
     private Instant issueDate;
 
-    @Column(name = "issue_amount", precision = 10, scale = 2)
+    @Column(name = "issue_amount", precision = 20, scale = 2)
     private BigDecimal issueAmount;
 
     @Column(name = "received_date")
     private Instant receivedDate;
 
-    @Column(name = "received_amount", precision = 10, scale = 2)
+    @Column(name = "received_amount", precision = 20, scale = 2)
     private BigDecimal receivedAmount;
 
-    @Column(name = "amount_dollar", precision = 10, scale = 2)
+    @Column(name = "amount_dollar", precision = 20, scale = 2)
     private BigDecimal amountDollar;
 
     @Column(name = "register_date")
@@ -122,16 +122,16 @@ public class CaseRecovery extends AbstractAuditingEntity implements Serializable
         this.currency = currency;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public CaseRecovery currencyRate(Double currencyRate) {
+    public CaseRecovery currencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
         return this;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 

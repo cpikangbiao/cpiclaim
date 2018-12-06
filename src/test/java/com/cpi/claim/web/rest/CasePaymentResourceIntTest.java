@@ -65,8 +65,8 @@ public class CasePaymentResourceIntTest {
     private static final Long DEFAULT_CURRENCY = 1L;
     private static final Long UPDATED_CURRENCY = 2L;
 
-    private static final Double DEFAULT_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CURRENCY_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_PAY_COST = new BigDecimal(1);
     private static final BigDecimal UPDATED_PAY_COST = new BigDecimal(2);
@@ -223,7 +223,7 @@ public class CasePaymentResourceIntTest {
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].payCostDate").value(hasItem(DEFAULT_PAY_COST_DATE.toString())))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].payCost").value(hasItem(DEFAULT_PAY_COST.intValue())))
             .andExpect(jsonPath("$.[*].payCostDollar").value(hasItem(DEFAULT_PAY_COST_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].deduct").value(hasItem(DEFAULT_DEDUCT.intValue())))
@@ -249,7 +249,7 @@ public class CasePaymentResourceIntTest {
             .andExpect(jsonPath("$.numberId").value(DEFAULT_NUMBER_ID))
             .andExpect(jsonPath("$.payCostDate").value(DEFAULT_PAY_COST_DATE.toString()))
             .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.payCost").value(DEFAULT_PAY_COST.intValue()))
             .andExpect(jsonPath("$.payCostDollar").value(DEFAULT_PAY_COST_DOLLAR.intValue()))
             .andExpect(jsonPath("$.deduct").value(DEFAULT_DEDUCT.intValue()))
@@ -837,7 +837,7 @@ public class CasePaymentResourceIntTest {
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].payCostDate").value(hasItem(DEFAULT_PAY_COST_DATE.toString())))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].payCost").value(hasItem(DEFAULT_PAY_COST.intValue())))
             .andExpect(jsonPath("$.[*].payCostDollar").value(hasItem(DEFAULT_PAY_COST_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].deduct").value(hasItem(DEFAULT_DEDUCT.intValue())))

@@ -91,8 +91,8 @@ public class CaseClaimBillResourceIntTest {
     private static final Long DEFAULT_DEDUCTIBLE_CURRENCY = 1L;
     private static final Long UPDATED_DEDUCTIBLE_CURRENCY = 2L;
 
-    private static final Double DEFAULT_DEDUCTIBLE_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_DEDUCTIBLE_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_DEDUCTIBLE_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DEDUCTIBLE_CURRENCY_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_DEDUCTIBLE_DOLLAR = new BigDecimal(1);
     private static final BigDecimal UPDATED_DEDUCTIBLE_DOLLAR = new BigDecimal(2);
@@ -103,8 +103,8 @@ public class CaseClaimBillResourceIntTest {
     private static final BigDecimal DEFAULT_BILL_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_BILL_AMOUNT = new BigDecimal(2);
 
-    private static final Double DEFAULT_BILL_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_BILL_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_BILL_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_BILL_CURRENCY_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_BILL_AMOUNT_DOLLAR = new BigDecimal(1);
     private static final BigDecimal UPDATED_BILL_AMOUNT_DOLLAR = new BigDecimal(2);
@@ -293,11 +293,11 @@ public class CaseClaimBillResourceIntTest {
             .andExpect(jsonPath("$.[*].claimAmount").value(hasItem(DEFAULT_CLAIM_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].deductible").value(hasItem(DEFAULT_DEDUCTIBLE.intValue())))
             .andExpect(jsonPath("$.[*].deductibleCurrency").value(hasItem(DEFAULT_DEDUCTIBLE_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].deductibleCurrencyRate").value(hasItem(DEFAULT_DEDUCTIBLE_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].deductibleCurrencyRate").value(hasItem(DEFAULT_DEDUCTIBLE_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].deductibleDollar").value(hasItem(DEFAULT_DEDUCTIBLE_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].billCurrency").value(hasItem(DEFAULT_BILL_CURRENCY.intValue())))
             .andExpect(jsonPath("$.[*].billAmount").value(hasItem(DEFAULT_BILL_AMOUNT.intValue())))
-            .andExpect(jsonPath("$.[*].billCurrencyRate").value(hasItem(DEFAULT_BILL_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].billCurrencyRate").value(hasItem(DEFAULT_BILL_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].billAmountDollar").value(hasItem(DEFAULT_BILL_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())))
             .andExpect(jsonPath("$.[*].isSigned").value(hasItem(DEFAULT_IS_SIGNED.booleanValue())))
@@ -331,11 +331,11 @@ public class CaseClaimBillResourceIntTest {
             .andExpect(jsonPath("$.claimAmount").value(DEFAULT_CLAIM_AMOUNT.intValue()))
             .andExpect(jsonPath("$.deductible").value(DEFAULT_DEDUCTIBLE.intValue()))
             .andExpect(jsonPath("$.deductibleCurrency").value(DEFAULT_DEDUCTIBLE_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.deductibleCurrencyRate").value(DEFAULT_DEDUCTIBLE_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.deductibleCurrencyRate").value(DEFAULT_DEDUCTIBLE_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.deductibleDollar").value(DEFAULT_DEDUCTIBLE_DOLLAR.intValue()))
             .andExpect(jsonPath("$.billCurrency").value(DEFAULT_BILL_CURRENCY.intValue()))
             .andExpect(jsonPath("$.billAmount").value(DEFAULT_BILL_AMOUNT.intValue()))
-            .andExpect(jsonPath("$.billCurrencyRate").value(DEFAULT_BILL_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.billCurrencyRate").value(DEFAULT_BILL_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.billAmountDollar").value(DEFAULT_BILL_AMOUNT_DOLLAR.intValue()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK.toString()))
             .andExpect(jsonPath("$.isSigned").value(DEFAULT_IS_SIGNED.booleanValue()))
@@ -1572,11 +1572,11 @@ public class CaseClaimBillResourceIntTest {
             .andExpect(jsonPath("$.[*].claimAmount").value(hasItem(DEFAULT_CLAIM_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].deductible").value(hasItem(DEFAULT_DEDUCTIBLE.intValue())))
             .andExpect(jsonPath("$.[*].deductibleCurrency").value(hasItem(DEFAULT_DEDUCTIBLE_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].deductibleCurrencyRate").value(hasItem(DEFAULT_DEDUCTIBLE_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].deductibleCurrencyRate").value(hasItem(DEFAULT_DEDUCTIBLE_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].deductibleDollar").value(hasItem(DEFAULT_DEDUCTIBLE_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].billCurrency").value(hasItem(DEFAULT_BILL_CURRENCY.intValue())))
             .andExpect(jsonPath("$.[*].billAmount").value(hasItem(DEFAULT_BILL_AMOUNT.intValue())))
-            .andExpect(jsonPath("$.[*].billCurrencyRate").value(hasItem(DEFAULT_BILL_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].billCurrencyRate").value(hasItem(DEFAULT_BILL_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].billAmountDollar").value(hasItem(DEFAULT_BILL_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())))
             .andExpect(jsonPath("$.[*].isSigned").value(hasItem(DEFAULT_IS_SIGNED.booleanValue())))

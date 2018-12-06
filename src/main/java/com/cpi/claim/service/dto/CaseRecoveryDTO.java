@@ -19,7 +19,7 @@ public class CaseRecoveryDTO implements Serializable {
 
     private Long currency;
 
-    private Double currencyRate;
+    private BigDecimal currencyRate;
 
     private Instant issueDate;
 
@@ -82,11 +82,11 @@ public class CaseRecoveryDTO implements Serializable {
         this.currency = currency;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 

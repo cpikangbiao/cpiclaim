@@ -52,8 +52,8 @@ public class VesselSubCase extends  AbstractAuditingEntity implements Serializab
     @Column(name = "deductible", precision = 10, scale = 2)
     private BigDecimal deductible;
 
-    @Column(name = "currency_rate")
-    private Double currencyRate;
+    @Column(name = "currency_rate", precision = 15, scale = 5)
+    private BigDecimal currencyRate;
 
     @Column(name = "deduct_dollar", precision = 10, scale = 2)
     private BigDecimal deductDollar;
@@ -196,16 +196,16 @@ public class VesselSubCase extends  AbstractAuditingEntity implements Serializab
         this.deductible = deductible;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public VesselSubCase currencyRate(Double currencyRate) {
+    public VesselSubCase currencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
         return this;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 

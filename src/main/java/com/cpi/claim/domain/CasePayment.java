@@ -37,19 +37,19 @@ public class CasePayment extends AbstractAuditingEntity implements Serializable 
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "currency_rate")
-    private Double currencyRate;
+    @Column(name = "currency_rate", precision = 10, scale = 5)
+    private BigDecimal currencyRate;
 
-    @Column(name = "pay_cost", precision = 10, scale = 2)
+    @Column(name = "pay_cost", precision = 20, scale = 2)
     private BigDecimal payCost;
 
-    @Column(name = "pay_cost_dollar", precision = 10, scale = 2)
+    @Column(name = "pay_cost_dollar", precision = 20, scale = 2)
     private BigDecimal payCostDollar;
 
-    @Column(name = "deduct", precision = 10, scale = 2)
+    @Column(name = "deduct", precision = 20, scale = 2)
     private BigDecimal deduct;
 
-    @Column(name = "amount", precision = 10, scale = 2)
+    @Column(name = "amount", precision = 20, scale = 2)
     private BigDecimal amount;
 
     @Column(name = "fee_create_user")
@@ -135,16 +135,16 @@ public class CasePayment extends AbstractAuditingEntity implements Serializable 
         this.currency = currency;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public CasePayment currencyRate(Double currencyRate) {
+    public CasePayment currencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
         return this;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 

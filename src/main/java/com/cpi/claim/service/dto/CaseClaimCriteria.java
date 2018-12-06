@@ -38,23 +38,13 @@ public class CaseClaimCriteria implements Serializable {
 
     private LongFilter currencyId;
 
-    private DoubleFilter currencyRate;
+    private BigDecimalFilter currencyRate;
 
     private BigDecimalFilter claimCost;
 
     private BigDecimalFilter claimCostDollar;
 
     private LongFilter subcaseId;
-
-//    private LongFilter vesselCaseId;
-//
-//    public LongFilter getVesselCaseId() {
-//        return vesselCaseId;
-//    }
-//
-//    public void setVesselCaseId(LongFilter vesselCaseId) {
-//        this.vesselCaseId = vesselCaseId;
-//    }
 
     public CaseClaimCriteria() {
     }
@@ -107,11 +97,11 @@ public class CaseClaimCriteria implements Serializable {
         this.currencyId = currencyId;
     }
 
-    public DoubleFilter getCurrencyRate() {
+    public BigDecimalFilter getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(DoubleFilter currencyRate) {
+    public void setCurrencyRate(BigDecimalFilter currencyRate) {
         this.currencyRate = currencyRate;
     }
 

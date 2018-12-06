@@ -62,8 +62,8 @@ public class CaseRecoveryResourceIntTest {
     private static final Long DEFAULT_CURRENCY = 1L;
     private static final Long UPDATED_CURRENCY = 2L;
 
-    private static final Double DEFAULT_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CURRENCY_RATE = new BigDecimal(2);
 
     private static final Instant DEFAULT_ISSUE_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_ISSUE_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -222,7 +222,7 @@ public class CaseRecoveryResourceIntTest {
             .andExpect(jsonPath("$.[*].clientNo").value(hasItem(DEFAULT_CLIENT_NO.toString())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].issueDate").value(hasItem(DEFAULT_ISSUE_DATE.toString())))
             .andExpect(jsonPath("$.[*].issueAmount").value(hasItem(DEFAULT_ISSUE_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].receivedDate").value(hasItem(DEFAULT_RECEIVED_DATE.toString())))
@@ -248,7 +248,7 @@ public class CaseRecoveryResourceIntTest {
             .andExpect(jsonPath("$.clientNo").value(DEFAULT_CLIENT_NO.toString()))
             .andExpect(jsonPath("$.numberId").value(DEFAULT_NUMBER_ID))
             .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.issueDate").value(DEFAULT_ISSUE_DATE.toString()))
             .andExpect(jsonPath("$.issueAmount").value(DEFAULT_ISSUE_AMOUNT.intValue()))
             .andExpect(jsonPath("$.receivedDate").value(DEFAULT_RECEIVED_DATE.toString()))
@@ -836,7 +836,7 @@ public class CaseRecoveryResourceIntTest {
             .andExpect(jsonPath("$.[*].clientNo").value(hasItem(DEFAULT_CLIENT_NO.toString())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].issueDate").value(hasItem(DEFAULT_ISSUE_DATE.toString())))
             .andExpect(jsonPath("$.[*].issueAmount").value(hasItem(DEFAULT_ISSUE_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].receivedDate").value(hasItem(DEFAULT_RECEIVED_DATE.toString())))

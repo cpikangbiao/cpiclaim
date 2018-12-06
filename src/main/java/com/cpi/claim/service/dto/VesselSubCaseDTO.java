@@ -31,7 +31,7 @@ public class VesselSubCaseDTO implements Serializable {
 
     private BigDecimal deductible;
 
-    private Double currencyRate;
+    private BigDecimal currencyRate;
 
     private BigDecimal deductDollar;
 
@@ -126,11 +126,11 @@ public class VesselSubCaseDTO implements Serializable {
         this.deductible = deductible;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 

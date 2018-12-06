@@ -52,7 +52,7 @@ public class CaseClaimBillCriteria implements Serializable {
 
     private LongFilter deductibleCurrency;
 
-    private DoubleFilter deductibleCurrencyRate;
+    private BigDecimalFilter deductibleCurrencyRate;
 
     private BigDecimalFilter deductibleDollar;
 
@@ -60,7 +60,7 @@ public class CaseClaimBillCriteria implements Serializable {
 
     private BigDecimalFilter billAmount;
 
-    private DoubleFilter billCurrencyRate;
+    private BigDecimalFilter billCurrencyRate;
 
     private BigDecimalFilter billAmountDollar;
 
@@ -191,11 +191,11 @@ public class CaseClaimBillCriteria implements Serializable {
         this.deductibleCurrency = deductibleCurrency;
     }
 
-    public DoubleFilter getDeductibleCurrencyRate() {
+    public BigDecimalFilter getDeductibleCurrencyRate() {
         return deductibleCurrencyRate;
     }
 
-    public void setDeductibleCurrencyRate(DoubleFilter deductibleCurrencyRate) {
+    public void setDeductibleCurrencyRate(BigDecimalFilter deductibleCurrencyRate) {
         this.deductibleCurrencyRate = deductibleCurrencyRate;
     }
 
@@ -223,11 +223,11 @@ public class CaseClaimBillCriteria implements Serializable {
         this.billAmount = billAmount;
     }
 
-    public DoubleFilter getBillCurrencyRate() {
+    public BigDecimalFilter getBillCurrencyRate() {
         return billCurrencyRate;
     }
 
-    public void setBillCurrencyRate(DoubleFilter billCurrencyRate) {
+    public void setBillCurrencyRate(BigDecimalFilter billCurrencyRate) {
         this.billCurrencyRate = billCurrencyRate;
     }
 

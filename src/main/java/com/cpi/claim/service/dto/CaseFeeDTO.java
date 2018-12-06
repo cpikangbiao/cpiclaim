@@ -19,7 +19,7 @@ public class CaseFeeDTO implements Serializable {
 
     private Long currency;
 
-    private Double currencyRate;
+    private BigDecimal currencyRate;
 
     private Instant feeCostDate;
 
@@ -31,7 +31,7 @@ public class CaseFeeDTO implements Serializable {
 
     private Long deductCurrency;
 
-    private Double deductCurrencyRate;
+    private BigDecimal deductCurrencyRate;
 
     private BigDecimal deductAmount;
 
@@ -96,11 +96,11 @@ public class CaseFeeDTO implements Serializable {
         this.currency = currency;
     }
 
-    public Double getCurrencyRate() {
+    public BigDecimal getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(Double currencyRate) {
+    public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
     }
 
@@ -144,11 +144,11 @@ public class CaseFeeDTO implements Serializable {
         this.deductCurrency = deductCurrency;
     }
 
-    public Double getDeductCurrencyRate() {
+    public BigDecimal getDeductCurrencyRate() {
         return deductCurrencyRate;
     }
 
-    public void setDeductCurrencyRate(Double deductCurrencyRate) {
+    public void setDeductCurrencyRate(BigDecimal deductCurrencyRate) {
         this.deductCurrencyRate = deductCurrencyRate;
     }
 

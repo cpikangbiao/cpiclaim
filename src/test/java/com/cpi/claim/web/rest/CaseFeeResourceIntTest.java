@@ -62,8 +62,8 @@ public class CaseFeeResourceIntTest {
     private static final Long DEFAULT_CURRENCY = 1L;
     private static final Long UPDATED_CURRENCY = 2L;
 
-    private static final Double DEFAULT_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CURRENCY_RATE = new BigDecimal(2);
 
     private static final Instant DEFAULT_FEE_COST_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FEE_COST_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -80,8 +80,8 @@ public class CaseFeeResourceIntTest {
     private static final Long DEFAULT_DEDUCT_CURRENCY = 1L;
     private static final Long UPDATED_DEDUCT_CURRENCY = 2L;
 
-    private static final Double DEFAULT_DEDUCT_CURRENCY_RATE = 1D;
-    private static final Double UPDATED_DEDUCT_CURRENCY_RATE = 2D;
+    private static final BigDecimal DEFAULT_DEDUCT_CURRENCY_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DEDUCT_CURRENCY_RATE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_DEDUCT_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_DEDUCT_AMOUNT = new BigDecimal(2);
@@ -257,13 +257,13 @@ public class CaseFeeResourceIntTest {
             .andExpect(jsonPath("$.[*].clientNo").value(hasItem(DEFAULT_CLIENT_NO.toString())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].feeCostDate").value(hasItem(DEFAULT_FEE_COST_DATE.toString())))
             .andExpect(jsonPath("$.[*].feeCost").value(hasItem(DEFAULT_FEE_COST.intValue())))
             .andExpect(jsonPath("$.[*].feeCostDollar").value(hasItem(DEFAULT_FEE_COST_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].deduct").value(hasItem(DEFAULT_DEDUCT.intValue())))
             .andExpect(jsonPath("$.[*].deductCurrency").value(hasItem(DEFAULT_DEDUCT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].deductCurrencyRate").value(hasItem(DEFAULT_DEDUCT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].deductCurrencyRate").value(hasItem(DEFAULT_DEDUCT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].deductAmount").value(hasItem(DEFAULT_DEDUCT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].amountDollar").value(hasItem(DEFAULT_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].feeCreateUser").value(hasItem(DEFAULT_FEE_CREATE_USER.intValue())))
@@ -290,13 +290,13 @@ public class CaseFeeResourceIntTest {
             .andExpect(jsonPath("$.clientNo").value(DEFAULT_CLIENT_NO.toString()))
             .andExpect(jsonPath("$.numberId").value(DEFAULT_NUMBER_ID))
             .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.currencyRate").value(DEFAULT_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.feeCostDate").value(DEFAULT_FEE_COST_DATE.toString()))
             .andExpect(jsonPath("$.feeCost").value(DEFAULT_FEE_COST.intValue()))
             .andExpect(jsonPath("$.feeCostDollar").value(DEFAULT_FEE_COST_DOLLAR.intValue()))
             .andExpect(jsonPath("$.deduct").value(DEFAULT_DEDUCT.intValue()))
             .andExpect(jsonPath("$.deductCurrency").value(DEFAULT_DEDUCT_CURRENCY.intValue()))
-            .andExpect(jsonPath("$.deductCurrencyRate").value(DEFAULT_DEDUCT_CURRENCY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.deductCurrencyRate").value(DEFAULT_DEDUCT_CURRENCY_RATE.intValue()))
             .andExpect(jsonPath("$.deductAmount").value(DEFAULT_DEDUCT_AMOUNT.intValue()))
             .andExpect(jsonPath("$.amountDollar").value(DEFAULT_AMOUNT_DOLLAR.intValue()))
             .andExpect(jsonPath("$.feeCreateUser").value(DEFAULT_FEE_CREATE_USER.intValue()))
@@ -1266,13 +1266,13 @@ public class CaseFeeResourceIntTest {
             .andExpect(jsonPath("$.[*].clientNo").value(hasItem(DEFAULT_CLIENT_NO.toString())))
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].currencyRate").value(hasItem(DEFAULT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].feeCostDate").value(hasItem(DEFAULT_FEE_COST_DATE.toString())))
             .andExpect(jsonPath("$.[*].feeCost").value(hasItem(DEFAULT_FEE_COST.intValue())))
             .andExpect(jsonPath("$.[*].feeCostDollar").value(hasItem(DEFAULT_FEE_COST_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].deduct").value(hasItem(DEFAULT_DEDUCT.intValue())))
             .andExpect(jsonPath("$.[*].deductCurrency").value(hasItem(DEFAULT_DEDUCT_CURRENCY.intValue())))
-            .andExpect(jsonPath("$.[*].deductCurrencyRate").value(hasItem(DEFAULT_DEDUCT_CURRENCY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].deductCurrencyRate").value(hasItem(DEFAULT_DEDUCT_CURRENCY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].deductAmount").value(hasItem(DEFAULT_DEDUCT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].amountDollar").value(hasItem(DEFAULT_AMOUNT_DOLLAR.intValue())))
             .andExpect(jsonPath("$.[*].feeCreateUser").value(hasItem(DEFAULT_FEE_CREATE_USER.intValue())))

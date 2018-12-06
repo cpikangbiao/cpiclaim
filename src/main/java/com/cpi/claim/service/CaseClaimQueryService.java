@@ -103,9 +103,6 @@ public class CaseClaimQueryService extends QueryService<CaseClaim> {
             if (criteria.getSubcaseId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CaseClaim_.subcase, VesselSubCase_.id));
             }
-//            if (criteria.getVesselCaseId() != null) {
-//                specification = specification.and(buildReferringEntitySpecification(criteria.getVesselCaseId(), CaseClaim_.subcase, VesselSubCase_.vesselCase));
-//            }
         }
         return specification;
     }
