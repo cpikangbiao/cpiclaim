@@ -1,3 +1,27 @@
+/*
+ * Copyright (c)  2015-2018, All rights Reserved, Designed By Kang Biao
+ * Email: alex.kangbiao@gmail.com
+ * Create by Alex Kang on 18-12-11 下午2:41
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE
+ */
+
 package com.cpi.claim.web.rest;
 
 import com.cpi.claim.CpiclaimApp;
@@ -61,7 +85,7 @@ public class CaseRecoveryBillResourceIntTest {
 
     @Autowired
     private CaseRecoveryBillMapper caseRecoveryBillMapper;
-    
+
 
     @Autowired
     private CaseRecoveryBillService caseRecoveryBillService;
@@ -168,7 +192,7 @@ public class CaseRecoveryBillResourceIntTest {
             .andExpect(jsonPath("$.[*].numberId").value(hasItem(DEFAULT_NUMBER_ID)))
             .andExpect(jsonPath("$.[*].isWriteOff").value(hasItem(DEFAULT_IS_WRITE_OFF.booleanValue())));
     }
-    
+
 
     @Test
     @Transactional
@@ -415,7 +439,7 @@ public class CaseRecoveryBillResourceIntTest {
         // Create the CaseRecoveryBill
         CaseRecoveryBillDTO caseRecoveryBillDTO = caseRecoveryBillMapper.toDto(caseRecoveryBill);
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException 
+        // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCaseRecoveryBillMockMvc.perform(put("/api/case-recovery-bills")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(caseRecoveryBillDTO)))
