@@ -1,7 +1,7 @@
 /*
  * Copyright (c)  2015-2018, All rights Reserved, Designed By Kang Biao
  * Email: alex.kangbiao@gmail.com
- * Create by Alex Kang on 18-12-11 下午2:41
+ * Create by Alex Kang on 18-12-17 下午2:44
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.cpi.claim.service.utility.bill;
-
-import com.cpi.claim.domain.CaseClaimBill;
-import com.cpi.claim.domain.VesselCase;
-
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
+package com.cpi.claim.service.utility.bill.doc;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -38,7 +31,7 @@ import java.util.Map;
  * @create 2018/10/29
  * @since 1.0.0
  */
-public class ClaimBillParameterUtility {
+public  class ClaimBillParameterUtility {
 
 //    public static  Map<String, Object> copyCreditorParameter(CaseClaimBill caseClaimBill) {
 //        Map<String, Object> parameter = new HashMap<>();

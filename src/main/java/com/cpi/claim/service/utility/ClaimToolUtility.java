@@ -23,10 +23,7 @@
  */
 package com.cpi.claim.service.utility;
 
-import com.cpi.claim.domain.CaseClaim;
-import com.cpi.claim.domain.CaseGuarantee;
-import com.cpi.claim.domain.CasePayment;
-import com.cpi.claim.domain.VesselCase;
+import com.cpi.claim.domain.*;
 import com.cpi.claim.repository.*;
 import com.cpi.claim.repository.common.*;
 import com.cpi.claim.repository.jasperreport.JasperReportUtility;
@@ -34,6 +31,7 @@ import com.cpi.claim.repository.uaa.UserRepository;
 import com.cpi.claim.repository.uw.InsuredVesselRepository;
 import com.cpi.claim.repository.uw.MemberRepository;
 import com.cpi.claim.repository.workflow.WorkflowRepository;
+import com.cpi.claim.service.bean.bill.CaseClaimBillFeeBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -122,5 +120,16 @@ public class ClaimToolUtility {
     @Autowired
     public VesselCaseRepository vesselCaseRepository;
 
+    @Autowired
+    public ClaimBillStatusRepository claimBillStatusRepository;
+
+    @Autowired
+    public ClaimBillTypeRepository claimBillTypeRepository;
+
+    @Autowired
+    public ClaimBillFinanceTypeRepository claimBillFinanceTypeRepository;
+//
+//    @Autowired
+//    public CaseFeeBillRepository caseFeeBillRepository;
 
 }

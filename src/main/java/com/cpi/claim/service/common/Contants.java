@@ -42,4 +42,9 @@ public class Contants
     public static final int CONTANT_OUTER_TYPE_INNER = 1;
 
 
+    public static final int CLAIM_CONTANTS_CURRENCY_SCALE = 2;
+
+    public static final int CLAIM_CONTANTS_RATIO_SCALE = 5;
+
+
 }

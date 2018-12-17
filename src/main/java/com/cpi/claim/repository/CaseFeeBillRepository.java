@@ -24,9 +24,13 @@
 
 package com.cpi.claim.repository;
 
+import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseFee;
 import com.cpi.claim.domain.CaseFeeBill;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,4 +44,12 @@ import java.util.List;
 public interface CaseFeeBillRepository extends JpaRepository<CaseFeeBill, Long>, JpaSpecificationExecutor<CaseFeeBill> {
 
     List<CaseFeeBill> findAllByCaseFee(CaseFee caseFee);
+
+    CaseFeeBill findFirstByWriteOffBill(CaseClaimBill caseClaimBill);
+
+
+    @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
+        + " FROM CaseFeeBill cc "
+        + " WHERE cc.caseFee = :caseFee ")
+    Integer findMaxNumberIdByCaseFee(@Param("caseFee") CaseFee caseFee);
 }

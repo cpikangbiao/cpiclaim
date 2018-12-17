@@ -76,6 +76,10 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
 
+        <!-- by kangbiao begin -->
+        <jasperreports.version>6.5.1</jasperreports.version>
+        <!--by kangbiao end-->
+
         <!-- Plugin versions -->
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -384,6 +388,14 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-spring-service-connector</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>${jasperreports.version}</version>
+        </dependency>
+
+
         <!-- Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>

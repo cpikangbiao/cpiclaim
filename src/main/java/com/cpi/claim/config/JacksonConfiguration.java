@@ -24,17 +24,26 @@
 
 package com.cpi.claim.config;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
-
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.zalando.problem.ProblemModule;
 import org.zalando.problem.validation.ConstraintViolationProblemModule;
+
+import java.io.IOException;
+import java.math.BigDecimal;
 
 @Configuration
 public class JacksonConfiguration {
 
+    private final static int precision = 10;
     /*
      * Support for Hibernate types in Jackson.
      */
@@ -66,5 +75,59 @@ public class JacksonConfiguration {
     ConstraintViolationProblemModule constraintViolationProblemModule() {
         return new ConstraintViolationProblemModule();
     }
+
+
+
+    @Bean("jackson2ObjectMapperBuilderCustomizer")
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+        Jackson2ObjectMapperBuilderCustomizer customizer = new Jackson2ObjectMapperBuilderCustomizer() {
+            @Override
+            public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
+
+                jacksonObjectMapperBuilder.serializerByType(BigDecimal.class, new JsonSerializer<Object>() {
+                    @Override
+                    public void serialize(Object arg0, JsonGenerator jsonGenerator, SerializerProvider arg2)
+                        throws IOException, JsonProcessingException {
+                        if (arg0 instanceof BigDecimal) {
+                            if (jsonGenerator != null) {
+                                jsonGenerator.writeString(((BigDecimal) arg0).setScale(precision, BigDecimal.ROUND_HALF_UP).toPlainString());
+//                                jsonGenerator.writeString(((BigDecimal) arg0).toPlainString());
+                            }
+
+                        }
+                    }
+                });
+            }
+        };
+
+        return customizer;
+    }
+
+//    @Bean
+//    public ObjectMapper objectMapper() {
+//
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+//        dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.setDateFormat(dateFormat);
+//        return mapper;
+//    }
+//    private void customize(Jackson2ObjectMapperBuilder builder,
+//                           List<Jackson2ObjectMapperBuilderCustomizer> customizers) {
+//        for (Jackson2ObjectMapperBuilderCustomizer customizer : customizers) {
+//            customizer.customize(builder);
+//        }
+//    }
+//
+//    private Jackson2ObjectMapperBuilder configureObjectMapper() {
+//        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+//        List<String> activeProfiles = asList(env.getActiveProfiles());
+//        if (activeProfiles.contains(SPRING_PROFILE_DEVELOPMENT)) {
+//            builder.featuresToEnable(SerializationFeature.INDENT_OUTPUT);
+//        }
+//        return builder;
+//    }
+//}
 
 }

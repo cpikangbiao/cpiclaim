@@ -1,0 +1,69 @@
+/*
+ * Copyright (c)  2015-2018, All rights Reserved, Designed By Kang Biao
+ * Email: alex.kangbiao@gmail.com
+ * Create by Alex Kang on 18-12-17 下午2:00
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE
+ */
+package com.cpi.claim.service.bean.bill;
+
+import com.cpi.claim.domain.CasePaymentBill;
+import com.cpi.claim.service.utility.ClaimToolUtility;
+
+/**
+ * 〈一句话功能简述〉<br>
+ * 〈〉
+ *
+ * @author admin
+ * @create 2018/12/17
+ * @since 1.0.0
+ */
+public class CaseClaimBillPaymentBean extends AbstractCaseClaimBillBase {
+
+    private CasePaymentBill casePaymentBill;
+
+    public void init(CasePaymentBill casePaymentBill, ClaimToolUtility claimToolUtility) {
+        this.casePaymentBill = casePaymentBill;
+        this.isWriteOff        = false;
+        this.isWritedOff       = false;
+
+        //这个账单是否是冲销账单，冲销那个账单
+        this.caseClaimBill         = casePaymentBill.getCaseClaimBill();
+        this.isWriteOff        = casePaymentBill.isIsWriteOff();
+        if (this.isWriteOff.equals(true)) {
+            this.writeOffCaseClaimBill      = casePaymentBill.getWriteOffBill();
+        }
+
+        //这个账单是否被冲销，由那个账单冲销
+        CasePaymentBill casePaymentBill1 =  claimToolUtility.casePaymentBillRepository.findFirstByWriteOffBill(caseClaimBill);
+        if (casePaymentBill1 != null) {
+            this.writedOffCaseClaimBill = casePaymentBill1.getCaseClaimBill();
+            if (this.writedOffCaseClaimBill != null) {
+                this.isWritedOff = true;
+            }
+        }
+
+    }
+
+    public CaseClaimBillPaymentBean() {
+        super();
+        this.casePaymentBill = null;
+    }
+
+}

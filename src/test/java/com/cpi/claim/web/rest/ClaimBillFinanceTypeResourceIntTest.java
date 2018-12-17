@@ -25,18 +25,14 @@
 package com.cpi.claim.web.rest;
 
 import com.cpi.claim.CpiclaimApp;
-
 import com.cpi.claim.config.SecurityBeanOverrideConfiguration;
-
 import com.cpi.claim.domain.ClaimBillFinanceType;
 import com.cpi.claim.repository.ClaimBillFinanceTypeRepository;
+import com.cpi.claim.service.ClaimBillFinanceTypeQueryService;
 import com.cpi.claim.service.ClaimBillFinanceTypeService;
 import com.cpi.claim.service.dto.ClaimBillFinanceTypeDTO;
 import com.cpi.claim.service.mapper.ClaimBillFinanceTypeMapper;
 import com.cpi.claim.web.rest.errors.ExceptionTranslator;
-import com.cpi.claim.service.dto.ClaimBillFinanceTypeCriteria;
-import com.cpi.claim.service.ClaimBillFinanceTypeQueryService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,7 +49,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-
 
 import static com.cpi.claim.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;

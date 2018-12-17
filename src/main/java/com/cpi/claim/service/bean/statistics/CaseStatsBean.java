@@ -31,6 +31,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -42,11 +43,11 @@ import java.util.List;
  */
 public class CaseStatsBean implements Serializable {
 
-    private List<VesselCase> vesselCases;
+//    private List<VesselCase> vesselCases;
 
     private List<CaseStatsPerCaseBean> caseStatsPerCaseBeans;
 
-    private List<CaseStatsPerSubCaseBean> caseStatsPerSubCaseBeans;
+//    private List<CaseStatsPerSubCaseBean> caseStatsPerSubCaseBeans;
 
     private Integer language;
 
@@ -87,9 +88,9 @@ public class CaseStatsBean implements Serializable {
     private BigDecimal  costRatio;
 
     public CaseStatsBean() {
-        this.vesselCases = new ArrayList<>();
+//        this.vesselCases = new ArrayList<>();
         this.caseStatsPerCaseBeans = new ArrayList<>();
-        this.caseStatsPerSubCaseBeans = new ArrayList<>();
+//        this.caseStatsPerSubCaseBeans = new ArrayList<>();
         this.language = null;
         this.caseNum = 0;
         this.subCaseNum = 0;
@@ -112,15 +113,15 @@ public class CaseStatsBean implements Serializable {
     }
 
     public void init(List<VesselCase> vesselCases, Integer language, ClaimToolUtility claimToolUtility) {
-        this.vesselCases = vesselCases;
+//        this.vesselCases = vesselCases;
         this.caseStatsPerCaseBeans = new ArrayList<>();
-        this.caseStatsPerSubCaseBeans = new ArrayList<>();
+//        this.caseStatsPerSubCaseBeans = new ArrayList<>();
         int i = 1;
         for (VesselCase vesselCase : vesselCases) {
             CaseStatsPerCaseBean caseStatsPerCaseBean = new CaseStatsPerCaseBean();
             caseStatsPerCaseBean.init(vesselCase, language, claimToolUtility);
             this.caseStatsPerCaseBeans.add(caseStatsPerCaseBean);
-            this.caseStatsPerSubCaseBeans.addAll(caseStatsPerCaseBean.getCaseStatsPerSubCaseBeans());
+//            this.caseStatsPerSubCaseBeans.addAll(caseStatsPerCaseBean.getCaseStatsPerSubCaseBeans());
             i ++;
         }
 
@@ -157,14 +158,74 @@ public class CaseStatsBean implements Serializable {
         }
     }
 
-
-    public List<VesselCase> getVesselCases() {
-        return vesselCases;
+    @Override
+    public String toString() {
+        return "CaseStatsBean{" +
+//            "vesselCases=" + vesselCases +
+            ", caseStatsPerCaseBeans=" + caseStatsPerCaseBeans +
+//            ", caseStatsPerSubCaseBeans=" + caseStatsPerSubCaseBeans +
+            ", language=" + language +
+            ", caseNum=" + caseNum +
+            ", subCaseNum=" + subCaseNum +
+            ", guaranteeAmount=" + guaranteeAmount +
+            ", estimateAmount=" + estimateAmount +
+            ", claimAmount=" + claimAmount +
+            ", riAmount=" + riAmount +
+            ", thirdpartAmount=" + thirdpartAmount +
+            ", memberPaymentAmount=" + memberPaymentAmount +
+            ", surveyorFee=" + surveyorFee +
+            ", correspondentFee=" + correspondentFee +
+            ", lawyerFee=" + lawyerFee +
+            ", otherFee=" + otherFee +
+            ", totalCost=" + totalCost +
+            ", paymentAmount=" + paymentAmount +
+            ", grossPayment=" + grossPayment +
+            ", netPayment=" + netPayment +
+            ", benifitRatio=" + benifitRatio +
+            ", costRatio=" + costRatio +
+            '}';
     }
 
-    public void setVesselCases(List<VesselCase> vesselCases) {
-        this.vesselCases = vesselCases;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CaseStatsBean)) return false;
+        CaseStatsBean that = (CaseStatsBean) o;
+        return Objects.equals(getCaseStatsPerCaseBeans(), that.getCaseStatsPerCaseBeans()) &&
+            Objects.equals(getLanguage(), that.getLanguage()) &&
+            Objects.equals(getCaseNum(), that.getCaseNum()) &&
+            Objects.equals(getSubCaseNum(), that.getSubCaseNum()) &&
+            Objects.equals(getGuaranteeAmount(), that.getGuaranteeAmount()) &&
+            Objects.equals(getEstimateAmount(), that.getEstimateAmount()) &&
+            Objects.equals(getClaimAmount(), that.getClaimAmount()) &&
+            Objects.equals(getRiAmount(), that.getRiAmount()) &&
+            Objects.equals(getThirdpartAmount(), that.getThirdpartAmount()) &&
+            Objects.equals(getMemberPaymentAmount(), that.getMemberPaymentAmount()) &&
+            Objects.equals(getSurveyorFee(), that.getSurveyorFee()) &&
+            Objects.equals(getCorrespondentFee(), that.getCorrespondentFee()) &&
+            Objects.equals(getLawyerFee(), that.getLawyerFee()) &&
+            Objects.equals(getOtherFee(), that.getOtherFee()) &&
+            Objects.equals(getTotalCost(), that.getTotalCost()) &&
+            Objects.equals(getPaymentAmount(), that.getPaymentAmount()) &&
+            Objects.equals(getGrossPayment(), that.getGrossPayment()) &&
+            Objects.equals(getNetPayment(), that.getNetPayment()) &&
+            Objects.equals(getBenifitRatio(), that.getBenifitRatio()) &&
+            Objects.equals(getCostRatio(), that.getCostRatio());
     }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getCaseStatsPerCaseBeans(), getLanguage(), getCaseNum(), getSubCaseNum(), getGuaranteeAmount(), getEstimateAmount(), getClaimAmount(), getRiAmount(), getThirdpartAmount(), getMemberPaymentAmount(), getSurveyorFee(), getCorrespondentFee(), getLawyerFee(), getOtherFee(), getTotalCost(), getPaymentAmount(), getGrossPayment(), getNetPayment(), getBenifitRatio(), getCostRatio());
+    }
+
+    //    public List<VesselCase> getVesselCases() {
+//        return vesselCases;
+//    }
+//
+//    public void setVesselCases(List<VesselCase> vesselCases) {
+//        this.vesselCases = vesselCases;
+//    }
 
     public List<CaseStatsPerCaseBean> getCaseStatsPerCaseBeans() {
         return caseStatsPerCaseBeans;
@@ -174,13 +235,13 @@ public class CaseStatsBean implements Serializable {
         this.caseStatsPerCaseBeans = caseStatsPerCaseBeans;
     }
 
-    public List<CaseStatsPerSubCaseBean> getCaseStatsPerSubCaseBeans() {
-        return caseStatsPerSubCaseBeans;
-    }
-
-    public void setCaseStatsPerSubCaseBeans(List<CaseStatsPerSubCaseBean> caseStatsPerSubCaseBeans) {
-        this.caseStatsPerSubCaseBeans = caseStatsPerSubCaseBeans;
-    }
+//    public List<CaseStatsPerSubCaseBean> getCaseStatsPerSubCaseBeans() {
+//        return caseStatsPerSubCaseBeans;
+//    }
+//
+//    public void setCaseStatsPerSubCaseBeans(List<CaseStatsPerSubCaseBean> caseStatsPerSubCaseBeans) {
+//        this.caseStatsPerSubCaseBeans = caseStatsPerSubCaseBeans;
+//    }
 
     public Integer getLanguage() {
         return language;

@@ -27,7 +27,9 @@ package com.cpi.claim.repository;
 import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseRecovery;
 import com.cpi.claim.domain.CaseRecoveryBill;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -47,4 +49,12 @@ public interface CaseRecoveryBillRepository extends JpaRepository<CaseRecoveryBi
     List<CaseClaimBill> findAllCaseClaimBillByCaseRecovery(@Param("caseRecovery") CaseRecovery caseRecovery);
 
     List<CaseRecoveryBill> findAllByCaseRecovery(CaseRecovery caseRecovery);
+
+    CaseRecoveryBill findFirstByWriteOffBill(CaseClaimBill caseClaimBill);
+
+
+    @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
+        + " FROM CaseRecoveryBill cc "
+        + " WHERE cc.caseRecovery = :caseRecovery ")
+    Integer findMaxNumberIdByCaseRecovery(@Param("caseRecovery") CaseRecovery caseRecovery);
 }

@@ -37,6 +37,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -50,7 +51,7 @@ public class CaseStatsPerSubCaseBean implements Serializable {
 
     private Integer  numberId;
 
-    private VesselSubCase vesselSubCase;
+//    private VesselSubCase vesselSubCase;
 
     private Integer language;
 
@@ -116,7 +117,7 @@ public class CaseStatsPerSubCaseBean implements Serializable {
 
     public CaseStatsPerSubCaseBean() {
         this.numberId = 0;
-        this.vesselSubCase = null;
+//        this.vesselSubCase = null;
         this.language = null;
         this.year = null;
         this.caseCode = null;
@@ -150,7 +151,7 @@ public class CaseStatsPerSubCaseBean implements Serializable {
     }
 
     public void init(VesselSubCase vesselSubCase, Integer language, ClaimToolUtility claimToolUtility) {
-        this.vesselSubCase = vesselSubCase;
+//        this.vesselSubCase = vesselSubCase;
         this.language = language;
 
         VesselCase vesselCase = vesselSubCase.getVesselCase();
@@ -516,5 +517,160 @@ public class CaseStatsPerSubCaseBean implements Serializable {
 
     public void setCostRatio(BigDecimal costRatio) {
         this.costRatio = costRatio;
+    }
+
+    public Integer getNumberId() {
+        return numberId;
+    }
+
+    public void setNumberId(Integer numberId) {
+        this.numberId = numberId;
+    }
+
+//    public VesselSubCase getVesselSubCase() {
+//        return vesselSubCase;
+//    }
+//
+//    public void setVesselSubCase(VesselSubCase vesselSubCase) {
+//        this.vesselSubCase = vesselSubCase;
+//    }
+
+    public Integer getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Integer language) {
+        this.language = language;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getCaseCode() {
+        return caseCode;
+    }
+
+    public void setCaseCode(String caseCode) {
+        this.caseCode = caseCode;
+    }
+
+    public String getSubCaseCode() {
+        return subCaseCode;
+    }
+
+    public void setSubCaseCode(String subCaseCode) {
+        this.subCaseCode = subCaseCode;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getVesselName() {
+        return vesselName;
+    }
+
+    public void setVesselName(String vesselName) {
+        this.vesselName = vesselName;
+    }
+
+    public String getRegistUser() {
+        return registUser;
+    }
+
+    public void setRegistUser(String registUser) {
+        this.registUser = registUser;
+    }
+
+    @Override
+    public String toString() {
+        return "CaseStatsPerSubCaseBean{" +
+            "numberId=" + numberId +
+//            ", vesselSubCase=" + vesselSubCase +
+            ", language=" + language +
+            ", year='" + year + '\'' +
+            ", caseCode='" + caseCode + '\'' +
+            ", subCaseCode='" + subCaseCode + '\'' +
+            ", companyName='" + companyName + '\'' +
+            ", vesselName='" + vesselName + '\'' +
+            ", registUser='" + registUser + '\'' +
+            ", registDate=" + registDate +
+            ", assignedUser='" + assignedUser + '\'' +
+            ", caseDate=" + caseDate +
+            ", caseLocation='" + caseLocation + '\'' +
+            ", caseStatus='" + caseStatus + '\'' +
+            ", closeDate=" + closeDate +
+            ", risk='" + risk + '\'' +
+            ", guaranteeAmount=" + guaranteeAmount +
+            ", claimAmount=" + claimAmount +
+            ", estimateAmount=" + estimateAmount +
+            ", riAmount=" + riAmount +
+            ", thirdpartAmount=" + thirdpartAmount +
+            ", memberPaymentAmount=" + memberPaymentAmount +
+            ", surveyorFee=" + surveyorFee +
+            ", correspondentFee=" + correspondentFee +
+            ", lawyerFee=" + lawyerFee +
+            ", otherFee=" + otherFee +
+            ", totalCost=" + totalCost +
+            ", paymentAmount=" + paymentAmount +
+            ", grossPayment=" + grossPayment +
+            ", netPayment=" + netPayment +
+            ", benifitRatio=" + benifitRatio +
+            ", costRatio=" + costRatio +
+            '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CaseStatsPerSubCaseBean)) return false;
+        CaseStatsPerSubCaseBean that = (CaseStatsPerSubCaseBean) o;
+        return Objects.equals(getNumberId(), that.getNumberId()) &&
+//            Objects.equals(getVesselSubCase(), that.getVesselSubCase()) &&
+            Objects.equals(getLanguage(), that.getLanguage()) &&
+            Objects.equals(getYear(), that.getYear()) &&
+            Objects.equals(getCaseCode(), that.getCaseCode()) &&
+            Objects.equals(getSubCaseCode(), that.getSubCaseCode()) &&
+            Objects.equals(getCompanyName(), that.getCompanyName()) &&
+            Objects.equals(getVesselName(), that.getVesselName()) &&
+            Objects.equals(getRegistUser(), that.getRegistUser()) &&
+            Objects.equals(getRegistDate(), that.getRegistDate()) &&
+            Objects.equals(getAssignedUser(), that.getAssignedUser()) &&
+            Objects.equals(getCaseDate(), that.getCaseDate()) &&
+            Objects.equals(getCaseLocation(), that.getCaseLocation()) &&
+            Objects.equals(getCaseStatus(), that.getCaseStatus()) &&
+            Objects.equals(getCloseDate(), that.getCloseDate()) &&
+            Objects.equals(getRisk(), that.getRisk()) &&
+            Objects.equals(getGuaranteeAmount(), that.getGuaranteeAmount()) &&
+            Objects.equals(getClaimAmount(), that.getClaimAmount()) &&
+            Objects.equals(getEstimateAmount(), that.getEstimateAmount()) &&
+            Objects.equals(getRiAmount(), that.getRiAmount()) &&
+            Objects.equals(getThirdpartAmount(), that.getThirdpartAmount()) &&
+            Objects.equals(getMemberPaymentAmount(), that.getMemberPaymentAmount()) &&
+            Objects.equals(getSurveyorFee(), that.getSurveyorFee()) &&
+            Objects.equals(getCorrespondentFee(), that.getCorrespondentFee()) &&
+            Objects.equals(getLawyerFee(), that.getLawyerFee()) &&
+            Objects.equals(getOtherFee(), that.getOtherFee()) &&
+            Objects.equals(getTotalCost(), that.getTotalCost()) &&
+            Objects.equals(getPaymentAmount(), that.getPaymentAmount()) &&
+            Objects.equals(getGrossPayment(), that.getGrossPayment()) &&
+            Objects.equals(getNetPayment(), that.getNetPayment()) &&
+            Objects.equals(getBenifitRatio(), that.getBenifitRatio()) &&
+            Objects.equals(getCostRatio(), that.getCostRatio());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getNumberId(), getLanguage(), getYear(), getCaseCode(), getSubCaseCode(), getCompanyName(), getVesselName(), getRegistUser(), getRegistDate(), getAssignedUser(), getCaseDate(), getCaseLocation(), getCaseStatus(), getCloseDate(), getRisk(), getGuaranteeAmount(), getClaimAmount(), getEstimateAmount(), getRiAmount(), getThirdpartAmount(), getMemberPaymentAmount(), getSurveyorFee(), getCorrespondentFee(), getLawyerFee(), getOtherFee(), getTotalCost(), getPaymentAmount(), getGrossPayment(), getNetPayment(), getBenifitRatio(), getCostRatio());
     }
 }

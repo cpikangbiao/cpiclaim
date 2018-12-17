@@ -24,22 +24,21 @@
 
 package com.cpi.claim.service.utility.statistics;
 
-import com.cpi.claim.domain.*;
-import com.cpi.claim.repository.*;
+import com.cpi.claim.domain.CaseStatusType;
+import com.cpi.claim.domain.CpiInsuranceType;
+import com.cpi.claim.domain.VesselCase;
+import com.cpi.claim.repository.CaseStatusTypeRepository;
+import com.cpi.claim.repository.CpiInsuranceTypeRepository;
+import com.cpi.claim.repository.VesselCaseRepository;
 import com.cpi.claim.service.VesselCaseQueryExtService;
 import com.cpi.claim.service.bean.statistics.CaseStatsBean;
 import com.cpi.claim.service.common.Contants;
-import com.cpi.claim.service.dto.VesselCaseCriteria;
-import com.cpi.claim.service.dto.VesselCaseDTO;
 import com.cpi.claim.service.dto.common.CompanyDTO;
-import com.cpi.claim.service.dto.common.VesselDTO;
 import com.cpi.claim.service.mapper.VesselCaseMapper;
 import com.cpi.claim.service.utility.ClaimToolUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -51,12 +50,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Service for executing complex queries for VesselCase entities in the database.
- * The main input is a {@link VesselCaseCriteria} which gets converted to {@link Specification},
- * in a way that all the filters must apply.
- * It returns a {@link List} of {@link VesselCaseDTO} or a {@link Page} of {@link VesselCaseDTO} which fulfills the criteria.
- */
 @Service
 @Transactional
 public class StatisticsForCaseService {
@@ -122,8 +115,9 @@ public class StatisticsForCaseService {
         parameter.put("toYear", endYear);
         if (companyId != null) {
             CompanyDTO company = claimToolUtility.companyRepository.findCompanyByID(companyId);
-            if (company != null && company.getCompanyName() != null)
+            if (company != null && company.getCompanyName() != null) {
                 parameter.put("companyName", company.getCompanyCode() + " " + company.getCompanyName());
+            }
         }
 
         if (caseStatsBean != null) {
@@ -156,18 +150,23 @@ public class StatisticsForCaseService {
 
         parameter.put("caseNum", caseStatsBean.getCaseNum());
         parameter.put("subCaseNum", caseStatsBean.getSubCaseNum());
-        parameter.put("claimAmount", caseStatsBean.getClaimAmount());
-        parameter.put("estimateAmount", caseStatsBean.getEstimateAmount()	);
-        parameter.put("memberPaymentAmount", caseStatsBean.getMemberPaymentAmount());
-        parameter.put("correspondentFee", caseStatsBean.getCorrespondentFee());
-        parameter.put("surveyorFee", caseStatsBean.getSurveyorFee());
-        parameter.put("lawyerFee", caseStatsBean.getLawyerFee());
-        parameter.put("otherFee", caseStatsBean.getOtherFee());
-        parameter.put("paymentAmount", caseStatsBean.getPaymentAmount());
-        parameter.put("benifitRatio", caseStatsBean.getBenifitRatio());
-        parameter.put("costRatio", caseStatsBean.getCostRatio());
-        parameter.put("thirdpartAmount", caseStatsBean.getThirdpartAmount());
-        parameter.put("totalCost", caseStatsBean.getTotalCost());
+        parameter.put("claimAmount", caseStatsBean.getClaimAmount().doubleValue());
+        parameter.put("estimateAmount", caseStatsBean.getEstimateAmount().doubleValue()	);
+        parameter.put("memberPaymentAmount", caseStatsBean.getMemberPaymentAmount().doubleValue());
+        parameter.put("correspondentFee", caseStatsBean.getCorrespondentFee().doubleValue());
+        parameter.put("surveyorFee", caseStatsBean.getSurveyorFee().doubleValue());
+        parameter.put("lawyerFee", caseStatsBean.getLawyerFee().doubleValue());
+        parameter.put("otherFee", caseStatsBean.getOtherFee().doubleValue());
+        parameter.put("paymentAmount", caseStatsBean.getPaymentAmount().doubleValue());
+        parameter.put("benifitRatio", caseStatsBean.getBenifitRatio().doubleValue());
+        parameter.put("costRatio", caseStatsBean.getCostRatio().doubleValue());
+        parameter.put("thirdpartAmount", caseStatsBean.getThirdpartAmount().doubleValue());
+        parameter.put("totalCost", caseStatsBean.getTotalCost().doubleValue());
+
+//        parameter.put("datasource", caseStatsBean.getCaseStatsPerCaseBeans());
+//
+//        JRBeanArrayDataSource dataSource = new JRBeanArrayDataSource(caseStatsBean.getCaseStatsPerCaseBeans().toArray()) ;
+//        parameter.put("JRDataSource", dataSource);
 
         parameter.put("datasource", caseStatsBean.getCaseStatsPerCaseBeans());
 
@@ -180,39 +179,45 @@ public class StatisticsForCaseService {
         if (cpiInsuranceTypeId.equals(CpiInsuranceType.CPI_INSURANCE_PI)) {
             //By Case
             if (language.equals(Contants.CONTANT_LANGUAGE_CHINESE)) {
-                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN))
+                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN)) {
                     jasperFilePath = "CaseStatsByMemberOuterCase.jasper";
-                else
+                } else {
                     jasperFilePath = "CaseStatsByMemberInnerCase.jasper";
+                }
             } else {
-                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN))
+                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN)) {
                     jasperFilePath = "CaseStatsByMemberOuterCase_en.jasper";
-                else
+                } else {
                     jasperFilePath = "CaseStatsByMemberInnerCase_en.jasper";
+                }
             }
         } else if (cpiInsuranceTypeId.equals(CpiInsuranceType.CPI_INSURANCE_FDD)) {
             if (language.equals(Contants.CONTANT_LANGUAGE_CHINESE)) {
-                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN))
+                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN)) {
                     jasperFilePath = "CaseStatsByMemberOuterCase_fdd.jasper";
-                else
+                } else {
                     jasperFilePath = "CaseStatsByMemberInnerCase_fdd.jasper";
+                }
             } else {
-                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN))
+                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN)) {
                     jasperFilePath = "CaseStatsByMemberOuterCase_en_fdd.jasper";
-                else
+                } else {
                     jasperFilePath = "CaseStatsByMemberInnerCase_en_fdd.jasper";
+                }
             }
         } else if (cpiInsuranceTypeId.equals(CpiInsuranceType.CPI_INSURANCE_TCL)) {
             if (language.equals(Contants.CONTANT_LANGUAGE_CHINESE)) {
-                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN))
+                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN)) {
                     jasperFilePath = "CaseStatsByMemberOuterCase_tcl.jasper";
-                else
+                } else {
                     jasperFilePath = "CaseStatsByMemberInnerCase_tcl.jasper";
+                }
             } else {
-                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN))
+                if (operateType.equals(Contants.CONTANT_OUTER_TYPE_OUTER) || caseStatusId.equals(CaseStatusType.CASE_STATUS_OPEN)) {
                     jasperFilePath = "CaseStatsByMemberOuterCase_en_tcl.jasper";
-                else
+                } else {
                     jasperFilePath = "CaseStatsByMemberInnerCase_en_tcl.jasper";
+                }
             }
         }
 
