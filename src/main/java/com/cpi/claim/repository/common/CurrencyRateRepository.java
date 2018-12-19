@@ -1,7 +1,7 @@
 /*
  * Copyright (c)  2015-2018, All rights Reserved, Designed By Kang Biao
  * Email: alex.kangbiao@gmail.com
- * Create by Alex Kang on 18-12-11 下午2:41
+ * Create by Alex Kang on 18-12-19 下午2:06
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,36 +22,28 @@
  * SOFTWARE
  */
 
-package com.cpi.claim.repository;
 
-import com.cpi.claim.domain.CaseClaimBill;
-import com.cpi.claim.domain.CaseFee;
-import com.cpi.claim.domain.CaseFeeBill;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+package com.cpi.claim.repository.common;
 
-import java.util.List;
-
+import com.cpi.claim.client.AuthorizedFeignClient;
+import com.cpi.claim.service.dto.common.CurrencyRateDTO;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Spring Data  repository for the CaseFeeBill entity.
+ * 〈一句话功能简述〉<br>
+ * 〈get country from remote microservice〉
+ *
+ * @author admin
+ * @create 2018/4/26
+ * @since 1.0.0
  */
-@SuppressWarnings("unused")
-@Repository
-public interface CaseFeeBillRepository extends JpaRepository<CaseFeeBill, Long>, JpaSpecificationExecutor<CaseFeeBill> {
 
-    List<CaseFeeBill> findAllByCaseFee(CaseFee caseFee);
+@AuthorizedFeignClient(name = "cpicommon")
+public interface CurrencyRateRepository {
 
-    CaseFeeBill findFirstByWriteOffBill(CaseClaimBill caseClaimBill);
+    @RequestMapping(value = "/api/currency-rates/get-last-rate/{currencyId}", method = RequestMethod.GET)
+    CurrencyRateDTO getLastCurrencyRate(@PathVariable("currencyId") Long currencyId);
 
-
-    @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
-        + " FROM CaseFeeBill cc "
-        + " WHERE cc.caseFee = :caseFee ")
-    Integer findMaxNumberIdByCaseFee(@Param("caseFee") CaseFee caseFee);
-
-    List<CaseFeeBill> findAllByCaseClaimBill(CaseClaimBill caseClaimBill);
 }

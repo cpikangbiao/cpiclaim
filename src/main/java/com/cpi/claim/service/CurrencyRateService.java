@@ -1,7 +1,7 @@
 /*
  * Copyright (c)  2015-2018, All rights Reserved, Designed By Kang Biao
  * Email: alex.kangbiao@gmail.com
- * Create by Alex Kang on 18-12-11 下午2:41
+ * Create by Alex Kang on 18-12-19 下午2:10
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,36 +22,33 @@
  * SOFTWARE
  */
 
-package com.cpi.claim.repository;
+package com.cpi.claim.service;
 
 import com.cpi.claim.domain.CaseClaimBill;
-import com.cpi.claim.domain.CaseFee;
-import com.cpi.claim.domain.CaseFeeBill;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-
-
-/**
- * Spring Data  repository for the CaseFeeBill entity.
- */
-@SuppressWarnings("unused")
-@Repository
-public interface CaseFeeBillRepository extends JpaRepository<CaseFeeBill, Long>, JpaSpecificationExecutor<CaseFeeBill> {
-
-    List<CaseFeeBill> findAllByCaseFee(CaseFee caseFee);
-
-    CaseFeeBill findFirstByWriteOffBill(CaseClaimBill caseClaimBill);
+import com.cpi.claim.service.dto.common.CurrencyRateDTO;
+import com.cpi.claim.service.utility.ClaimToolUtility;
+import io.github.jhipster.service.QueryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
-    @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
-        + " FROM CaseFeeBill cc "
-        + " WHERE cc.caseFee = :caseFee ")
-    Integer findMaxNumberIdByCaseFee(@Param("caseFee") CaseFee caseFee);
+@Service
+@Transactional
+public class CurrencyRateService extends QueryService<CaseClaimBill> {
 
-    List<CaseFeeBill> findAllByCaseClaimBill(CaseClaimBill caseClaimBill);
+    private final Logger log = LoggerFactory.getLogger(CurrencyRateService.class);
+
+    @Autowired
+    private ClaimToolUtility claimToolUtility;
+
+    @Transactional(readOnly = true)
+    public CurrencyRateDTO getLastCurrencyRate(Long currencyId) {
+        log.debug("get Last Currency Rate By currencyId : {}", currencyId);
+        return claimToolUtility.currencyRateRepository.getLastCurrencyRate(currencyId);
+    }
+
+
 }

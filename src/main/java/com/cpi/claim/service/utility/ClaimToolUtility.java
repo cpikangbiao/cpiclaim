@@ -128,8 +128,8 @@ public class ClaimToolUtility {
 
     @Autowired
     public ClaimBillFinanceTypeRepository claimBillFinanceTypeRepository;
-//
-//    @Autowired
-//    public CaseFeeBillRepository caseFeeBillRepository;
+
+    @Autowired
+    public CurrencyRateRepository currencyRateRepository;
 
 }

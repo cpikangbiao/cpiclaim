@@ -1,7 +1,7 @@
 /*
  * Copyright (c)  2015-2018, All rights Reserved, Designed By Kang Biao
  * Email: alex.kangbiao@gmail.com
- * Create by Alex Kang on 18-12-11 下午2:41
+ * Create by Alex Kang on 18-12-18 上午10:14
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,37 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
+package com.cpi.claim.service.utility.common;
 
-package com.cpi.claim.repository;
-
-import com.cpi.claim.domain.CaseClaimBill;
-import com.cpi.claim.domain.CaseFee;
-import com.cpi.claim.domain.CaseFeeBill;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
- * Spring Data  repository for the CaseFeeBill entity.
+ * 〈一句话功能简述〉<br>
+ * 〈〉
+ *
+ * @author admin
+ * @create 2018/10/30
+ * @since 1.0.0
  */
-@SuppressWarnings("unused")
-@Repository
-public interface CaseFeeBillRepository extends JpaRepository<CaseFeeBill, Long>, JpaSpecificationExecutor<CaseFeeBill> {
+public class NumberFormatUtility {
 
-    List<CaseFeeBill> findAllByCaseFee(CaseFee caseFee);
+    private static final String CURRENCY_FORMAT = "#,###,###,###,##0.00";
 
-    CaseFeeBill findFirstByWriteOffBill(CaseClaimBill caseClaimBill);
+    private static final String RATIO_FORMAT = "#,###,###,###,##0.00000";
 
+    public static String ratioCurrency(BigDecimal amount){
+        DecimalFormat  decimalFormat = new DecimalFormat(RATIO_FORMAT);
+        return decimalFormat.format(amount);
+    }
 
-    @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
-        + " FROM CaseFeeBill cc "
-        + " WHERE cc.caseFee = :caseFee ")
-    Integer findMaxNumberIdByCaseFee(@Param("caseFee") CaseFee caseFee);
+    public static String formatCurrency(BigDecimal amount){
+        DecimalFormat  decimalFormat = new DecimalFormat(CURRENCY_FORMAT);
+        return decimalFormat.format(amount);
+    }
 
-    List<CaseFeeBill> findAllByCaseClaimBill(CaseClaimBill caseClaimBill);
 }
+

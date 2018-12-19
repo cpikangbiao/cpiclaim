@@ -78,10 +78,12 @@ public class CasePaymentBean {
 
     private Boolean    hasRemainDeductible;
 
+    // for bill
     private Integer    billNum;
 
     private BigDecimal     billSumAmount;
 
+    // for remain
     private BigDecimal     remainAmountDollar;
 
     private Long remainAmountCurrencyId;
@@ -126,86 +128,101 @@ public class CasePaymentBean {
         this.hasRemain = false;
     }
 
-    public void init(VesselSubCase vesselSubCase, Boolean hasDeductible,
-                     Long remainAmountCurrencyId, BigDecimal remainAmountCurrencyRate,
+    public void init(VesselSubCase vesselSubCase,
+                     Long currencyId,
+                     BigDecimal currencyRate,
+                     Boolean hasDeductible,
+                     Long deductibleCurrencyId,
+                     BigDecimal deductibleCurrencyRate,
                      ClaimToolUtility claimToolUtility) {
 //        this.vesselSubCase = vesselSubCase;
         this.hasDeductible    = hasDeductible;
+        if (!this.hasDeductible) {
+            deductibleCurrencyId = currencyId;
+            deductibleCurrencyRate = new BigDecimal(1.0);
+        }
 
         //2014-05-07优化币种转换中的误差
         List<CasePayment> casePayments = claimToolUtility.casePaymentRepository.findAllBySubcase(vesselSubCase);
         for (CasePayment casePayment : casePayments) {
-            paymentNum      += 1;
-            paymentSumAmount = paymentSumAmount.add(casePayment.getPayCost().divide(casePayment.getCurrencyRate(),
+            this.paymentNum      += 1;
+            this.paymentSumAmount = this.paymentSumAmount.add(casePayment.getPayCost().divide(casePayment.getCurrencyRate(),
                 Contants.CLAIM_CONTANTS_CURRENCY_SCALE, BigDecimal.ROUND_HALF_UP));
         }
 
         if (vesselSubCase.getDeductible() != null) {
-            totalDeductibleDollar = vesselSubCase.getDeductible().divide(vesselSubCase.getCurrencyRate(),
+            this.totalDeductibleDollar = vesselSubCase.getDeductible().divide(vesselSubCase.getCurrencyRate(),
                 Contants.CLAIM_CONTANTS_CURRENCY_SCALE, BigDecimal.ROUND_HALF_UP);
         }
 
+        // for bill summary
         List<CasePaymentBill> casePaymentBills = claimToolUtility.casePaymentBillRepository.findAllBySubcase(vesselSubCase);
         for (CasePaymentBill casePaymentBill : casePaymentBills) {
             CaseClaimBillPaymentBean caseClaimBillPaymentBean = new CaseClaimBillPaymentBean();
             caseClaimBillPaymentBean.init(casePaymentBill, claimToolUtility);
             this.caseClaimBillPaymentBeans.add(caseClaimBillPaymentBean);
-            billNum       += 1;
+            this.billNum       += 1;
 
             CaseClaimBill caseClaimBill = casePaymentBill.getCaseClaimBill();
 
-            if (casePaymentBill.getCaseClaimBill().getBillAmount() != null) {
-
+            if (caseClaimBill.getBillAmount() != null) {
+                BigDecimal billAmountTemp = caseClaimBill.getBillAmount().divide(
+                                    caseClaimBill.getBillCurrencyRate(),
+                                    Contants.CLAIM_CONTANTS_CURRENCY_SCALE, BigDecimal.ROUND_HALF_UP);
                 if (caseClaimBill.getClaimBillFinanceType().getId().equals(ClaimBillFinanceType.BILL_FINANCE_TYPE_DEBIT)) {
-                    billSumAmount = billSumAmount.subtract(
-                                                    caseClaimBill.getBillAmount().divide(
-                                                        caseClaimBill.getBillCurrencyRate(),
-                                                                        Contants.CLAIM_CONTANTS_CURRENCY_SCALE, BigDecimal.ROUND_HALF_UP));
+                    this.billSumAmount = this.billSumAmount.subtract(billAmountTemp);
                 }
                 if (caseClaimBill.getClaimBillFinanceType().getId().equals(ClaimBillFinanceType.BILL_FINANCE_TYPE_CREDIT)) {
-                    billSumAmount = billSumAmount.add( caseClaimBill.getBillAmount().divide(
-                                                    caseClaimBill.getBillCurrencyRate(),
-                                                        Contants.CLAIM_CONTANTS_CURRENCY_SCALE, BigDecimal.ROUND_HALF_UP));
+                    this.billSumAmount = this.billSumAmount.add(billAmountTemp);
                 }
             }
+
             if (caseClaimBill.getDeductible() != null) {
-                totalBillDeductibleDollar = totalBillDeductibleDollar.add(caseClaimBill.getDeductible().divide(caseClaimBill.getDeductibleCurrencyRate(),
+                this.totalBillDeductibleDollar = this.totalBillDeductibleDollar.add(caseClaimBill.getDeductible().divide(caseClaimBill.getDeductibleCurrencyRate(),
                     Contants.CLAIM_CONTANTS_CURRENCY_SCALE, BigDecimal.ROUND_HALF_UP));
             } else {
-                totalBillDeductibleDollar = totalBillDeductibleDollar.add(caseClaimBill.getDeductibleDollar());
+                this.totalBillDeductibleDollar = this.totalBillDeductibleDollar.add(caseClaimBill.getDeductibleDollar());
             }
         }
 
-        deductibleDollar = totalDeductibleDollar.subtract(totalBillDeductibleDollar) ;
 
-        deductibleCurrencyId    = vesselSubCase.getCurrency();
-        CurrencyDTO currencyDTO = claimToolUtility.currencyRepository.findCurrencyByID(vesselSubCase.getCurrency());
-        deductibleCurrency     = currencyDTO.getNameAbbre();
-        deductibleCurrencyRate = remainAmountCurrencyRate;
-        deductible             = deductibleDollar.multiply(deductibleCurrencyRate);
+        // for deductible
+        this.deductibleCurrencyId    = deductibleCurrencyId;
+        CurrencyDTO currencyDTO = claimToolUtility.currencyRepository.findCurrencyByID(this.deductibleCurrencyId);
+        this.deductibleCurrency     = currencyDTO.getNameAbbre();
 
-        if (hasDeductible) {
-            remainAmountDollar = paymentSumAmount.subtract(billSumAmount.subtract(totalBillDeductibleDollar.subtract(deductibleDollar)));
+        this.deductibleCurrencyRate = deductibleCurrencyRate;
+
+        if (this.hasDeductible) {
+            this.deductibleDollar = this.totalDeductibleDollar.subtract(this.totalBillDeductibleDollar) ;
+            this.deductible       = this.deductibleDollar.multiply(this.deductibleCurrencyRate);
+
         } else {
-            remainAmountDollar = paymentSumAmount.subtract(billSumAmount) .subtract(totalBillDeductibleDollar);
+            this.deductibleDollar = BigDecimal.ZERO ;
+            this.deductible       = BigDecimal.ZERO;
         }
 
-        if (remainAmountDollar.compareTo(BigDecimal.ZERO) > 1) {
-            hasRemain = true;
-        }
-
-        if (deductible.compareTo(BigDecimal.ZERO) > 1) {
+        if (deductible.compareTo(BigDecimal.ZERO) != 1) {
             hasRemainDeductible = true;
         }
 
-        this.remainAmountCurrencyId    = remainAmountCurrencyId;
-        currencyDTO = claimToolUtility.currencyRepository.findCurrencyByID(remainAmountCurrencyId);
-        this.remainAmountCurrency     = currencyDTO.getNameAbbre();
-        this.remainAmountCurrencyRate = remainAmountCurrencyRate;
-        remainAmount = remainAmountDollar.multiply(remainAmountCurrencyRate);
+        // for remain
+        this.remainAmountDollar = this.paymentSumAmount.subtract(this.billSumAmount.subtract(this.totalBillDeductibleDollar.subtract(this.deductibleDollar)));
 
-        claimAmountCurrency      = remainAmountCurrency;
-        claimAmount              = (remainAmountDollar .add(deductibleDollar)).multiply(remainAmountCurrencyRate);
+        if (remainAmountDollar.compareTo(BigDecimal.ZERO) != 1) {
+            hasRemain = true;
+        }
+
+
+
+        this.remainAmountCurrencyId    = currencyId;
+        currencyDTO = claimToolUtility.currencyRepository.findCurrencyByID(this.remainAmountCurrencyId);
+        this.remainAmountCurrency     = currencyDTO.getNameAbbre();
+        this.remainAmountCurrencyRate = currencyRate;
+        this.remainAmount = this.remainAmountDollar.multiply(this.remainAmountCurrencyRate);
+
+        this.claimAmountCurrency      = this.remainAmountCurrency;
+        this.claimAmount              = (this.remainAmountDollar .add(this.deductibleDollar)).multiply(this.remainAmountCurrencyRate);
     }
 
     public List<CaseClaimBillPaymentBean> getCaseClaimBillPaymentBeans() {
