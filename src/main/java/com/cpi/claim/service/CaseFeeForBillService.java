@@ -24,13 +24,18 @@
 
 package com.cpi.claim.service;
 
+import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseFee;
+import com.cpi.claim.domain.Creditor;
 import com.cpi.claim.repository.CaseFeeRepository;
 import com.cpi.claim.service.bean.fee.CaseFeeBean;
+import com.cpi.claim.service.dto.CaseClaimBillDTO;
 import com.cpi.claim.service.dto.CaseFeeCriteria;
 import com.cpi.claim.service.dto.CaseFeeDTO;
+import com.cpi.claim.service.mapper.CaseClaimBillMapper;
 import com.cpi.claim.service.mapper.CaseFeeMapper;
 import com.cpi.claim.service.utility.ClaimToolUtility;
+import com.cpi.claim.service.utility.bill.ClaimBillFeeUtility;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +45,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -61,6 +67,12 @@ public class CaseFeeForBillService extends QueryService<CaseFee> {
     @Autowired
     private ClaimToolUtility claimToolUtility;
 
+    @Autowired
+    private ClaimBillFeeUtility claimBillFeeUtility;
+
+    @Autowired
+    private CaseClaimBillMapper caseClaimBillMapper;;
+
     public CaseFeeForBillService(CaseFeeRepository caseFeeRepository, CaseFeeMapper caseFeeMapper) {
         this.caseFeeRepository = caseFeeRepository;
         this.caseFeeMapper = caseFeeMapper;
@@ -79,6 +91,94 @@ public class CaseFeeForBillService extends QueryService<CaseFee> {
         return caseFeeBean;
     }
 
+    @Transactional
+    public CaseClaimBillDTO createClaimBillForCredit(
+        Long caseFeeId,
+        String clientBillNo,
+        Long creditorId,
+        Long userId,
+        Long claimAmountCurrency,
+        BigDecimal claimAmount
+    ) {
+        log.debug("find getCaseFeeBeanForCaseFeeId By caseFeeId Id : {}", caseFeeId);
+        CaseClaimBill caseClaimBill = null;
+        CaseFee caseFee = claimToolUtility.caseFeeRepository.getOne(caseFeeId);
+        Creditor creditor = claimToolUtility.creditorRepository.getOne(creditorId);
+        if (caseFee != null
+            && creditor != null) {
+            caseClaimBill = claimBillFeeUtility.createClaimBillForCredit(
+                caseFee,
+                clientBillNo,
+                creditor,
+                userId,
+                claimAmountCurrency,
+                claimAmount
+            );
+        }
 
+        return caseClaimBillMapper.toDto(caseClaimBill) ;
+    }
+
+    @Transactional
+    public CaseClaimBillDTO createClaimBillForDebit(
+        Long caseFeeId,
+        String clientBillNo,
+        Long creditorId,
+        Long userId,
+        Long claimAmountCurrency,
+        BigDecimal claimAmount
+    ) {
+        log.debug("find getCaseFeeBeanForCaseFeeId By caseFeeId Id : {}", caseFeeId);
+        CaseClaimBill caseClaimBill = null;
+        CaseFee caseFee = claimToolUtility.caseFeeRepository.getOne(caseFeeId);
+        Creditor creditor = claimToolUtility.creditorRepository.getOne(creditorId);
+        if (caseFee != null
+            && creditor != null) {
+            caseClaimBill = claimBillFeeUtility.createClaimBillForDebit(
+                caseFee,
+                clientBillNo,
+                creditor,
+                userId,
+                claimAmountCurrency,
+                claimAmount
+            );
+        }
+
+        return caseClaimBillMapper.toDto(caseClaimBill);
+    }
+
+    @Transactional
+    public CaseClaimBillDTO createClaimBillForCreditWithDeductible(
+        Long caseFeeId,
+        String clientBillNo,
+        Long creditorId,
+        Long userId,
+        Long claimAmountCurrency,
+        BigDecimal claimAmount,
+        Long deductibleCurrency,
+        BigDecimal deductibleCurrencyRate,
+        BigDecimal deductibleAmount
+    ) {
+        log.debug("find getCaseFeeBeanForCaseFeeId By caseFeeId Id : {}", caseFeeId);
+        CaseClaimBill caseClaimBill = null;
+        CaseFee caseFee = claimToolUtility.caseFeeRepository.getOne(caseFeeId);
+        Creditor creditor = claimToolUtility.creditorRepository.getOne(creditorId);
+        if (caseFee != null
+            && creditor != null) {
+            caseClaimBill = claimBillFeeUtility.createClaimBillForCreditWithDeductible(
+                caseFee,
+                clientBillNo,
+                creditor,
+                userId,
+                claimAmountCurrency,
+                claimAmount,
+                deductibleCurrency,
+                deductibleCurrencyRate,
+                deductibleAmount
+            );
+        }
+
+        return caseClaimBillMapper.toDto(caseClaimBill);
+    }
 
 }

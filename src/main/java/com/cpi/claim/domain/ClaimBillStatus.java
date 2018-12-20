@@ -44,15 +44,15 @@ public class ClaimBillStatus implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    public final static int CASE_CLAIM_BILL_STATUS_NOAPPROVAL = 1;
+    public final static Long CASE_CLAIM_BILL_STATUS_NOAPPROVAL = new Long(1);
 
-    public final static int CASE_CLAIM_BILL_STATUS_APPROVALED = 2;
+    public final static Long CASE_CLAIM_BILL_STATUS_APPROVALED = new Long(2);
 
-    public final static int CASE_CLAIM_BILL_STATUS_PAYING     = 3;
+    public final static Long CASE_CLAIM_BILL_STATUS_PAYING     = new Long(3);
 
-    public final static int CASE_CLAIM_BILL_STATUS_PAID       = 4;
+    public final static Long CASE_CLAIM_BILL_STATUS_PAID       = new Long(4);
 
-    public final static int CASE_CLAIM_BILL_STATUS_WRITEOFF   = 5;
+    public final static Long CASE_CLAIM_BILL_STATUS_WRITEOFF   = new Long(5);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,7 +25,9 @@
 package com.cpi.claim.repository;
 
 import com.cpi.claim.domain.CaseAssignLog;
+import com.cpi.claim.domain.VesselCase;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -36,4 +38,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CaseAssignLogRepository extends JpaRepository<CaseAssignLog, Long>, JpaSpecificationExecutor<CaseAssignLog> {
 
+    @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
+        + " FROM CaseAssignLog cc "
+        + " WHERE cc.vesselCase = :vesselCase ")
+    Integer findMaxNumberIdBySubcaseId(@Param("vesselCase") VesselCase vesselCase);
 }

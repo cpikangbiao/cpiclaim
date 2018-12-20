@@ -7,7 +7,7 @@
         },
         {
             "fieldName": "operateDate",
-            "fieldType": "String"
+            "fieldType": "Instant"
         },
         {
             "fieldName": "operateType",

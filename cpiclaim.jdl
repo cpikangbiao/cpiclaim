@@ -318,7 +318,7 @@ relationship ManyToOne {
 entity CaseAssignLog {
 	numberId String ,
 	assignUser String ,
-	assignTime String ,
+	assignTime Instant ,
 	assignedUser String ,
 }
 
@@ -329,7 +329,7 @@ relationship ManyToOne {
 entity CaseRegisterLog {
 	numberId String ,
 	assignUser String ,
-	assignTime String ,
+	assignTime Instant ,
 	assignedUser String ,
 }
 
@@ -339,7 +339,7 @@ relationship ManyToOne {
 
 entity CaseCloseLog {
 	operateUserId String ,
-	operateDate String ,
+	operateDate Instant ,
 	operateType String ,
 }
 
@@ -410,7 +410,7 @@ relationship ManyToOne {
 entity CaseClaimBillPrintLog {
 	operateType String ,
 	operateUser String ,
-	operateDate String ,
+	operateDate Instant ,
 }
 
 relationship ManyToOne {

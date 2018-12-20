@@ -43,9 +43,9 @@ public class ClaimBillFinanceType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public final static int BILL_FINANCE_TYPE_CREDIT = 1;
+    public final static Long BILL_FINANCE_TYPE_CREDIT = new Long(1);
 
-    public final static int BILL_FINANCE_TYPE_DEBIT  = 2;
+    public final static Long BILL_FINANCE_TYPE_DEBIT  = new Long(2);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

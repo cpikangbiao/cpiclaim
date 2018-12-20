@@ -25,18 +25,16 @@
 package com.cpi.claim.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.cpi.claim.service.CaseFeeExtService;
 import com.cpi.claim.service.CaseFeeForBillService;
 import com.cpi.claim.service.bean.fee.CaseFeeBean;
+import com.cpi.claim.service.dto.CaseClaimBillDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 /**
  * REST controller for managing CaseFee.
@@ -51,9 +49,6 @@ public class CaseFeeForBillResource {
 
     private final CaseFeeForBillService caseFeeForBillService;
 
-    @Autowired
-    private CaseFeeExtService caseFeeExtService;
-
     public CaseFeeForBillResource(CaseFeeForBillService caseFeeForBillService) {
         this.caseFeeForBillService = caseFeeForBillService;
     }
@@ -66,5 +61,76 @@ public class CaseFeeForBillResource {
         return new ResponseEntity<>(caseFeeForBillService.getCaseFeeBeanForCaseFeeId(id), HttpStatus.OK);
     }
 
+    @PostMapping("/case-fees/create-bill/credit")
+    @Timed
+    public ResponseEntity<CaseClaimBillDTO> createClaimBillForCredit(
+        @RequestParam Long caseFeeId,
+        @RequestParam String clientBillNo,
+        @RequestParam Long creditorId,
+        @RequestParam Long userId,
+        @RequestParam Long claimAmountCurrency,
+        @RequestParam BigDecimal claimAmount
+    ) {
+        log.debug("REST request to create Claim Bill For Credit with caseFeeId : {} clientBillNo: {} : creditorId : {} userId: {} claimAmountCurrency: {} claimAmount: {}",
+            caseFeeId, clientBillNo, creditorId, userId, claimAmountCurrency, claimAmount);
+        return new ResponseEntity<>(
+            caseFeeForBillService.createClaimBillForCredit(
+                caseFeeId,
+                clientBillNo,
+                creditorId,
+                userId,
+                claimAmountCurrency,
+                claimAmount), HttpStatus.OK);
+    }
+
+    @PostMapping("/case-fees/create-bill/credit-with-deductible")
+    @Timed
+    public ResponseEntity<CaseClaimBillDTO> createClaimBillForCreditWithDeductible(
+        @RequestParam Long caseFeeId,
+        @RequestParam String clientBillNo,
+        @RequestParam Long creditorId,
+        @RequestParam Long userId,
+        @RequestParam Long claimAmountCurrency,
+        @RequestParam BigDecimal claimAmount,
+        @RequestParam Long deductibleCurrency,
+        @RequestParam BigDecimal deductibleCurrencyRate,
+        @RequestParam BigDecimal deductibleAmount
+    ) {
+        log.debug("REST request to create Claim Bill For Credit With Deductible with caseFeeId : {} clientBillNo: {} : creditorId : {} userId: {} claimAmountCurrency: {} claimAmount: {}",
+            caseFeeId, clientBillNo, creditorId, userId, claimAmountCurrency, claimAmount);
+        return new ResponseEntity<>(
+            caseFeeForBillService.createClaimBillForCreditWithDeductible(
+                caseFeeId,
+                clientBillNo,
+                creditorId,
+                userId,
+                claimAmountCurrency,
+                claimAmount,
+                deductibleCurrency,
+                deductibleCurrencyRate,
+                deductibleAmount), HttpStatus.OK);
+    }
+
+    @PostMapping("/case-fees/create-bill/debit")
+    @Timed
+    public ResponseEntity<CaseClaimBillDTO> createClaimBillForDebit(
+        @RequestParam Long caseFeeId,
+        @RequestParam String clientBillNo,
+        @RequestParam Long creditorId,
+        @RequestParam Long userId,
+        @RequestParam Long claimAmountCurrency,
+        @RequestParam BigDecimal claimAmount
+    ) {
+        log.debug("REST request to create Claim Bill For Debit with caseFeeId : {} clientBillNo: {} : creditorId : {} userId: {} claimAmountCurrency: {} claimAmount: {}",
+            caseFeeId, clientBillNo, creditorId, userId, claimAmountCurrency, claimAmount);
+        return new ResponseEntity<>(
+            caseFeeForBillService.createClaimBillForDebit(
+                caseFeeId,
+                clientBillNo,
+                creditorId,
+                userId,
+                claimAmountCurrency,
+                claimAmount), HttpStatus.OK);
+    }
 
 }

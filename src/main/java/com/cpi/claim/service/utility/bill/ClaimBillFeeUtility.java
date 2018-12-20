@@ -26,6 +26,7 @@ import com.cpi.claim.domain.CaseFee;
 import com.cpi.claim.domain.CaseClaimBill;
 
 import com.cpi.claim.domain.*;
+import com.cpi.claim.service.dto.common.CurrencyDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +45,59 @@ import java.math.BigDecimal;
 public class ClaimBillFeeUtility extends AbstractClaimBillUtility {
 
     @Transactional
-    public  void createFeeClaimBill(
+    public  CaseClaimBill createClaimBillForDebit(
+        CaseFee caseFee,
+        String clientBillNo,
+        Creditor creditor,
+        Long userId,
+        Long claimAmountCurrency,
+        BigDecimal claimAmount
+    ) {
+        ClaimBillFinanceType claimBillFinanceType = claimToolUtility.claimBillFinanceTypeRepository.getOne(ClaimBillFinanceType.BILL_FINANCE_TYPE_DEBIT);
+        CaseClaimBill caseClaimBill = createFeeClaimBill(
+            caseFee,
+            claimBillFinanceType,
+            clientBillNo,
+            creditor,
+            userId,
+            claimAmountCurrency,
+            claimAmount,
+            CurrencyDTO.CURRENCY_USD,
+            new BigDecimal(1.0),
+            new BigDecimal(0.0)
+        );
+
+        return caseClaimBill;
+    }
+
+    @Transactional
+    public  CaseClaimBill createClaimBillForCredit(
+        CaseFee caseFee,
+        String clientBillNo,
+        Creditor creditor,
+        Long userId,
+        Long claimAmountCurrency,
+        BigDecimal claimAmount
+    ) {
+        ClaimBillFinanceType claimBillFinanceType = claimToolUtility.claimBillFinanceTypeRepository.getOne(ClaimBillFinanceType.BILL_FINANCE_TYPE_CREDIT);
+        CaseClaimBill caseClaimBill = createFeeClaimBill(
+            caseFee,
+            claimBillFinanceType,
+            clientBillNo,
+            creditor,
+            userId,
+            claimAmountCurrency,
+            claimAmount,
+            CurrencyDTO.CURRENCY_USD,
+            new BigDecimal(1.0),
+            new BigDecimal(0.0)
+        );
+
+        return caseClaimBill;
+    }
+
+    @Transactional
+    public  CaseClaimBill createClaimBillForCreditWithDeductible(
         CaseFee caseFee,
         String clientBillNo,
         Creditor creditor,
@@ -55,8 +108,37 @@ public class ClaimBillFeeUtility extends AbstractClaimBillUtility {
         BigDecimal deductibleCurrencyRate,
         BigDecimal deductibleAmount
     ) {
+        ClaimBillFinanceType claimBillFinanceType = claimToolUtility.claimBillFinanceTypeRepository.getOne(ClaimBillFinanceType.BILL_FINANCE_TYPE_CREDIT);
+        CaseClaimBill caseClaimBill = createFeeClaimBill(
+            caseFee,
+            claimBillFinanceType,
+            clientBillNo,
+            creditor,
+            userId,
+            claimAmountCurrency,
+            claimAmount,
+            deductibleCurrency,
+            deductibleCurrencyRate,
+            deductibleAmount
+        );
+
+        return caseClaimBill;
+    }
+
+
+    private  CaseClaimBill createFeeClaimBill(
+        CaseFee caseFee,
+        ClaimBillFinanceType claimBillFinanceType,
+        String clientBillNo,
+        Creditor creditor,
+        Long userId,
+        Long claimAmountCurrency,
+        BigDecimal claimAmount,
+        Long deductibleCurrency,
+        BigDecimal deductibleCurrencyRate,
+        BigDecimal deductibleAmount
+    ) {
         ClaimBillType claimBillType = claimToolUtility.claimBillTypeRepository.getOne((long)ClaimBillType.CLAIM_BILL_TYPE_CLAIMFEE);
-        ClaimBillFinanceType claimBillFinanceType = claimToolUtility.claimBillFinanceTypeRepository.getOne((long)ClaimBillFinanceType.BILL_FINANCE_TYPE_CREDIT);
 
         CaseClaimBill caseClaimBill = createClaimBill(
             caseFee.getSubcase(),
@@ -77,6 +159,7 @@ public class ClaimBillFeeUtility extends AbstractClaimBillUtility {
             caseClaimBill
         );
 
+        return caseClaimBill;
     }
 
     private CaseFeeBill createCaseFeeBill(

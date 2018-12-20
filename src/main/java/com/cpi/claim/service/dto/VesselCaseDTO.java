@@ -24,12 +24,12 @@
 
 package com.cpi.claim.service.dto;
 
-import java.time.Instant;
-import javax.validation.constraints.*;
+import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Objects;
-import javax.persistence.Lob;
 
 /**
  * A DTO for the VesselCase entity.
@@ -38,7 +38,6 @@ public class VesselCaseDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private Integer numberId;
 
     private String caseYear;
@@ -66,13 +65,15 @@ public class VesselCaseDTO implements Serializable {
 
     private Instant registeredDate;
 
-    @NotNull
     private String caseCode;
 
+    @NotNull
     private Instant caseDate;
 
+    @NotNull
     private Long caseLocation;
 
+    @NotNull
     private String caseDescription;
 
     private String voyageNo;

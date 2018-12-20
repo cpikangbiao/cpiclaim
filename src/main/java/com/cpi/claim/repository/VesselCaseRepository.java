@@ -44,6 +44,14 @@ import java.util.List;
 @Repository
 public interface VesselCaseRepository extends JpaRepository<VesselCase, Long>, JpaSpecificationExecutor<VesselCase> {
 
+
+    @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
+        + " FROM VesselCase cc "
+        + " WHERE cc.caseYear.id = :caseYear "
+        + " AND cc.cpiInsuranceType.id = :cpiInsuranceTypeId ")
+    Integer findMaxNumberIdByCaseYearAndCpiInsuranceTypeId(@Param("caseYear") String caseYear, @Param("cpiInsuranceTypeId") Long cpiInsuranceTypeId);
+
+
     @Query(value = "SELECT "
         + " new com.cpi.claim.repository.bean.CaseYearCountStatisticsBean( c.caseYear, t.cpiInsuranceTypeName, COUNT(c) ) "
         + " FROM VesselCase c JOIN c.cpiInsuranceType t "

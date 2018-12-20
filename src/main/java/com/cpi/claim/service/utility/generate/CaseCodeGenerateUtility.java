@@ -38,12 +38,14 @@ import java.text.NumberFormat;
  */
 public class CaseCodeGenerateUtility {
 
-    public static String createCaseCode(CpiInsuranceType cpiInsuranceType, String year, Integer numberId) {
-        if (cpiInsuranceType.getId().equals(CpiInsuranceType.CPI_INSURANCE_PI)) {
+    private static final String NUMBER_PATTERN = "0000";
+
+    public static String createCaseCode(Long cpiInsuranceTypeId, String year, Integer numberId) {
+        if (cpiInsuranceTypeId.equals(CpiInsuranceType.CPI_INSURANCE_PI)) {
             return createPICaseCode(year, numberId);
-        } else if (cpiInsuranceType.getId().equals(CpiInsuranceType.CPI_INSURANCE_FDD)) {
+        } else if (cpiInsuranceTypeId.equals(CpiInsuranceType.CPI_INSURANCE_FDD)) {
             return createFDDCaseCode(year, numberId);
-        } else if (cpiInsuranceType.getId().equals(CpiInsuranceType.CPI_INSURANCE_TCL)) {
+        } else if (cpiInsuranceTypeId.equals(CpiInsuranceType.CPI_INSURANCE_TCL)) {
             return createTCLCaseCode(year, numberId);
         } else {
             return createOtherCaseCode(year, numberId);
@@ -54,7 +56,7 @@ public class CaseCodeGenerateUtility {
     private static String createFDDCaseCode(String year, Integer numberId) {
         StringBuilder caseCode = new StringBuilder();
         caseCode.append("F");
-        NumberFormat formatter4 = new DecimalFormat("0000");
+        NumberFormat formatter4 = new DecimalFormat(NUMBER_PATTERN);
         caseCode.append(year);
         caseCode.append(formatter4.format(numberId));
         return caseCode.toString();
@@ -63,7 +65,7 @@ public class CaseCodeGenerateUtility {
     private static String createTCLCaseCode(String year, Integer numberId) {
         StringBuilder caseCode = new StringBuilder();
         caseCode.append("TCL");
-        NumberFormat formatter4 = new DecimalFormat("0000");
+        NumberFormat formatter4 = new DecimalFormat(NUMBER_PATTERN);
         caseCode.append(year);
         caseCode.append(formatter4.format(numberId));
         return caseCode.toString();
@@ -71,7 +73,7 @@ public class CaseCodeGenerateUtility {
 
     private static String createPICaseCode(String year, Integer numberId) {
         StringBuilder caseCode = new StringBuilder();
-        NumberFormat formatter4 = new DecimalFormat("0000");
+        NumberFormat formatter4 = new DecimalFormat(NUMBER_PATTERN);
         caseCode.append(year);
         caseCode.append(formatter4.format(numberId));
         return caseCode.toString();
@@ -80,7 +82,7 @@ public class CaseCodeGenerateUtility {
     private static String createOtherCaseCode(String year, Integer numberId) {
         StringBuilder caseCode = new StringBuilder();
         caseCode.append("OTHER");
-        NumberFormat formatter4 = new DecimalFormat("0000");
+        NumberFormat formatter4 = new DecimalFormat(NUMBER_PATTERN);
         caseCode.append(year);
         caseCode.append(formatter4.format(numberId));
         return caseCode.toString();

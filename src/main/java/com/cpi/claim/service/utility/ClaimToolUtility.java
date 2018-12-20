@@ -77,6 +77,16 @@ public class ClaimToolUtility {
     @Autowired
     public MemberRepository memberRepository;
 
+    @Autowired
+    public CompanyNameHistoryRepository companyNameHistoryRepository;
+
+    @Autowired
+    public VesselNameHistoryRepository vesselNameHistoryRepository;
+
+
+    @Autowired
+    public CurrencyRateRepository currencyRateRepository;
+
 
     @Autowired
     public CaseGuaranteeRepository caseGuaranteeRepository;
@@ -129,7 +139,11 @@ public class ClaimToolUtility {
     @Autowired
     public ClaimBillFinanceTypeRepository claimBillFinanceTypeRepository;
 
+
     @Autowired
-    public CurrencyRateRepository currencyRateRepository;
+    public CreditorRepository creditorRepository;
+
+    @Autowired
+    public CaseStatusTypeRepository caseStatusTypeRepository;
 
 }

@@ -46,31 +46,6 @@ public abstract class AbstractClaimBillUtility {
     @Autowired
     protected ClaimToolUtility claimToolUtility;
 
-    protected CaseClaimBill createDeductBill(
-        VesselSubCase vesselSubCase,
-        ClaimBillType claimBillType,
-        String clientBillNo,
-        Creditor creditor,
-        Long userId,
-        Long claimAmountCurrency,
-        BigDecimal claimAmount
-    ) {
-        ClaimBillFinanceType claimBillFinanceType = claimToolUtility.claimBillFinanceTypeRepository.getOne((long) ClaimBillFinanceType.BILL_FINANCE_TYPE_DEBIT);
-        return createClaimBill(
-                                vesselSubCase,
-                                claimBillType,
-                                claimBillFinanceType,
-                                clientBillNo,
-                                creditor,
-                                userId,
-                                claimAmountCurrency,
-                                claimAmount,
-                                claimAmountCurrency,
-                                new BigDecimal(1.0),
-                                BigDecimal.ZERO
-                            );
-    }
-
     protected CaseClaimBill createClaimBill(
         VesselSubCase vesselSubCase,
         ClaimBillType claimBillType,
@@ -86,7 +61,7 @@ public abstract class AbstractClaimBillUtility {
     ) {
         CaseClaimBill caseClaimBill = new CaseClaimBill();
 
-        ClaimBillStatus claimBillStatus = claimToolUtility.claimBillStatusRepository.getOne((long) ClaimBillStatus.CASE_CLAIM_BILL_STATUS_APPROVALED);
+        ClaimBillStatus claimBillStatus = claimToolUtility.claimBillStatusRepository.getOne((long) ClaimBillStatus.CASE_CLAIM_BILL_STATUS_NOAPPROVAL);
         caseClaimBill.setClaimBillStatus(claimBillStatus);
         caseClaimBill.setClaimBillType(claimBillType);
         caseClaimBill.setClaimBillFinanceType(claimBillFinanceType);
