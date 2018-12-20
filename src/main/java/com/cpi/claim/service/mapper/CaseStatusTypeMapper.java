@@ -24,10 +24,10 @@
 
 package com.cpi.claim.service.mapper;
 
-import com.cpi.claim.domain.*;
-import com.cpi.claim.service.dto.CaseStatusTypeDTO;
 
-import org.mapstruct.*;
+import com.cpi.claim.domain.CaseStatusType;
+import com.cpi.claim.service.dto.CaseStatusTypeDTO;
+import org.mapstruct.Mapper;
 
 /**
  * Mapper for the entity CaseStatusType and its DTO CaseStatusTypeDTO.

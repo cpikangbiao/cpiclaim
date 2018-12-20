@@ -51,11 +51,11 @@ public interface CompanyNameHistoryRepository {
     CompanyNameHistoryDTO findCompanyNameHistoryByID(@PathVariable("id") Long id);
 
     @RequestMapping(value = "/api/company-name-histories/by-company-id/{companyId}", method = RequestMethod.GET)
-    List<CompanyNameHistoryDTO> findAllByCompanyId(@PathVariable("id") Long companyId);
+    List<CompanyNameHistoryDTO> findAllByCompanyId(@PathVariable("companyId") Long companyId);
 
     @RequestMapping(value = "/api/company-name-histories/find-fit-name-by-company-id", method = RequestMethod.GET)
-    CompanyNameHistoryDTO findFitCompanyNameByCompanyId(@RequestParam Long companyId,
-                                                        @RequestParam Instant speicalTime);
+    CompanyNameHistoryDTO findFitCompanyNameByCompanyId(@RequestParam("companyId") Long companyId,
+                                                        @RequestParam("specialTime") Instant specialTime);
 
 
 }

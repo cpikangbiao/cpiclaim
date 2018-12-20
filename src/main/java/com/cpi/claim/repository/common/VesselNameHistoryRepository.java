@@ -51,9 +51,9 @@ public interface VesselNameHistoryRepository {
     VesselNameHistoryDTO findVesselNameHistoryByID(@PathVariable("id") Long id);
 
     @RequestMapping(value = "/api/vessel-name-histories/by-vessel-id/{vesselId}", method = RequestMethod.GET)
-    List<VesselNameHistoryDTO> findAllByVesselId(@PathVariable("id") Long vesselId);
+    List<VesselNameHistoryDTO> findAllByVesselId(@PathVariable("vesselId") Long vesselId);
 
     @RequestMapping(value = "/api/vessel-name-histories/find-fit-name-by-vessel-id", method = RequestMethod.GET)
-    VesselNameHistoryDTO findFitVesselNameByVesselId(@RequestParam Long vesselId,
-                                                        @RequestParam Instant speicalTime);
+    VesselNameHistoryDTO findFitVesselNameByVesselId(@RequestParam("vesselId") Long vesselId,
+                                                     @RequestParam("specialTime") Instant specialTime);
 }
