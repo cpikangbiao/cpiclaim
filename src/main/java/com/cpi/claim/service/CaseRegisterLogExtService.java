@@ -28,10 +28,13 @@ import com.cpi.claim.domain.CaseRegisterLog;
 import com.cpi.claim.domain.VesselCase;
 import com.cpi.claim.repository.CaseRegisterLogRepository;
 import com.cpi.claim.security.SecurityUtils;
+import com.cpi.claim.service.dto.CaseRegisterLogDTO;
 import com.cpi.claim.service.mapper.CaseRegisterLogMapper;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +53,12 @@ public class CaseRegisterLogExtService extends QueryService<CaseRegisterLog> {
     public CaseRegisterLogExtService(CaseRegisterLogRepository caseRegisterLogRepository, CaseRegisterLogMapper caseRegisterLogMapper) {
         this.caseRegisterLogRepository = caseRegisterLogRepository;
         this.caseRegisterLogMapper = caseRegisterLogMapper;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CaseRegisterLogDTO> findAllByVesselCase(Long vesselCaseId, Pageable page) {
+        return caseRegisterLogRepository.findAllByVesselCaseIdOrderByAssignTimeDesc(vesselCaseId, page)
+            .map(caseRegisterLogMapper::toDto);
     }
 
     @Transactional

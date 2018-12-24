@@ -26,22 +26,21 @@ package com.cpi.claim.service;
 
 import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseClaimBillApprovalLog;
-import com.cpi.claim.domain.CaseClaimBillApprovalLog_;
-import com.cpi.claim.domain.CaseClaimBill_;
 import com.cpi.claim.repository.CaseClaimBillApprovalLogRepository;
-import com.cpi.claim.service.dto.CaseClaimBillApprovalLogCriteria;
+import com.cpi.claim.repository.CaseClaimBillRepository;
+import com.cpi.claim.security.SecurityUtils;
 import com.cpi.claim.service.dto.CaseClaimBillApprovalLogDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillApprovalLogMapper;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.Instant;
 
 @Service
 @Transactional
@@ -53,16 +52,47 @@ public class CaseClaimBillApprovalLogExtService extends QueryService<CaseClaimBi
 
     private final CaseClaimBillApprovalLogMapper caseClaimBillApprovalLogMapper;
 
-    public CaseClaimBillApprovalLogExtService(CaseClaimBillApprovalLogRepository caseClaimBillApprovalLogRepository, CaseClaimBillApprovalLogMapper caseClaimBillApprovalLogMapper) {
+    @Autowired
+    private CaseClaimBillRepository caseClaimBillRepository;
+
+    public CaseClaimBillApprovalLogExtService(
+        CaseClaimBillApprovalLogRepository caseClaimBillApprovalLogRepository,
+        CaseClaimBillApprovalLogMapper caseClaimBillApprovalLogMapper) {
         this.caseClaimBillApprovalLogRepository = caseClaimBillApprovalLogRepository;
         this.caseClaimBillApprovalLogMapper = caseClaimBillApprovalLogMapper;
     }
 
     @Transactional(readOnly = true)
-    public Page<CaseClaimBillApprovalLogDTO> findAllByCaseClaimBill(CaseClaimBill caseClaimBill, Pageable page) {
-        log.debug("find by caseClaimBill : {}", caseClaimBill);
-        return caseClaimBillApprovalLogRepository.findAllByCaseClaimBill(caseClaimBill, page)
-            .map(caseClaimBillApprovalLogMapper::toDto);
+    public Page<CaseClaimBillApprovalLogDTO> findAllByCaseClaimBill(Long caseClaimBillId, Pageable page) {
+        log.debug("find by caseClaimBillId : {}", caseClaimBillId);
+        CaseClaimBill caseClaimBill = caseClaimBillRepository.getOne(caseClaimBillId);
+        if (caseClaimBill != null) {
+            return caseClaimBillApprovalLogRepository.findAllByCaseClaimBill(caseClaimBill, page)
+                .map(caseClaimBillApprovalLogMapper::toDto);
+        }
+        return null;
+    }
+
+    @Transactional
+    public void saveBillApprovalLog(CaseClaimBill caseClaimBill,
+                                Long processId,
+                                String approvalOptiion,
+                                String approvalTransition) {
+        CaseClaimBillApprovalLog caseClaimBillApprovalLog = new  CaseClaimBillApprovalLog();
+
+        caseClaimBillApprovalLog.setCaseClaimBill(caseClaimBill);
+        caseClaimBillApprovalLog.setProcessId(processId);
+        caseClaimBillApprovalLog.setInsertTime(Instant.now());
+        if (SecurityUtils.getCurrentUserLogin().isPresent()) {
+            caseClaimBillApprovalLog.setApprovalUser(SecurityUtils.getCurrentUserLogin().get());
+        } else {
+            caseClaimBillApprovalLog.setApprovalUser("Error User");
+        }
+        caseClaimBillApprovalLog.setApprovalOpinion(approvalOptiion);
+        caseClaimBillApprovalLog.setApprovalTransition(approvalTransition);
+        caseClaimBillApprovalLog.setRemark(null);
+
+        caseClaimBillApprovalLogRepository.save(caseClaimBillApprovalLog);
     }
 
 }

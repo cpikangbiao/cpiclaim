@@ -24,12 +24,9 @@
 
 package com.cpi.claim.repository;
 
-import com.cpi.claim.domain.CaseClaimBill;
-import com.cpi.claim.domain.CaseClaimBillApprovalLog;
 import com.cpi.claim.domain.CaseClaimBillDeleteLog;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 

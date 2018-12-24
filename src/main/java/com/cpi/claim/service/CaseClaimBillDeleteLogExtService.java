@@ -26,10 +26,8 @@ package com.cpi.claim.service;
 
 import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseClaimBillDeleteLog;
-import com.cpi.claim.domain.CaseClaimBillDeleteLog_;
 import com.cpi.claim.repository.CaseClaimBillDeleteLogRepository;
-import com.cpi.claim.service.dto.CaseClaimBillDeleteLogDTO;
-import com.cpi.claim.service.dto.CaseClaimBillDeleteLogCriteria;
+import com.cpi.claim.security.SecurityUtils;
 import com.cpi.claim.service.dto.CaseClaimBillDeleteLogDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillDeleteLogMapper;
 import io.github.jhipster.service.QueryService;
@@ -37,11 +35,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.Instant;
 
 
 @Service
@@ -59,11 +56,29 @@ public class CaseClaimBillDeleteLogExtService extends QueryService<CaseClaimBill
         this.caseClaimBillDeleteLogMapper = caseClaimBillDeleteLogMapper;
     }
 
-//    @Transactional(readOnly = true)
-//    public Page<CaseClaimBillDeleteLogDTO> findAllByCaseClaimBill(CaseClaimBill caseClaimBill, Pageable page) {
-//        log.debug("find by caseClaimBill : {}", caseClaimBill);
-//        return caseClaimBillDeleteLogRepository.findAllByCaseClaimBill(caseClaimBill, page)
-//            .map(caseClaimBillDeleteLogMapper::toDto);
-//    }
+    @Transactional(readOnly = true)
+    public Page<CaseClaimBillDeleteLogDTO> findAll(Pageable page) {
+        log.debug("find by page : {}", page);
+        return caseClaimBillDeleteLogRepository.findAll(page)
+            .map(caseClaimBillDeleteLogMapper::toDto);
+    }
 
+
+    @Transactional
+    public void saveBillPrintLog(CaseClaimBill caseClaimBill, String operateType) {
+        CaseClaimBillDeleteLog caseClaimBillDeleteLog = new  CaseClaimBillDeleteLog();
+
+        caseClaimBillDeleteLog.setClaimBillCode(caseClaimBill.getClaimBillCode());
+
+        if (SecurityUtils.getCurrentUserLogin().isPresent()) {
+            caseClaimBillDeleteLog.setOperateUser(SecurityUtils.getCurrentUserLogin().get());
+        } else {
+            caseClaimBillDeleteLog.setOperateUser("Error User");
+        }
+
+        caseClaimBillDeleteLog.setOperateType(operateType);
+        caseClaimBillDeleteLog.setOperateDate(Instant.now());
+
+        caseClaimBillDeleteLogRepository.save(caseClaimBillDeleteLog);
+    }
 }

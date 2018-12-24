@@ -26,6 +26,8 @@ package com.cpi.claim.repository;
 
 import com.cpi.claim.domain.CaseAssignLog;
 import com.cpi.claim.domain.VesselCase;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -42,4 +44,6 @@ public interface CaseAssignLogRepository extends JpaRepository<CaseAssignLog, Lo
         + " FROM CaseAssignLog cc "
         + " WHERE cc.vesselCase = :vesselCase ")
     Integer findMaxNumberIdBySubcaseId(@Param("vesselCase") VesselCase vesselCase);
+
+    Page<CaseAssignLog> findAllByVesselCaseIdOrderByAssignTimeDesc(Long vesselCaseId, Pageable pageable);
 }

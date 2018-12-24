@@ -28,6 +28,7 @@ import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CaseClaimBillPrintLog;
 import com.cpi.claim.repository.CaseClaimBillPrintLogRepository;
 import com.cpi.claim.repository.CaseClaimBillRepository;
+import com.cpi.claim.security.SecurityUtils;
 import com.cpi.claim.service.dto.CaseClaimBillPrintLogDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillPrintLogMapper;
 import io.github.jhipster.service.QueryService;
@@ -38,6 +39,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
 
 
 @Service
@@ -65,6 +68,22 @@ public class CaseClaimBillPrintLogExtService extends QueryService<CaseClaimBillP
 
         return caseClaimBillPrintLogRepository.findAllByCaseClaimBill(caseClaimBill, page)
             .map(caseClaimBillPrintLogMapper::toDto);
+    }
+
+    @Transactional
+    public void saveBillPrintLog(CaseClaimBill caseClaimBill, String operateType) {
+        CaseClaimBillPrintLog caseClaimBillPrintLog = new  CaseClaimBillPrintLog();
+
+        caseClaimBillPrintLog.setCaseClaimBill(caseClaimBill);
+        caseClaimBillPrintLog.setOperateType(operateType);
+        if (SecurityUtils.getCurrentUserLogin().isPresent()) {
+            caseClaimBillPrintLog.setOperateUser(SecurityUtils.getCurrentUserLogin().get());
+        } else {
+            caseClaimBillPrintLog.setOperateUser("Error User");
+        }
+        caseClaimBillPrintLog.setOperateDate(Instant.now());
+
+        caseClaimBillPrintLogRepository.save(caseClaimBillPrintLog);
     }
 
 }

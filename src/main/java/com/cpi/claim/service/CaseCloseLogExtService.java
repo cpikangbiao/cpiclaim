@@ -28,10 +28,13 @@ import com.cpi.claim.domain.CaseCloseLog;
 import com.cpi.claim.domain.VesselCase;
 import com.cpi.claim.repository.CaseCloseLogRepository;
 import com.cpi.claim.security.SecurityUtils;
+import com.cpi.claim.service.dto.CaseCloseLogDTO;
 import com.cpi.claim.service.mapper.CaseCloseLogMapper;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +55,13 @@ public class CaseCloseLogExtService extends QueryService<CaseCloseLog> {
     public CaseCloseLogExtService(CaseCloseLogRepository caseCloseLogRepository, CaseCloseLogMapper caseCloseLogMapper) {
         this.caseCloseLogRepository = caseCloseLogRepository;
         this.caseCloseLogMapper = caseCloseLogMapper;
+    }
+
+
+    @Transactional(readOnly = true)
+    public Page<CaseCloseLogDTO> findAllByVesselCase(Long vesselCaseId, Pageable page) {
+        return caseCloseLogRepository.findAllByVesselCaseIdOrderByOperateDateDesc(vesselCaseId, page)
+            .map(caseCloseLogMapper::toDto);
     }
 
     @Transactional

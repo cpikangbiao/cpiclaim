@@ -105,7 +105,7 @@ public class VesselCaseOperateService extends QueryService<VesselCase> {
 
         caseCloseLogExtService.saveCaseCloseLog(vesselCase,"Close");
     }
-
+    @Transactional
     private void operateCaseStatus(VesselCase vesselCase, Long caseStatusTypeId) {
         if (vesselCase != null) {
             CaseStatusType caseStatusType =
@@ -121,7 +121,7 @@ public class VesselCaseOperateService extends QueryService<VesselCase> {
         }
     }
 
-
+    @Transactional
     private void assignCase(VesselCase vesselCase, Long assignedUserId) {
         vesselCase.setAssignedHandler(assignedUserId);
         vesselCase.setAssignedTime(Instant.now());
@@ -129,6 +129,7 @@ public class VesselCaseOperateService extends QueryService<VesselCase> {
         vesselCaseRepository.save(vesselCase);
     }
 
+    @Transactional
     private void registeredCase(VesselCase vesselCase, Long registeredUserId) {
         vesselCase.setRegisteredHandler(registeredUserId);
         vesselCase.setRegisteredDate(Instant.now());
