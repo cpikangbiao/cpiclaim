@@ -50,7 +50,6 @@ public class VesselCase extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Column(name = "number_id", nullable = false)
     private Integer numberId;
 

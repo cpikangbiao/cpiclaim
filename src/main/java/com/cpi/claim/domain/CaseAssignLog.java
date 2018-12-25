@@ -36,7 +36,7 @@ public class CaseAssignLog implements Serializable {
     @Column(name = "assigned_user")
     private String assignedUser;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JsonIgnoreProperties("")
     private VesselCase vesselCase;
 

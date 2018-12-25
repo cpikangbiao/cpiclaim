@@ -39,7 +39,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -105,36 +104,37 @@ public class VesselCaseOperateService extends QueryService<VesselCase> {
 
         caseCloseLogExtService.saveCaseCloseLog(vesselCase,"Close");
     }
+
     @Transactional
-    private void operateCaseStatus(VesselCase vesselCase, Long caseStatusTypeId) {
+    protected void operateCaseStatus(VesselCase vesselCase, Long caseStatusTypeId) {
         if (vesselCase != null) {
             CaseStatusType caseStatusType =
                 claimToolUtility.caseStatusTypeRepository.getOne(caseStatusTypeId);
             vesselCase.setCaseStatus(caseStatusType);
             vesselCase.setCloseDate(Instant.now());
-            Optional<UserDTO> optional = userService.getCurrentUser();
-            if (optional.isPresent()) {
-                vesselCase.setCloseHandler(optional.get().getId());
-            }
+//            Optional<UserDTO> optional = userService.getCurrentUser();
+//            if (optional.isPresent()) {
+//                vesselCase.setCloseHandler(optional.get().getId());
+//            }
 
             vesselCaseRepository.save(vesselCase);
         }
     }
 
     @Transactional
-    private void assignCase(VesselCase vesselCase, Long assignedUserId) {
+    protected void assignCase(VesselCase vesselCase, Long assignedUserId) {
         vesselCase.setAssignedHandler(assignedUserId);
         vesselCase.setAssignedTime(Instant.now());
 
-        vesselCaseRepository.save(vesselCase);
+        vesselCaseRepository.saveAndFlush(vesselCase);
     }
 
     @Transactional
-    private void registeredCase(VesselCase vesselCase, Long registeredUserId) {
+    protected void registeredCase(VesselCase vesselCase, Long registeredUserId) {
         vesselCase.setRegisteredHandler(registeredUserId);
         vesselCase.setRegisteredDate(Instant.now());
 
-        vesselCaseRepository.save(vesselCase);
+        vesselCaseRepository.saveAndFlush(vesselCase);
     }
 
 

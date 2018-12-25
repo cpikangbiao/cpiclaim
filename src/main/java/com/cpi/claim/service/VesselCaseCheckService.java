@@ -150,11 +150,11 @@ public class VesselCaseCheckService extends QueryService<VesselCase> {
 
 //        vesselCaseDTO.setVoyageNo("");
 //        vesselCaseDTO.setLoadingPort(0L);
-//        vesselCaseDTO.setLoadingDate(new Instant());
+//        vesselCaseDTO.setLoadingDate(Instant.now());
 //        vesselCaseDTO.setDischargingPort(0L);
-//        vesselCaseDTO.setDischargingDate(new Instant());
-//        vesselCaseDTO.setLimitTime(new Instant());
-//        vesselCaseDTO.setCpDate(new Instant());
+//        vesselCaseDTO.setDischargingDate(Instant.now());
+//        vesselCaseDTO.setLimitTime(Instant.now());
+//        vesselCaseDTO.setCpDate(Instant.now());
 //        vesselCaseDTO.setCpType("");
 //        vesselCaseDTO.setArrestVessel("");
 //        vesselCaseDTO.setJurisdiction(0L);
@@ -162,7 +162,7 @@ public class VesselCaseCheckService extends QueryService<VesselCase> {
 //
 //        vesselCaseDTO.setRemark("");
 //        vesselCaseDTO.setSettlementAmount(new BigDecimal("0"));
-//        vesselCaseDTO.setSettlementDate(new Instant());
+//        vesselCaseDTO.setSettlementDate(Instant.now());
 
 //
 //        vesselCaseDTO.setSettlementModeId(0L);

@@ -78,9 +78,8 @@ public class CaseCloseLogExtService extends QueryService<CaseCloseLog> {
 
         caseCloseLog.setOperateDate(Instant.now());
         caseCloseLog.setOperateType(operateType);
-        caseCloseLog.setVesselCase(new VesselCase());
 
-        caseCloseLogRepository.save(caseCloseLog);
+        caseCloseLogRepository.saveAndFlush(caseCloseLog);
     }
 
 

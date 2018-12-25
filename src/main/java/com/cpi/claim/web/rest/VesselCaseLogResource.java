@@ -68,32 +68,29 @@ public class VesselCaseLogResource {
         this.vesselCaseOperateService = vesselCaseOperateService;
     }
 
-    @GetMapping("/vessel-cases/log/get-close-case-logs/{id}")
+    @GetMapping("/vessel-cases/log/get-close-case-logs")
     @Timed
     public ResponseEntity<Page<CaseCloseLogDTO>> getCloseLogsForVesselCase(
-        @PathVariable("id") Long id,
-        @RequestParam("pageable") Pageable pageable) throws URISyntaxException {
-        log.debug("REST request to get CloseLogs For VesselCase for id : {}", id);
+        Long id, Pageable pageable) throws URISyntaxException {
+        log.debug("REST request to get CloseLogs For VesselCase for id : {} pageable : {}", id, pageable);
         return ResponseEntity.ok()
             .body(caseCloseLogExtService.findAllByVesselCase(id, pageable));
     }
 
-    @GetMapping("/vessel-cases/log/get-assign-case-logs/{id}")
+    @GetMapping("/vessel-cases/log/get-assign-case-logs")
     @Timed
     public ResponseEntity<Page<CaseAssignLogDTO>> getCaseAssignLogsForVesselCase(
-        @PathVariable("id") Long id,
-        @RequestParam("pageable") Pageable pageable) throws URISyntaxException {
-        log.debug("REST request to get CloseLogs For VesselCase for id : {}", id);
+         Long id, Pageable pageable) throws URISyntaxException {
+        log.debug("REST request to get CloseLogs For VesselCase for id : {} pageable : {}", id, pageable);
         return ResponseEntity.ok()
             .body(caseAssignLogExtService.findAllByVesselCase(id, pageable));
     }
 
-    @GetMapping("/vessel-cases/log/get-register-case-logs/{id}")
+    @GetMapping("/vessel-cases/log/get-register-case-logs")
     @Timed
     public ResponseEntity<Page<CaseRegisterLogDTO>> getCaseRegisterLogsForVesselCase(
-        @PathVariable("id") Long id,
-        @RequestParam("pageable") Pageable pageable) throws URISyntaxException {
-        log.debug("REST request to get CloseLogs For VesselCase for id : {}", id);
+        Long id, Pageable pageable) throws URISyntaxException {
+        log.debug("REST request to get CloseLogs For VesselCase for id : {} pageable : {}", id, pageable);
         return ResponseEntity.ok()
             .body(caseRegisterLogExtService.findAllByVesselCase(id, pageable));
     }

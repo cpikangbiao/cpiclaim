@@ -45,7 +45,7 @@ import java.net.URISyntaxException;
  * REST controller for managing VesselCase.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/test")
 public class VesselCaseOperateResource {
 
     private final Logger log = LoggerFactory.getLogger(VesselCaseOperateResource.class);

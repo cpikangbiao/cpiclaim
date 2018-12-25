@@ -66,7 +66,7 @@ public class CaseClaimBillApprovalLog implements Serializable {
     @Column(name = "remark")
     private String remark;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JsonIgnoreProperties("")
     private CaseClaimBill caseClaimBill;
 

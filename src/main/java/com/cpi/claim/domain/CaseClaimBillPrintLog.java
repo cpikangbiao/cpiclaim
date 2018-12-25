@@ -33,7 +33,7 @@ public class CaseClaimBillPrintLog implements Serializable {
     @Column(name = "operate_date")
     private Instant operateDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JsonIgnoreProperties("")
     private CaseClaimBill caseClaimBill;
 

@@ -33,7 +33,7 @@ public class CaseCloseLog implements Serializable {
     @Column(name = "operate_type")
     private String operateType;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JsonIgnoreProperties("")
     private VesselCase vesselCase;
 
