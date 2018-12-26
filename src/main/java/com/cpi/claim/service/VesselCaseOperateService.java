@@ -39,6 +39,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -102,7 +103,7 @@ public class VesselCaseOperateService extends QueryService<VesselCase> {
         VesselCase vesselCase = vesselCaseRepository.getOne(vesselCaseId);
         operateCaseStatus(vesselCase, CaseStatusType.CASE_STATUS_OPEN);
 
-        caseCloseLogExtService.saveCaseCloseLog(vesselCase,"Close");
+        caseCloseLogExtService.saveCaseCloseLog(vesselCase,"Reopen");
     }
 
     @Transactional
@@ -112,10 +113,10 @@ public class VesselCaseOperateService extends QueryService<VesselCase> {
                 claimToolUtility.caseStatusTypeRepository.getOne(caseStatusTypeId);
             vesselCase.setCaseStatus(caseStatusType);
             vesselCase.setCloseDate(Instant.now());
-//            Optional<UserDTO> optional = userService.getCurrentUser();
-//            if (optional.isPresent()) {
-//                vesselCase.setCloseHandler(optional.get().getId());
-//            }
+            Optional<UserDTO> optional = userService.getCurrentUser();
+            if (optional.isPresent()) {
+                vesselCase.setCloseHandler(optional.get().getId());
+            }
 
             vesselCaseRepository.save(vesselCase);
         }

@@ -38,6 +38,7 @@ import com.cpi.claim.service.mapper.VesselCaseMapper;
 import com.cpi.claim.service.user.UserService;
 import com.cpi.claim.service.utility.ClaimToolUtility;
 import com.cpi.claim.service.utility.generate.CaseCodeGenerateUtility;
+import com.cpi.share.uw.reinsurance.IvReinsuranceInfo;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -213,27 +214,11 @@ public class VesselCaseCheckService extends QueryService<VesselCase> {
     }
 
     @Transactional
-    public void checkReinsures(VesselCaseDTO vesselCaseDTO) {
-//        List<InsuredVesselReinsureVO> ivreinsures =
-//            new InsuredVesselReinsureDAO().getListByInsuredVessel(vesselCaseDTO.getInsuredVesselId(), null);
-//        if (vesselCaseDTO.getCaseDate() != null) {
-//            if (ivreinsures.size() > 0) {
-//                for (InsuredVesselReinsureVO ivreinsure : ivreinsures) {
-//                    if (vesselCaseDTO.getCaseDate() != null
-//                        && !vesselCaseDTO.getCaseDate().before(ivreinsure.getEntryDate())
-//                        && !vesselCaseDTO.getCaseDate().after(ivreinsure.getWithdrawDate())) {
-//                        vesselCaseDTO.setReinsureId(ivreinsure.getReinsure());
-//                        vesselCaseDTO.setDeduct(ivreinsure.getDeductibles());
-//                    }
-//                }
-//            } else {
-//                vesselCaseDTO.setReinsureId(null);
-//                vesselCaseDTO.setDeduct(null);
-//            }
-//        } else {
-//            vesselCaseDTO.setReinsureId(null);
-//            vesselCaseDTO.setDeduct(null);
-//        }
+    public void checkReinsurances(VesselCaseDTO vesselCaseDTO) {
+        IvReinsuranceInfo ivReinsuranceInfo =
+            claimToolUtility.insuredVesselRepository.getLastIvReinsuranceInfo(vesselCaseDTO.getInsuredVesselId(), vesselCaseDTO.getCaseDate());
+        vesselCaseDTO.setReinsureId(ivReinsuranceInfo.getReinsuranceId());
+        vesselCaseDTO.setDeduct(ivReinsuranceInfo.getDeductiable());
     }
 
 

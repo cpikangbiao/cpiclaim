@@ -390,17 +390,23 @@
             <artifactId>spring-cloud-spring-service-connector</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports</artifactId>
-            <version>${jasperreports.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>net.sf.jasperreports</groupId>-->
+            <!--<artifactId>jasperreports</artifactId>-->
+            <!--<version>${jasperreports.version}</version>-->
+        <!--</dependency>-->
 
 
         <!-- Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-data</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cpi.share</groupId>
+            <artifactId>cpishare</artifactId>
+            <version>1.0</version>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>

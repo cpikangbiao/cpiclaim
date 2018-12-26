@@ -24,15 +24,15 @@
 
 package com.cpi.claim.repository.uw;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.client.AuthorizedFeignClient;
 import com.cpi.claim.service.dto.uw.InsuredVesselDTO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.cpi.share.uw.reinsurance.IvReinsuranceInfo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.Instant;
 import java.util.List;
 
 @AuthorizedFeignClient(name = "cpiuw")
@@ -48,6 +48,13 @@ public interface InsuredVesselRepository {
         @PathVariable("companyId") Long companyId,
         @PathVariable("cpiInsuranceTypeId") Long cpiInsuranceTypeId
     );
+
+    @RequestMapping(value = "/api/insured-vessels/claim/get-last-iv-reinsurance-info", method = RequestMethod.GET)
+    IvReinsuranceInfo getLastIvReinsuranceInfo(
+        @RequestParam("insuredVesselId") Long insuredVesselId,
+        @RequestParam("caseDate") Instant caseDate
+    );
+
 
 
 }

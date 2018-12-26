@@ -47,7 +47,7 @@ public interface VesselCaseRepository extends JpaRepository<VesselCase, Long>, J
 
     @Query("SELECT COALESCE(MAX(cc.numberId), 0) "
         + " FROM VesselCase cc "
-        + " WHERE cc.caseYear.id = :caseYear "
+        + " WHERE cc.caseYear = :caseYear "
         + " AND cc.cpiInsuranceType.id = :cpiInsuranceTypeId ")
     Integer findMaxNumberIdByCaseYearAndCpiInsuranceTypeId(@Param("caseYear") String caseYear, @Param("cpiInsuranceTypeId") Long cpiInsuranceTypeId);
 

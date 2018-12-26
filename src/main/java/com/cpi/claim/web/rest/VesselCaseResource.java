@@ -90,7 +90,7 @@ public class VesselCaseResource {
 
         vesselCaseCheckService.setDefaultValue(vesselCaseDTO);
         vesselCaseCheckService.checkCompanyAndVesselName(vesselCaseDTO);
-        vesselCaseCheckService.checkReinsures(vesselCaseDTO);
+        vesselCaseCheckService.checkReinsurances(vesselCaseDTO);
 
         VesselCaseDTO result = vesselCaseService.save(vesselCaseDTO);
         return ResponseEntity.created(new URI("/api/vessel-cases/" + result.getId()))
