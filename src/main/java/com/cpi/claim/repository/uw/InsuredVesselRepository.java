@@ -26,6 +26,7 @@ package com.cpi.claim.repository.uw;
 
 import com.cpi.claim.client.AuthorizedFeignClient;
 import com.cpi.claim.service.dto.uw.InsuredVesselDTO;
+import com.cpi.share.uw.insuredvessel.InsuredVesselInfo;
 import com.cpi.share.uw.reinsurance.IvReinsuranceInfo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,14 @@ public interface InsuredVesselRepository {
         @RequestParam("caseDate") Instant caseDate
     );
 
+    @RequestMapping(value = "/api/insured-vessels/claim/get-iv-info", method = RequestMethod.GET)
+    InsuredVesselInfo getInsuredVesselInfo(
+        @RequestParam("insuredVesselId") Long insuredVesselId
+    );
 
-
+    @RequestMapping(value = "/api/insured-vessels/claim/get-certificate-version-html/{ivCertificateVersionId}", method = RequestMethod.GET)
+    byte[] getHTMLFileForCertificate(
+        @PathVariable("ivCertificateVersionId") Long ivCertificateVersionId
+    );
 }
 

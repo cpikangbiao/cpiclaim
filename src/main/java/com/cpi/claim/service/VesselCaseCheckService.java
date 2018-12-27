@@ -218,7 +218,7 @@ public class VesselCaseCheckService extends QueryService<VesselCase> {
         IvReinsuranceInfo ivReinsuranceInfo =
             claimToolUtility.insuredVesselRepository.getLastIvReinsuranceInfo(vesselCaseDTO.getInsuredVesselId(), vesselCaseDTO.getCaseDate());
         vesselCaseDTO.setReinsureId(ivReinsuranceInfo.getReinsuranceId());
-        vesselCaseDTO.setDeduct(ivReinsuranceInfo.getDeductiable());
+        vesselCaseDTO.setDeduct(ivReinsuranceInfo.getDeductible());
     }
 
 
