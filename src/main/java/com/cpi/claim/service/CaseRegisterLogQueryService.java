@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseRegisterLog;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseRegisterLogRepository;
 import com.cpi.claim.service.dto.CaseRegisterLogCriteria;
-
 import com.cpi.claim.service.dto.CaseRegisterLogDTO;
 import com.cpi.claim.service.mapper.CaseRegisterLogMapper;
 
 /**
- * Service for executing complex queries for CaseRegisterLog entities in the database.
+ * Service for executing complex queries for {@link CaseRegisterLog} entities in the database.
  * The main input is a {@link CaseRegisterLogCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseRegisterLogDTO} or a {@link Page} of {@link CaseRegisterLogDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseRegisterLogQueryService extends QueryService<CaseRegisterLog> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseRegisterLogDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseRegisterLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseRegisterLogQueryService extends QueryService<CaseRegisterLog> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseRegisterLogDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseRegisterLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseRegisterLogQueryService extends QueryService<CaseRegisterLog> {
     }
 
     /**
-     * Function to convert CaseRegisterLogCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseRegisterLogCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseRegisterLog> specification = createSpecification(criteria);
+        return caseRegisterLogRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseRegisterLogCriteria to a {@link Specification}.
      */
     private Specification<CaseRegisterLog> createSpecification(CaseRegisterLogCriteria criteria) {
         Specification<CaseRegisterLog> specification = Specification.where(null);
@@ -89,10 +102,10 @@ public class CaseRegisterLogQueryService extends QueryService<CaseRegisterLog> {
                 specification = specification.and(buildStringSpecification(criteria.getAssignedUser(), CaseRegisterLog_.assignedUser));
             }
             if (criteria.getVesselCaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getVesselCaseId(), CaseRegisterLog_.vesselCase, VesselCase_.id));
+                specification = specification.and(buildSpecification(criteria.getVesselCaseId(),
+                    root -> root.join(CaseRegisterLog_.vesselCase, JoinType.LEFT).get(VesselCase_.id)));
             }
         }
         return specification;
     }
-
 }

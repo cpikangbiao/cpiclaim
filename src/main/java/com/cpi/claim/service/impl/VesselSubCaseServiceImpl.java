@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing VesselSubCase.
+ * Service Implementation for managing {@link VesselSubCase}.
  */
 @Service
 @Transactional
@@ -36,8 +36,8 @@ public class VesselSubCaseServiceImpl implements VesselSubCaseService {
     /**
      * Save a vesselSubCase.
      *
-     * @param vesselSubCaseDTO the entity to save
-     * @return the persisted entity
+     * @param vesselSubCaseDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public VesselSubCaseDTO save(VesselSubCaseDTO vesselSubCaseDTO) {
@@ -50,8 +50,8 @@ public class VesselSubCaseServiceImpl implements VesselSubCaseService {
     /**
      * Get all the vesselSubCases.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -65,8 +65,8 @@ public class VesselSubCaseServiceImpl implements VesselSubCaseService {
     /**
      * Get one vesselSubCase by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -79,7 +79,7 @@ public class VesselSubCaseServiceImpl implements VesselSubCaseService {
     /**
      * Delete the vesselSubCase by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,7 +6,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A StatisticsCaseMonthCount.
@@ -118,19 +116,15 @@ public class StatisticsCaseMonthCount implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof StatisticsCaseMonthCount)) {
             return false;
         }
-        StatisticsCaseMonthCount statisticsCaseMonthCount = (StatisticsCaseMonthCount) o;
-        if (statisticsCaseMonthCount.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), statisticsCaseMonthCount.getId());
+        return id != null && id.equals(((StatisticsCaseMonthCount) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

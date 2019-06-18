@@ -1,11 +1,10 @@
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CaseAssignLog entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseAssignLog} entity.
  */
 public class CaseAssignLogDTO implements Serializable {
 
@@ -18,6 +17,7 @@ public class CaseAssignLogDTO implements Serializable {
     private Instant assignTime;
 
     private String assignedUser;
+
 
     private Long vesselCaseId;
 

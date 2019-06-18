@@ -1,6 +1,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -11,20 +13,18 @@ import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
-
-
-
 /**
- * Criteria class for the CaseClaimBill entity. This class is used in CaseClaimBillResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /case-claim-bills?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.CaseClaimBill} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.CaseClaimBillResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /case-claim-bills?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CaseClaimBillCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CaseClaimBillCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -84,7 +84,44 @@ public class CaseClaimBillCriteria implements Serializable {
 
     private LongFilter creditorId;
 
-    public CaseClaimBillCriteria() {
+    public CaseClaimBillCriteria(){
+    }
+
+    public CaseClaimBillCriteria(CaseClaimBillCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.claimBillCode = other.claimBillCode == null ? null : other.claimBillCode.copy();
+        this.claimBillDate = other.claimBillDate == null ? null : other.claimBillDate.copy();
+        this.registerUserId = other.registerUserId == null ? null : other.registerUserId.copy();
+        this.clientBillNo = other.clientBillNo == null ? null : other.clientBillNo.copy();
+        this.billDescription = other.billDescription == null ? null : other.billDescription.copy();
+        this.dueDate = other.dueDate == null ? null : other.dueDate.copy();
+        this.memberYear = other.memberYear == null ? null : other.memberYear.copy();
+        this.numberId = other.numberId == null ? null : other.numberId.copy();
+        this.claimAmountCurrency = other.claimAmountCurrency == null ? null : other.claimAmountCurrency.copy();
+        this.claimAmount = other.claimAmount == null ? null : other.claimAmount.copy();
+        this.deductible = other.deductible == null ? null : other.deductible.copy();
+        this.deductibleCurrency = other.deductibleCurrency == null ? null : other.deductibleCurrency.copy();
+        this.deductibleCurrencyRate = other.deductibleCurrencyRate == null ? null : other.deductibleCurrencyRate.copy();
+        this.deductibleDollar = other.deductibleDollar == null ? null : other.deductibleDollar.copy();
+        this.billCurrency = other.billCurrency == null ? null : other.billCurrency.copy();
+        this.billAmount = other.billAmount == null ? null : other.billAmount.copy();
+        this.billCurrencyRate = other.billCurrencyRate == null ? null : other.billCurrencyRate.copy();
+        this.billAmountDollar = other.billAmountDollar == null ? null : other.billAmountDollar.copy();
+        this.isSigned = other.isSigned == null ? null : other.isSigned.copy();
+        this.signUser = other.signUser == null ? null : other.signUser.copy();
+        this.signDate = other.signDate == null ? null : other.signDate.copy();
+        this.processId = other.processId == null ? null : other.processId.copy();
+        this.printNumber = other.printNumber == null ? null : other.printNumber.copy();
+        this.subcaseId = other.subcaseId == null ? null : other.subcaseId.copy();
+        this.claimBillStatusId = other.claimBillStatusId == null ? null : other.claimBillStatusId.copy();
+        this.claimBillTypeId = other.claimBillTypeId == null ? null : other.claimBillTypeId.copy();
+        this.claimBillFinanceTypeId = other.claimBillFinanceTypeId == null ? null : other.claimBillFinanceTypeId.copy();
+        this.creditorId = other.creditorId == null ? null : other.creditorId.copy();
+    }
+
+    @Override
+    public CaseClaimBillCriteria copy() {
+        return new CaseClaimBillCriteria(this);
     }
 
     public LongFilter getId() {
@@ -317,6 +354,83 @@ public class CaseClaimBillCriteria implements Serializable {
 
     public void setCreditorId(LongFilter creditorId) {
         this.creditorId = creditorId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CaseClaimBillCriteria that = (CaseClaimBillCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(claimBillCode, that.claimBillCode) &&
+            Objects.equals(claimBillDate, that.claimBillDate) &&
+            Objects.equals(registerUserId, that.registerUserId) &&
+            Objects.equals(clientBillNo, that.clientBillNo) &&
+            Objects.equals(billDescription, that.billDescription) &&
+            Objects.equals(dueDate, that.dueDate) &&
+            Objects.equals(memberYear, that.memberYear) &&
+            Objects.equals(numberId, that.numberId) &&
+            Objects.equals(claimAmountCurrency, that.claimAmountCurrency) &&
+            Objects.equals(claimAmount, that.claimAmount) &&
+            Objects.equals(deductible, that.deductible) &&
+            Objects.equals(deductibleCurrency, that.deductibleCurrency) &&
+            Objects.equals(deductibleCurrencyRate, that.deductibleCurrencyRate) &&
+            Objects.equals(deductibleDollar, that.deductibleDollar) &&
+            Objects.equals(billCurrency, that.billCurrency) &&
+            Objects.equals(billAmount, that.billAmount) &&
+            Objects.equals(billCurrencyRate, that.billCurrencyRate) &&
+            Objects.equals(billAmountDollar, that.billAmountDollar) &&
+            Objects.equals(isSigned, that.isSigned) &&
+            Objects.equals(signUser, that.signUser) &&
+            Objects.equals(signDate, that.signDate) &&
+            Objects.equals(processId, that.processId) &&
+            Objects.equals(printNumber, that.printNumber) &&
+            Objects.equals(subcaseId, that.subcaseId) &&
+            Objects.equals(claimBillStatusId, that.claimBillStatusId) &&
+            Objects.equals(claimBillTypeId, that.claimBillTypeId) &&
+            Objects.equals(claimBillFinanceTypeId, that.claimBillFinanceTypeId) &&
+            Objects.equals(creditorId, that.creditorId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        claimBillCode,
+        claimBillDate,
+        registerUserId,
+        clientBillNo,
+        billDescription,
+        dueDate,
+        memberYear,
+        numberId,
+        claimAmountCurrency,
+        claimAmount,
+        deductible,
+        deductibleCurrency,
+        deductibleCurrencyRate,
+        deductibleDollar,
+        billCurrency,
+        billAmount,
+        billCurrencyRate,
+        billAmountDollar,
+        isSigned,
+        signUser,
+        signDate,
+        processId,
+        printNumber,
+        subcaseId,
+        claimBillStatusId,
+        claimBillTypeId,
+        claimBillFinanceTypeId,
+        creditorId
+        );
     }
 
     @Override

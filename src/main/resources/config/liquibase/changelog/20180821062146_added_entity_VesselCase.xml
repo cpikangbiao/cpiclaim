@@ -3,16 +3,10 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <property name="now" value="now()" dbms="h2"/>
-
-    <property name="now" value="now()" dbms="mysql"/>
     <property name="autoIncrement" value="true"/>
-
-    <property name="floatType" value="float4" dbms="postgresql, h2"/>
-    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
         Added the entity VesselCase.
@@ -54,7 +48,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="deduct" type="decimal(10,2)">
+            <column name="deduct" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -142,11 +136,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="remark" type="clob">
+            <column name="remark" type="${clobType}">
                 <constraints nullable="true" />
             </column>
 
-            <column name="settlement_amount" type="decimal(10,2)">
+            <column name="settlement_amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -168,6 +162,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+
         <dropDefaultValue tableName="vessel_case" columnName="assigned_time" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="registered_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="case_date" columnDataType="datetime"/>
@@ -177,7 +172,60 @@
         <dropDefaultValue tableName="vessel_case" columnName="cp_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="close_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="vessel_case" columnName="settlement_date" columnDataType="datetime"/>
-        
+    </changeSet>
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20180821062146-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/vessel_case.csv"
+                  separator=";"
+                  tableName="vessel_case">
+            <column name="id" type="numeric"/>
+            <column name="number_id" type="numeric"/>
+            <column name="case_year" type="string"/>
+            <column name="insured_vessel_id" type="numeric"/>
+            <column name="company_name" type="string"/>
+            <column name="vessel_name" type="string"/>
+            <column name="company_chinese_name" type="string"/>
+            <column name="vessel_chinese_name" type="string"/>
+            <column name="reinsure_id" type="numeric"/>
+            <column name="deduct" type="numeric"/>
+            <column name="assigned_handler" type="numeric"/>
+            <column name="assigned_time" type="datetime"/>
+            <column name="registered_handler" type="numeric"/>
+            <column name="registered_date" type="datetime"/>
+            <column name="case_code" type="string"/>
+            <column name="case_date" type="datetime"/>
+            <column name="case_location" type="numeric"/>
+            <column name="case_description" type="string"/>
+            <column name="voyage_no" type="string"/>
+            <column name="loading_port" type="numeric"/>
+            <column name="loading_date" type="datetime"/>
+            <column name="discharging_port" type="numeric"/>
+            <column name="discharging_date" type="datetime"/>
+            <column name="limit_time" type="datetime"/>
+            <column name="cp_date" type="datetime"/>
+            <column name="cp_type" type="string"/>
+            <column name="arrest_vessel" type="string"/>
+            <column name="jurisdiction" type="numeric"/>
+            <column name="applicable_law" type="numeric"/>
+            <column name="close_date" type="datetime"/>
+            <column name="close_handler" type="numeric"/>
+            <column name="remark" type="clob"/>
+            <column name="settlement_amount" type="numeric"/>
+            <column name="settlement_date" type="datetime"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="20180821062146-1-relations" author="jhipster">
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

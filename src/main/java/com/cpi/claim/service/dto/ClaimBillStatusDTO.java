@@ -1,11 +1,10 @@
 package com.cpi.claim.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the ClaimBillStatus entity.
+ * A DTO for the {@link com.cpi.claim.domain.ClaimBillStatus} entity.
  */
 public class ClaimBillStatusDTO implements Serializable {
 
@@ -15,6 +14,7 @@ public class ClaimBillStatusDTO implements Serializable {
 
     @NotNull
     private String claimBillStatusName;
+
 
     public Long getId() {
         return id;

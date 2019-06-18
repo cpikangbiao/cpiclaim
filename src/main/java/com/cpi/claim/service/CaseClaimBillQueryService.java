@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseClaimBillRepository;
 import com.cpi.claim.service.dto.CaseClaimBillCriteria;
-
 import com.cpi.claim.service.dto.CaseClaimBillDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillMapper;
 
 /**
- * Service for executing complex queries for CaseClaimBill entities in the database.
+ * Service for executing complex queries for {@link CaseClaimBill} entities in the database.
  * The main input is a {@link CaseClaimBillCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseClaimBillDTO} or a {@link Page} of {@link CaseClaimBillDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseClaimBillQueryService extends QueryService<CaseClaimBill> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseClaimBillDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseClaimBillDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseClaimBillQueryService extends QueryService<CaseClaimBill> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseClaimBillDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseClaimBillDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseClaimBillQueryService extends QueryService<CaseClaimBill> {
     }
 
     /**
-     * Function to convert CaseClaimBillCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseClaimBillCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseClaimBill> specification = createSpecification(criteria);
+        return caseClaimBillRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseClaimBillCriteria to a {@link Specification}.
      */
     private Specification<CaseClaimBill> createSpecification(CaseClaimBillCriteria criteria) {
         Specification<CaseClaimBill> specification = Specification.where(null);
@@ -146,22 +159,26 @@ public class CaseClaimBillQueryService extends QueryService<CaseClaimBill> {
                 specification = specification.and(buildRangeSpecification(criteria.getPrintNumber(), CaseClaimBill_.printNumber));
             }
             if (criteria.getSubcaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CaseClaimBill_.subcase, VesselSubCase_.id));
+                specification = specification.and(buildSpecification(criteria.getSubcaseId(),
+                    root -> root.join(CaseClaimBill_.subcase, JoinType.LEFT).get(VesselSubCase_.id)));
             }
             if (criteria.getClaimBillStatusId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getClaimBillStatusId(), CaseClaimBill_.claimBillStatus, ClaimBillStatus_.id));
+                specification = specification.and(buildSpecification(criteria.getClaimBillStatusId(),
+                    root -> root.join(CaseClaimBill_.claimBillStatus, JoinType.LEFT).get(ClaimBillStatus_.id)));
             }
             if (criteria.getClaimBillTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getClaimBillTypeId(), CaseClaimBill_.claimBillType, ClaimBillType_.id));
+                specification = specification.and(buildSpecification(criteria.getClaimBillTypeId(),
+                    root -> root.join(CaseClaimBill_.claimBillType, JoinType.LEFT).get(ClaimBillType_.id)));
             }
             if (criteria.getClaimBillFinanceTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getClaimBillFinanceTypeId(), CaseClaimBill_.claimBillFinanceType, ClaimBillFinanceType_.id));
+                specification = specification.and(buildSpecification(criteria.getClaimBillFinanceTypeId(),
+                    root -> root.join(CaseClaimBill_.claimBillFinanceType, JoinType.LEFT).get(ClaimBillFinanceType_.id)));
             }
             if (criteria.getCreditorId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCreditorId(), CaseClaimBill_.creditor, Creditor_.id));
+                specification = specification.and(buildSpecification(criteria.getCreditorId(),
+                    root -> root.join(CaseClaimBill_.creditor, JoinType.LEFT).get(Creditor_.id)));
             }
         }
         return specification;
     }
-
 }

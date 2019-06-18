@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseClaim;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseClaimRepository;
 import com.cpi.claim.service.dto.CaseClaimCriteria;
-
 import com.cpi.claim.service.dto.CaseClaimDTO;
 import com.cpi.claim.service.mapper.CaseClaimMapper;
 
 /**
- * Service for executing complex queries for CaseClaim entities in the database.
+ * Service for executing complex queries for {@link CaseClaim} entities in the database.
  * The main input is a {@link CaseClaimCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseClaimDTO} or a {@link Page} of {@link CaseClaimDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseClaimQueryService extends QueryService<CaseClaim> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseClaimDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseClaimDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseClaimQueryService extends QueryService<CaseClaim> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseClaimDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseClaimDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseClaimQueryService extends QueryService<CaseClaim> {
     }
 
     /**
-     * Function to convert CaseClaimCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseClaimCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseClaim> specification = createSpecification(criteria);
+        return caseClaimRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseClaimCriteria to a {@link Specification}.
      */
     private Specification<CaseClaim> createSpecification(CaseClaimCriteria criteria) {
         Specification<CaseClaim> specification = Specification.where(null);
@@ -101,10 +114,10 @@ public class CaseClaimQueryService extends QueryService<CaseClaim> {
                 specification = specification.and(buildRangeSpecification(criteria.getClaimCostDollar(), CaseClaim_.claimCostDollar));
             }
             if (criteria.getSubcaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CaseClaim_.subcase, VesselSubCase_.id));
+                specification = specification.and(buildSpecification(criteria.getSubcaseId(),
+                    root -> root.join(CaseClaim_.subcase, JoinType.LEFT).get(VesselSubCase_.id)));
             }
         }
         return specification;
     }
-
 }

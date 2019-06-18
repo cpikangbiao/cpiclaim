@@ -1,6 +1,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -9,22 +11,18 @@ import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-
-
-
-
-
 /**
- * Criteria class for the Creditor entity. This class is used in CreditorResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /creditors?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.Creditor} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.CreditorResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /creditors?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CreditorCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CreditorCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -54,7 +52,29 @@ public class CreditorCriteria implements Serializable {
 
     private StringFilter corrBankAddress2;
 
-    public CreditorCriteria() {
+    public CreditorCriteria(){
+    }
+
+    public CreditorCriteria(CreditorCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.creditorCode = other.creditorCode == null ? null : other.creditorCode.copy();
+        this.creditorName = other.creditorName == null ? null : other.creditorName.copy();
+        this.creditorAddress = other.creditorAddress == null ? null : other.creditorAddress.copy();
+        this.portName = other.portName == null ? null : other.portName.copy();
+        this.swiftCode = other.swiftCode == null ? null : other.swiftCode.copy();
+        this.ibanCode = other.ibanCode == null ? null : other.ibanCode.copy();
+        this.bankName = other.bankName == null ? null : other.bankName.copy();
+        this.bankAddress = other.bankAddress == null ? null : other.bankAddress.copy();
+        this.accountNo = other.accountNo == null ? null : other.accountNo.copy();
+        this.corrBankName = other.corrBankName == null ? null : other.corrBankName.copy();
+        this.corrBankAddress = other.corrBankAddress == null ? null : other.corrBankAddress.copy();
+        this.corrBankName2 = other.corrBankName2 == null ? null : other.corrBankName2.copy();
+        this.corrBankAddress2 = other.corrBankAddress2 == null ? null : other.corrBankAddress2.copy();
+    }
+
+    @Override
+    public CreditorCriteria copy() {
+        return new CreditorCriteria(this);
     }
 
     public LongFilter getId() {
@@ -167,6 +187,53 @@ public class CreditorCriteria implements Serializable {
 
     public void setCorrBankAddress2(StringFilter corrBankAddress2) {
         this.corrBankAddress2 = corrBankAddress2;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CreditorCriteria that = (CreditorCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(creditorCode, that.creditorCode) &&
+            Objects.equals(creditorName, that.creditorName) &&
+            Objects.equals(creditorAddress, that.creditorAddress) &&
+            Objects.equals(portName, that.portName) &&
+            Objects.equals(swiftCode, that.swiftCode) &&
+            Objects.equals(ibanCode, that.ibanCode) &&
+            Objects.equals(bankName, that.bankName) &&
+            Objects.equals(bankAddress, that.bankAddress) &&
+            Objects.equals(accountNo, that.accountNo) &&
+            Objects.equals(corrBankName, that.corrBankName) &&
+            Objects.equals(corrBankAddress, that.corrBankAddress) &&
+            Objects.equals(corrBankName2, that.corrBankName2) &&
+            Objects.equals(corrBankAddress2, that.corrBankAddress2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        creditorCode,
+        creditorName,
+        creditorAddress,
+        portName,
+        swiftCode,
+        ibanCode,
+        bankName,
+        bankAddress,
+        accountNo,
+        corrBankName,
+        corrBankAddress,
+        corrBankName2,
+        corrBankAddress2
+        );
     }
 
     @Override

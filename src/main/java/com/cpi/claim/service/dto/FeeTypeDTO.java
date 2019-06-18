@@ -1,11 +1,10 @@
 package com.cpi.claim.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the FeeType entity.
+ * A DTO for the {@link com.cpi.claim.domain.FeeType} entity.
  */
 public class FeeTypeDTO implements Serializable {
 
@@ -15,6 +14,7 @@ public class FeeTypeDTO implements Serializable {
 
     @NotNull
     private String feeTypeName;
+
 
     public Long getId() {
         return id;

@@ -1,5 +1,4 @@
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -7,7 +6,7 @@ import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the CaseEstimate entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseEstimate} entity.
  */
 public class CaseEstimateDTO implements Serializable {
 
@@ -25,6 +24,7 @@ public class CaseEstimateDTO implements Serializable {
 
     @Lob
     private String remark;
+
 
     private Long subcaseId;
 

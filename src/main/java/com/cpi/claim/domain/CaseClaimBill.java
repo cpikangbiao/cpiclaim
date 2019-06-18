@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseClaimBill.
@@ -52,31 +50,31 @@ public class CaseClaimBill implements Serializable {
     @Column(name = "claim_amount_currency")
     private Long claimAmountCurrency;
 
-    @Column(name = "claim_amount", precision = 10, scale = 2)
+    @Column(name = "claim_amount", precision = 21, scale = 2)
     private BigDecimal claimAmount;
 
-    @Column(name = "deductible", precision = 10, scale = 2)
+    @Column(name = "deductible", precision = 21, scale = 2)
     private BigDecimal deductible;
 
     @Column(name = "deductible_currency")
     private Long deductibleCurrency;
 
-    @Column(name = "deductible_currency_rate", precision = 10, scale = 2)
+    @Column(name = "deductible_currency_rate", precision = 21, scale = 2)
     private BigDecimal deductibleCurrencyRate;
 
-    @Column(name = "deductible_dollar", precision = 10, scale = 2)
+    @Column(name = "deductible_dollar", precision = 21, scale = 2)
     private BigDecimal deductibleDollar;
 
     @Column(name = "bill_currency")
     private Long billCurrency;
 
-    @Column(name = "bill_amount", precision = 10, scale = 2)
+    @Column(name = "bill_amount", precision = 21, scale = 2)
     private BigDecimal billAmount;
 
-    @Column(name = "bill_currency_rate", precision = 10, scale = 2)
+    @Column(name = "bill_currency_rate", precision = 21, scale = 2)
     private BigDecimal billCurrencyRate;
 
-    @Column(name = "bill_amount_dollar", precision = 10, scale = 2)
+    @Column(name = "bill_amount_dollar", precision = 21, scale = 2)
     private BigDecimal billAmountDollar;
 
     @Lob
@@ -99,23 +97,23 @@ public class CaseClaimBill implements Serializable {
     private Integer printNumber;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseClaimBills")
     private VesselSubCase subcase;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseClaimBills")
     private ClaimBillStatus claimBillStatus;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseClaimBills")
     private ClaimBillType claimBillType;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseClaimBills")
     private ClaimBillFinanceType claimBillFinanceType;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseClaimBills")
     private Creditor creditor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -510,19 +508,15 @@ public class CaseClaimBill implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseClaimBill)) {
             return false;
         }
-        CaseClaimBill caseClaimBill = (CaseClaimBill) o;
-        if (caseClaimBill.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseClaimBill.getId());
+        return id != null && id.equals(((CaseClaimBill) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

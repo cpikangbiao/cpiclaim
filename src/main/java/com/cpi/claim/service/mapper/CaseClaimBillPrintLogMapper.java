@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.CaseClaimBillPrintLogDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CaseClaimBillPrintLog and its DTO CaseClaimBillPrintLogDTO.
+ * Mapper for the entity {@link CaseClaimBillPrintLog} and its DTO {@link CaseClaimBillPrintLogDTO}.
  */
 @Mapper(componentModel = "spring", uses = {CaseClaimBillMapper.class})
 public interface CaseClaimBillPrintLogMapper extends EntityMapper<CaseClaimBillPrintLogDTO, CaseClaimBillPrintLog> {

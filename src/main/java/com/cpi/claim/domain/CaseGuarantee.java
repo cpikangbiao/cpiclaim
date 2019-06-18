@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseGuarantee.
@@ -61,13 +59,13 @@ public class CaseGuarantee implements Serializable {
     @Column(name = "guarantee_currency")
     private Long guaranteeCurrency;
 
-    @Column(name = "guarantee_rate", precision = 10, scale = 2)
+    @Column(name = "guarantee_rate", precision = 21, scale = 2)
     private BigDecimal guaranteeRate;
 
-    @Column(name = "guarantee_amount", precision = 10, scale = 2)
+    @Column(name = "guarantee_amount", precision = 21, scale = 2)
     private BigDecimal guaranteeAmount;
 
-    @Column(name = "guarantee_amount_dollar", precision = 10, scale = 2)
+    @Column(name = "guarantee_amount_dollar", precision = 21, scale = 2)
     private BigDecimal guaranteeAmountDollar;
 
     @Column(name = "guarantee_to")
@@ -79,7 +77,7 @@ public class CaseGuarantee implements Serializable {
     @Column(name = "guarantee_no")
     private String guaranteeNo;
 
-    @Column(name = "guarantee_fee", precision = 10, scale = 2)
+    @Column(name = "guarantee_fee", precision = 21, scale = 2)
     private BigDecimal guaranteeFee;
 
     @Column(name = "guarantee_other")
@@ -97,13 +95,13 @@ public class CaseGuarantee implements Serializable {
     @Column(name = "con_guarantee_currency")
     private Long conGuaranteeCurrency;
 
-    @Column(name = "con_guarantee_rate", precision = 10, scale = 2)
+    @Column(name = "con_guarantee_rate", precision = 21, scale = 2)
     private BigDecimal conGuaranteeRate;
 
-    @Column(name = "con_guarantee_amount", precision = 10, scale = 2)
+    @Column(name = "con_guarantee_amount", precision = 21, scale = 2)
     private BigDecimal conGuaranteeAmount;
 
-    @Column(name = "con_guarantee_amount_dollar", precision = 10, scale = 2)
+    @Column(name = "con_guarantee_amount_dollar", precision = 21, scale = 2)
     private BigDecimal conGuaranteeAmountDollar;
 
     @Column(name = "con_guarantee_no")
@@ -126,15 +124,15 @@ public class CaseGuarantee implements Serializable {
     private Long registerUserId;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseGuarantees")
     private VesselSubCase subcase;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseGuarantees")
     private GuaranteeType guaranteeType;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseGuarantees")
     private GuaranteeType conGuaranteeType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -620,19 +618,15 @@ public class CaseGuarantee implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseGuarantee)) {
             return false;
         }
-        CaseGuarantee caseGuarantee = (CaseGuarantee) o;
-        if (caseGuarantee.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseGuarantee.getId());
+        return id != null && id.equals(((CaseGuarantee) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

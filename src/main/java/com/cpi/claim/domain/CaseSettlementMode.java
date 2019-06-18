@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A CaseSettlementMode.
@@ -71,19 +69,15 @@ public class CaseSettlementMode implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseSettlementMode)) {
             return false;
         }
-        CaseSettlementMode caseSettlementMode = (CaseSettlementMode) o;
-        if (caseSettlementMode.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseSettlementMode.getId());
+        return id != null && id.equals(((CaseSettlementMode) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

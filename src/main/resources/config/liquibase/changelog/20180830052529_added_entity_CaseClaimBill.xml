@@ -3,16 +3,10 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <property name="now" value="now()" dbms="h2"/>
-
-    <property name="now" value="now()" dbms="mysql"/>
     <property name="autoIncrement" value="true"/>
-
-    <property name="floatType" value="float4" dbms="postgresql, h2"/>
-    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
         Added the entity CaseClaimBill.
@@ -58,11 +52,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="claim_amount" type="decimal(10,2)">
+            <column name="claim_amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="deductible" type="decimal(10,2)">
+            <column name="deductible" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -70,11 +64,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="deductible_currency_rate" type="decimal(10,2)">
+            <column name="deductible_currency_rate" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="deductible_dollar" type="decimal(10,2)">
+            <column name="deductible_dollar" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -82,23 +76,23 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="bill_amount" type="decimal(10,2)">
+            <column name="bill_amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="bill_currency_rate" type="decimal(10,2)">
+            <column name="bill_currency_rate" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="bill_amount_dollar" type="decimal(10,2)">
+            <column name="bill_amount_dollar" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="remark" type="clob">
+            <column name="remark" type="${clobType}">
                 <constraints nullable="true" />
             </column>
 
-            <column name="is_signed" type="bit">
+            <column name="is_signed" type="boolean">
                 <constraints nullable="true" />
             </column>
 
@@ -140,10 +134,55 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+
         <dropDefaultValue tableName="case_claim_bill" columnName="claim_bill_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="case_claim_bill" columnName="due_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="case_claim_bill" columnName="sign_date" columnDataType="datetime"/>
-        
+    </changeSet>
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20180830052529-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/case_claim_bill.csv"
+                  separator=";"
+                  tableName="case_claim_bill">
+            <column name="id" type="numeric"/>
+            <column name="claim_bill_code" type="string"/>
+            <column name="claim_bill_date" type="datetime"/>
+            <column name="register_user_id" type="numeric"/>
+            <column name="client_bill_no" type="string"/>
+            <column name="bill_description" type="string"/>
+            <column name="due_date" type="datetime"/>
+            <column name="member_year" type="string"/>
+            <column name="number_id" type="numeric"/>
+            <column name="claim_amount_currency" type="numeric"/>
+            <column name="claim_amount" type="numeric"/>
+            <column name="deductible" type="numeric"/>
+            <column name="deductible_currency" type="numeric"/>
+            <column name="deductible_currency_rate" type="numeric"/>
+            <column name="deductible_dollar" type="numeric"/>
+            <column name="bill_currency" type="numeric"/>
+            <column name="bill_amount" type="numeric"/>
+            <column name="bill_currency_rate" type="numeric"/>
+            <column name="bill_amount_dollar" type="numeric"/>
+            <column name="remark" type="clob"/>
+            <column name="is_signed" type="boolean"/>
+            <column name="sign_user" type="numeric"/>
+            <column name="sign_date" type="datetime"/>
+            <column name="process_id" type="numeric"/>
+            <column name="print_number" type="numeric"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="20180830052529-1-relations" author="jhipster">
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

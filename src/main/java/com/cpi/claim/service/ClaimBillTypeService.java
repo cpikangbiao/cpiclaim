@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing ClaimBillType.
+ * Service Interface for managing {@link com.cpi.claim.domain.ClaimBillType}.
  */
 public interface ClaimBillTypeService {
 
     /**
      * Save a claimBillType.
      *
-     * @param claimBillTypeDTO the entity to save
-     * @return the persisted entity
+     * @param claimBillTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     ClaimBillTypeDTO save(ClaimBillTypeDTO claimBillTypeDTO);
 
     /**
      * Get all the claimBillTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<ClaimBillTypeDTO> findAll(Pageable pageable);
 
@@ -32,15 +32,15 @@ public interface ClaimBillTypeService {
     /**
      * Get the "id" claimBillType.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<ClaimBillTypeDTO> findOne(Long id);
 
     /**
      * Delete the "id" claimBillType.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

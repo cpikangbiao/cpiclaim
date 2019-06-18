@@ -1,11 +1,10 @@
 package com.cpi.claim.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CaseSettlementMode entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseSettlementMode} entity.
  */
 public class CaseSettlementModeDTO implements Serializable {
 
@@ -15,6 +14,7 @@ public class CaseSettlementModeDTO implements Serializable {
 
     @NotNull
     private String settlementModeName;
+
 
     public Long getId() {
         return id;

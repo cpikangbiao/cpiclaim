@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.GuaranteeTypeDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity GuaranteeType and its DTO GuaranteeTypeDTO.
+ * Mapper for the entity {@link GuaranteeType} and its DTO {@link GuaranteeTypeDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface GuaranteeTypeMapper extends EntityMapper<GuaranteeTypeDTO, GuaranteeType> {

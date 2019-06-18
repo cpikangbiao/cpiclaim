@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A ClaimBillStatus.
@@ -71,19 +69,15 @@ public class ClaimBillStatus implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ClaimBillStatus)) {
             return false;
         }
-        ClaimBillStatus claimBillStatus = (ClaimBillStatus) o;
-        if (claimBillStatus.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), claimBillStatus.getId());
+        return id != null && id.equals(((ClaimBillStatus) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

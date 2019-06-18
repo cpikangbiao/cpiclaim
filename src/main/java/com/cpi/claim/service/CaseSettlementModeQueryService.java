@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseSettlementMode;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseSettlementModeRepository;
 import com.cpi.claim.service.dto.CaseSettlementModeCriteria;
-
 import com.cpi.claim.service.dto.CaseSettlementModeDTO;
 import com.cpi.claim.service.mapper.CaseSettlementModeMapper;
 
 /**
- * Service for executing complex queries for CaseSettlementMode entities in the database.
+ * Service for executing complex queries for {@link CaseSettlementMode} entities in the database.
  * The main input is a {@link CaseSettlementModeCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseSettlementModeDTO} or a {@link Page} of {@link CaseSettlementModeDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseSettlementModeQueryService extends QueryService<CaseSettlementM
     }
 
     /**
-     * Return a {@link List} of {@link CaseSettlementModeDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseSettlementModeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseSettlementModeQueryService extends QueryService<CaseSettlementM
     }
 
     /**
-     * Return a {@link Page} of {@link CaseSettlementModeDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseSettlementModeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseSettlementModeQueryService extends QueryService<CaseSettlementM
     }
 
     /**
-     * Function to convert CaseSettlementModeCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseSettlementModeCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseSettlementMode> specification = createSpecification(criteria);
+        return caseSettlementModeRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseSettlementModeCriteria to a {@link Specification}.
      */
     private Specification<CaseSettlementMode> createSpecification(CaseSettlementModeCriteria criteria) {
         Specification<CaseSettlementMode> specification = Specification.where(null);
@@ -85,5 +98,4 @@ public class CaseSettlementModeQueryService extends QueryService<CaseSettlementM
         }
         return specification;
     }
-
 }

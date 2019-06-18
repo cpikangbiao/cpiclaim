@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing PaymentType.
+ * Service Implementation for managing {@link PaymentType}.
  */
 @Service
 @Transactional
@@ -36,8 +36,8 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
     /**
      * Save a paymentType.
      *
-     * @param paymentTypeDTO the entity to save
-     * @return the persisted entity
+     * @param paymentTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public PaymentTypeDTO save(PaymentTypeDTO paymentTypeDTO) {
@@ -50,8 +50,8 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
     /**
      * Get all the paymentTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -65,8 +65,8 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
     /**
      * Get one paymentType by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -79,7 +79,7 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
     /**
      * Delete the paymentType by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

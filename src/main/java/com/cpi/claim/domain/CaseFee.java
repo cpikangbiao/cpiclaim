@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseFee.
@@ -34,31 +32,31 @@ public class CaseFee implements Serializable {
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "currency_rate", precision = 10, scale = 2)
+    @Column(name = "currency_rate", precision = 21, scale = 2)
     private BigDecimal currencyRate;
 
     @Column(name = "fee_cost_date")
     private Instant feeCostDate;
 
-    @Column(name = "fee_cost", precision = 10, scale = 2)
+    @Column(name = "fee_cost", precision = 21, scale = 2)
     private BigDecimal feeCost;
 
-    @Column(name = "fee_cost_dollar", precision = 10, scale = 2)
+    @Column(name = "fee_cost_dollar", precision = 21, scale = 2)
     private BigDecimal feeCostDollar;
 
-    @Column(name = "deduct", precision = 10, scale = 2)
+    @Column(name = "deduct", precision = 21, scale = 2)
     private BigDecimal deduct;
 
     @Column(name = "deduct_currency")
     private Long deductCurrency;
 
-    @Column(name = "deduct_currency_rate", precision = 10, scale = 2)
+    @Column(name = "deduct_currency_rate", precision = 21, scale = 2)
     private BigDecimal deductCurrencyRate;
 
-    @Column(name = "deduct_amount", precision = 10, scale = 2)
+    @Column(name = "deduct_amount", precision = 21, scale = 2)
     private BigDecimal deductAmount;
 
-    @Column(name = "amount_dollar", precision = 10, scale = 2)
+    @Column(name = "amount_dollar", precision = 21, scale = 2)
     private BigDecimal amountDollar;
 
     @Column(name = "fee_create_user")
@@ -84,15 +82,15 @@ public class CaseFee implements Serializable {
     private Long processId;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseFees")
     private FeeType feeType;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseFees")
     private VesselSubCase subcase;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseFees")
     private Creditor creditor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -396,19 +394,15 @@ public class CaseFee implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseFee)) {
             return false;
         }
-        CaseFee caseFee = (CaseFee) o;
-        if (caseFee.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseFee.getId());
+        return id != null && id.equals(((CaseFee) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

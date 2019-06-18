@@ -1,11 +1,10 @@
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CaseClaimBillDeleteLog entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseClaimBillDeleteLog} entity.
  */
 public class CaseClaimBillDeleteLogDTO implements Serializable {
 
@@ -18,6 +17,7 @@ public class CaseClaimBillDeleteLogDTO implements Serializable {
     private String operateUser;
 
     private Instant operateDate;
+
 
     public Long getId() {
         return id;

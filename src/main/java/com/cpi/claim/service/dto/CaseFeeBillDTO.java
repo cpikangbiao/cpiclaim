@@ -1,10 +1,9 @@
 package com.cpi.claim.service.dto;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CaseFeeBill entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseFeeBill} entity.
  */
 public class CaseFeeBillDTO implements Serializable {
 
@@ -13,6 +12,7 @@ public class CaseFeeBillDTO implements Serializable {
     private Integer numberId;
 
     private Boolean isWriteOff;
+
 
     private Long caseFeeId;
 

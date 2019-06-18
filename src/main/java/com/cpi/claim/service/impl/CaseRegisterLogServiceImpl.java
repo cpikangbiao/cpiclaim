@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CaseRegisterLog.
+ * Service Implementation for managing {@link CaseRegisterLog}.
  */
 @Service
 @Transactional
@@ -36,8 +36,8 @@ public class CaseRegisterLogServiceImpl implements CaseRegisterLogService {
     /**
      * Save a caseRegisterLog.
      *
-     * @param caseRegisterLogDTO the entity to save
-     * @return the persisted entity
+     * @param caseRegisterLogDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CaseRegisterLogDTO save(CaseRegisterLogDTO caseRegisterLogDTO) {
@@ -50,8 +50,8 @@ public class CaseRegisterLogServiceImpl implements CaseRegisterLogService {
     /**
      * Get all the caseRegisterLogs.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -65,8 +65,8 @@ public class CaseRegisterLogServiceImpl implements CaseRegisterLogService {
     /**
      * Get one caseRegisterLog by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -79,7 +79,7 @@ public class CaseRegisterLogServiceImpl implements CaseRegisterLogService {
     /**
      * Delete the caseRegisterLog by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

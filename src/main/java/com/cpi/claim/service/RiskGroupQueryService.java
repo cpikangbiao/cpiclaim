@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.RiskGroup;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.RiskGroupRepository;
 import com.cpi.claim.service.dto.RiskGroupCriteria;
-
 import com.cpi.claim.service.dto.RiskGroupDTO;
 import com.cpi.claim.service.mapper.RiskGroupMapper;
 
 /**
- * Service for executing complex queries for RiskGroup entities in the database.
+ * Service for executing complex queries for {@link RiskGroup} entities in the database.
  * The main input is a {@link RiskGroupCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link RiskGroupDTO} or a {@link Page} of {@link RiskGroupDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class RiskGroupQueryService extends QueryService<RiskGroup> {
     }
 
     /**
-     * Return a {@link List} of {@link RiskGroupDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link RiskGroupDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class RiskGroupQueryService extends QueryService<RiskGroup> {
     }
 
     /**
-     * Return a {@link Page} of {@link RiskGroupDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link RiskGroupDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class RiskGroupQueryService extends QueryService<RiskGroup> {
     }
 
     /**
-     * Function to convert RiskGroupCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(RiskGroupCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<RiskGroup> specification = createSpecification(criteria);
+        return riskGroupRepository.count(specification);
+    }
+
+    /**
+     * Function to convert RiskGroupCriteria to a {@link Specification}.
      */
     private Specification<RiskGroup> createSpecification(RiskGroupCriteria criteria) {
         Specification<RiskGroup> specification = Specification.where(null);
@@ -85,5 +98,4 @@ public class RiskGroupQueryService extends QueryService<RiskGroup> {
         }
         return specification;
     }
-
 }

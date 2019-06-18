@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.CaseGuaranteeDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CaseGuarantee and its DTO CaseGuaranteeDTO.
+ * Mapper for the entity {@link CaseGuarantee} and its DTO {@link CaseGuaranteeDTO}.
  */
 @Mapper(componentModel = "spring", uses = {VesselSubCaseMapper.class, GuaranteeTypeMapper.class})
 public interface CaseGuaranteeMapper extends EntityMapper<CaseGuaranteeDTO, CaseGuarantee> {

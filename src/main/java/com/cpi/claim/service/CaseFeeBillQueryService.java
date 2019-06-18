@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseFeeBill;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseFeeBillRepository;
 import com.cpi.claim.service.dto.CaseFeeBillCriteria;
-
 import com.cpi.claim.service.dto.CaseFeeBillDTO;
 import com.cpi.claim.service.mapper.CaseFeeBillMapper;
 
 /**
- * Service for executing complex queries for CaseFeeBill entities in the database.
+ * Service for executing complex queries for {@link CaseFeeBill} entities in the database.
  * The main input is a {@link CaseFeeBillCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseFeeBillDTO} or a {@link Page} of {@link CaseFeeBillDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseFeeBillQueryService extends QueryService<CaseFeeBill> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseFeeBillDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseFeeBillDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseFeeBillQueryService extends QueryService<CaseFeeBill> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseFeeBillDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseFeeBillDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseFeeBillQueryService extends QueryService<CaseFeeBill> {
     }
 
     /**
-     * Function to convert CaseFeeBillCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseFeeBillCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseFeeBill> specification = createSpecification(criteria);
+        return caseFeeBillRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseFeeBillCriteria to a {@link Specification}.
      */
     private Specification<CaseFeeBill> createSpecification(CaseFeeBillCriteria criteria) {
         Specification<CaseFeeBill> specification = Specification.where(null);
@@ -83,16 +96,18 @@ public class CaseFeeBillQueryService extends QueryService<CaseFeeBill> {
                 specification = specification.and(buildSpecification(criteria.getIsWriteOff(), CaseFeeBill_.isWriteOff));
             }
             if (criteria.getCaseFeeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseFeeId(), CaseFeeBill_.caseFee, CaseFee_.id));
+                specification = specification.and(buildSpecification(criteria.getCaseFeeId(),
+                    root -> root.join(CaseFeeBill_.caseFee, JoinType.LEFT).get(CaseFee_.id)));
             }
             if (criteria.getCaseClaimBillId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseClaimBillId(), CaseFeeBill_.caseClaimBill, CaseClaimBill_.id));
+                specification = specification.and(buildSpecification(criteria.getCaseClaimBillId(),
+                    root -> root.join(CaseFeeBill_.caseClaimBill, JoinType.LEFT).get(CaseClaimBill_.id)));
             }
             if (criteria.getWriteOffBillId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getWriteOffBillId(), CaseFeeBill_.writeOffBill, CaseClaimBill_.id));
+                specification = specification.and(buildSpecification(criteria.getWriteOffBillId(),
+                    root -> root.join(CaseFeeBill_.writeOffBill, JoinType.LEFT).get(CaseClaimBill_.id)));
             }
         }
         return specification;
     }
-
 }

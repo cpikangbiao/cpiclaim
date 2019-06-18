@@ -3,16 +3,10 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <property name="now" value="now()" dbms="h2"/>
-
-    <property name="now" value="now()" dbms="mysql"/>
     <property name="autoIncrement" value="true"/>
-
-    <property name="floatType" value="float4" dbms="postgresql, h2"/>
-    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
         Added the entity CaseFee.
@@ -34,7 +28,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="currency_rate" type="decimal(10,2)">
+            <column name="currency_rate" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -42,15 +36,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="fee_cost" type="decimal(10,2)">
+            <column name="fee_cost" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="fee_cost_dollar" type="decimal(10,2)">
+            <column name="fee_cost_dollar" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="deduct" type="decimal(10,2)">
+            <column name="deduct" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -58,15 +52,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="deduct_currency_rate" type="decimal(10,2)">
+            <column name="deduct_currency_rate" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="deduct_amount" type="decimal(10,2)">
+            <column name="deduct_amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="amount_dollar" type="decimal(10,2)">
+            <column name="amount_dollar" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -78,11 +72,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="remark" type="clob">
+            <column name="remark" type="${clobType}">
                 <constraints nullable="true" />
             </column>
 
-            <column name="is_signed" type="bit">
+            <column name="is_signed" type="boolean">
                 <constraints nullable="true" />
             </column>
 
@@ -112,9 +106,49 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+
         <dropDefaultValue tableName="case_fee" columnName="fee_cost_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="case_fee" columnName="fee_create_date" columnDataType="datetime"/>
-        
+    </changeSet>
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20180827071400-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/case_fee.csv"
+                  separator=";"
+                  tableName="case_fee">
+            <column name="id" type="numeric"/>
+            <column name="client_no" type="string"/>
+            <column name="number_id" type="numeric"/>
+            <column name="currency" type="numeric"/>
+            <column name="currency_rate" type="numeric"/>
+            <column name="fee_cost_date" type="datetime"/>
+            <column name="fee_cost" type="numeric"/>
+            <column name="fee_cost_dollar" type="numeric"/>
+            <column name="deduct" type="numeric"/>
+            <column name="deduct_currency" type="numeric"/>
+            <column name="deduct_currency_rate" type="numeric"/>
+            <column name="deduct_amount" type="numeric"/>
+            <column name="amount_dollar" type="numeric"/>
+            <column name="fee_create_user" type="numeric"/>
+            <column name="fee_create_date" type="datetime"/>
+            <column name="remark" type="clob"/>
+            <column name="is_signed" type="boolean"/>
+            <column name="sign_user" type="numeric"/>
+            <column name="sign_date" type="numeric"/>
+            <column name="process_id" type="numeric"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="20180827071400-1-relations" author="jhipster">
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

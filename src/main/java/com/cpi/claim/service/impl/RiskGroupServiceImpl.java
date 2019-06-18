@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing RiskGroup.
+ * Service Implementation for managing {@link RiskGroup}.
  */
 @Service
 @Transactional
@@ -36,8 +36,8 @@ public class RiskGroupServiceImpl implements RiskGroupService {
     /**
      * Save a riskGroup.
      *
-     * @param riskGroupDTO the entity to save
-     * @return the persisted entity
+     * @param riskGroupDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public RiskGroupDTO save(RiskGroupDTO riskGroupDTO) {
@@ -50,8 +50,8 @@ public class RiskGroupServiceImpl implements RiskGroupService {
     /**
      * Get all the riskGroups.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -65,8 +65,8 @@ public class RiskGroupServiceImpl implements RiskGroupService {
     /**
      * Get one riskGroup by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -79,7 +79,7 @@ public class RiskGroupServiceImpl implements RiskGroupService {
     /**
      * Delete the riskGroup by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

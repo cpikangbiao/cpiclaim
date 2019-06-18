@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.CasePaymentDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CasePayment and its DTO CasePaymentDTO.
+ * Mapper for the entity {@link CasePayment} and its DTO {@link CasePaymentDTO}.
  */
 @Mapper(componentModel = "spring", uses = {PaymentTypeMapper.class, VesselSubCaseMapper.class, CreditorMapper.class})
 public interface CasePaymentMapper extends EntityMapper<CasePaymentDTO, CasePayment> {

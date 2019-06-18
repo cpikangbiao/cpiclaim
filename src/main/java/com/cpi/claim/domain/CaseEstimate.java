@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseEstimate.
@@ -34,10 +32,10 @@ public class CaseEstimate implements Serializable {
     @Column(name = "estimate_date")
     private Instant estimateDate;
 
-    @Column(name = "estimate_entity_fee", precision = 10, scale = 2)
+    @Column(name = "estimate_entity_fee", precision = 21, scale = 2)
     private BigDecimal estimateEntityFee;
 
-    @Column(name = "estimate_cost_fee", precision = 10, scale = 2)
+    @Column(name = "estimate_cost_fee", precision = 21, scale = 2)
     private BigDecimal estimateCostFee;
 
     @Lob
@@ -45,7 +43,7 @@ public class CaseEstimate implements Serializable {
     private String remark;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseEstimates")
     private VesselSubCase subcase;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -154,19 +152,15 @@ public class CaseEstimate implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseEstimate)) {
             return false;
         }
-        CaseEstimate caseEstimate = (CaseEstimate) o;
-        if (caseEstimate.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseEstimate.getId());
+        return id != null && id.equals(((CaseEstimate) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

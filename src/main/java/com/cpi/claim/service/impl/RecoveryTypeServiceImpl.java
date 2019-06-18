@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing RecoveryType.
+ * Service Implementation for managing {@link RecoveryType}.
  */
 @Service
 @Transactional
@@ -36,8 +36,8 @@ public class RecoveryTypeServiceImpl implements RecoveryTypeService {
     /**
      * Save a recoveryType.
      *
-     * @param recoveryTypeDTO the entity to save
-     * @return the persisted entity
+     * @param recoveryTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public RecoveryTypeDTO save(RecoveryTypeDTO recoveryTypeDTO) {
@@ -50,8 +50,8 @@ public class RecoveryTypeServiceImpl implements RecoveryTypeService {
     /**
      * Get all the recoveryTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -65,8 +65,8 @@ public class RecoveryTypeServiceImpl implements RecoveryTypeService {
     /**
      * Get one recoveryType by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -79,7 +79,7 @@ public class RecoveryTypeServiceImpl implements RecoveryTypeService {
     /**
      * Delete the recoveryType by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

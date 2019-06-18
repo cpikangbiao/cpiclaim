@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.VesselCase;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.VesselCaseRepository;
 import com.cpi.claim.service.dto.VesselCaseCriteria;
-
 import com.cpi.claim.service.dto.VesselCaseDTO;
 import com.cpi.claim.service.mapper.VesselCaseMapper;
 
 /**
- * Service for executing complex queries for VesselCase entities in the database.
+ * Service for executing complex queries for {@link VesselCase} entities in the database.
  * The main input is a {@link VesselCaseCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link VesselCaseDTO} or a {@link Page} of {@link VesselCaseDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
     }
 
     /**
-     * Return a {@link List} of {@link VesselCaseDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link VesselCaseDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
     }
 
     /**
-     * Return a {@link Page} of {@link VesselCaseDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link VesselCaseDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
     }
 
     /**
-     * Function to convert VesselCaseCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(VesselCaseCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<VesselCase> specification = createSpecification(criteria);
+        return vesselCaseRepository.count(specification);
+    }
+
+    /**
+     * Function to convert VesselCaseCriteria to a {@link Specification}.
      */
     private Specification<VesselCase> createSpecification(VesselCaseCriteria criteria) {
         Specification<VesselCase> specification = Specification.where(null);
@@ -173,16 +186,18 @@ public class VesselCaseQueryService extends QueryService<VesselCase> {
                 specification = specification.and(buildRangeSpecification(criteria.getSettlementDate(), VesselCase_.settlementDate));
             }
             if (criteria.getCpiInsuranceTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCpiInsuranceTypeId(), VesselCase_.cpiInsuranceType, CpiInsuranceType_.id));
+                specification = specification.and(buildSpecification(criteria.getCpiInsuranceTypeId(),
+                    root -> root.join(VesselCase_.cpiInsuranceType, JoinType.LEFT).get(CpiInsuranceType_.id)));
             }
             if (criteria.getCaseStatusId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseStatusId(), VesselCase_.caseStatus, CaseStatusType_.id));
+                specification = specification.and(buildSpecification(criteria.getCaseStatusId(),
+                    root -> root.join(VesselCase_.caseStatus, JoinType.LEFT).get(CaseStatusType_.id)));
             }
             if (criteria.getSettlementModeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSettlementModeId(), VesselCase_.settlementMode, CaseSettlementMode_.id));
+                specification = specification.and(buildSpecification(criteria.getSettlementModeId(),
+                    root -> root.join(VesselCase_.settlementMode, JoinType.LEFT).get(CaseSettlementMode_.id)));
             }
         }
         return specification;
     }
-
 }

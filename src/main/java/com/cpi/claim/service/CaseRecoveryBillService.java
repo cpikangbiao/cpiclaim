@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing CaseRecoveryBill.
+ * Service Interface for managing {@link com.cpi.claim.domain.CaseRecoveryBill}.
  */
 public interface CaseRecoveryBillService {
 
     /**
      * Save a caseRecoveryBill.
      *
-     * @param caseRecoveryBillDTO the entity to save
-     * @return the persisted entity
+     * @param caseRecoveryBillDTO the entity to save.
+     * @return the persisted entity.
      */
     CaseRecoveryBillDTO save(CaseRecoveryBillDTO caseRecoveryBillDTO);
 
     /**
      * Get all the caseRecoveryBills.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<CaseRecoveryBillDTO> findAll(Pageable pageable);
 
@@ -32,15 +32,15 @@ public interface CaseRecoveryBillService {
     /**
      * Get the "id" caseRecoveryBill.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<CaseRecoveryBillDTO> findOne(Long id);
 
     /**
      * Delete the "id" caseRecoveryBill.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

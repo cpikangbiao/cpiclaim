@@ -1,20 +1,23 @@
 package com.cpi.claim.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CreditorService;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
-import com.cpi.claim.web.rest.util.HeaderUtil;
-import com.cpi.claim.web.rest.util.PaginationUtil;
 import com.cpi.claim.service.dto.CreditorDTO;
 import com.cpi.claim.service.dto.CreditorCriteria;
 import com.cpi.claim.service.CreditorQueryService;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * REST controller for managing Creditor.
+ * REST controller for managing {@link com.cpi.claim.domain.Creditor}.
  */
 @RestController
 @RequestMapping("/api")
@@ -33,7 +36,10 @@ public class CreditorResource {
 
     private final Logger log = LoggerFactory.getLogger(CreditorResource.class);
 
-    private static final String ENTITY_NAME = "creditor";
+    private static final String ENTITY_NAME = "cpiclaimCreditor";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final CreditorService creditorService;
 
@@ -45,14 +51,13 @@ public class CreditorResource {
     }
 
     /**
-     * POST  /creditors : Create a new creditor.
+     * {@code POST  /creditors} : Create a new creditor.
      *
-     * @param creditorDTO the creditorDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new creditorDTO, or with status 400 (Bad Request) if the creditor has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param creditorDTO the creditorDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new creditorDTO, or with status {@code 400 (Bad Request)} if the creditor has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/creditors")
-    @Timed
     public ResponseEntity<CreditorDTO> createCreditor(@RequestBody CreditorDTO creditorDTO) throws URISyntaxException {
         log.debug("REST request to save Creditor : {}", creditorDTO);
         if (creditorDTO.getId() != null) {
@@ -60,21 +65,20 @@ public class CreditorResource {
         }
         CreditorDTO result = creditorService.save(creditorDTO);
         return ResponseEntity.created(new URI("/api/creditors/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /creditors : Updates an existing creditor.
+     * {@code PUT  /creditors} : Updates an existing creditor.
      *
-     * @param creditorDTO the creditorDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated creditorDTO,
-     * or with status 400 (Bad Request) if the creditorDTO is not valid,
-     * or with status 500 (Internal Server Error) if the creditorDTO couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param creditorDTO the creditorDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated creditorDTO,
+     * or with status {@code 400 (Bad Request)} if the creditorDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the creditorDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/creditors")
-    @Timed
     public ResponseEntity<CreditorDTO> updateCreditor(@RequestBody CreditorDTO creditorDTO) throws URISyntaxException {
         log.debug("REST request to update Creditor : {}", creditorDTO);
         if (creditorDTO.getId() == null) {
@@ -82,34 +86,44 @@ public class CreditorResource {
         }
         CreditorDTO result = creditorService.save(creditorDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, creditorDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, creditorDTO.getId().toString()))
             .body(result);
     }
 
     /**
-     * GET  /creditors : get all the creditors.
+     * {@code GET  /creditors} : get all the creditors.
      *
-     * @param pageable the pagination information
-     * @param criteria the criterias which the requested entities should match
-     * @return the ResponseEntity with status 200 (OK) and the list of creditors in body
+     * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of creditors in body.
      */
     @GetMapping("/creditors")
-    @Timed
-    public ResponseEntity<List<CreditorDTO>> getAllCreditors(CreditorCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<CreditorDTO>> getAllCreditors(CreditorCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
         log.debug("REST request to get Creditors by criteria: {}", criteria);
         Page<CreditorDTO> page = creditorQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/creditors");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
-     * GET  /creditors/:id : get the "id" creditor.
+    * {@code GET  /creditors/count} : count all the creditors.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/creditors/count")
+    public ResponseEntity<Long> countCreditors(CreditorCriteria criteria) {
+        log.debug("REST request to count Creditors by criteria: {}", criteria);
+        return ResponseEntity.ok().body(creditorQueryService.countByCriteria(criteria));
+    }
+
+    /**
+     * {@code GET  /creditors/:id} : get the "id" creditor.
      *
-     * @param id the id of the creditorDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the creditorDTO, or with status 404 (Not Found)
+     * @param id the id of the creditorDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the creditorDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/creditors/{id}")
-    @Timed
     public ResponseEntity<CreditorDTO> getCreditor(@PathVariable Long id) {
         log.debug("REST request to get Creditor : {}", id);
         Optional<CreditorDTO> creditorDTO = creditorService.findOne(id);
@@ -117,16 +131,15 @@ public class CreditorResource {
     }
 
     /**
-     * DELETE  /creditors/:id : delete the "id" creditor.
+     * {@code DELETE  /creditors/:id} : delete the "id" creditor.
      *
-     * @param id the id of the creditorDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @param id the id of the creditorDTO to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/creditors/{id}")
-    @Timed
     public ResponseEntity<Void> deleteCreditor(@PathVariable Long id) {
         log.debug("REST request to delete Creditor : {}", id);
         creditorService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

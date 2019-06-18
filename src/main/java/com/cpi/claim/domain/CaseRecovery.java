@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseRecovery.
@@ -34,22 +32,22 @@ public class CaseRecovery implements Serializable {
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "currency_rate", precision = 10, scale = 2)
+    @Column(name = "currency_rate", precision = 21, scale = 2)
     private BigDecimal currencyRate;
 
     @Column(name = "issue_date")
     private Instant issueDate;
 
-    @Column(name = "issue_amount", precision = 10, scale = 2)
+    @Column(name = "issue_amount", precision = 21, scale = 2)
     private BigDecimal issueAmount;
 
     @Column(name = "received_date")
     private Instant receivedDate;
 
-    @Column(name = "received_amount", precision = 10, scale = 2)
+    @Column(name = "received_amount", precision = 21, scale = 2)
     private BigDecimal receivedAmount;
 
-    @Column(name = "amount_dollar", precision = 10, scale = 2)
+    @Column(name = "amount_dollar", precision = 21, scale = 2)
     private BigDecimal amountDollar;
 
     @Column(name = "register_date")
@@ -63,15 +61,15 @@ public class CaseRecovery implements Serializable {
     private String remark;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseRecoveries")
     private VesselSubCase subcase;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseRecoveries")
     private RecoveryType recoveryType;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseRecoveries")
     private Creditor creditor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -284,19 +282,15 @@ public class CaseRecovery implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseRecovery)) {
             return false;
         }
-        CaseRecovery caseRecovery = (CaseRecovery) o;
-        if (caseRecovery.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseRecovery.getId());
+        return id != null && id.equals(((CaseRecovery) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -7,7 +6,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A CaseFeeBill.
@@ -30,15 +28,15 @@ public class CaseFeeBill implements Serializable {
     private Boolean isWriteOff;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseFeeBills")
     private CaseFee caseFee;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseFeeBills")
     private CaseClaimBill caseClaimBill;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseFeeBills")
     private CaseClaimBill writeOffBill;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -121,19 +119,15 @@ public class CaseFeeBill implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseFeeBill)) {
             return false;
         }
-        CaseFeeBill caseFeeBill = (CaseFeeBill) o;
-        if (caseFeeBill.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseFeeBill.getId());
+        return id != null && id.equals(((CaseFeeBill) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

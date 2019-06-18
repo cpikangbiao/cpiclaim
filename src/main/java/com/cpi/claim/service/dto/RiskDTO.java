@@ -1,10 +1,9 @@
 package com.cpi.claim.service.dto;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the Risk entity.
+ * A DTO for the {@link com.cpi.claim.domain.Risk} entity.
  */
 public class RiskDTO implements Serializable {
 
@@ -23,6 +22,7 @@ public class RiskDTO implements Serializable {
     private String riskNameEnglish;
 
     private String riskNameEnglishAbbr;
+
 
     private Long riskGroupId;
 

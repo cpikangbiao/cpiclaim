@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.CaseStatusTypeDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CaseStatusType and its DTO CaseStatusTypeDTO.
+ * Mapper for the entity {@link CaseStatusType} and its DTO {@link CaseStatusTypeDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface CaseStatusTypeMapper extends EntityMapper<CaseStatusTypeDTO, CaseStatusType> {

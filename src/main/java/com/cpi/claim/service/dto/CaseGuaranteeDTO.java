@@ -1,5 +1,4 @@
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -7,7 +6,7 @@ import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the CaseGuarantee entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseGuarantee} entity.
  */
 public class CaseGuaranteeDTO implements Serializable {
 
@@ -79,6 +78,7 @@ public class CaseGuaranteeDTO implements Serializable {
     private Instant releaseDate;
 
     private Long registerUserId;
+
 
     private Long subcaseId;
 

@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.VesselSubCaseDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity VesselSubCase and its DTO VesselSubCaseDTO.
+ * Mapper for the entity {@link VesselSubCase} and its DTO {@link VesselSubCaseDTO}.
  */
 @Mapper(componentModel = "spring", uses = {VesselCaseMapper.class, RiskMapper.class})
 public interface VesselSubCaseMapper extends EntityMapper<VesselSubCaseDTO, VesselSubCase> {

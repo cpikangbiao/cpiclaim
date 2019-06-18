@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.ClaimBillStatus;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.ClaimBillStatusRepository;
 import com.cpi.claim.service.dto.ClaimBillStatusCriteria;
-
 import com.cpi.claim.service.dto.ClaimBillStatusDTO;
 import com.cpi.claim.service.mapper.ClaimBillStatusMapper;
 
 /**
- * Service for executing complex queries for ClaimBillStatus entities in the database.
+ * Service for executing complex queries for {@link ClaimBillStatus} entities in the database.
  * The main input is a {@link ClaimBillStatusCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link ClaimBillStatusDTO} or a {@link Page} of {@link ClaimBillStatusDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class ClaimBillStatusQueryService extends QueryService<ClaimBillStatus> {
     }
 
     /**
-     * Return a {@link List} of {@link ClaimBillStatusDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link ClaimBillStatusDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class ClaimBillStatusQueryService extends QueryService<ClaimBillStatus> {
     }
 
     /**
-     * Return a {@link Page} of {@link ClaimBillStatusDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link ClaimBillStatusDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class ClaimBillStatusQueryService extends QueryService<ClaimBillStatus> {
     }
 
     /**
-     * Function to convert ClaimBillStatusCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(ClaimBillStatusCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<ClaimBillStatus> specification = createSpecification(criteria);
+        return claimBillStatusRepository.count(specification);
+    }
+
+    /**
+     * Function to convert ClaimBillStatusCriteria to a {@link Specification}.
      */
     private Specification<ClaimBillStatus> createSpecification(ClaimBillStatusCriteria criteria) {
         Specification<ClaimBillStatus> specification = Specification.where(null);
@@ -85,5 +98,4 @@ public class ClaimBillStatusQueryService extends QueryService<ClaimBillStatus> {
         }
         return specification;
     }
-
 }

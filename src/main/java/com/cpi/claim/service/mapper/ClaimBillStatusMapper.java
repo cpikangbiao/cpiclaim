@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.ClaimBillStatusDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity ClaimBillStatus and its DTO ClaimBillStatusDTO.
+ * Mapper for the entity {@link ClaimBillStatus} and its DTO {@link ClaimBillStatusDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface ClaimBillStatusMapper extends EntityMapper<ClaimBillStatusDTO, ClaimBillStatus> {

@@ -1,10 +1,9 @@
 package com.cpi.claim.service.dto;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the Creditor entity.
+ * A DTO for the {@link com.cpi.claim.domain.Creditor} entity.
  */
 public class CreditorDTO implements Serializable {
 
@@ -35,6 +34,7 @@ public class CreditorDTO implements Serializable {
     private String corrBankName2;
 
     private String corrBankAddress2;
+
 
     public Long getId() {
         return id;

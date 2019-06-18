@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CpiInsuranceType;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CpiInsuranceTypeRepository;
 import com.cpi.claim.service.dto.CpiInsuranceTypeCriteria;
-
 import com.cpi.claim.service.dto.CpiInsuranceTypeDTO;
 import com.cpi.claim.service.mapper.CpiInsuranceTypeMapper;
 
 /**
- * Service for executing complex queries for CpiInsuranceType entities in the database.
+ * Service for executing complex queries for {@link CpiInsuranceType} entities in the database.
  * The main input is a {@link CpiInsuranceTypeCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CpiInsuranceTypeDTO} or a {@link Page} of {@link CpiInsuranceTypeDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CpiInsuranceTypeQueryService extends QueryService<CpiInsuranceType>
     }
 
     /**
-     * Return a {@link List} of {@link CpiInsuranceTypeDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CpiInsuranceTypeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CpiInsuranceTypeQueryService extends QueryService<CpiInsuranceType>
     }
 
     /**
-     * Return a {@link Page} of {@link CpiInsuranceTypeDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CpiInsuranceTypeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CpiInsuranceTypeQueryService extends QueryService<CpiInsuranceType>
     }
 
     /**
-     * Function to convert CpiInsuranceTypeCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CpiInsuranceTypeCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CpiInsuranceType> specification = createSpecification(criteria);
+        return cpiInsuranceTypeRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CpiInsuranceTypeCriteria to a {@link Specification}.
      */
     private Specification<CpiInsuranceType> createSpecification(CpiInsuranceTypeCriteria criteria) {
         Specification<CpiInsuranceType> specification = Specification.where(null);
@@ -85,5 +98,4 @@ public class CpiInsuranceTypeQueryService extends QueryService<CpiInsuranceType>
         }
         return specification;
     }
-
 }

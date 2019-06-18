@@ -1,6 +1,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -11,20 +13,18 @@ import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
-
-
-
 /**
- * Criteria class for the VesselSubCase entity. This class is used in VesselSubCaseResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /vessel-sub-cases?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.VesselSubCase} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.VesselSubCaseResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /vessel-sub-cases?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class VesselSubCaseCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class VesselSubCaseCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -54,7 +54,29 @@ public class VesselSubCaseCriteria implements Serializable {
 
     private LongFilter riskId;
 
-    public VesselSubCaseCriteria() {
+    public VesselSubCaseCriteria(){
+    }
+
+    public VesselSubCaseCriteria(VesselSubCaseCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.numberId = other.numberId == null ? null : other.numberId.copy();
+        this.assignedUserId = other.assignedUserId == null ? null : other.assignedUserId.copy();
+        this.insertTime = other.insertTime == null ? null : other.insertTime.copy();
+        this.subcaseCode = other.subcaseCode == null ? null : other.subcaseCode.copy();
+        this.blNo = other.blNo == null ? null : other.blNo.copy();
+        this.claimant = other.claimant == null ? null : other.claimant.copy();
+        this.claimAmount = other.claimAmount == null ? null : other.claimAmount.copy();
+        this.currency = other.currency == null ? null : other.currency.copy();
+        this.deductible = other.deductible == null ? null : other.deductible.copy();
+        this.currencyRate = other.currencyRate == null ? null : other.currencyRate.copy();
+        this.deductDollar = other.deductDollar == null ? null : other.deductDollar.copy();
+        this.vesselCaseId = other.vesselCaseId == null ? null : other.vesselCaseId.copy();
+        this.riskId = other.riskId == null ? null : other.riskId.copy();
+    }
+
+    @Override
+    public VesselSubCaseCriteria copy() {
+        return new VesselSubCaseCriteria(this);
     }
 
     public LongFilter getId() {
@@ -167,6 +189,53 @@ public class VesselSubCaseCriteria implements Serializable {
 
     public void setRiskId(LongFilter riskId) {
         this.riskId = riskId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final VesselSubCaseCriteria that = (VesselSubCaseCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(numberId, that.numberId) &&
+            Objects.equals(assignedUserId, that.assignedUserId) &&
+            Objects.equals(insertTime, that.insertTime) &&
+            Objects.equals(subcaseCode, that.subcaseCode) &&
+            Objects.equals(blNo, that.blNo) &&
+            Objects.equals(claimant, that.claimant) &&
+            Objects.equals(claimAmount, that.claimAmount) &&
+            Objects.equals(currency, that.currency) &&
+            Objects.equals(deductible, that.deductible) &&
+            Objects.equals(currencyRate, that.currencyRate) &&
+            Objects.equals(deductDollar, that.deductDollar) &&
+            Objects.equals(vesselCaseId, that.vesselCaseId) &&
+            Objects.equals(riskId, that.riskId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        numberId,
+        assignedUserId,
+        insertTime,
+        subcaseCode,
+        blNo,
+        claimant,
+        claimAmount,
+        currency,
+        deductible,
+        currencyRate,
+        deductDollar,
+        vesselCaseId,
+        riskId
+        );
     }
 
     @Override

@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing VesselCase.
+ * Service Interface for managing {@link com.cpi.claim.domain.VesselCase}.
  */
 public interface VesselCaseService {
 
     /**
      * Save a vesselCase.
      *
-     * @param vesselCaseDTO the entity to save
-     * @return the persisted entity
+     * @param vesselCaseDTO the entity to save.
+     * @return the persisted entity.
      */
     VesselCaseDTO save(VesselCaseDTO vesselCaseDTO);
 
     /**
      * Get all the vesselCases.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<VesselCaseDTO> findAll(Pageable pageable);
 
@@ -32,15 +32,15 @@ public interface VesselCaseService {
     /**
      * Get the "id" vesselCase.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<VesselCaseDTO> findOne(Long id);
 
     /**
      * Delete the "id" vesselCase.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

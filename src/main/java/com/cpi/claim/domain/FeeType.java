@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A FeeType.
@@ -71,19 +69,15 @@ public class FeeType implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof FeeType)) {
             return false;
         }
-        FeeType feeType = (FeeType) o;
-        if (feeType.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), feeType.getId());
+        return id != null && id.equals(((FeeType) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

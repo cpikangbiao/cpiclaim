@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -7,7 +6,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A Risk.
@@ -45,7 +43,7 @@ public class Risk implements Serializable {
     private String riskNameEnglishAbbr;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("risks")
     private RiskGroup riskGroup;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -167,19 +165,15 @@ public class Risk implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Risk)) {
             return false;
         }
-        Risk risk = (Risk) o;
-        if (risk.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), risk.getId());
+        return id != null && id.equals(((Risk) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

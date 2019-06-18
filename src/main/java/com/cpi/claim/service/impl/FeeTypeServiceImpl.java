@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing FeeType.
+ * Service Implementation for managing {@link FeeType}.
  */
 @Service
 @Transactional
@@ -36,8 +36,8 @@ public class FeeTypeServiceImpl implements FeeTypeService {
     /**
      * Save a feeType.
      *
-     * @param feeTypeDTO the entity to save
-     * @return the persisted entity
+     * @param feeTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public FeeTypeDTO save(FeeTypeDTO feeTypeDTO) {
@@ -50,8 +50,8 @@ public class FeeTypeServiceImpl implements FeeTypeService {
     /**
      * Get all the feeTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -65,8 +65,8 @@ public class FeeTypeServiceImpl implements FeeTypeService {
     /**
      * Get one feeType by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -79,7 +79,7 @@ public class FeeTypeServiceImpl implements FeeTypeService {
     /**
      * Delete the feeType by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

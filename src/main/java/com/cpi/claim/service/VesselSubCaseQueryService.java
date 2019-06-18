@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.VesselSubCase;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.VesselSubCaseRepository;
 import com.cpi.claim.service.dto.VesselSubCaseCriteria;
-
 import com.cpi.claim.service.dto.VesselSubCaseDTO;
 import com.cpi.claim.service.mapper.VesselSubCaseMapper;
 
 /**
- * Service for executing complex queries for VesselSubCase entities in the database.
+ * Service for executing complex queries for {@link VesselSubCase} entities in the database.
  * The main input is a {@link VesselSubCaseCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link VesselSubCaseDTO} or a {@link Page} of {@link VesselSubCaseDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class VesselSubCaseQueryService extends QueryService<VesselSubCase> {
     }
 
     /**
-     * Return a {@link List} of {@link VesselSubCaseDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link VesselSubCaseDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class VesselSubCaseQueryService extends QueryService<VesselSubCase> {
     }
 
     /**
-     * Return a {@link Page} of {@link VesselSubCaseDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link VesselSubCaseDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class VesselSubCaseQueryService extends QueryService<VesselSubCase> {
     }
 
     /**
-     * Function to convert VesselSubCaseCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(VesselSubCaseCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<VesselSubCase> specification = createSpecification(criteria);
+        return vesselSubCaseRepository.count(specification);
+    }
+
+    /**
+     * Function to convert VesselSubCaseCriteria to a {@link Specification}.
      */
     private Specification<VesselSubCase> createSpecification(VesselSubCaseCriteria criteria) {
         Specification<VesselSubCase> specification = Specification.where(null);
@@ -110,13 +123,14 @@ public class VesselSubCaseQueryService extends QueryService<VesselSubCase> {
                 specification = specification.and(buildRangeSpecification(criteria.getDeductDollar(), VesselSubCase_.deductDollar));
             }
             if (criteria.getVesselCaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getVesselCaseId(), VesselSubCase_.vesselCase, VesselCase_.id));
+                specification = specification.and(buildSpecification(criteria.getVesselCaseId(),
+                    root -> root.join(VesselSubCase_.vesselCase, JoinType.LEFT).get(VesselCase_.id)));
             }
             if (criteria.getRiskId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getRiskId(), VesselSubCase_.risk, Risk_.id));
+                specification = specification.and(buildSpecification(criteria.getRiskId(),
+                    root -> root.join(VesselSubCase_.risk, JoinType.LEFT).get(Risk_.id)));
             }
         }
         return specification;
     }
-
 }

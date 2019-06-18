@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CasePayment.
@@ -37,19 +35,19 @@ public class CasePayment implements Serializable {
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "currency_rate", precision = 10, scale = 2)
+    @Column(name = "currency_rate", precision = 21, scale = 2)
     private BigDecimal currencyRate;
 
-    @Column(name = "pay_cost", precision = 10, scale = 2)
+    @Column(name = "pay_cost", precision = 21, scale = 2)
     private BigDecimal payCost;
 
-    @Column(name = "pay_cost_dollar", precision = 10, scale = 2)
+    @Column(name = "pay_cost_dollar", precision = 21, scale = 2)
     private BigDecimal payCostDollar;
 
-    @Column(name = "deduct", precision = 10, scale = 2)
+    @Column(name = "deduct", precision = 21, scale = 2)
     private BigDecimal deduct;
 
-    @Column(name = "amount", precision = 10, scale = 2)
+    @Column(name = "amount", precision = 21, scale = 2)
     private BigDecimal amount;
 
     @Column(name = "fee_create_user")
@@ -63,15 +61,15 @@ public class CasePayment implements Serializable {
     private String remark;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("casePayments")
     private PaymentType paymentType;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("casePayments")
     private VesselSubCase subcase;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("casePayments")
     private Creditor creditor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -284,19 +282,15 @@ public class CasePayment implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CasePayment)) {
             return false;
         }
-        CasePayment casePayment = (CasePayment) o;
-        if (casePayment.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), casePayment.getId());
+        return id != null && id.equals(((CasePayment) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

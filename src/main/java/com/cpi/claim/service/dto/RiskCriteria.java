@@ -1,6 +1,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -9,22 +11,18 @@ import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-
-
-
-
-
 /**
- * Criteria class for the Risk entity. This class is used in RiskResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /risks?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.Risk} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.RiskResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /risks?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class RiskCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class RiskCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -44,7 +42,24 @@ public class RiskCriteria implements Serializable {
 
     private LongFilter riskGroupId;
 
-    public RiskCriteria() {
+    public RiskCriteria(){
+    }
+
+    public RiskCriteria(RiskCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.sortNum = other.sortNum == null ? null : other.sortNum.copy();
+        this.tclType = other.tclType == null ? null : other.tclType.copy();
+        this.piType = other.piType == null ? null : other.piType.copy();
+        this.riskName = other.riskName == null ? null : other.riskName.copy();
+        this.riskNameChinese = other.riskNameChinese == null ? null : other.riskNameChinese.copy();
+        this.riskNameEnglish = other.riskNameEnglish == null ? null : other.riskNameEnglish.copy();
+        this.riskNameEnglishAbbr = other.riskNameEnglishAbbr == null ? null : other.riskNameEnglishAbbr.copy();
+        this.riskGroupId = other.riskGroupId == null ? null : other.riskGroupId.copy();
+    }
+
+    @Override
+    public RiskCriteria copy() {
+        return new RiskCriteria(this);
     }
 
     public LongFilter getId() {
@@ -117,6 +132,43 @@ public class RiskCriteria implements Serializable {
 
     public void setRiskGroupId(LongFilter riskGroupId) {
         this.riskGroupId = riskGroupId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final RiskCriteria that = (RiskCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(sortNum, that.sortNum) &&
+            Objects.equals(tclType, that.tclType) &&
+            Objects.equals(piType, that.piType) &&
+            Objects.equals(riskName, that.riskName) &&
+            Objects.equals(riskNameChinese, that.riskNameChinese) &&
+            Objects.equals(riskNameEnglish, that.riskNameEnglish) &&
+            Objects.equals(riskNameEnglishAbbr, that.riskNameEnglishAbbr) &&
+            Objects.equals(riskGroupId, that.riskGroupId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        sortNum,
+        tclType,
+        piType,
+        riskName,
+        riskNameChinese,
+        riskNameEnglish,
+        riskNameEnglishAbbr,
+        riskGroupId
+        );
     }
 
     @Override

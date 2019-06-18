@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing CaseFee.
+ * Service Interface for managing {@link com.cpi.claim.domain.CaseFee}.
  */
 public interface CaseFeeService {
 
     /**
      * Save a caseFee.
      *
-     * @param caseFeeDTO the entity to save
-     * @return the persisted entity
+     * @param caseFeeDTO the entity to save.
+     * @return the persisted entity.
      */
     CaseFeeDTO save(CaseFeeDTO caseFeeDTO);
 
     /**
      * Get all the caseFees.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<CaseFeeDTO> findAll(Pageable pageable);
 
@@ -32,15 +32,15 @@ public interface CaseFeeService {
     /**
      * Get the "id" caseFee.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<CaseFeeDTO> findOne(Long id);
 
     /**
      * Delete the "id" caseFee.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

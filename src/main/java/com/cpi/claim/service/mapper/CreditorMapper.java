@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.CreditorDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity Creditor and its DTO CreditorDTO.
+ * Mapper for the entity {@link Creditor} and its DTO {@link CreditorDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface CreditorMapper extends EntityMapper<CreditorDTO, Creditor> {

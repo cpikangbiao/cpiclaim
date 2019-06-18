@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.Creditor;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CreditorRepository;
 import com.cpi.claim.service.dto.CreditorCriteria;
-
 import com.cpi.claim.service.dto.CreditorDTO;
 import com.cpi.claim.service.mapper.CreditorMapper;
 
 /**
- * Service for executing complex queries for Creditor entities in the database.
+ * Service for executing complex queries for {@link Creditor} entities in the database.
  * The main input is a {@link CreditorCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CreditorDTO} or a {@link Page} of {@link CreditorDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CreditorQueryService extends QueryService<Creditor> {
     }
 
     /**
-     * Return a {@link List} of {@link CreditorDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CreditorDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CreditorQueryService extends QueryService<Creditor> {
     }
 
     /**
-     * Return a {@link Page} of {@link CreditorDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CreditorDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CreditorQueryService extends QueryService<Creditor> {
     }
 
     /**
-     * Function to convert CreditorCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CreditorCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<Creditor> specification = createSpecification(criteria);
+        return creditorRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CreditorCriteria to a {@link Specification}.
      */
     private Specification<Creditor> createSpecification(CreditorCriteria criteria) {
         Specification<Creditor> specification = Specification.where(null);
@@ -118,5 +131,4 @@ public class CreditorQueryService extends QueryService<Creditor> {
         }
         return specification;
     }
-
 }

@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing RiskGroup.
+ * Service Interface for managing {@link com.cpi.claim.domain.RiskGroup}.
  */
 public interface RiskGroupService {
 
     /**
      * Save a riskGroup.
      *
-     * @param riskGroupDTO the entity to save
-     * @return the persisted entity
+     * @param riskGroupDTO the entity to save.
+     * @return the persisted entity.
      */
     RiskGroupDTO save(RiskGroupDTO riskGroupDTO);
 
     /**
      * Get all the riskGroups.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<RiskGroupDTO> findAll(Pageable pageable);
 
@@ -32,15 +32,15 @@ public interface RiskGroupService {
     /**
      * Get the "id" riskGroup.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<RiskGroupDTO> findOne(Long id);
 
     /**
      * Delete the "id" riskGroup.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

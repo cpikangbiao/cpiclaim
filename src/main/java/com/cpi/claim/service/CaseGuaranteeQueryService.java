@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseGuarantee;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseGuaranteeRepository;
 import com.cpi.claim.service.dto.CaseGuaranteeCriteria;
-
 import com.cpi.claim.service.dto.CaseGuaranteeDTO;
 import com.cpi.claim.service.mapper.CaseGuaranteeMapper;
 
 /**
- * Service for executing complex queries for CaseGuarantee entities in the database.
+ * Service for executing complex queries for {@link CaseGuarantee} entities in the database.
  * The main input is a {@link CaseGuaranteeCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseGuaranteeDTO} or a {@link Page} of {@link CaseGuaranteeDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseGuaranteeQueryService extends QueryService<CaseGuarantee> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseGuaranteeDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseGuaranteeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseGuaranteeQueryService extends QueryService<CaseGuarantee> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseGuaranteeDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseGuaranteeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseGuaranteeQueryService extends QueryService<CaseGuarantee> {
     }
 
     /**
-     * Function to convert CaseGuaranteeCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseGuaranteeCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseGuarantee> specification = createSpecification(criteria);
+        return caseGuaranteeRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseGuaranteeCriteria to a {@link Specification}.
      */
     private Specification<CaseGuarantee> createSpecification(CaseGuaranteeCriteria criteria) {
         Specification<CaseGuarantee> specification = Specification.where(null);
@@ -173,16 +186,18 @@ public class CaseGuaranteeQueryService extends QueryService<CaseGuarantee> {
                 specification = specification.and(buildRangeSpecification(criteria.getRegisterUserId(), CaseGuarantee_.registerUserId));
             }
             if (criteria.getSubcaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CaseGuarantee_.subcase, VesselSubCase_.id));
+                specification = specification.and(buildSpecification(criteria.getSubcaseId(),
+                    root -> root.join(CaseGuarantee_.subcase, JoinType.LEFT).get(VesselSubCase_.id)));
             }
             if (criteria.getGuaranteeTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getGuaranteeTypeId(), CaseGuarantee_.guaranteeType, GuaranteeType_.id));
+                specification = specification.and(buildSpecification(criteria.getGuaranteeTypeId(),
+                    root -> root.join(CaseGuarantee_.guaranteeType, JoinType.LEFT).get(GuaranteeType_.id)));
             }
             if (criteria.getConGuaranteeTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getConGuaranteeTypeId(), CaseGuarantee_.conGuaranteeType, GuaranteeType_.id));
+                specification = specification.and(buildSpecification(criteria.getConGuaranteeTypeId(),
+                    root -> root.join(CaseGuarantee_.conGuaranteeType, JoinType.LEFT).get(GuaranteeType_.id)));
             }
         }
         return specification;
     }
-
 }

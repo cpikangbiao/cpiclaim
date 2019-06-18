@@ -1,6 +1,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -11,20 +13,18 @@ import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
-
-
-
 /**
- * Criteria class for the CaseEstimate entity. This class is used in CaseEstimateResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /case-estimates?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.CaseEstimate} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.CaseEstimateResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /case-estimates?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CaseEstimateCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CaseEstimateCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -40,7 +40,22 @@ public class CaseEstimateCriteria implements Serializable {
 
     private LongFilter subcaseId;
 
-    public CaseEstimateCriteria() {
+    public CaseEstimateCriteria(){
+    }
+
+    public CaseEstimateCriteria(CaseEstimateCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.numberId = other.numberId == null ? null : other.numberId.copy();
+        this.registerUserId = other.registerUserId == null ? null : other.registerUserId.copy();
+        this.estimateDate = other.estimateDate == null ? null : other.estimateDate.copy();
+        this.estimateEntityFee = other.estimateEntityFee == null ? null : other.estimateEntityFee.copy();
+        this.estimateCostFee = other.estimateCostFee == null ? null : other.estimateCostFee.copy();
+        this.subcaseId = other.subcaseId == null ? null : other.subcaseId.copy();
+    }
+
+    @Override
+    public CaseEstimateCriteria copy() {
+        return new CaseEstimateCriteria(this);
     }
 
     public LongFilter getId() {
@@ -97,6 +112,39 @@ public class CaseEstimateCriteria implements Serializable {
 
     public void setSubcaseId(LongFilter subcaseId) {
         this.subcaseId = subcaseId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CaseEstimateCriteria that = (CaseEstimateCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(numberId, that.numberId) &&
+            Objects.equals(registerUserId, that.registerUserId) &&
+            Objects.equals(estimateDate, that.estimateDate) &&
+            Objects.equals(estimateEntityFee, that.estimateEntityFee) &&
+            Objects.equals(estimateCostFee, that.estimateCostFee) &&
+            Objects.equals(subcaseId, that.subcaseId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        numberId,
+        registerUserId,
+        estimateDate,
+        estimateEntityFee,
+        estimateCostFee,
+        subcaseId
+        );
     }
 
     @Override

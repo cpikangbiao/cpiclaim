@@ -1,6 +1,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -11,20 +13,18 @@ import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
-
-
-
 /**
- * Criteria class for the CaseRecovery entity. This class is used in CaseRecoveryResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /case-recoveries?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.CaseRecovery} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.CaseRecoveryResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /case-recoveries?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CaseRecoveryCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CaseRecoveryCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -56,7 +56,30 @@ public class CaseRecoveryCriteria implements Serializable {
 
     private LongFilter creditorId;
 
-    public CaseRecoveryCriteria() {
+    public CaseRecoveryCriteria(){
+    }
+
+    public CaseRecoveryCriteria(CaseRecoveryCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.clientNo = other.clientNo == null ? null : other.clientNo.copy();
+        this.numberId = other.numberId == null ? null : other.numberId.copy();
+        this.currency = other.currency == null ? null : other.currency.copy();
+        this.currencyRate = other.currencyRate == null ? null : other.currencyRate.copy();
+        this.issueDate = other.issueDate == null ? null : other.issueDate.copy();
+        this.issueAmount = other.issueAmount == null ? null : other.issueAmount.copy();
+        this.receivedDate = other.receivedDate == null ? null : other.receivedDate.copy();
+        this.receivedAmount = other.receivedAmount == null ? null : other.receivedAmount.copy();
+        this.amountDollar = other.amountDollar == null ? null : other.amountDollar.copy();
+        this.registerDate = other.registerDate == null ? null : other.registerDate.copy();
+        this.registerUser = other.registerUser == null ? null : other.registerUser.copy();
+        this.subcaseId = other.subcaseId == null ? null : other.subcaseId.copy();
+        this.recoveryTypeId = other.recoveryTypeId == null ? null : other.recoveryTypeId.copy();
+        this.creditorId = other.creditorId == null ? null : other.creditorId.copy();
+    }
+
+    @Override
+    public CaseRecoveryCriteria copy() {
+        return new CaseRecoveryCriteria(this);
     }
 
     public LongFilter getId() {
@@ -177,6 +200,55 @@ public class CaseRecoveryCriteria implements Serializable {
 
     public void setCreditorId(LongFilter creditorId) {
         this.creditorId = creditorId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CaseRecoveryCriteria that = (CaseRecoveryCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(clientNo, that.clientNo) &&
+            Objects.equals(numberId, that.numberId) &&
+            Objects.equals(currency, that.currency) &&
+            Objects.equals(currencyRate, that.currencyRate) &&
+            Objects.equals(issueDate, that.issueDate) &&
+            Objects.equals(issueAmount, that.issueAmount) &&
+            Objects.equals(receivedDate, that.receivedDate) &&
+            Objects.equals(receivedAmount, that.receivedAmount) &&
+            Objects.equals(amountDollar, that.amountDollar) &&
+            Objects.equals(registerDate, that.registerDate) &&
+            Objects.equals(registerUser, that.registerUser) &&
+            Objects.equals(subcaseId, that.subcaseId) &&
+            Objects.equals(recoveryTypeId, that.recoveryTypeId) &&
+            Objects.equals(creditorId, that.creditorId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        clientNo,
+        numberId,
+        currency,
+        currencyRate,
+        issueDate,
+        issueAmount,
+        receivedDate,
+        receivedAmount,
+        amountDollar,
+        registerDate,
+        registerUser,
+        subcaseId,
+        recoveryTypeId,
+        creditorId
+        );
     }
 
     @Override
