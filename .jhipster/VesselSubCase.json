@@ -1,0 +1,78 @@
+{
+    "name": "VesselSubCase",
+    "fields": [
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "assignedUserId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "insertTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "subcaseCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "blNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "claimant",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "claimAmount",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "deductible",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "currencyRate",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "deductDollar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "vesselCase",
+            "otherEntityName": "vesselCase",
+            "otherEntityField": "caseCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "risk",
+            "otherEntityName": "risk",
+            "otherEntityField": "riskName"
+        }
+    ],
+    "changelogDate": "20180821083308",
+    "entityTableName": "vessel_sub_case",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

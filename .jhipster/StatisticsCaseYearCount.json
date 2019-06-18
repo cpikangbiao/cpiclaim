@@ -1,0 +1,32 @@
+{
+    "name": "StatisticsCaseYearCount",
+    "fields": [
+        {
+            "fieldName": "caseYear",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "insuranceType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "caseCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "updateTime",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180831004225",
+    "entityTableName": "statistics_case_year_count",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

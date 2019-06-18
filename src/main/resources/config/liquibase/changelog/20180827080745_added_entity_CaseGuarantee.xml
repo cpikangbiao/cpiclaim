@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity CaseGuarantee.
+    -->
+    <changeSet id="20180827080745-1" author="jhipster">
+        <createTable tableName="case_guarantee">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="vessel_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="number_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="arrest_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="arrest_port" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="arrest_vessel_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="arrest_vessel_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bill_of_lading" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bill_lading_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nature_of_claim" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_currency" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_rate" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_amount_dollar" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_to" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_to_address" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_fee" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_other" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cancel_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_currency" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_rate" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_amount" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_amount_dollar" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_to" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_cancel_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="remark" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="release_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="register_user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="subcase_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="guarantee_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="con_guarantee_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="case_guarantee" columnName="arrest_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="case_guarantee" columnName="bill_lading_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="case_guarantee" columnName="guarantee_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="case_guarantee" columnName="cancel_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="case_guarantee" columnName="con_guarantee_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="case_guarantee" columnName="con_guarantee_cancel_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="case_guarantee" columnName="release_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

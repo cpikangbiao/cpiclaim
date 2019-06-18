@@ -1,0 +1,32 @@
+{
+    "name": "CaseClaimBillDeleteLog",
+    "fields": [
+        {
+            "fieldName": "claimBillCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "operateType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "operateUser",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "operateDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180830064452",
+    "entityTableName": "case_claim_bill_delete_log",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

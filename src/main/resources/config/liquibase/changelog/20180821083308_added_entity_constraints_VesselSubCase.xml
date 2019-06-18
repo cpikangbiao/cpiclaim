@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity VesselSubCase.
+    -->
+    <changeSet id="20180821083308-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="vessel_case_id"
+                                 baseTableName="vessel_sub_case"
+                                 constraintName="fk_vessel_sub_case_vessel_case_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vessel_case"/>
+
+        <addForeignKeyConstraint baseColumnNames="risk_id"
+                                 baseTableName="vessel_sub_case"
+                                 constraintName="fk_vessel_sub_case_risk_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="risk"/>
+
+    </changeSet>
+</databaseChangeLog>

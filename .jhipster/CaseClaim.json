@@ -1,0 +1,60 @@
+{
+    "name": "CaseClaim",
+    "fields": [
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "claimer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "claimDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "billOfLading",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "currencyId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "currencyRate",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "claimCost",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "claimCostDollar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "subcase",
+            "otherEntityName": "vesselSubCase",
+            "otherEntityField": "subcaseCode"
+        }
+    ],
+    "changelogDate": "20180827053446",
+    "entityTableName": "case_claim",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

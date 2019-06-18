@@ -1,0 +1,27 @@
+{
+    "name": "ClaimBillStatus",
+    "fields": [
+        {
+            "fieldName": "sortNum",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "claimBillStatusName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180830052105",
+    "entityTableName": "claim_bill_status",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

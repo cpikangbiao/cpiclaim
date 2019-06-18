@@ -1,0 +1,43 @@
+{
+    "name": "CaseRecoveryBill",
+    "fields": [
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "isWriteOff",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "caseRecovery",
+            "otherEntityName": "caseRecovery",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "caseClaimBill",
+            "otherEntityName": "caseClaimBill",
+            "otherEntityField": "claimBillCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "writeOffBill",
+            "otherEntityName": "caseClaimBill",
+            "otherEntityField": "claimBillCode"
+        }
+    ],
+    "changelogDate": "20181109035142",
+    "entityTableName": "case_recovery_bill",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

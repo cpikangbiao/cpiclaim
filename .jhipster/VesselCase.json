@@ -1,0 +1,177 @@
+{
+    "name": "VesselCase",
+    "fields": [
+        {
+            "fieldName": "numberId",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "caseYear",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "insuredVesselId",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "companyName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "vesselName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "companyChineseName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "vesselChineseName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reinsureId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "deduct",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "assignedHandler",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "assignedTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "registeredHandler",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "registeredDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "caseCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "caseDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "caseLocation",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "caseDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "voyageNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "loadingPort",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "loadingDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "dischargingPort",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dischargingDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "limitTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "cpDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "cpType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "arrestVessel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "jurisdiction",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "applicableLaw",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "closeDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "closeHandler",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "settlementAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "settlementDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "cpiInsuranceType",
+            "otherEntityName": "cpiInsuranceType",
+            "otherEntityField": "cpiInsuranceTypeName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "caseStatus",
+            "otherEntityName": "caseStatusType",
+            "otherEntityField": "caseStatusName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "settlementMode",
+            "otherEntityName": "caseSettlementMode",
+            "otherEntityField": "settlementModeName"
+        }
+    ],
+    "changelogDate": "20180821062146",
+    "entityTableName": "vessel_case",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

@@ -1,0 +1,36 @@
+{
+    "name": "StatisticsCaseMonthCount",
+    "fields": [
+        {
+            "fieldName": "caseYear",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "caseMonth",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "insuranceType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "caseCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "updateTime",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180831014222",
+    "entityTableName": "statistics_case_month_count",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

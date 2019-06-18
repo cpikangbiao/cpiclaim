@@ -1,0 +1,35 @@
+{
+    "name": "CaseClaimBillPrintLog",
+    "fields": [
+        {
+            "fieldName": "operateType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "operateUser",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "operateDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "caseClaimBill",
+            "otherEntityName": "caseClaimBill",
+            "otherEntityField": "claimBillCode"
+        }
+    ],
+    "changelogDate": "20180830063121",
+    "entityTableName": "case_claim_bill_print_log",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

@@ -1,0 +1,27 @@
+{
+    "name": "GuaranteeType",
+    "fields": [
+        {
+            "fieldName": "sortNum",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "guaranteeTypeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180827075426",
+    "entityTableName": "guarantee_type",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}

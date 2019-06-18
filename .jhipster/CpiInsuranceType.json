@@ -1,0 +1,27 @@
+{
+    "name": "CpiInsuranceType",
+    "fields": [
+        {
+            "fieldName": "sortNum",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cpiInsuranceTypeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180821015136",
+    "entityTableName": "cpi_insurance_type",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "microserviceName": "cpiclaim"
+}
