@@ -25,21 +25,17 @@
 package com.cpi.claim.web.rest;
 
 import com.cpi.claim.CpiclaimApp;
-
 import com.cpi.claim.config.SecurityBeanOverrideConfiguration;
-
 import com.cpi.claim.domain.CasePayment;
+import com.cpi.claim.domain.Creditor;
 import com.cpi.claim.domain.PaymentType;
 import com.cpi.claim.domain.VesselSubCase;
-import com.cpi.claim.domain.Creditor;
 import com.cpi.claim.repository.CasePaymentRepository;
+import com.cpi.claim.service.CasePaymentQueryService;
 import com.cpi.claim.service.CasePaymentService;
 import com.cpi.claim.service.dto.CasePaymentDTO;
 import com.cpi.claim.service.mapper.CasePaymentMapper;
 import com.cpi.claim.web.rest.errors.ExceptionTranslator;
-import com.cpi.claim.service.dto.CasePaymentCriteria;
-import com.cpi.claim.service.CasePaymentQueryService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,14 +49,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 
 import static com.cpi.claim.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -797,7 +791,7 @@ public class CasePaymentResourceIntTest {
     @Transactional
     public void getAllCasePaymentsByPaymentTypeIsEqualToSomething() throws Exception {
         // Initialize the database
-        PaymentType paymentType = PaymentTypeResourceIntTest.createEntity(em);
+        PaymentType paymentType = PaymentTypeResourceIT.createEntity(em);
         em.persist(paymentType);
         em.flush();
         casePayment.setPaymentType(paymentType);
@@ -816,7 +810,7 @@ public class CasePaymentResourceIntTest {
     @Transactional
     public void getAllCasePaymentsBySubcaseIsEqualToSomething() throws Exception {
         // Initialize the database
-        VesselSubCase subcase = VesselSubCaseResourceIntTest.createEntity(em);
+        VesselSubCase subcase = VesselSubCaseResourceIT.createEntity(em);
         em.persist(subcase);
         em.flush();
         casePayment.setSubcase(subcase);
@@ -835,7 +829,7 @@ public class CasePaymentResourceIntTest {
     @Transactional
     public void getAllCasePaymentsByCreditorIsEqualToSomething() throws Exception {
         // Initialize the database
-        Creditor creditor = CreditorResourceIntTest.createEntity(em);
+        Creditor creditor = CreditorResourceIT.createEntity(em);
         em.persist(creditor);
         em.flush();
         casePayment.setCreditor(creditor);

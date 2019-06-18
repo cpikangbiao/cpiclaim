@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -31,7 +30,7 @@ import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the CaseFee entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseFee} entity.
  */
 public class CaseFeeDTO implements Serializable {
 
@@ -75,6 +74,7 @@ public class CaseFeeDTO implements Serializable {
     private Long signDate;
 
     private Long processId;
+
 
     private Long feeTypeId;
 

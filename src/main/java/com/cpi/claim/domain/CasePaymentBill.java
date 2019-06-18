@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -32,7 +31,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  * A CasePaymentBill.
@@ -54,22 +52,22 @@ public class CasePaymentBill implements Serializable {
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "amount", precision = 10, scale = 2)
+    @Column(name = "amount", precision = 21, scale = 2)
     private BigDecimal amount;
 
     @Column(name = "is_write_off")
     private Boolean isWriteOff;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("casePaymentBills")
     private VesselSubCase subcase;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("casePaymentBills")
     private CaseClaimBill caseClaimBill;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("casePaymentBills")
     private CaseClaimBill writeOffBill;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -178,19 +176,15 @@ public class CasePaymentBill implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CasePaymentBill)) {
             return false;
         }
-        CasePaymentBill casePaymentBill = (CasePaymentBill) o;
-        if (casePaymentBill.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), casePaymentBill.getId());
+        return id != null && id.equals(((CasePaymentBill) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

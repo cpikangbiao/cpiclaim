@@ -1,6 +1,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -8,23 +10,20 @@ import io.github.jhipster.service.filter.FloatFilter;
 import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
-
 import io.github.jhipster.service.filter.InstantFilter;
 
-
-
-
 /**
- * Criteria class for the CaseRegisterLog entity. This class is used in CaseRegisterLogResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /case-register-logs?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.CaseRegisterLog} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.CaseRegisterLogResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /case-register-logs?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CaseRegisterLogCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CaseRegisterLogCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -38,7 +37,21 @@ public class CaseRegisterLogCriteria implements Serializable {
 
     private LongFilter vesselCaseId;
 
-    public CaseRegisterLogCriteria() {
+    public CaseRegisterLogCriteria(){
+    }
+
+    public CaseRegisterLogCriteria(CaseRegisterLogCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.numberId = other.numberId == null ? null : other.numberId.copy();
+        this.assignUser = other.assignUser == null ? null : other.assignUser.copy();
+        this.assignTime = other.assignTime == null ? null : other.assignTime.copy();
+        this.assignedUser = other.assignedUser == null ? null : other.assignedUser.copy();
+        this.vesselCaseId = other.vesselCaseId == null ? null : other.vesselCaseId.copy();
+    }
+
+    @Override
+    public CaseRegisterLogCriteria copy() {
+        return new CaseRegisterLogCriteria(this);
     }
 
     public LongFilter getId() {
@@ -87,6 +100,37 @@ public class CaseRegisterLogCriteria implements Serializable {
 
     public void setVesselCaseId(LongFilter vesselCaseId) {
         this.vesselCaseId = vesselCaseId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CaseRegisterLogCriteria that = (CaseRegisterLogCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(numberId, that.numberId) &&
+            Objects.equals(assignUser, that.assignUser) &&
+            Objects.equals(assignTime, that.assignTime) &&
+            Objects.equals(assignedUser, that.assignedUser) &&
+            Objects.equals(vesselCaseId, that.vesselCaseId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        numberId,
+        assignUser,
+        assignTime,
+        assignedUser,
+        vesselCaseId
+        );
     }
 
     @Override

@@ -27,16 +27,10 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <property name="now" value="now()" dbms="h2"/>
-
-    <property name="now" value="now()" dbms="mysql"/>
     <property name="autoIncrement" value="true"/>
-
-    <property name="floatType" value="float4" dbms="postgresql, h2"/>
-    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
         Added the entity CaseRecovery.
@@ -58,7 +52,11 @@
                 <constraints nullable="true" />
             </column>
 
+<<<<<<< HEAD
             <column name="currency_rate" type="double">
+=======
+            <column name="currency_rate" type="decimal(21,2)">
+>>>>>>> jhipster_upgrade
                 <constraints nullable="true" />
             </column>
 
@@ -66,7 +64,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="issue_amount" type="decimal(10,2)">
+            <column name="issue_amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -74,11 +72,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="received_amount" type="decimal(10,2)">
+            <column name="received_amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="amount_dollar" type="decimal(10,2)">
+            <column name="amount_dollar" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
 
@@ -90,7 +88,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="remark" type="clob">
+            <column name="remark" type="${clobType}">
                 <constraints nullable="true" />
             </column>
 
@@ -108,9 +106,45 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+
         <dropDefaultValue tableName="case_recovery" columnName="issue_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="case_recovery" columnName="received_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="case_recovery" columnName="register_date" columnDataType="datetime"/>
+<<<<<<< HEAD
+=======
+    </changeSet>
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20180827064441-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/case_recovery.csv"
+                  separator=";"
+                  tableName="case_recovery">
+            <column name="id" type="numeric"/>
+            <column name="client_no" type="string"/>
+            <column name="number_id" type="numeric"/>
+            <column name="currency" type="numeric"/>
+            <column name="currency_rate" type="numeric"/>
+            <column name="issue_date" type="datetime"/>
+            <column name="issue_amount" type="numeric"/>
+            <column name="received_date" type="datetime"/>
+            <column name="received_amount" type="numeric"/>
+            <column name="amount_dollar" type="numeric"/>
+            <column name="register_date" type="datetime"/>
+            <column name="register_user" type="numeric"/>
+            <column name="remark" type="clob"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="20180827064441-1-relations" author="jhipster">
+>>>>>>> jhipster_upgrade
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

@@ -23,13 +23,12 @@
  */
 
 package com.cpi.claim.service.dto;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * A DTO for the CasePaymentBill entity.
+ * A DTO for the {@link com.cpi.claim.domain.CasePaymentBill} entity.
  */
 public class CasePaymentBillDTO implements Serializable {
 
@@ -42,6 +41,7 @@ public class CasePaymentBillDTO implements Serializable {
     private BigDecimal amount;
 
     private Boolean isWriteOff;
+
 
     private Long subcaseId;
 

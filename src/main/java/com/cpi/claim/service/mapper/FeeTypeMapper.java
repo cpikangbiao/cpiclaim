@@ -30,7 +30,7 @@ import com.cpi.claim.service.dto.FeeTypeDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity FeeType and its DTO FeeTypeDTO.
+ * Mapper for the entity {@link FeeType} and its DTO {@link FeeTypeDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface FeeTypeMapper extends EntityMapper<FeeTypeDTO, FeeType> {

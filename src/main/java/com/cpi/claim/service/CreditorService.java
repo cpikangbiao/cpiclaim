@@ -32,23 +32,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing Creditor.
+ * Service Interface for managing {@link com.cpi.claim.domain.Creditor}.
  */
 public interface CreditorService {
 
     /**
      * Save a creditor.
      *
-     * @param creditorDTO the entity to save
-     * @return the persisted entity
+     * @param creditorDTO the entity to save.
+     * @return the persisted entity.
      */
     CreditorDTO save(CreditorDTO creditorDTO);
 
     /**
      * Get all the creditors.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<CreditorDTO> findAll(Pageable pageable);
 
@@ -56,15 +56,15 @@ public interface CreditorService {
     /**
      * Get the "id" creditor.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<CreditorDTO> findOne(Long id);
 
     /**
      * Delete the "id" creditor.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

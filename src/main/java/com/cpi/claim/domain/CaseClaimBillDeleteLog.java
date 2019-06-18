@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,7 +30,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseClaimBillDeleteLog.
@@ -126,19 +124,15 @@ public class CaseClaimBillDeleteLog implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseClaimBillDeleteLog)) {
             return false;
         }
-        CaseClaimBillDeleteLog caseClaimBillDeleteLog = (CaseClaimBillDeleteLog) o;
-        if (caseClaimBillDeleteLog.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseClaimBillDeleteLog.getId());
+        return id != null && id.equals(((CaseClaimBillDeleteLog) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

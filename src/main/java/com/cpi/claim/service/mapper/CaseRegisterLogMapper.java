@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.CaseRegisterLogDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CaseRegisterLog and its DTO CaseRegisterLogDTO.
+ * Mapper for the entity {@link CaseRegisterLog} and its DTO {@link CaseRegisterLogDTO}.
  */
 @Mapper(componentModel = "spring", uses = {VesselCaseMapper.class})
 public interface CaseRegisterLogMapper extends EntityMapper<CaseRegisterLogDTO, CaseRegisterLog> {

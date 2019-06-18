@@ -26,6 +26,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -40,12 +42,11 @@ import com.cpi.claim.domain.CaseRecovery;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseRecoveryRepository;
 import com.cpi.claim.service.dto.CaseRecoveryCriteria;
-
 import com.cpi.claim.service.dto.CaseRecoveryDTO;
 import com.cpi.claim.service.mapper.CaseRecoveryMapper;
 
 /**
- * Service for executing complex queries for CaseRecovery entities in the database.
+ * Service for executing complex queries for {@link CaseRecovery} entities in the database.
  * The main input is a {@link CaseRecoveryCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseRecoveryDTO} or a {@link Page} of {@link CaseRecoveryDTO} which fulfills the criteria.
@@ -66,7 +67,7 @@ public class CaseRecoveryQueryService extends QueryService<CaseRecovery> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseRecoveryDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseRecoveryDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -78,7 +79,7 @@ public class CaseRecoveryQueryService extends QueryService<CaseRecovery> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseRecoveryDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseRecoveryDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -92,7 +93,19 @@ public class CaseRecoveryQueryService extends QueryService<CaseRecovery> {
     }
 
     /**
-     * Function to convert CaseRecoveryCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseRecoveryCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseRecovery> specification = createSpecification(criteria);
+        return caseRecoveryRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseRecoveryCriteria to a {@link Specification}.
      */
     private Specification<CaseRecovery> createSpecification(CaseRecoveryCriteria criteria) {
         Specification<CaseRecovery> specification = Specification.where(null);
@@ -134,16 +147,18 @@ public class CaseRecoveryQueryService extends QueryService<CaseRecovery> {
                 specification = specification.and(buildRangeSpecification(criteria.getRegisterUser(), CaseRecovery_.registerUser));
             }
             if (criteria.getSubcaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CaseRecovery_.subcase, VesselSubCase_.id));
+                specification = specification.and(buildSpecification(criteria.getSubcaseId(),
+                    root -> root.join(CaseRecovery_.subcase, JoinType.LEFT).get(VesselSubCase_.id)));
             }
             if (criteria.getRecoveryTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getRecoveryTypeId(), CaseRecovery_.recoveryType, RecoveryType_.id));
+                specification = specification.and(buildSpecification(criteria.getRecoveryTypeId(),
+                    root -> root.join(CaseRecovery_.recoveryType, JoinType.LEFT).get(RecoveryType_.id)));
             }
             if (criteria.getCreditorId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCreditorId(), CaseRecovery_.creditor, Creditor_.id));
+                specification = specification.and(buildSpecification(criteria.getCreditorId(),
+                    root -> root.join(CaseRecovery_.creditor, JoinType.LEFT).get(Creditor_.id)));
             }
         }
         return specification;
     }
-
 }

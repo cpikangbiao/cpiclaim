@@ -25,20 +25,16 @@
 package com.cpi.claim.web.rest;
 
 import com.cpi.claim.CpiclaimApp;
-
 import com.cpi.claim.config.SecurityBeanOverrideConfiguration;
-
 import com.cpi.claim.domain.FeeType;
 import com.cpi.claim.repository.FeeTypeRepository;
+import com.cpi.claim.service.FeeTypeQueryService;
 import com.cpi.claim.service.FeeTypeService;
 import com.cpi.claim.service.dto.FeeTypeDTO;
 import com.cpi.claim.service.mapper.FeeTypeMapper;
 import com.cpi.claim.web.rest.errors.ExceptionTranslator;
-import com.cpi.claim.service.dto.FeeTypeCriteria;
-import com.cpi.claim.service.FeeTypeQueryService;
-
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +49,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-
 
 import static com.cpi.claim.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;

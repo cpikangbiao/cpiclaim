@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,7 +30,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A RecoveryType.
@@ -99,19 +97,15 @@ public class RecoveryType implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof RecoveryType)) {
             return false;
         }
-        RecoveryType recoveryType = (RecoveryType) o;
-        if (recoveryType.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), recoveryType.getId());
+        return id != null && id.equals(((RecoveryType) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

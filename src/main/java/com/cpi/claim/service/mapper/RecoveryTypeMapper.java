@@ -30,7 +30,7 @@ import com.cpi.claim.service.dto.RecoveryTypeDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity RecoveryType and its DTO RecoveryTypeDTO.
+ * Mapper for the entity {@link RecoveryType} and its DTO {@link RecoveryTypeDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface RecoveryTypeMapper extends EntityMapper<RecoveryTypeDTO, RecoveryType> {

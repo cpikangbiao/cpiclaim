@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CpiInsuranceType.
+ * Service Implementation for managing {@link CpiInsuranceType}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CpiInsuranceTypeServiceImpl implements CpiInsuranceTypeService {
     /**
      * Save a cpiInsuranceType.
      *
-     * @param cpiInsuranceTypeDTO the entity to save
-     * @return the persisted entity
+     * @param cpiInsuranceTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CpiInsuranceTypeDTO save(CpiInsuranceTypeDTO cpiInsuranceTypeDTO) {
@@ -74,8 +74,8 @@ public class CpiInsuranceTypeServiceImpl implements CpiInsuranceTypeService {
     /**
      * Get all the cpiInsuranceTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class CpiInsuranceTypeServiceImpl implements CpiInsuranceTypeService {
     /**
      * Get one cpiInsuranceType by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class CpiInsuranceTypeServiceImpl implements CpiInsuranceTypeService {
     /**
      * Delete the cpiInsuranceType by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

@@ -24,9 +24,9 @@
 
 package com.cpi.claim.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.exchange.uw.LossRatioToUwService;
 import com.cpi.share.claim.lossratio.LossRatioForClaimPartInfo;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,6 @@ public class ServiceForUwResource {
 
 
     @GetMapping("/service/for-uw/get-loss-ratio/{insuredVesselId}")
-    @Timed
     public ResponseEntity<LossRatioForClaimPartInfo> getLossRatioForClaimPartInfo(@PathVariable Long insuredVesselId) {
         log.debug("REST request to get LossRatio For ClaimPartInfo for insuredVesselId: {} ", insuredVesselId);
         return new ResponseEntity<>(lossRatioToUwService.getLossRatioForClaimPartInfo(insuredVesselId), HttpStatus.OK);

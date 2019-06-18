@@ -24,15 +24,20 @@
 
 package com.cpi.claim.service.dto;
 
+
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
+
+import java.time.Instant;
+import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
 /**
- * A DTO for the VesselCase entity.
+ * A DTO for the {@link com.cpi.claim.domain.VesselCase} entity.
  */
 public class VesselCaseDTO implements Serializable {
 
@@ -108,6 +113,7 @@ public class VesselCaseDTO implements Serializable {
     private BigDecimal settlementAmount;
 
     private Instant settlementDate;
+
 
     private Long cpiInsuranceTypeId;
 

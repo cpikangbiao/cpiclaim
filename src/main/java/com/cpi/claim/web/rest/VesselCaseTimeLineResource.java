@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.VesselCaseQueryService;
 import com.cpi.claim.service.VesselCaseService;
 import com.cpi.claim.service.bean.timeline.TimeLineBean;
@@ -58,7 +56,6 @@ public class VesselCaseTimeLineResource {
     private VesselCaseTimeLineGenerateUtility vesselCaseTimeLineGenerateUtility;
 
     @GetMapping("/vessel-cases/time-line/{id}")
-    @Timed
     public ResponseEntity<List<TimeLineBean>> getVesselCaseTimeLine(@PathVariable("id") Long id) {
         log.debug("REST request to get getVesselCaseTimeLine by id: {}", id);
         return new ResponseEntity<>(vesselCaseTimeLineGenerateUtility.createVesselCaseTimeLine(id), HttpStatus.OK);

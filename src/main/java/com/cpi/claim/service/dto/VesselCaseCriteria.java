@@ -25,6 +25,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -35,20 +37,18 @@ import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
-
-
-
 /**
- * Criteria class for the VesselCase entity. This class is used in VesselCaseResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /vessel-cases?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.VesselCase} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.VesselCaseResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /vessel-cases?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class VesselCaseCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class VesselCaseCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -122,7 +122,51 @@ public class VesselCaseCriteria implements Serializable {
 
     private LongFilter settlementModeId;
 
-    public VesselCaseCriteria() {
+    public VesselCaseCriteria(){
+    }
+
+    public VesselCaseCriteria(VesselCaseCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.numberId = other.numberId == null ? null : other.numberId.copy();
+        this.caseYear = other.caseYear == null ? null : other.caseYear.copy();
+        this.insuredVesselId = other.insuredVesselId == null ? null : other.insuredVesselId.copy();
+        this.companyName = other.companyName == null ? null : other.companyName.copy();
+        this.vesselName = other.vesselName == null ? null : other.vesselName.copy();
+        this.companyChineseName = other.companyChineseName == null ? null : other.companyChineseName.copy();
+        this.vesselChineseName = other.vesselChineseName == null ? null : other.vesselChineseName.copy();
+        this.reinsureId = other.reinsureId == null ? null : other.reinsureId.copy();
+        this.deduct = other.deduct == null ? null : other.deduct.copy();
+        this.assignedHandler = other.assignedHandler == null ? null : other.assignedHandler.copy();
+        this.assignedTime = other.assignedTime == null ? null : other.assignedTime.copy();
+        this.registeredHandler = other.registeredHandler == null ? null : other.registeredHandler.copy();
+        this.registeredDate = other.registeredDate == null ? null : other.registeredDate.copy();
+        this.caseCode = other.caseCode == null ? null : other.caseCode.copy();
+        this.caseDate = other.caseDate == null ? null : other.caseDate.copy();
+        this.caseLocation = other.caseLocation == null ? null : other.caseLocation.copy();
+        this.caseDescription = other.caseDescription == null ? null : other.caseDescription.copy();
+        this.voyageNo = other.voyageNo == null ? null : other.voyageNo.copy();
+        this.loadingPort = other.loadingPort == null ? null : other.loadingPort.copy();
+        this.loadingDate = other.loadingDate == null ? null : other.loadingDate.copy();
+        this.dischargingPort = other.dischargingPort == null ? null : other.dischargingPort.copy();
+        this.dischargingDate = other.dischargingDate == null ? null : other.dischargingDate.copy();
+        this.limitTime = other.limitTime == null ? null : other.limitTime.copy();
+        this.cpDate = other.cpDate == null ? null : other.cpDate.copy();
+        this.cpType = other.cpType == null ? null : other.cpType.copy();
+        this.arrestVessel = other.arrestVessel == null ? null : other.arrestVessel.copy();
+        this.jurisdiction = other.jurisdiction == null ? null : other.jurisdiction.copy();
+        this.applicableLaw = other.applicableLaw == null ? null : other.applicableLaw.copy();
+        this.closeDate = other.closeDate == null ? null : other.closeDate.copy();
+        this.closeHandler = other.closeHandler == null ? null : other.closeHandler.copy();
+        this.settlementAmount = other.settlementAmount == null ? null : other.settlementAmount.copy();
+        this.settlementDate = other.settlementDate == null ? null : other.settlementDate.copy();
+        this.cpiInsuranceTypeId = other.cpiInsuranceTypeId == null ? null : other.cpiInsuranceTypeId.copy();
+        this.caseStatusId = other.caseStatusId == null ? null : other.caseStatusId.copy();
+        this.settlementModeId = other.settlementModeId == null ? null : other.settlementModeId.copy();
+    }
+
+    @Override
+    public VesselCaseCriteria copy() {
+        return new VesselCaseCriteria(this);
     }
 
     public LongFilter getId() {
@@ -411,6 +455,97 @@ public class VesselCaseCriteria implements Serializable {
 
     public void setSettlementModeId(LongFilter settlementModeId) {
         this.settlementModeId = settlementModeId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final VesselCaseCriteria that = (VesselCaseCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(numberId, that.numberId) &&
+            Objects.equals(caseYear, that.caseYear) &&
+            Objects.equals(insuredVesselId, that.insuredVesselId) &&
+            Objects.equals(companyName, that.companyName) &&
+            Objects.equals(vesselName, that.vesselName) &&
+            Objects.equals(companyChineseName, that.companyChineseName) &&
+            Objects.equals(vesselChineseName, that.vesselChineseName) &&
+            Objects.equals(reinsureId, that.reinsureId) &&
+            Objects.equals(deduct, that.deduct) &&
+            Objects.equals(assignedHandler, that.assignedHandler) &&
+            Objects.equals(assignedTime, that.assignedTime) &&
+            Objects.equals(registeredHandler, that.registeredHandler) &&
+            Objects.equals(registeredDate, that.registeredDate) &&
+            Objects.equals(caseCode, that.caseCode) &&
+            Objects.equals(caseDate, that.caseDate) &&
+            Objects.equals(caseLocation, that.caseLocation) &&
+            Objects.equals(caseDescription, that.caseDescription) &&
+            Objects.equals(voyageNo, that.voyageNo) &&
+            Objects.equals(loadingPort, that.loadingPort) &&
+            Objects.equals(loadingDate, that.loadingDate) &&
+            Objects.equals(dischargingPort, that.dischargingPort) &&
+            Objects.equals(dischargingDate, that.dischargingDate) &&
+            Objects.equals(limitTime, that.limitTime) &&
+            Objects.equals(cpDate, that.cpDate) &&
+            Objects.equals(cpType, that.cpType) &&
+            Objects.equals(arrestVessel, that.arrestVessel) &&
+            Objects.equals(jurisdiction, that.jurisdiction) &&
+            Objects.equals(applicableLaw, that.applicableLaw) &&
+            Objects.equals(closeDate, that.closeDate) &&
+            Objects.equals(closeHandler, that.closeHandler) &&
+            Objects.equals(settlementAmount, that.settlementAmount) &&
+            Objects.equals(settlementDate, that.settlementDate) &&
+            Objects.equals(cpiInsuranceTypeId, that.cpiInsuranceTypeId) &&
+            Objects.equals(caseStatusId, that.caseStatusId) &&
+            Objects.equals(settlementModeId, that.settlementModeId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        numberId,
+        caseYear,
+        insuredVesselId,
+        companyName,
+        vesselName,
+        companyChineseName,
+        vesselChineseName,
+        reinsureId,
+        deduct,
+        assignedHandler,
+        assignedTime,
+        registeredHandler,
+        registeredDate,
+        caseCode,
+        caseDate,
+        caseLocation,
+        caseDescription,
+        voyageNo,
+        loadingPort,
+        loadingDate,
+        dischargingPort,
+        dischargingDate,
+        limitTime,
+        cpDate,
+        cpType,
+        arrestVessel,
+        jurisdiction,
+        applicableLaw,
+        closeDate,
+        closeHandler,
+        settlementAmount,
+        settlementDate,
+        cpiInsuranceTypeId,
+        caseStatusId,
+        settlementModeId
+        );
     }
 
     @Override

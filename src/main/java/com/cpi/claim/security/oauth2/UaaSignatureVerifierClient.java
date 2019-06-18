@@ -41,7 +41,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 /**
- * Client fetching the public key from UAA to create a SignatureVerifier.
+ * Client fetching the public key from UAA to create a {@link SignatureVerifier}.
  */
 @Component
 public class UaaSignatureVerifierClient implements OAuth2SignatureVerifierClient {
@@ -60,7 +60,7 @@ public class UaaSignatureVerifierClient implements OAuth2SignatureVerifierClient
     /**
      * Fetches the public key from the UAA.
      *
-     * @return the public key used to verify JWT tokens; or null.
+     * @return the public key used to verify JWT tokens; or {@code null}.
      */
     @Override
     public SignatureVerifier getSignatureVerifier() throws Exception {
@@ -76,7 +76,11 @@ public class UaaSignatureVerifierClient implements OAuth2SignatureVerifierClient
         }
     }
 
-    /** Returns the configured endpoint URI to retrieve the public key. */
+    /**
+     * Returns the configured endpoint URI to retrieve the public key.
+     *
+     * @return the configured endpoint URI to retrieve the public key.
+     */
     private String getPublicKeyEndpoint() {
         String tokenEndpointUrl = oAuth2Properties.getSignatureVerification().getPublicKeyEndpointUri();
         if (tokenEndpointUrl == null) {

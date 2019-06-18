@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CurrencyRateService;
 import com.cpi.claim.service.dto.common.CurrencyRateDTO;
 import org.slf4j.Logger;
@@ -55,7 +53,6 @@ public class CurrencyRateResource {
 
 
     @GetMapping("/currency-rates/get-last-rate/{currencyId}")
-    @Timed
     public ResponseEntity<CurrencyRateDTO> getLastCurrencyRate(@PathVariable  Long currencyId) {
         log.debug("get Last Currency Rate By currencyId : {}", currencyId);
         return new ResponseEntity<>(currencyRateService.getLastCurrencyRate(currencyId), HttpStatus.OK);

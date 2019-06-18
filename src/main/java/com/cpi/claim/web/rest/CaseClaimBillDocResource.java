@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseClaimBillQueryService;
 import com.cpi.claim.service.CaseClaimBillService;
 import com.cpi.claim.service.utility.bill.doc.ClaimBillDocUtility;
@@ -66,7 +64,6 @@ public class CaseClaimBillDocResource {
 
 
     @GetMapping("/case-claim-bills/doc/{id}/pdf")
-    @Timed
     public ResponseEntity<byte[]> getCaseClaimBillDocPDFForId(@PathVariable("id") Long id) {
         log.debug("REST request to get CaseClaimBill Doc PDF For Id: {}", id);
         byte[] bytes = claimBillDocUtility.createCaseClaimBillDocPDF(id);

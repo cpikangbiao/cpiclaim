@@ -23,13 +23,12 @@
  */
 
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CaseClaimBillApprovalLog entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseClaimBillApprovalLog} entity.
  */
 public class CaseClaimBillApprovalLogDTO implements Serializable {
 
@@ -46,6 +45,7 @@ public class CaseClaimBillApprovalLogDTO implements Serializable {
     private String approvalTransition;
 
     private String remark;
+
 
     private Long caseClaimBillId;
 

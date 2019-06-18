@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -33,7 +32,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A VesselSubCase.
@@ -73,13 +71,13 @@ public class VesselSubCase extends  AbstractAuditingEntity implements Serializab
     @Column(name = "currency")
     private Long currency;
 
-    @Column(name = "deductible", precision = 10, scale = 2)
+    @Column(name = "deductible", precision = 21, scale = 2)
     private BigDecimal deductible;
 
-    @Column(name = "currency_rate", precision = 15, scale = 5)
+    @Column(name = "currency_rate", precision = 21, scale = 2)
     private BigDecimal currencyRate;
 
-    @Column(name = "deduct_dollar", precision = 10, scale = 2)
+    @Column(name = "deduct_dollar", precision = 21, scale = 2)
     private BigDecimal deductDollar;
 
     @Lob
@@ -87,11 +85,11 @@ public class VesselSubCase extends  AbstractAuditingEntity implements Serializab
     private String remark;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("vesselSubCases")
     private VesselCase vesselCase;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("vesselSubCases")
     private Risk risk;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -291,19 +289,15 @@ public class VesselSubCase extends  AbstractAuditingEntity implements Serializab
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof VesselSubCase)) {
             return false;
         }
-        VesselSubCase vesselSubCase = (VesselSubCase) o;
-        if (vesselSubCase.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), vesselSubCase.getId());
+        return id != null && id.equals(((VesselSubCase) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

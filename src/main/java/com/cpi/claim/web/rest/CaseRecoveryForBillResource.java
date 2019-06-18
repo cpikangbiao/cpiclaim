@@ -24,9 +24,9 @@
 
 package com.cpi.claim.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseRecoveryForBillService;
 import com.cpi.claim.service.bean.recovery.CaseRecoveryBean;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -55,7 +55,6 @@ public class CaseRecoveryForBillResource {
     }
 
     @GetMapping("/case-recoveries/get-bean/{id}")
-    @Timed
     public ResponseEntity<CaseRecoveryBean> getCaseRecoveryBeanForCaseRecoveryId(@PathVariable Long id) {
         log.debug("REST request to get CaseFeeBean For CaseFeeId(: {}", id);
         return new ResponseEntity<>(caseRecoveryForBillService.getCaseRecoveryBeanForCaseRecoveryId(id), HttpStatus.OK);

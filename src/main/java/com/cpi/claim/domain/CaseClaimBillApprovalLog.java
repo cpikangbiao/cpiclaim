@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -32,7 +31,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseClaimBillApprovalLog.
@@ -66,8 +64,8 @@ public class CaseClaimBillApprovalLog implements Serializable {
     @Column(name = "remark")
     private String remark;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JsonIgnoreProperties("")
+    @ManyToOne
+    @JsonIgnoreProperties("caseClaimBillApprovalLogs")
     private CaseClaimBill caseClaimBill;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -176,19 +174,15 @@ public class CaseClaimBillApprovalLog implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseClaimBillApprovalLog)) {
             return false;
         }
-        CaseClaimBillApprovalLog caseClaimBillApprovalLog = (CaseClaimBillApprovalLog) o;
-        if (caseClaimBillApprovalLog.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseClaimBillApprovalLog.getId());
+        return id != null && id.equals(((CaseClaimBillApprovalLog) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -33,7 +32,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseClaim.
@@ -64,13 +62,14 @@ public class CaseClaim extends AbstractAuditingEntity implements Serializable {
     @Column(name = "currency_id")
     private Long currencyId;
 
-    @Column(name = "currency_rate", precision = 15, scale = 5)
+    @Column(name = "currency_rate", precision = 21, scale = 2)
     private BigDecimal currencyRate;
 
-    @Column(name = "claim_cost", precision = 20, scale = 2)
+    @Column(name = "claim_cost", precision = 21, scale = 2)
     private BigDecimal claimCost;
 
-    @Column(name = "claim_cost_dollar", precision = 20, scale = 2)
+    @Column(name = "claim_cost_dollar", precision = 21, scale = 2)
+
     private BigDecimal claimCostDollar;
 
     @Lob
@@ -78,7 +77,7 @@ public class CaseClaim extends AbstractAuditingEntity implements Serializable {
     private String remark;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("caseClaims")
     private VesselSubCase subcase;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -226,19 +225,15 @@ public class CaseClaim extends AbstractAuditingEntity implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseClaim)) {
             return false;
         }
-        CaseClaim caseClaim = (CaseClaim) o;
-        if (caseClaim.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseClaim.getId());
+        return id != null && id.equals(((CaseClaim) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

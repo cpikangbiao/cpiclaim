@@ -1,11 +1,10 @@
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CaseCloseLog entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseCloseLog} entity.
  */
 public class CaseCloseLogDTO implements Serializable {
 
@@ -16,6 +15,7 @@ public class CaseCloseLogDTO implements Serializable {
     private Instant operateDate;
 
     private String operateType;
+
 
     private Long vesselCaseId;
 

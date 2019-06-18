@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.VesselCaseQueryService;
 import com.cpi.claim.service.VesselCaseService;
 import com.cpi.claim.service.bean.vesselcase.VesselCaseOverviewBean;
@@ -76,7 +74,6 @@ public class VesselCaseOverviewResource {
 
 
     @GetMapping("/vessel-cases/overview/{id}")
-    @Timed
     public ResponseEntity<VesselCaseOverviewBean> getVesselCaseOverviewBean(@PathVariable("id") Long id) {
         log.debug("REST request to get VesselCases by id: {}", id);
         VesselCaseOverviewBean vesselCaseOverviewBean = vesselCaseOverviewUtility.createVesselCaseOverviewBean(id);

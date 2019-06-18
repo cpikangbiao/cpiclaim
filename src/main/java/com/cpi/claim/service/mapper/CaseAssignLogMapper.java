@@ -6,7 +6,7 @@ import com.cpi.claim.service.dto.CaseAssignLogDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CaseAssignLog and its DTO CaseAssignLogDTO.
+ * Mapper for the entity {@link CaseAssignLog} and its DTO {@link CaseAssignLogDTO}.
  */
 @Mapper(componentModel = "spring", uses = {VesselCaseMapper.class})
 public interface CaseAssignLogMapper extends EntityMapper<CaseAssignLogDTO, CaseAssignLog> {

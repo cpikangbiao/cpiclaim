@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.service.dto;
-
 import java.time.Instant;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -31,7 +30,7 @@ import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
- * A DTO for the CaseClaimBill entity.
+ * A DTO for the {@link com.cpi.claim.domain.CaseClaimBill} entity.
  */
 public class CaseClaimBillDTO implements Serializable {
 
@@ -85,6 +84,7 @@ public class CaseClaimBillDTO implements Serializable {
     private Long processId;
 
     private Integer printNumber;
+
 
     private Long subcaseId;
 

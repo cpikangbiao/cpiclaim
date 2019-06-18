@@ -26,6 +26,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -40,12 +42,11 @@ import com.cpi.claim.domain.CaseEstimate;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseEstimateRepository;
 import com.cpi.claim.service.dto.CaseEstimateCriteria;
-
 import com.cpi.claim.service.dto.CaseEstimateDTO;
 import com.cpi.claim.service.mapper.CaseEstimateMapper;
 
 /**
- * Service for executing complex queries for CaseEstimate entities in the database.
+ * Service for executing complex queries for {@link CaseEstimate} entities in the database.
  * The main input is a {@link CaseEstimateCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseEstimateDTO} or a {@link Page} of {@link CaseEstimateDTO} which fulfills the criteria.
@@ -66,7 +67,7 @@ public class CaseEstimateQueryService extends QueryService<CaseEstimate> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseEstimateDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseEstimateDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -78,7 +79,7 @@ public class CaseEstimateQueryService extends QueryService<CaseEstimate> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseEstimateDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseEstimateDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -92,7 +93,19 @@ public class CaseEstimateQueryService extends QueryService<CaseEstimate> {
     }
 
     /**
-     * Function to convert CaseEstimateCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseEstimateCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseEstimate> specification = createSpecification(criteria);
+        return caseEstimateRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseEstimateCriteria to a {@link Specification}.
      */
     private Specification<CaseEstimate> createSpecification(CaseEstimateCriteria criteria) {
         Specification<CaseEstimate> specification = Specification.where(null);
@@ -116,10 +129,10 @@ public class CaseEstimateQueryService extends QueryService<CaseEstimate> {
                 specification = specification.and(buildRangeSpecification(criteria.getEstimateCostFee(), CaseEstimate_.estimateCostFee));
             }
             if (criteria.getSubcaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CaseEstimate_.subcase, VesselSubCase_.id));
+                specification = specification.and(buildSpecification(criteria.getSubcaseId(),
+                    root -> root.join(CaseEstimate_.subcase, JoinType.LEFT).get(VesselSubCase_.id)));
             }
         }
         return specification;
     }
-
 }

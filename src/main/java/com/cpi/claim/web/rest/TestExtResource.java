@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.repository.bean.CaseYearCountStatisticsBean;
 import com.cpi.claim.service.VesselCaseExtService;
 
@@ -59,14 +57,12 @@ public class TestExtResource {
     }
 
     @GetMapping("/statistics/year")
-    @Timed
     public void getStatisForYear() {
 
         vesselCaseStatisticsService.gatherStaticForCaseMonthCount();
     }
 
     @GetMapping("/statistics/year/{startyear}/{endyear}")
-    @Timed
     public ResponseEntity<List<CaseYearCountStatisticsBean>> getStatisForYear(@PathVariable String startyear, @PathVariable String endyear) {
         return new ResponseEntity<>(vesselCaseStatisticsService.findCaseYearStaticsCount(startyear, endyear), HttpStatus.OK);
     }

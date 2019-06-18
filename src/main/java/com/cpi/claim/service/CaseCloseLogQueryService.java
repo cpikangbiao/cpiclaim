@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseCloseLog;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseCloseLogRepository;
 import com.cpi.claim.service.dto.CaseCloseLogCriteria;
-
 import com.cpi.claim.service.dto.CaseCloseLogDTO;
 import com.cpi.claim.service.mapper.CaseCloseLogMapper;
 
 /**
- * Service for executing complex queries for CaseCloseLog entities in the database.
+ * Service for executing complex queries for {@link CaseCloseLog} entities in the database.
  * The main input is a {@link CaseCloseLogCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseCloseLogDTO} or a {@link Page} of {@link CaseCloseLogDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseCloseLogQueryService extends QueryService<CaseCloseLog> {
     }
 
     /**
-     * Return a {@link List} of {@link CaseCloseLogDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseCloseLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseCloseLogQueryService extends QueryService<CaseCloseLog> {
     }
 
     /**
-     * Return a {@link Page} of {@link CaseCloseLogDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseCloseLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseCloseLogQueryService extends QueryService<CaseCloseLog> {
     }
 
     /**
-     * Function to convert CaseCloseLogCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseCloseLogCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseCloseLog> specification = createSpecification(criteria);
+        return caseCloseLogRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseCloseLogCriteria to a {@link Specification}.
      */
     private Specification<CaseCloseLog> createSpecification(CaseCloseLogCriteria criteria) {
         Specification<CaseCloseLog> specification = Specification.where(null);
@@ -86,10 +99,10 @@ public class CaseCloseLogQueryService extends QueryService<CaseCloseLog> {
                 specification = specification.and(buildStringSpecification(criteria.getOperateType(), CaseCloseLog_.operateType));
             }
             if (criteria.getVesselCaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getVesselCaseId(), CaseCloseLog_.vesselCase, VesselCase_.id));
+                specification = specification.and(buildSpecification(criteria.getVesselCaseId(),
+                    root -> root.join(CaseCloseLog_.vesselCase, JoinType.LEFT).get(VesselCase_.id)));
             }
         }
         return specification;
     }
-
 }

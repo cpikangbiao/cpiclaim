@@ -23,13 +23,12 @@
  */
 
 package com.cpi.claim.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the RecoveryType entity.
+ * A DTO for the {@link com.cpi.claim.domain.RecoveryType} entity.
  */
 public class RecoveryTypeDTO implements Serializable {
 
@@ -39,6 +38,7 @@ public class RecoveryTypeDTO implements Serializable {
 
     @NotNull
     private String recoveryTypeName;
+
 
     public Long getId() {
         return id;

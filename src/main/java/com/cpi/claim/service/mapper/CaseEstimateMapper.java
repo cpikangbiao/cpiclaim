@@ -30,7 +30,7 @@ import com.cpi.claim.service.dto.CaseEstimateDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CaseEstimate and its DTO CaseEstimateDTO.
+ * Mapper for the entity {@link CaseEstimate} and its DTO {@link CaseEstimateDTO}.
  */
 @Mapper(componentModel = "spring", uses = {VesselSubCaseMapper.class})
 public interface CaseEstimateMapper extends EntityMapper<CaseEstimateDTO, CaseEstimate> {

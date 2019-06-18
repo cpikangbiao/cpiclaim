@@ -25,21 +25,16 @@
 package com.cpi.claim.web.rest;
 
 import com.cpi.claim.CpiclaimApp;
-
 import com.cpi.claim.config.SecurityBeanOverrideConfiguration;
-
+import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.domain.CasePaymentBill;
 import com.cpi.claim.domain.VesselSubCase;
-import com.cpi.claim.domain.CaseClaimBill;
-import com.cpi.claim.domain.CaseClaimBill;
 import com.cpi.claim.repository.CasePaymentBillRepository;
+import com.cpi.claim.service.CasePaymentBillQueryService;
 import com.cpi.claim.service.CasePaymentBillService;
 import com.cpi.claim.service.dto.CasePaymentBillDTO;
 import com.cpi.claim.service.mapper.CasePaymentBillMapper;
 import com.cpi.claim.web.rest.errors.ExceptionTranslator;
-import com.cpi.claim.service.dto.CasePaymentBillCriteria;
-import com.cpi.claim.service.CasePaymentBillQueryService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +52,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
-
 
 import static com.cpi.claim.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -438,7 +432,7 @@ public class CasePaymentBillResourceIntTest {
     @Transactional
     public void getAllCasePaymentBillsBySubcaseIsEqualToSomething() throws Exception {
         // Initialize the database
-        VesselSubCase subcase = VesselSubCaseResourceIntTest.createEntity(em);
+        VesselSubCase subcase = VesselSubCaseResourceIT.createEntity(em);
         em.persist(subcase);
         em.flush();
         casePaymentBill.setSubcase(subcase);
@@ -457,7 +451,7 @@ public class CasePaymentBillResourceIntTest {
     @Transactional
     public void getAllCasePaymentBillsByCaseClaimBillIsEqualToSomething() throws Exception {
         // Initialize the database
-        CaseClaimBill caseClaimBill = CaseClaimBillResourceIntTest.createEntity(em);
+        CaseClaimBill caseClaimBill = CaseClaimBillResourceIT.createEntity(em);
         em.persist(caseClaimBill);
         em.flush();
         casePaymentBill.setCaseClaimBill(caseClaimBill);
@@ -476,7 +470,7 @@ public class CasePaymentBillResourceIntTest {
     @Transactional
     public void getAllCasePaymentBillsByWriteOffBillIsEqualToSomething() throws Exception {
         // Initialize the database
-        CaseClaimBill writeOffBill = CaseClaimBillResourceIntTest.createEntity(em);
+        CaseClaimBill writeOffBill = CaseClaimBillResourceIT.createEntity(em);
         em.persist(writeOffBill);
         em.flush();
         casePaymentBill.setWriteOffBill(writeOffBill);

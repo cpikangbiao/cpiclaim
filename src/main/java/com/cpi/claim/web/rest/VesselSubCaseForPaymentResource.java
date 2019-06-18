@@ -24,9 +24,9 @@
 
 package com.cpi.claim.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.VesselSubCaseForPaymentBillService;
 import com.cpi.claim.service.bean.payment.CasePaymentBean;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -53,7 +53,6 @@ public class VesselSubCaseForPaymentResource {
     }
 
     @GetMapping("/vessel-sub-cases/get-payment-bean/{vesselSubCaseId}")
-    @Timed
     public ResponseEntity<CasePaymentBean> getCasePaymentBeanForVesselSubCaseId(@PathVariable Long vesselSubCaseId,
                                                                                 @RequestParam("currencyId") Long currencyId,
                                                                                 @RequestParam("currencyRate") BigDecimal currencyRate,

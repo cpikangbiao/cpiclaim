@@ -32,23 +32,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing CaseClaimBillDeleteLog.
+ * Service Interface for managing {@link com.cpi.claim.domain.CaseClaimBillDeleteLog}.
  */
 public interface CaseClaimBillDeleteLogService {
 
     /**
      * Save a caseClaimBillDeleteLog.
      *
-     * @param caseClaimBillDeleteLogDTO the entity to save
-     * @return the persisted entity
+     * @param caseClaimBillDeleteLogDTO the entity to save.
+     * @return the persisted entity.
      */
     CaseClaimBillDeleteLogDTO save(CaseClaimBillDeleteLogDTO caseClaimBillDeleteLogDTO);
 
     /**
      * Get all the caseClaimBillDeleteLogs.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<CaseClaimBillDeleteLogDTO> findAll(Pageable pageable);
 
@@ -56,15 +56,15 @@ public interface CaseClaimBillDeleteLogService {
     /**
      * Get the "id" caseClaimBillDeleteLog.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<CaseClaimBillDeleteLogDTO> findOne(Long id);
 
     /**
      * Delete the "id" caseClaimBillDeleteLog.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

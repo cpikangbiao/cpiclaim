@@ -26,6 +26,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -40,12 +42,11 @@ import com.cpi.claim.domain.RecoveryType;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.RecoveryTypeRepository;
 import com.cpi.claim.service.dto.RecoveryTypeCriteria;
-
 import com.cpi.claim.service.dto.RecoveryTypeDTO;
 import com.cpi.claim.service.mapper.RecoveryTypeMapper;
 
 /**
- * Service for executing complex queries for RecoveryType entities in the database.
+ * Service for executing complex queries for {@link RecoveryType} entities in the database.
  * The main input is a {@link RecoveryTypeCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link RecoveryTypeDTO} or a {@link Page} of {@link RecoveryTypeDTO} which fulfills the criteria.
@@ -66,7 +67,7 @@ public class RecoveryTypeQueryService extends QueryService<RecoveryType> {
     }
 
     /**
-     * Return a {@link List} of {@link RecoveryTypeDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link RecoveryTypeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -78,7 +79,7 @@ public class RecoveryTypeQueryService extends QueryService<RecoveryType> {
     }
 
     /**
-     * Return a {@link Page} of {@link RecoveryTypeDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link RecoveryTypeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -92,7 +93,19 @@ public class RecoveryTypeQueryService extends QueryService<RecoveryType> {
     }
 
     /**
-     * Function to convert RecoveryTypeCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(RecoveryTypeCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<RecoveryType> specification = createSpecification(criteria);
+        return recoveryTypeRepository.count(specification);
+    }
+
+    /**
+     * Function to convert RecoveryTypeCriteria to a {@link Specification}.
      */
     private Specification<RecoveryType> createSpecification(RecoveryTypeCriteria criteria) {
         Specification<RecoveryType> specification = Specification.where(null);
@@ -109,5 +122,4 @@ public class RecoveryTypeQueryService extends QueryService<RecoveryType> {
         }
         return specification;
     }
-
 }

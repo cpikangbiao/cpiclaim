@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.VesselCaseCheckService;
 import com.cpi.claim.service.VesselCaseOperateService;
 import com.cpi.claim.service.VesselCaseService;
@@ -65,7 +63,6 @@ public class VesselCaseOperateResource {
     }
 
     @PutMapping("/vessel-cases/close-case/{id}")
-    @Timed
     public ResponseEntity<VesselCaseDTO> closeCase(@PathVariable("id") Long id) throws URISyntaxException {
         log.debug("REST request to close Case for id : {}", id);
 
@@ -82,7 +79,6 @@ public class VesselCaseOperateResource {
     }
 
     @PutMapping("/vessel-cases/reopen-case/{id}")
-    @Timed
     public ResponseEntity<VesselCaseDTO> reopenCase(@PathVariable("id") Long id) throws URISyntaxException {
         log.debug("REST request to close Case for id : {}", id);
 
@@ -93,7 +89,6 @@ public class VesselCaseOperateResource {
     }
 
     @PutMapping("/vessel-cases/change-registered-handler/{id}/{registeredHandlerId}")
-    @Timed
     public ResponseEntity<VesselCaseDTO> changeRegisteredHandler(
         @PathVariable("id") Long id,
         @PathVariable("registeredHandlerId") Long registeredHandlerId) throws URISyntaxException {
@@ -106,7 +101,6 @@ public class VesselCaseOperateResource {
     }
 
     @PutMapping("/vessel-cases/change-assigned-handler/{id}/{assignedHandlerId}")
-    @Timed
     public ResponseEntity<VesselCaseDTO> changeCaseAssignedHandler(
         @PathVariable("id") Long id,
         @PathVariable("assignedHandlerId") Long assignedHandlerId) throws URISyntaxException {

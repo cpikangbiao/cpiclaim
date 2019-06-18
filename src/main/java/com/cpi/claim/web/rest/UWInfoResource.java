@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.UWInfoService;
 import com.cpi.share.uw.insuredvessel.InsuredVesselInfo;
 import org.slf4j.Logger;
@@ -55,7 +53,6 @@ public class UWInfoResource {
     }
 
     @GetMapping("/get-uw-info/get-iv-info")
-    @Timed
     public ResponseEntity<InsuredVesselInfo> getInsuredVesselInfo(Long vesselCaseId) throws URISyntaxException {
         log.debug("REST request to get  InsuredVesselInfo For VesselCase for id : {} ", vesselCaseId);
         return ResponseEntity.ok()
@@ -63,7 +60,6 @@ public class UWInfoResource {
     }
 
     @GetMapping("/get-uw-info/get-iv-certificate-version/html/{ivCertificateVersionId}")
-    @Timed
     public ResponseEntity<byte[]> getHTMLFileForCertificate(@PathVariable Long ivCertificateVersionId) throws URISyntaxException {
         log.debug("REST request to get HTML File For Certificate For ivCertificateVersionId: {} ", ivCertificateVersionId);
         return ResponseEntity.ok()

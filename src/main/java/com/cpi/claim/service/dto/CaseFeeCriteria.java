@@ -25,6 +25,8 @@
 package com.cpi.claim.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
+import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -35,20 +37,18 @@ import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.BigDecimalFilter;
 import io.github.jhipster.service.filter.InstantFilter;
 
-
-
-
 /**
- * Criteria class for the CaseFee entity. This class is used in CaseFeeResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /case-fees?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
+ * Criteria class for the {@link com.cpi.claim.domain.CaseFee} entity. This class is used
+ * in {@link com.cpi.claim.web.rest.CaseFeeResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /case-fees?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CaseFeeCriteria implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CaseFeeCriteria implements Serializable, Criteria {
 
+    private static final long serialVersionUID = 1L;
 
     private LongFilter id;
 
@@ -94,7 +94,37 @@ public class CaseFeeCriteria implements Serializable {
 
     private LongFilter creditorId;
 
-    public CaseFeeCriteria() {
+    public CaseFeeCriteria(){
+    }
+
+    public CaseFeeCriteria(CaseFeeCriteria other){
+        this.id = other.id == null ? null : other.id.copy();
+        this.clientNo = other.clientNo == null ? null : other.clientNo.copy();
+        this.numberId = other.numberId == null ? null : other.numberId.copy();
+        this.currency = other.currency == null ? null : other.currency.copy();
+        this.currencyRate = other.currencyRate == null ? null : other.currencyRate.copy();
+        this.feeCostDate = other.feeCostDate == null ? null : other.feeCostDate.copy();
+        this.feeCost = other.feeCost == null ? null : other.feeCost.copy();
+        this.feeCostDollar = other.feeCostDollar == null ? null : other.feeCostDollar.copy();
+        this.deduct = other.deduct == null ? null : other.deduct.copy();
+        this.deductCurrency = other.deductCurrency == null ? null : other.deductCurrency.copy();
+        this.deductCurrencyRate = other.deductCurrencyRate == null ? null : other.deductCurrencyRate.copy();
+        this.deductAmount = other.deductAmount == null ? null : other.deductAmount.copy();
+        this.amountDollar = other.amountDollar == null ? null : other.amountDollar.copy();
+        this.feeCreateUser = other.feeCreateUser == null ? null : other.feeCreateUser.copy();
+        this.feeCreateDate = other.feeCreateDate == null ? null : other.feeCreateDate.copy();
+        this.isSigned = other.isSigned == null ? null : other.isSigned.copy();
+        this.signUser = other.signUser == null ? null : other.signUser.copy();
+        this.signDate = other.signDate == null ? null : other.signDate.copy();
+        this.processId = other.processId == null ? null : other.processId.copy();
+        this.feeTypeId = other.feeTypeId == null ? null : other.feeTypeId.copy();
+        this.subcaseId = other.subcaseId == null ? null : other.subcaseId.copy();
+        this.creditorId = other.creditorId == null ? null : other.creditorId.copy();
+    }
+
+    @Override
+    public CaseFeeCriteria copy() {
+        return new CaseFeeCriteria(this);
     }
 
     public LongFilter getId() {
@@ -271,6 +301,69 @@ public class CaseFeeCriteria implements Serializable {
 
     public void setCreditorId(LongFilter creditorId) {
         this.creditorId = creditorId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CaseFeeCriteria that = (CaseFeeCriteria) o;
+        return
+            Objects.equals(id, that.id) &&
+            Objects.equals(clientNo, that.clientNo) &&
+            Objects.equals(numberId, that.numberId) &&
+            Objects.equals(currency, that.currency) &&
+            Objects.equals(currencyRate, that.currencyRate) &&
+            Objects.equals(feeCostDate, that.feeCostDate) &&
+            Objects.equals(feeCost, that.feeCost) &&
+            Objects.equals(feeCostDollar, that.feeCostDollar) &&
+            Objects.equals(deduct, that.deduct) &&
+            Objects.equals(deductCurrency, that.deductCurrency) &&
+            Objects.equals(deductCurrencyRate, that.deductCurrencyRate) &&
+            Objects.equals(deductAmount, that.deductAmount) &&
+            Objects.equals(amountDollar, that.amountDollar) &&
+            Objects.equals(feeCreateUser, that.feeCreateUser) &&
+            Objects.equals(feeCreateDate, that.feeCreateDate) &&
+            Objects.equals(isSigned, that.isSigned) &&
+            Objects.equals(signUser, that.signUser) &&
+            Objects.equals(signDate, that.signDate) &&
+            Objects.equals(processId, that.processId) &&
+            Objects.equals(feeTypeId, that.feeTypeId) &&
+            Objects.equals(subcaseId, that.subcaseId) &&
+            Objects.equals(creditorId, that.creditorId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+        id,
+        clientNo,
+        numberId,
+        currency,
+        currencyRate,
+        feeCostDate,
+        feeCost,
+        feeCostDollar,
+        deduct,
+        deductCurrency,
+        deductCurrencyRate,
+        deductAmount,
+        amountDollar,
+        feeCreateUser,
+        feeCreateDate,
+        isSigned,
+        signUser,
+        signDate,
+        processId,
+        feeTypeId,
+        subcaseId,
+        creditorId
+        );
     }
 
     @Override

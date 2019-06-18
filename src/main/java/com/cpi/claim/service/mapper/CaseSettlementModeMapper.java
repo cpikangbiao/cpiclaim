@@ -30,7 +30,7 @@ import com.cpi.claim.service.dto.CaseSettlementModeDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity CaseSettlementMode and its DTO CaseSettlementModeDTO.
+ * Mapper for the entity {@link CaseSettlementMode} and its DTO {@link CaseSettlementModeDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface CaseSettlementModeMapper extends EntityMapper<CaseSettlementModeDTO, CaseSettlementMode> {

@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseAssignLogExtService;
 import com.cpi.claim.service.CaseCloseLogExtService;
 import com.cpi.claim.service.CaseRegisterLogExtService;
@@ -69,7 +67,6 @@ public class VesselCaseLogResource {
     }
 
     @GetMapping("/vessel-cases/log/get-close-case-logs")
-    @Timed
     public ResponseEntity<Page<CaseCloseLogDTO>> getCloseLogsForVesselCase(
         Long id, Pageable pageable) throws URISyntaxException {
         log.debug("REST request to get CloseLogs For VesselCase for id : {} pageable : {}", id, pageable);
@@ -78,7 +75,6 @@ public class VesselCaseLogResource {
     }
 
     @GetMapping("/vessel-cases/log/get-assign-case-logs")
-    @Timed
     public ResponseEntity<Page<CaseAssignLogDTO>> getCaseAssignLogsForVesselCase(
          Long id, Pageable pageable) throws URISyntaxException {
         log.debug("REST request to get CloseLogs For VesselCase for id : {} pageable : {}", id, pageable);
@@ -87,7 +83,6 @@ public class VesselCaseLogResource {
     }
 
     @GetMapping("/vessel-cases/log/get-register-case-logs")
-    @Timed
     public ResponseEntity<Page<CaseRegisterLogDTO>> getCaseRegisterLogsForVesselCase(
         Long id, Pageable pageable) throws URISyntaxException {
         log.debug("REST request to get CloseLogs For VesselCase for id : {} pageable : {}", id, pageable);

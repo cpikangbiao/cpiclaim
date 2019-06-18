@@ -24,16 +24,18 @@
 
 package com.cpi.claim.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.repository.bean.CaseMonthCountStatisticsBean;
 import com.cpi.claim.repository.bean.CaseYearCountStatisticsBean;
-import com.cpi.claim.service.VesselCaseExtService;
 import com.cpi.claim.service.VesselCaseStatisticsService;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -55,7 +57,6 @@ public class VesselCaseStatisticsResource {
     }
 
     @GetMapping("/vessel-cases/statistics/{startyear}/{endyear}/{startmonth}/{endmonth}/month")
-    @Timed
     public ResponseEntity<List<CaseMonthCountStatisticsBean>> getStatisForMonth(
         @PathVariable String startyear,
         @PathVariable String endyear,
@@ -65,7 +66,6 @@ public class VesselCaseStatisticsResource {
     }
 
     @GetMapping("/vessel-cases/statistics/{startyear}/{endyear}/year")
-    @Timed
     public ResponseEntity<List<CaseYearCountStatisticsBean>> getStatisForYear(
         @PathVariable String startyear,
         @PathVariable String endyear) {

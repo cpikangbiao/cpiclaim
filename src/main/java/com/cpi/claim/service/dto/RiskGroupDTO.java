@@ -23,13 +23,12 @@
  */
 
 package com.cpi.claim.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the RiskGroup entity.
+ * A DTO for the {@link com.cpi.claim.domain.RiskGroup} entity.
  */
 public class RiskGroupDTO implements Serializable {
 
@@ -39,6 +38,7 @@ public class RiskGroupDTO implements Serializable {
 
     @NotNull
     private String riskGroupName;
+
 
     public Long getId() {
         return id;

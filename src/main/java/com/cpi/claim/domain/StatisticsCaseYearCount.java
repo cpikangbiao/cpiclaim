@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,7 +30,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A StatisticsCaseYearCount.
@@ -126,19 +124,15 @@ public class StatisticsCaseYearCount implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof StatisticsCaseYearCount)) {
             return false;
         }
-        StatisticsCaseYearCount statisticsCaseYearCount = (StatisticsCaseYearCount) o;
-        if (statisticsCaseYearCount.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), statisticsCaseYearCount.getId());
+        return id != null && id.equals(((StatisticsCaseYearCount) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

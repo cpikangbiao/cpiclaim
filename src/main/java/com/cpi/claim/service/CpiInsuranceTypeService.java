@@ -32,23 +32,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing CpiInsuranceType.
+ * Service Interface for managing {@link com.cpi.claim.domain.CpiInsuranceType}.
  */
 public interface CpiInsuranceTypeService {
 
     /**
      * Save a cpiInsuranceType.
      *
-     * @param cpiInsuranceTypeDTO the entity to save
-     * @return the persisted entity
+     * @param cpiInsuranceTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     CpiInsuranceTypeDTO save(CpiInsuranceTypeDTO cpiInsuranceTypeDTO);
 
     /**
      * Get all the cpiInsuranceTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<CpiInsuranceTypeDTO> findAll(Pageable pageable);
 
@@ -56,15 +56,15 @@ public interface CpiInsuranceTypeService {
     /**
      * Get the "id" cpiInsuranceType.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<CpiInsuranceTypeDTO> findOne(Long id);
 
     /**
      * Delete the "id" cpiInsuranceType.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

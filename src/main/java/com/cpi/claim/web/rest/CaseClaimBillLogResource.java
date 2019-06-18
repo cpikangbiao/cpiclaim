@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseClaimBillApprovalLogExtService;
 import com.cpi.claim.service.CaseClaimBillPrintLogExtService;
 import com.cpi.claim.service.CaseClaimBillQueryService;
@@ -69,7 +67,6 @@ public class CaseClaimBillLogResource {
 
 
     @GetMapping("/case-claim-bills/log/get-approval-log/{id}")
-    @Timed
     public ResponseEntity<Page<CaseClaimBillApprovalLogDTO>> getClaimBillApprovalLogsForcaseClaimBillId(
         @PathVariable Long id,
         @RequestParam("page") Pageable page) {
@@ -79,7 +76,6 @@ public class CaseClaimBillLogResource {
     }
 
     @GetMapping("/case-claim-bills/log/get-print-log/{id}")
-    @Timed
     public ResponseEntity<Page<CaseClaimBillPrintLogDTO>> getClaimBillPrintlLogsForcaseClaimBillId(
         @PathVariable Long id,
         @RequestParam("page") Pageable page) {

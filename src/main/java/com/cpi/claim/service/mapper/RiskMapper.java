@@ -30,7 +30,7 @@ import com.cpi.claim.service.dto.RiskDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity Risk and its DTO RiskDTO.
+ * Mapper for the entity {@link Risk} and its DTO {@link RiskDTO}.
  */
 @Mapper(componentModel = "spring", uses = {RiskGroupMapper.class})
 public interface RiskMapper extends EntityMapper<RiskDTO, Risk> {

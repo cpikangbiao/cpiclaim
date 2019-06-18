@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing CaseAssignLog.
+ * Service Interface for managing {@link com.cpi.claim.domain.CaseAssignLog}.
  */
 public interface CaseAssignLogService {
 
     /**
      * Save a caseAssignLog.
      *
-     * @param caseAssignLogDTO the entity to save
-     * @return the persisted entity
+     * @param caseAssignLogDTO the entity to save.
+     * @return the persisted entity.
      */
     CaseAssignLogDTO save(CaseAssignLogDTO caseAssignLogDTO);
 
     /**
      * Get all the caseAssignLogs.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<CaseAssignLogDTO> findAll(Pageable pageable);
 
@@ -32,15 +32,15 @@ public interface CaseAssignLogService {
     /**
      * Get the "id" caseAssignLog.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<CaseAssignLogDTO> findOne(Long id);
 
     /**
      * Delete the "id" caseAssignLog.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

@@ -26,6 +26,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -40,12 +42,11 @@ import com.cpi.claim.domain.CaseClaimBillApprovalLog;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseClaimBillApprovalLogRepository;
 import com.cpi.claim.service.dto.CaseClaimBillApprovalLogCriteria;
-
 import com.cpi.claim.service.dto.CaseClaimBillApprovalLogDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillApprovalLogMapper;
 
 /**
- * Service for executing complex queries for CaseClaimBillApprovalLog entities in the database.
+ * Service for executing complex queries for {@link CaseClaimBillApprovalLog} entities in the database.
  * The main input is a {@link CaseClaimBillApprovalLogCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseClaimBillApprovalLogDTO} or a {@link Page} of {@link CaseClaimBillApprovalLogDTO} which fulfills the criteria.
@@ -66,7 +67,7 @@ public class CaseClaimBillApprovalLogQueryService extends QueryService<CaseClaim
     }
 
     /**
-     * Return a {@link List} of {@link CaseClaimBillApprovalLogDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseClaimBillApprovalLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -78,7 +79,7 @@ public class CaseClaimBillApprovalLogQueryService extends QueryService<CaseClaim
     }
 
     /**
-     * Return a {@link Page} of {@link CaseClaimBillApprovalLogDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseClaimBillApprovalLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -92,7 +93,19 @@ public class CaseClaimBillApprovalLogQueryService extends QueryService<CaseClaim
     }
 
     /**
-     * Function to convert CaseClaimBillApprovalLogCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseClaimBillApprovalLogCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseClaimBillApprovalLog> specification = createSpecification(criteria);
+        return caseClaimBillApprovalLogRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseClaimBillApprovalLogCriteria to a {@link Specification}.
      */
     private Specification<CaseClaimBillApprovalLog> createSpecification(CaseClaimBillApprovalLogCriteria criteria) {
         Specification<CaseClaimBillApprovalLog> specification = Specification.where(null);
@@ -119,10 +132,10 @@ public class CaseClaimBillApprovalLogQueryService extends QueryService<CaseClaim
                 specification = specification.and(buildStringSpecification(criteria.getRemark(), CaseClaimBillApprovalLog_.remark));
             }
             if (criteria.getCaseClaimBillId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseClaimBillId(), CaseClaimBillApprovalLog_.caseClaimBill, CaseClaimBill_.id));
+                specification = specification.and(buildSpecification(criteria.getCaseClaimBillId(),
+                    root -> root.join(CaseClaimBillApprovalLog_.caseClaimBill, JoinType.LEFT).get(CaseClaimBill_.id)));
             }
         }
         return specification;
     }
-
 }

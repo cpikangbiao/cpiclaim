@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CaseGuarantee.
+ * Service Implementation for managing {@link CaseGuarantee}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CaseGuaranteeServiceImpl implements CaseGuaranteeService {
     /**
      * Save a caseGuarantee.
      *
-     * @param caseGuaranteeDTO the entity to save
-     * @return the persisted entity
+     * @param caseGuaranteeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CaseGuaranteeDTO save(CaseGuaranteeDTO caseGuaranteeDTO) {
@@ -74,8 +74,8 @@ public class CaseGuaranteeServiceImpl implements CaseGuaranteeService {
     /**
      * Get all the caseGuarantees.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class CaseGuaranteeServiceImpl implements CaseGuaranteeService {
     /**
      * Get one caseGuarantee by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class CaseGuaranteeServiceImpl implements CaseGuaranteeService {
     /**
      * Delete the caseGuarantee by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -34,7 +33,6 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A VesselCase.
@@ -75,7 +73,7 @@ public class VesselCase extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reinsure_id")
     private Long reinsureId;
 
-    @Column(name = "deduct", precision = 10, scale = 2)
+    @Column(name = "deduct", precision = 21, scale = 2)
     private BigDecimal deduct;
 
     @Column(name = "assigned_handler")
@@ -146,22 +144,22 @@ public class VesselCase extends AbstractAuditingEntity implements Serializable {
     @Column(name = "remark")
     private String remark;
 
-    @Column(name = "settlement_amount", precision = 10, scale = 2)
+    @Column(name = "settlement_amount", precision = 21, scale = 2)
     private BigDecimal settlementAmount;
 
     @Column(name = "settlement_date")
     private Instant settlementDate;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("vesselCases")
     private CpiInsuranceType cpiInsuranceType;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("vesselCases")
     private CaseStatusType caseStatus;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("vesselCases")
     private CaseSettlementMode settlementMode;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -647,19 +645,15 @@ public class VesselCase extends AbstractAuditingEntity implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof VesselCase)) {
             return false;
         }
-        VesselCase vesselCase = (VesselCase) o;
-        if (vesselCase.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), vesselCase.getId());
+        return id != null && id.equals(((VesselCase) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseClaimBillPrintLogExtService;
 import com.cpi.claim.service.CaseClaimBillPrintLogQueryService;
 import com.cpi.claim.service.CaseClaimBillPrintLogService;
@@ -70,7 +68,6 @@ public class CaseClaimBillPrintLogExtResource {
     }
 
     @GetMapping("/case-claim-bill-print-logs/by-claim-bill")
-    @Timed
     public ResponseEntity<List<CaseClaimBillPrintLogDTO>> getAllCaseClaimBillPrintLogsByClaimBill(Long claimBillId, Pageable pageable) {
         log.debug("REST request to get CaseClaimBillPrintLogs by id: {}", claimBillId);
         Page<CaseClaimBillPrintLogDTO> page = caseClaimBillPrintLogExtService.findAllByCaseClaimBill(claimBillId, pageable);

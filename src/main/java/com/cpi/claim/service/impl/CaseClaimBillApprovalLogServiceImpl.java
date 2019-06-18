@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CaseClaimBillApprovalLog.
+ * Service Implementation for managing {@link CaseClaimBillApprovalLog}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CaseClaimBillApprovalLogServiceImpl implements CaseClaimBillApprova
     /**
      * Save a caseClaimBillApprovalLog.
      *
-     * @param caseClaimBillApprovalLogDTO the entity to save
-     * @return the persisted entity
+     * @param caseClaimBillApprovalLogDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CaseClaimBillApprovalLogDTO save(CaseClaimBillApprovalLogDTO caseClaimBillApprovalLogDTO) {
@@ -74,8 +74,8 @@ public class CaseClaimBillApprovalLogServiceImpl implements CaseClaimBillApprova
     /**
      * Get all the caseClaimBillApprovalLogs.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class CaseClaimBillApprovalLogServiceImpl implements CaseClaimBillApprova
     /**
      * Get one caseClaimBillApprovalLog by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class CaseClaimBillApprovalLogServiceImpl implements CaseClaimBillApprova
     /**
      * Delete the caseClaimBillApprovalLog by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

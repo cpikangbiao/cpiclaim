@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseClaimBillApprovalLogQueryService;
 import com.cpi.claim.service.CaseClaimBillApprovalLogService;
 import com.cpi.claim.service.dto.CaseClaimBillApprovalLogCriteria;

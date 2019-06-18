@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CaseRecoveryBill.
+ * Service Implementation for managing {@link CaseRecoveryBill}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CaseRecoveryBillServiceImpl implements CaseRecoveryBillService {
     /**
      * Save a caseRecoveryBill.
      *
-     * @param caseRecoveryBillDTO the entity to save
-     * @return the persisted entity
+     * @param caseRecoveryBillDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CaseRecoveryBillDTO save(CaseRecoveryBillDTO caseRecoveryBillDTO) {
@@ -74,8 +74,8 @@ public class CaseRecoveryBillServiceImpl implements CaseRecoveryBillService {
     /**
      * Get all the caseRecoveryBills.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class CaseRecoveryBillServiceImpl implements CaseRecoveryBillService {
     /**
      * Get one caseRecoveryBill by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class CaseRecoveryBillServiceImpl implements CaseRecoveryBillService {
     /**
      * Delete the caseRecoveryBill by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

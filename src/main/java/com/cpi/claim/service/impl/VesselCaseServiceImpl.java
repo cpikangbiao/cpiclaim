@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing VesselCase.
+ * Service Implementation for managing {@link VesselCase}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class VesselCaseServiceImpl implements VesselCaseService {
     /**
      * Save a vesselCase.
      *
-     * @param vesselCaseDTO the entity to save
-     * @return the persisted entity
+     * @param vesselCaseDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public VesselCaseDTO save(VesselCaseDTO vesselCaseDTO) {
@@ -74,8 +74,8 @@ public class VesselCaseServiceImpl implements VesselCaseService {
     /**
      * Get all the vesselCases.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class VesselCaseServiceImpl implements VesselCaseService {
     /**
      * Get one vesselCase by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class VesselCaseServiceImpl implements VesselCaseService {
     /**
      * Delete the vesselCase by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

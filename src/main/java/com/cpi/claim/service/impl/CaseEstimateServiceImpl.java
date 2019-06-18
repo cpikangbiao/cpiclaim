@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CaseEstimate.
+ * Service Implementation for managing {@link CaseEstimate}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CaseEstimateServiceImpl implements CaseEstimateService {
     /**
      * Save a caseEstimate.
      *
-     * @param caseEstimateDTO the entity to save
-     * @return the persisted entity
+     * @param caseEstimateDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CaseEstimateDTO save(CaseEstimateDTO caseEstimateDTO) {
@@ -74,8 +74,8 @@ public class CaseEstimateServiceImpl implements CaseEstimateService {
     /**
      * Get all the caseEstimates.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class CaseEstimateServiceImpl implements CaseEstimateService {
     /**
      * Get one caseEstimate by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class CaseEstimateServiceImpl implements CaseEstimateService {
     /**
      * Delete the caseEstimate by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

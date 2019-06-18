@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CaseSettlementMode.
+ * Service Implementation for managing {@link CaseSettlementMode}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CaseSettlementModeServiceImpl implements CaseSettlementModeService 
     /**
      * Save a caseSettlementMode.
      *
-     * @param caseSettlementModeDTO the entity to save
-     * @return the persisted entity
+     * @param caseSettlementModeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CaseSettlementModeDTO save(CaseSettlementModeDTO caseSettlementModeDTO) {
@@ -74,8 +74,8 @@ public class CaseSettlementModeServiceImpl implements CaseSettlementModeService 
     /**
      * Get all the caseSettlementModes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class CaseSettlementModeServiceImpl implements CaseSettlementModeService 
     /**
      * Get one caseSettlementMode by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class CaseSettlementModeServiceImpl implements CaseSettlementModeService 
     /**
      * Delete the caseSettlementMode by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

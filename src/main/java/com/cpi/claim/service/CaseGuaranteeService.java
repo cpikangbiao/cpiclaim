@@ -32,23 +32,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing CaseGuarantee.
+ * Service Interface for managing {@link com.cpi.claim.domain.CaseGuarantee}.
  */
 public interface CaseGuaranteeService {
 
     /**
      * Save a caseGuarantee.
      *
-     * @param caseGuaranteeDTO the entity to save
-     * @return the persisted entity
+     * @param caseGuaranteeDTO the entity to save.
+     * @return the persisted entity.
      */
     CaseGuaranteeDTO save(CaseGuaranteeDTO caseGuaranteeDTO);
 
     /**
      * Get all the caseGuarantees.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<CaseGuaranteeDTO> findAll(Pageable pageable);
 
@@ -56,15 +56,15 @@ public interface CaseGuaranteeService {
     /**
      * Get the "id" caseGuarantee.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<CaseGuaranteeDTO> findOne(Long id);
 
     /**
      * Delete the "id" caseGuarantee.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 }

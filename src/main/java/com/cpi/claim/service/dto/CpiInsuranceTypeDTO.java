@@ -23,13 +23,12 @@
  */
 
 package com.cpi.claim.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the CpiInsuranceType entity.
+ * A DTO for the {@link com.cpi.claim.domain.CpiInsuranceType} entity.
  */
 public class CpiInsuranceTypeDTO implements Serializable {
 
@@ -39,6 +38,7 @@ public class CpiInsuranceTypeDTO implements Serializable {
 
     @NotNull
     private String cpiInsuranceTypeName;
+
 
     public Long getId() {
         return id;

@@ -23,7 +23,6 @@
  */
 
 package com.cpi.claim.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,7 +30,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A ClaimBillType.
@@ -105,19 +103,15 @@ public class ClaimBillType implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ClaimBillType)) {
             return false;
         }
-        ClaimBillType claimBillType = (ClaimBillType) o;
-        if (claimBillType.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), claimBillType.getId());
+        return id != null && id.equals(((ClaimBillType) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

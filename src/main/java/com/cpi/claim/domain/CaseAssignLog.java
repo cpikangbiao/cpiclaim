@@ -1,5 +1,4 @@
 package com.cpi.claim.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,7 +7,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A CaseAssignLog.
@@ -36,8 +34,8 @@ public class CaseAssignLog implements Serializable {
     @Column(name = "assigned_user")
     private String assignedUser;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JsonIgnoreProperties("")
+    @ManyToOne
+    @JsonIgnoreProperties("caseAssignLogs")
     private VesselCase vesselCase;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -120,19 +118,15 @@ public class CaseAssignLog implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CaseAssignLog)) {
             return false;
         }
-        CaseAssignLog caseAssignLog = (CaseAssignLog) o;
-        if (caseAssignLog.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), caseAssignLog.getId());
+        return id != null && id.equals(((CaseAssignLog) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

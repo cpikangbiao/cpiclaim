@@ -29,13 +29,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.zalando.problem.ProblemModule;
-import org.zalando.problem.validation.ConstraintViolationProblemModule;
+import org.zalando.problem.violations.ConstraintViolationProblemModule;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -44,6 +46,21 @@ import java.math.BigDecimal;
 public class JacksonConfiguration {
 
     private final static int precision = 10;
+
+    /**
+     * Support for Java date and time API.
+     * @return the corresponding Jackson module.
+     */
+    @Bean
+    public JavaTimeModule javaTimeModule() {
+        return new JavaTimeModule();
+    }
+
+    @Bean
+    public Jdk8Module jdk8TimeModule() {
+        return new Jdk8Module();
+    }
+
     /*
      * Support for Hibernate types in Jackson.
      */
@@ -75,8 +92,6 @@ public class JacksonConfiguration {
     ConstraintViolationProblemModule constraintViolationProblemModule() {
         return new ConstraintViolationProblemModule();
     }
-
-
 
     @Bean("jackson2ObjectMapperBuilderCustomizer")
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
@@ -129,5 +144,6 @@ public class JacksonConfiguration {
 //        return builder;
 //    }
 //}
+
 
 }

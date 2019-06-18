@@ -2,6 +2,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,12 +18,11 @@ import com.cpi.claim.domain.CaseClaimBillPrintLog;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CaseClaimBillPrintLogRepository;
 import com.cpi.claim.service.dto.CaseClaimBillPrintLogCriteria;
-
 import com.cpi.claim.service.dto.CaseClaimBillPrintLogDTO;
 import com.cpi.claim.service.mapper.CaseClaimBillPrintLogMapper;
 
 /**
- * Service for executing complex queries for CaseClaimBillPrintLog entities in the database.
+ * Service for executing complex queries for {@link CaseClaimBillPrintLog} entities in the database.
  * The main input is a {@link CaseClaimBillPrintLogCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CaseClaimBillPrintLogDTO} or a {@link Page} of {@link CaseClaimBillPrintLogDTO} which fulfills the criteria.
@@ -42,7 +43,7 @@ public class CaseClaimBillPrintLogQueryService extends QueryService<CaseClaimBil
     }
 
     /**
-     * Return a {@link List} of {@link CaseClaimBillPrintLogDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CaseClaimBillPrintLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -54,7 +55,7 @@ public class CaseClaimBillPrintLogQueryService extends QueryService<CaseClaimBil
     }
 
     /**
-     * Return a {@link Page} of {@link CaseClaimBillPrintLogDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CaseClaimBillPrintLogDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -68,7 +69,19 @@ public class CaseClaimBillPrintLogQueryService extends QueryService<CaseClaimBil
     }
 
     /**
-     * Function to convert CaseClaimBillPrintLogCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CaseClaimBillPrintLogCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CaseClaimBillPrintLog> specification = createSpecification(criteria);
+        return caseClaimBillPrintLogRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CaseClaimBillPrintLogCriteria to a {@link Specification}.
      */
     private Specification<CaseClaimBillPrintLog> createSpecification(CaseClaimBillPrintLogCriteria criteria) {
         Specification<CaseClaimBillPrintLog> specification = Specification.where(null);
@@ -86,10 +99,10 @@ public class CaseClaimBillPrintLogQueryService extends QueryService<CaseClaimBil
                 specification = specification.and(buildRangeSpecification(criteria.getOperateDate(), CaseClaimBillPrintLog_.operateDate));
             }
             if (criteria.getCaseClaimBillId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCaseClaimBillId(), CaseClaimBillPrintLog_.caseClaimBill, CaseClaimBill_.id));
+                specification = specification.and(buildSpecification(criteria.getCaseClaimBillId(),
+                    root -> root.join(CaseClaimBillPrintLog_.caseClaimBill, JoinType.LEFT).get(CaseClaimBill_.id)));
             }
         }
         return specification;
     }
-
 }

@@ -24,21 +24,24 @@
 
 package com.cpi.claim.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseSettlementModeService;
 import com.cpi.claim.web.rest.errors.BadRequestAlertException;
-import com.cpi.claim.web.rest.util.HeaderUtil;
-import com.cpi.claim.web.rest.util.PaginationUtil;
 import com.cpi.claim.service.dto.CaseSettlementModeDTO;
 import com.cpi.claim.service.dto.CaseSettlementModeCriteria;
 import com.cpi.claim.service.CaseSettlementModeQueryService;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +53,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * REST controller for managing CaseSettlementMode.
+ * REST controller for managing {@link com.cpi.claim.domain.CaseSettlementMode}.
  */
 @RestController
 @RequestMapping("/api")
@@ -58,7 +61,10 @@ public class CaseSettlementModeResource {
 
     private final Logger log = LoggerFactory.getLogger(CaseSettlementModeResource.class);
 
-    private static final String ENTITY_NAME = "caseSettlementMode";
+    private static final String ENTITY_NAME = "cpiclaimCaseSettlementMode";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final CaseSettlementModeService caseSettlementModeService;
 
@@ -70,14 +76,13 @@ public class CaseSettlementModeResource {
     }
 
     /**
-     * POST  /case-settlement-modes : Create a new caseSettlementMode.
+     * {@code POST  /case-settlement-modes} : Create a new caseSettlementMode.
      *
-     * @param caseSettlementModeDTO the caseSettlementModeDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new caseSettlementModeDTO, or with status 400 (Bad Request) if the caseSettlementMode has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param caseSettlementModeDTO the caseSettlementModeDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new caseSettlementModeDTO, or with status {@code 400 (Bad Request)} if the caseSettlementMode has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/case-settlement-modes")
-    @Timed
     public ResponseEntity<CaseSettlementModeDTO> createCaseSettlementMode(@Valid @RequestBody CaseSettlementModeDTO caseSettlementModeDTO) throws URISyntaxException {
         log.debug("REST request to save CaseSettlementMode : {}", caseSettlementModeDTO);
         if (caseSettlementModeDTO.getId() != null) {
@@ -85,21 +90,20 @@ public class CaseSettlementModeResource {
         }
         CaseSettlementModeDTO result = caseSettlementModeService.save(caseSettlementModeDTO);
         return ResponseEntity.created(new URI("/api/case-settlement-modes/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /case-settlement-modes : Updates an existing caseSettlementMode.
+     * {@code PUT  /case-settlement-modes} : Updates an existing caseSettlementMode.
      *
-     * @param caseSettlementModeDTO the caseSettlementModeDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated caseSettlementModeDTO,
-     * or with status 400 (Bad Request) if the caseSettlementModeDTO is not valid,
-     * or with status 500 (Internal Server Error) if the caseSettlementModeDTO couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param caseSettlementModeDTO the caseSettlementModeDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated caseSettlementModeDTO,
+     * or with status {@code 400 (Bad Request)} if the caseSettlementModeDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the caseSettlementModeDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/case-settlement-modes")
-    @Timed
     public ResponseEntity<CaseSettlementModeDTO> updateCaseSettlementMode(@Valid @RequestBody CaseSettlementModeDTO caseSettlementModeDTO) throws URISyntaxException {
         log.debug("REST request to update CaseSettlementMode : {}", caseSettlementModeDTO);
         if (caseSettlementModeDTO.getId() == null) {
@@ -107,34 +111,44 @@ public class CaseSettlementModeResource {
         }
         CaseSettlementModeDTO result = caseSettlementModeService.save(caseSettlementModeDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, caseSettlementModeDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, caseSettlementModeDTO.getId().toString()))
             .body(result);
     }
 
     /**
-     * GET  /case-settlement-modes : get all the caseSettlementModes.
+     * {@code GET  /case-settlement-modes} : get all the caseSettlementModes.
      *
-     * @param pageable the pagination information
-     * @param criteria the criterias which the requested entities should match
-     * @return the ResponseEntity with status 200 (OK) and the list of caseSettlementModes in body
+     * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of caseSettlementModes in body.
      */
     @GetMapping("/case-settlement-modes")
-    @Timed
-    public ResponseEntity<List<CaseSettlementModeDTO>> getAllCaseSettlementModes(CaseSettlementModeCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<CaseSettlementModeDTO>> getAllCaseSettlementModes(CaseSettlementModeCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
         log.debug("REST request to get CaseSettlementModes by criteria: {}", criteria);
         Page<CaseSettlementModeDTO> page = caseSettlementModeQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/case-settlement-modes");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
-     * GET  /case-settlement-modes/:id : get the "id" caseSettlementMode.
+    * {@code GET  /case-settlement-modes/count} : count all the caseSettlementModes.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/case-settlement-modes/count")
+    public ResponseEntity<Long> countCaseSettlementModes(CaseSettlementModeCriteria criteria) {
+        log.debug("REST request to count CaseSettlementModes by criteria: {}", criteria);
+        return ResponseEntity.ok().body(caseSettlementModeQueryService.countByCriteria(criteria));
+    }
+
+    /**
+     * {@code GET  /case-settlement-modes/:id} : get the "id" caseSettlementMode.
      *
-     * @param id the id of the caseSettlementModeDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the caseSettlementModeDTO, or with status 404 (Not Found)
+     * @param id the id of the caseSettlementModeDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the caseSettlementModeDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/case-settlement-modes/{id}")
-    @Timed
     public ResponseEntity<CaseSettlementModeDTO> getCaseSettlementMode(@PathVariable Long id) {
         log.debug("REST request to get CaseSettlementMode : {}", id);
         Optional<CaseSettlementModeDTO> caseSettlementModeDTO = caseSettlementModeService.findOne(id);
@@ -142,16 +156,15 @@ public class CaseSettlementModeResource {
     }
 
     /**
-     * DELETE  /case-settlement-modes/:id : delete the "id" caseSettlementMode.
+     * {@code DELETE  /case-settlement-modes/:id} : delete the "id" caseSettlementMode.
      *
-     * @param id the id of the caseSettlementModeDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @param id the id of the caseSettlementModeDTO to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/case-settlement-modes/{id}")
-    @Timed
     public ResponseEntity<Void> deleteCaseSettlementMode(@PathVariable Long id) {
         log.debug("REST request to delete CaseSettlementMode : {}", id);
         caseSettlementModeService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

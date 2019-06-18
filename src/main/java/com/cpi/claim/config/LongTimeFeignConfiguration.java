@@ -23,11 +23,9 @@
  */
 package com.cpi.claim.config;
 
-import feign.Feign;
 import feign.Request;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -52,11 +50,11 @@ public class LongTimeFeignConfiguration {
 //        return new FormEncoder(new SpringEncoder(this.messageConverters));
 //    }
 //
-    @Bean
-    @Scope("prototype")
-    public Feign.Builder feignBuilder() {
-        return Feign.builder();
-    }
+//    @Bean
+//    @Scope("prototype")
+//    public Feign.Builder feignBuilder() {
+//        return Feign.builder();
+//    }
 
 //    @Bean
 //    public Logger.Level feignLogger() {

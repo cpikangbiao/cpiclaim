@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseFeeForBillService;
 import com.cpi.claim.service.bean.fee.CaseFeeBean;
 import com.cpi.claim.service.dto.CaseClaimBillDTO;
@@ -55,14 +53,12 @@ public class CaseFeeForBillResource {
 
 
     @GetMapping("/case-fees/get-bean/{id}")
-    @Timed
     public ResponseEntity<CaseFeeBean> getCaseFeeBeanForCaseFeeId(@PathVariable Long id) {
         log.debug("REST request to get CaseFeeBean For CaseFeeId(: {}", id);
         return new ResponseEntity<>(caseFeeForBillService.getCaseFeeBeanForCaseFeeId(id), HttpStatus.OK);
     }
 
     @PostMapping("/case-fees/create-bill/credit")
-    @Timed
     public ResponseEntity<CaseClaimBillDTO> createClaimBillForCredit(
         @RequestParam Long caseFeeId,
         @RequestParam String clientBillNo,
@@ -84,7 +80,6 @@ public class CaseFeeForBillResource {
     }
 
     @PostMapping("/case-fees/create-bill/credit-with-deductible")
-    @Timed
     public ResponseEntity<CaseClaimBillDTO> createClaimBillForCreditWithDeductible(
         @RequestParam Long caseFeeId,
         @RequestParam String clientBillNo,
@@ -112,7 +107,6 @@ public class CaseFeeForBillResource {
     }
 
     @PostMapping("/case-fees/create-bill/debit")
-    @Timed
     public ResponseEntity<CaseClaimBillDTO> createClaimBillForDebit(
         @RequestParam Long caseFeeId,
         @RequestParam String clientBillNo,

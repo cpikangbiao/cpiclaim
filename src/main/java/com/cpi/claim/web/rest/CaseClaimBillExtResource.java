@@ -23,8 +23,6 @@
  */
 
 package com.cpi.claim.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.cpi.claim.service.CaseClaimBillExtService;
 import com.cpi.claim.service.CaseClaimBillQueryService;
 import com.cpi.claim.service.CaseClaimBillService;
@@ -76,7 +74,6 @@ public class CaseClaimBillExtResource {
 
 
     @GetMapping("/case-claim-bills/by-vessel-case/{id}")
-    @Timed
     public ResponseEntity<List> getCaseClaimBillForVesselCaseId(@PathVariable Long id) {
         log.debug("REST request to get caseFee For VesselCaseId(: {}", id);
         List<CaseClaimBillDTO> caseClaimBillDTOS = caseClaimBillExtService.findAllByVesselCaseId(id);
@@ -84,7 +81,6 @@ public class CaseClaimBillExtResource {
     }
 
     @GetMapping("/case-claim-bills/by-vessel-case/page")
-    @Timed
     public ResponseEntity<List<CaseClaimBillDTO>> getAllCaseClaimBills(Long id, Pageable pageable) {
         log.debug("REST request to get CaseClaimBill For VesselCaseId: {} pageable: {}", id, pageable);
         Page<CaseClaimBillDTO> page = caseClaimBillExtService.findAllByVesselCaseId(id, pageable);

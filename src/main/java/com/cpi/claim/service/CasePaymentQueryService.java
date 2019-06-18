@@ -26,6 +26,8 @@ package com.cpi.claim.service;
 
 import java.util.List;
 
+import javax.persistence.criteria.JoinType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -40,12 +42,11 @@ import com.cpi.claim.domain.CasePayment;
 import com.cpi.claim.domain.*; // for static metamodels
 import com.cpi.claim.repository.CasePaymentRepository;
 import com.cpi.claim.service.dto.CasePaymentCriteria;
-
 import com.cpi.claim.service.dto.CasePaymentDTO;
 import com.cpi.claim.service.mapper.CasePaymentMapper;
 
 /**
- * Service for executing complex queries for CasePayment entities in the database.
+ * Service for executing complex queries for {@link CasePayment} entities in the database.
  * The main input is a {@link CasePaymentCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
  * It returns a {@link List} of {@link CasePaymentDTO} or a {@link Page} of {@link CasePaymentDTO} which fulfills the criteria.
@@ -66,7 +67,7 @@ public class CasePaymentQueryService extends QueryService<CasePayment> {
     }
 
     /**
-     * Return a {@link List} of {@link CasePaymentDTO} which matches the criteria from the database
+     * Return a {@link List} of {@link CasePaymentDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -78,7 +79,7 @@ public class CasePaymentQueryService extends QueryService<CasePayment> {
     }
 
     /**
-     * Return a {@link Page} of {@link CasePaymentDTO} which matches the criteria from the database
+     * Return a {@link Page} of {@link CasePaymentDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
@@ -92,7 +93,19 @@ public class CasePaymentQueryService extends QueryService<CasePayment> {
     }
 
     /**
-     * Function to convert CasePaymentCriteria to a {@link Specification}
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(CasePaymentCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<CasePayment> specification = createSpecification(criteria);
+        return casePaymentRepository.count(specification);
+    }
+
+    /**
+     * Function to convert CasePaymentCriteria to a {@link Specification}.
      */
     private Specification<CasePayment> createSpecification(CasePaymentCriteria criteria) {
         Specification<CasePayment> specification = Specification.where(null);
@@ -134,16 +147,18 @@ public class CasePaymentQueryService extends QueryService<CasePayment> {
                 specification = specification.and(buildRangeSpecification(criteria.getFeeCreateDate(), CasePayment_.feeCreateDate));
             }
             if (criteria.getPaymentTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getPaymentTypeId(), CasePayment_.paymentType, PaymentType_.id));
+                specification = specification.and(buildSpecification(criteria.getPaymentTypeId(),
+                    root -> root.join(CasePayment_.paymentType, JoinType.LEFT).get(PaymentType_.id)));
             }
             if (criteria.getSubcaseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getSubcaseId(), CasePayment_.subcase, VesselSubCase_.id));
+                specification = specification.and(buildSpecification(criteria.getSubcaseId(),
+                    root -> root.join(CasePayment_.subcase, JoinType.LEFT).get(VesselSubCase_.id)));
             }
             if (criteria.getCreditorId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCreditorId(), CasePayment_.creditor, Creditor_.id));
+                specification = specification.and(buildSpecification(criteria.getCreditorId(),
+                    root -> root.join(CasePayment_.creditor, JoinType.LEFT).get(Creditor_.id)));
             }
         }
         return specification;
     }
-
 }

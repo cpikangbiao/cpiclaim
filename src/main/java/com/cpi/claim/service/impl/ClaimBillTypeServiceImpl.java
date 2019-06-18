@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing ClaimBillType.
+ * Service Implementation for managing {@link ClaimBillType}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class ClaimBillTypeServiceImpl implements ClaimBillTypeService {
     /**
      * Save a claimBillType.
      *
-     * @param claimBillTypeDTO the entity to save
-     * @return the persisted entity
+     * @param claimBillTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public ClaimBillTypeDTO save(ClaimBillTypeDTO claimBillTypeDTO) {
@@ -74,8 +74,8 @@ public class ClaimBillTypeServiceImpl implements ClaimBillTypeService {
     /**
      * Get all the claimBillTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class ClaimBillTypeServiceImpl implements ClaimBillTypeService {
     /**
      * Get one claimBillType by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class ClaimBillTypeServiceImpl implements ClaimBillTypeService {
     /**
      * Delete the claimBillType by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

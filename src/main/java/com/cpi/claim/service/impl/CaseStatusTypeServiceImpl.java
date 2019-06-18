@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing CaseStatusType.
+ * Service Implementation for managing {@link CaseStatusType}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CaseStatusTypeServiceImpl implements CaseStatusTypeService {
     /**
      * Save a caseStatusType.
      *
-     * @param caseStatusTypeDTO the entity to save
-     * @return the persisted entity
+     * @param caseStatusTypeDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public CaseStatusTypeDTO save(CaseStatusTypeDTO caseStatusTypeDTO) {
@@ -74,8 +74,8 @@ public class CaseStatusTypeServiceImpl implements CaseStatusTypeService {
     /**
      * Get all the caseStatusTypes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class CaseStatusTypeServiceImpl implements CaseStatusTypeService {
     /**
      * Get one caseStatusType by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class CaseStatusTypeServiceImpl implements CaseStatusTypeService {
     /**
      * Delete the caseStatusType by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {

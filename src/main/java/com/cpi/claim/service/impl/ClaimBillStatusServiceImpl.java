@@ -37,10 +37,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
+
 /**
- * Service Implementation for managing ClaimBillStatus.
+ * Service Implementation for managing {@link ClaimBillStatus}.
  */
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class ClaimBillStatusServiceImpl implements ClaimBillStatusService {
     /**
      * Save a claimBillStatus.
      *
-     * @param claimBillStatusDTO the entity to save
-     * @return the persisted entity
+     * @param claimBillStatusDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public ClaimBillStatusDTO save(ClaimBillStatusDTO claimBillStatusDTO) {
@@ -74,8 +74,8 @@ public class ClaimBillStatusServiceImpl implements ClaimBillStatusService {
     /**
      * Get all the claimBillStatuses.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,8 +89,8 @@ public class ClaimBillStatusServiceImpl implements ClaimBillStatusService {
     /**
      * Get one claimBillStatus by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,7 +103,7 @@ public class ClaimBillStatusServiceImpl implements ClaimBillStatusService {
     /**
      * Delete the claimBillStatus by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
