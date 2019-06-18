@@ -65,4 +65,6 @@ public interface VesselCaseRepository extends JpaRepository<VesselCase, Long>, J
         + " GROUP BY DATE_FORMAT(c.caseDate, '%Y'), DATE_FORMAT(c.caseDate, '%m'), t.cpiInsuranceTypeName")
     List<CaseMonthCountStatisticsBean> findCaseMonthStaticsCount();
 
+    List<VesselCase> findAllByInsuredVesselId(Long insuredVesselId);
+
 }
